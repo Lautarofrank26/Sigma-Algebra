@@ -1,0 +1,84 @@
+<title>Pulso Macro</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Indicadores macroeconómicos de Argentina y Estados Unidos con series de tiempo y lectura macro.">
+
+<!-- Tipografías (Google Fonts) -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+
+<!-- Estilos: tokens primero, luego base, layout y componentes -->
+<link rel="stylesheet" href="css/tokens.css">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/layout.css">
+<link rel="stylesheet" href="css/components.css">
+
+<header class="topbar">
+  <div class="wrap">
+    <a class="brand" href="#inicio">Pulso Macro</a>
+    <nav aria-label="Secciones">
+      <a class="pill" href="#argentina">Argentina</a>
+      <a class="pill" href="#dolar">Dólar</a>
+      <a class="pill" href="#eeuu">EE.UU.</a>
+      <a class="pill" href="#comparativo">Comparativo</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap" id="inicio">
+  <section class="hero">
+    <span class="label">Análisis de datos económicos</span>
+    <h1>Dos economías, una lectura clara.</h1>
+    <p>Inflación, actividad, empleo, tasas y crecimiento de Argentina y Estados Unidos, con series históricas y una lectura macro de cada país.</p>
+    <div class="hero-meta">
+      <span class="label" id="updated">Cargando datos…</span>
+      <div class="range" id="range" role="group" aria-label="Período de los gráficos"></div>
+    </div>
+  </section>
+
+  <!-- Sección Argentina: se completa desde js/main.js -->
+  <section class="country" id="argentina" data-country="ar" aria-labelledby="ar-title">
+    <div class="country-head">
+      <h2 id="ar-title">Argentina</h2>
+      <p class="sub">Precios, actividad, empleo y sector externo</p>
+    </div>
+    <div id="ar-root"><div class="state">Cargando…</div></div>
+  </section>
+
+  <!-- Sección Tipo de cambio (Argentina) -->
+  <section class="country" id="dolar" data-country="fx" aria-labelledby="fx-title">
+    <div class="country-head">
+      <h2 id="fx-title">Tipo de cambio</h2>
+      <p class="sub">Oficial, blue, MEP, contado con liqui y más</p>
+    </div>
+    <div id="fx-root"><div class="state">Cargando…</div></div>
+  </section>
+
+  <!-- Sección Estados Unidos -->
+  <section class="country" id="eeuu" data-country="us" aria-labelledby="us-title">
+    <div class="country-head">
+      <h2 id="us-title">Estados Unidos</h2>
+      <p class="sub">Precios, mercado laboral, tasas y crecimiento</p>
+    </div>
+    <div id="us-root"><div class="state">Cargando…</div></div>
+  </section>
+
+  <!-- Comparativo -->
+  <section class="compare" id="comparativo" aria-labelledby="cmp-title">
+    <h2 id="cmp-title">Comparativo</h2>
+    <div id="compare-root"><div class="state">Cargando…</div></div>
+  </section>
+
+  <footer class="site-footer">
+    <strong>Fuentes y método</strong>
+    <ul>
+      <li>Argentina: INDEC y BCRA, vía la API de series de tiempo de datos.gob.ar.</li>
+      <li>Tipos de dólar: ArgentinaDatos (historia) y DolarAPI (cotización del día).</li>
+      <li>Estados Unidos: BLS (precios y empleo), NY Fed (tasa efectiva), U.S. Treasury (rendimientos).</li>
+      <li>PBI anual de ambos países: Banco Mundial (crecimiento real).</li>
+      <li>Las variaciones interanuales y mensuales se calculan a partir de los niveles originales de cada serie.</li>
+    </ul>
+  </footer>
+</main>
+
+<!-- Chart.js (UMD, versión fija) y luego la app como módulo ES -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.js"></script>
+<script type="module" src="js/main.js"></script>

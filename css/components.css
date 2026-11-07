@@ -1,0 +1,79 @@
+/* components.css — piezas reutilizables: pills, KPI, panel de gráfico, análisis, tabla */
+
+/* ---------- Pills (navegación y selector de período) ---------- */
+.pill {
+  border: 1px solid var(--line);
+  background: var(--surface);
+  border-radius: 999px;
+  padding: 0.3rem 0.85rem;
+  font-size: var(--fs-sm);
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s;
+}
+.pill:hover { border-color: var(--ink-3); }
+.pill[aria-pressed="true"] { background: var(--ink); color: #fff; border-color: var(--ink); }
+
+.range { display: flex; gap: 0.35rem; flex-wrap: wrap; align-items: center; }
+.range .label { margin-right: 0.35rem; }
+
+/* ---------- KPI ---------- */
+.kpi {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: var(--gap-2);
+  display: grid;
+  gap: 0.35rem;
+  align-content: start;
+  min-width: 0;
+}
+.kpi-value { font-family: var(--font-mono); font-variant-numeric: tabular-nums; font-size: 1.9rem; font-weight: 500; letter-spacing: -0.03em; line-height: 1.1; }
+.kpi-value small { font-size: 0.95rem; color: var(--ink-3); margin-left: 0.2rem; letter-spacing: 0; }
+.kpi-foot { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem; font-size: var(--fs-xs); color: var(--ink-3); }
+
+/* Chip de variación: color = semántica (bueno/malo), no el acento */
+.delta { font-family: var(--font-mono); font-variant-numeric: tabular-nums; font-weight: 600; padding: 0.1rem 0.45rem; border-radius: 4px; background: var(--surface-2); color: var(--flat); }
+.delta[data-tone="good"] { color: var(--good); background: #E3F4EA; }
+.delta[data-tone="bad"]  { color: var(--bad);  background: #FBE6E6; }
+
+/* ---------- Cotizaciones del día ---------- */
+.quote .kpi-value { font-size: 1.6rem; }
+.live { color: var(--good); font-weight: 600; }
+.quote-note { font-size: var(--fs-xs); color: var(--ink-3); }
+.quote-foot { font-size: var(--fs-xs); color: var(--ink-3); margin: calc(-1 * var(--gap-1)) 0 var(--gap-3); }
+
+/* ---------- Panel de gráfico ---------- */
+.panel { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow); padding: var(--gap-2) var(--gap-2) var(--gap-1); display: grid; gap: var(--gap-1); min-width: 0; align-content: start; }
+.panel-head { display: flex; justify-content: space-between; align-items: start; gap: var(--gap-2); flex-wrap: wrap; }
+.panel h3 { font-size: var(--fs-lg); font-weight: 700; }
+.panel .unit { font-size: var(--fs-xs); color: var(--ink-3); margin-top: 0.15rem; }
+.panel-now { text-align: right; }
+.panel-now .kpi-value { font-size: 1.6rem; color: var(--accent-ink); }
+.chart-box { position: relative; height: 240px; }
+.panel details { font-size: var(--fs-sm); color: var(--ink-2); border-top: 1px solid var(--line); padding-block: 0.6rem; }
+.panel summary { cursor: pointer; font-weight: 600; color: var(--ink); }
+.panel details p { margin-top: 0.4rem; max-width: 60ch; }
+.panel .src { font-size: var(--fs-xs); color: var(--ink-3); padding-bottom: 0.4rem; }
+
+/* ---------- Lectura macro ---------- */
+.analysis { background: var(--accent-soft); border: 1px solid transparent; border-radius: var(--radius); padding: var(--gap-3); display: grid; gap: var(--gap-2); }
+.analysis h3 { font-size: var(--fs-lg); color: var(--accent-ink); }
+.analysis .lead { font-family: var(--font-display); font-size: 1.5rem; line-height: 1.25; font-weight: 600; max-width: 38ch; text-wrap: balance; }
+.analysis ul { margin: 0; padding: 0; list-style: none; display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: var(--gap-2); }
+.analysis li { background: rgba(255, 255, 255, 0.7); border-radius: 8px; padding: 0.8rem 0.9rem; font-size: var(--fs-sm); color: var(--ink-2); }
+.analysis li strong { display: block; color: var(--ink); font-size: var(--fs-xs); text-transform: uppercase; letter-spacing: 0.07em; margin-bottom: 0.2rem; }
+.analysis .note { font-size: var(--fs-xs); color: var(--ink-2); }
+
+/* ---------- Tabla comparativa ---------- */
+.table-scroll { overflow-x: auto; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); }
+table { border-collapse: collapse; width: 100%; min-width: 520px; font-size: var(--fs-sm); }
+th, td { padding: 0.75rem 1rem; text-align: right; border-bottom: 1px solid var(--line); }
+th:first-child, td:first-child { text-align: left; }
+thead th { font-size: var(--fs-xs); text-transform: uppercase; letter-spacing: 0.07em; color: var(--ink-3); background: var(--surface-2); }
+thead th.ar { color: var(--ar-ink); } thead th.us { color: var(--us-ink); }
+tbody tr:last-child td { border-bottom: 0; }
+td small { display: block; color: var(--ink-3); font-size: var(--fs-xs); }
+
+/* ---------- Estados ---------- */
+.state { padding: var(--gap-3); border: 1px dashed var(--line); border-radius: var(--radius); color: var(--ink-2); text-align: center; }
