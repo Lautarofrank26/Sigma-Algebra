@@ -26,6 +26,14 @@ La actualización diaria de EE.UU. usa la API pública de BLS, que sin clave per
 3. Correr el workflow "Actualizar datos" a mano para probarla.
 La clave nunca va en el código de la página ni en archivos del repositorio: solo la usa el workflow.
 
+## Portada: mapa del mundo
+- `js/ui/worldhero.js` dibuja un mapa de puntos (`js/data/world-mask.js`, generado con Natural Earth) con ocho plazas: Buenos Aires, Nueva York, Ciudad de México, São Paulo, Londres, Eurozona, Shanghái y Tokio. El foco rota cada 5 s o al pasar el mouse. Con "reducir movimiento" activado no hay animación.
+- Los datos (`js/data/world.js`) se renuevan cada minuto: dólares (DolarAPI), riesgo país (ArgentinaDatos), bonos y tasa de la Fed (Tesoro y NY Fed), monedas (Frankfurter, cierre del BCE, un dato por día hábil) y bitcoin (CoinGecko).
+- No hay petróleo, oro ni bolsas porque no encontré fuentes gratuitas que permitan consultas desde el navegador.
+
+## Diseño
+Paleta y tipografía en `css/tokens.css`: gris frío, superficies blancas con filete, azul marino, serif editorial (Source Serif 4) para títulos y mono tabular (IBM Plex Mono) para cifras. Acentos por país solo en filetes y series de gráficos.
+
 ## Calendario de próximos datos
 - Vive en `data/calendario.json` (fecha, hora, huso horario, título y enlace de cada evento) y se muestra en el inicio con cuenta regresiva.
 - Las fechas del INDEC salen de su calendario de difusión (https://www.indec.gob.ar/indec/web/Calendario-Fecha-0) y las de la Fed, de https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm.

@@ -8,18 +8,18 @@
   z-index: 20;
   margin-inline: calc(-1 * max(16px, env(safe-area-inset-left, 0px))) calc(-1 * max(16px, env(safe-area-inset-right, 0px)));
   padding-inline: max(16px, env(safe-area-inset-left, 0px)) max(16px, env(safe-area-inset-right, 0px));
-  background: rgba(250, 246, 236, 0.92);
+  background: rgba(243, 245, 248, 0.94);
   backdrop-filter: blur(8px);
   border-bottom: 1px solid var(--line);
 }
 .topbar .wrap { display: flex; align-items: center; justify-content: space-between; gap: var(--gap-2); min-height: 3.25rem; flex-wrap: wrap; }
-.brand { font-family: var(--font-display); font-weight: 700; font-size: var(--fs-lg); text-decoration: none; letter-spacing: -0.02em; }
+.brand { font-family: var(--font-display); font-weight: 700; font-size: var(--fs-lg); text-decoration: none; letter-spacing: 0; }
 .topbar nav { display: flex; gap: var(--gap-1); }
 
 /* ---------- Hero ---------- */
 .hero { padding-block: var(--gap-4) var(--gap-3); display: grid; gap: var(--gap-2); }
-.hero h1 { font-size: var(--fs-2xl); font-weight: 800; max-width: 22ch; }
-.hero p { color: var(--ink-2); max-width: 62ch; font-size: var(--fs-lg); line-height: 1.45; }
+.hero h1 { font-size: var(--fs-2xl); font-weight: 700; max-width: 26ch; }
+.hero p { color: var(--ink-2); max-width: 68ch; font-size: var(--fs-md); line-height: 1.55; }
 .hero-meta { display: flex; flex-wrap: wrap; gap: var(--gap-2); align-items: center; justify-content: space-between; padding-top: var(--gap-2); }
 
 /* ---------- Secciones por país ---------- */
@@ -28,8 +28,8 @@
 .country[data-country="us"] { --accent: var(--us); --accent-soft: var(--us-soft); --accent-ink: var(--us-ink); }
 
 .country-head { display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: var(--gap-2); margin-bottom: var(--gap-3); }
-.country-head h2 { font-size: var(--fs-xl); font-weight: 800; display: flex; align-items: center; gap: 0.75rem; }
-.country-head h2::before { content: ""; width: 0.9rem; height: 2rem; background: var(--accent); border-radius: 3px; }
+.country-head { border-top: 2px solid var(--accent); padding-top: var(--gap-2); }
+.country-head h2 { font-size: var(--fs-xl); font-weight: 700; }
 .country-head .sub { color: var(--ink-2); font-size: var(--fs-sm); }
 
 .kpi-strip { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: var(--gap-2); margin-bottom: var(--gap-3); }
@@ -38,7 +38,7 @@
 
 /* ---------- Comparativo y footer ---------- */
 .compare { padding-block: var(--gap-4); border-top: 1px solid var(--line); display: grid; gap: var(--gap-2); }
-.compare h2 { font-size: var(--fs-xl); font-weight: 800; }
+.compare h2 { font-size: var(--fs-xl); font-weight: 700; }
 .site-footer { border-top: 1px solid var(--line); padding-block: var(--gap-3) var(--gap-4); color: var(--ink-2); font-size: var(--fs-sm); display: grid; gap: var(--gap-1); }
 .site-footer ul { margin: 0; padding-left: 1.1rem; display: grid; gap: 0.2rem; }
 
@@ -60,3 +60,4 @@
 /* Submenú de Argentina */
 .subnav { display: flex; flex-wrap: wrap; gap: var(--gap-1); padding-top: var(--gap-2); }
 .country--block .subnav { padding-top: var(--gap-2); }
+

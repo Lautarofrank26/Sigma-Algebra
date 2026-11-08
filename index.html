@@ -6,7 +6,7 @@
 <title>Macroeconomics</title>
 <meta name="description" content="Indicadores macroeconómicos de Argentina y Estados Unidos: panorama, dólar y comparativo.">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,500;8..60,600;8..60,700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
 <link rel="stylesheet" href="css/tokens.css">
 <link rel="stylesheet" href="css/base.css">
 <link rel="stylesheet" href="css/layout.css">
@@ -16,12 +16,7 @@
 <header class="topbar" id="site-header"></header>
 
 <main class="wrap">
-  <section class="hero">
-    <span class="label">Análisis de datos económicos</span>
-    <h1>Dos economías, una lectura clara.</h1>
-    <p>Inflación, actividad, empleo, tasas y crecimiento de Argentina y Estados Unidos, con series históricas y una lectura macro de cada país.</p>
-    <div class="hero-meta"><span class="label" id="updated">Cargando datos…</span></div>
-  </section>
+  <section class="world" id="world-root" aria-label="Mercados hoy"><div class="state">Cargando mercados…</div></section>
 
   <div id="root"><div class="state">Cargando…</div></div>
 </main>
@@ -31,4 +26,6 @@
 <script type="module" src="js/pages/home.js"></script>
 </body>
 </html>
+
+
 

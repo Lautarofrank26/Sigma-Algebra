@@ -234,6 +234,13 @@ foreach ($k in $casas.Keys) {
   $monthly[$k] = $map
   $dol += @{ id=$k; label=$casas[$k][0]; unit='ARS por USD (venta, prom. mensual)'; freq='M'; source='ArgentinaDatos'; points=$pts }
 }
+# Riesgo pais (puntos basicos): ultimos 60 dias, para la variacion diaria de la portada
+try {
+  $rp = Invoke-RestMethod 'https://api.argentinadatos.com/v1/finanzas/indices/riesgo-pais' -TimeoutSec 90
+  $dlr = New-Pts
+  foreach ($row in ($rp | Select-Object -Last 60)) { Add-Pt $dlr $row.fecha $row.valor }
+  $daily['riesgo'] = $dlr
+} catch { Write-Warning "Riesgo pais: $($_.Exception.Message)" }
 # Brecha contra el oficial (%)
 foreach ($k in 'blue','mep','ccl') {
   $pts = New-Pts

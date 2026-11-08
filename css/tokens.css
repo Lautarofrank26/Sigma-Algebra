@@ -1,44 +1,49 @@
 ﻿/* ==========================================================================
    tokens.css — Sistema de diseño (única fuente de colores, tipografía, espacio)
-   Concepto de layout: columna única con ancho máximo; cada país es una banda
-   con su acento (Argentina = celeste, EE.UU. = ámbar). Resumen arriba, detalle abajo.
-   Diseño deliberadamente claro (un solo tema).
+   Concepto: tablero de análisis. Fondo gris frío, superficies blancas con filete,
+   tinta azul marino, serif editorial para títulos y mono tabular para las cifras.
+   Cada país lleva un acento (Argentina = azul acero, EE.UU. = bronce) que se usa
+   solo en filetes y series del gráfico. Un solo tema, claro.
    ========================================================================== */
 :root {
   color-scheme: light;
 
-  /* Neutros con leve sesgo azul */
-  --bg:        #FAF6EC;
-  --surface:   #FFFDF8;
-  --surface-2: #F3EDDD;
-  --ink:       #1F2A44;
-  --ink-2:     #4D566D;
-  --ink-3:     #7C8196;
-  --line:      #E6DFCF;
-  --grid:      #EEE8D8;
+  /* Neutros fríos */
+  --bg:        #F3F5F8;
+  --surface:   #FFFFFF;
+  --surface-2: #ECF0F5;
+  --ink:       #0E1E33;
+  --ink-2:     #44546A;
+  --ink-3:     #76839A;
+  --line:      #D7DEE8;
+  --grid:      #E5E9F0;
 
   /* Acentos por país */
-  --ar:        #2679B8;
-  --ar-soft:   #E6EFF1;
-  --ar-ink:    #1B5A8C;
-  --us:        #B8740F;
-  --us-soft:   #F6E9CC;
-  --us-ink:    #7A4A06;
+  --ar:        #1F5FA6;
+  --ar-soft:   #E8EFF8;
+  --ar-ink:    #174A82;
+  --us:        #A06A12;
+  --us-soft:   #F4ECDA;
+  --us-ink:    #75500D;
   --series-2:  #5B6B86;   /* segunda serie de un gráfico */
 
   /* Tipos de dólar (sección Tipo de cambio) */
-  --fx-oficial: #2679B8;
-  --fx-blue:    #D4541F;
-  --fx-mep:     #2A8F60;
-  --fx-ccl:     #7E4FC0;
+  --fx-oficial: #1F5FA6;
+  --fx-blue:    #C2571A;
+  --fx-mep:     #1E7F5C;
+  --fx-ccl:     #6B4FA0;
+
+  /* Portada: mapa */
+  --map-dot:    #B5C1D3;
+  --map-dot-hi: #1F5FA6;
 
   /* Semántica (separada del acento) */
-  --good:      #2E8B57;
-  --bad:       #C23B3B;
-  --flat:      #7A889F;
+  --good:      #1E7F5C;
+  --bad:       #B3372F;
+  --flat:      #76839A;
 
   /* Tipografía */
-  --font-display: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --font-display: "Source Serif 4", "Georgia", "Times New Roman", serif;
   --font-body:    "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
   --font-mono:    "IBM Plex Mono", ui-monospace, "Cascadia Mono", monospace;
 
@@ -47,7 +52,7 @@
   --fs-md: 1rem;
   --fs-lg: 1.25rem;
   --fs-xl: 1.75rem;
-  --fs-2xl: clamp(2rem, 4.5vw, 3rem);
+  --fs-2xl: clamp(1.9rem, 4vw, 2.75rem);
 
   /* Espacio y forma */
   --gap-1: 0.5rem;
@@ -55,8 +60,7 @@
   --gap-3: 1.5rem;
   --gap-4: 2.5rem;
   --gap-5: 4rem;
-  --radius: 10px;
+  --radius: 3px;
   --maxw: 1180px;
-  --shadow: 0 1px 2px rgba(60, 45, 20, 0.06), 0 4px 16px rgba(60, 45, 20, 0.05);
+  --shadow: none;
 }
-

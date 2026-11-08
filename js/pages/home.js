@@ -12,6 +12,7 @@ import { renderQuotes } from '../ui/quotes.js';
 import { renderCompare } from '../ui/compare.js';
 import { renderSubnav } from '../ui/shell.js';
 import { loadCalendar, renderCalendar } from '../ui/calendar.js';
+import { mountWorld } from '../ui/worldhero.js';
 
 const dolar = { dataUrl: 'data/dolar.json' };
 initPage('inicio');
@@ -32,6 +33,7 @@ function block({ key, title, sub, href, content }) {
 async function init() {
   try {
     const [ar, us, fx] = await Promise.all([loadCountry(argentina), loadCountry(usa), loadCountry(dolar)]);
+    mountWorld(document.querySelector('#world-root'), fx); // portada: mapa del mundo con datos del día
     const calendar = await loadCalendar().then((cal) => renderCalendar(cal)).catch(() => null); // sin calendario, la página sigue igual
     root.replaceChildren(
       calendar,
@@ -62,4 +64,5 @@ async function init() {
 }
 
 init();
+
 
