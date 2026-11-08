@@ -1,4 +1,4 @@
-/**
+﻿/**
  * loader.js — capa de datos.
  *
  * Hoy lee snapshots JSON publicados junto con la página (carpeta /data),
@@ -25,10 +25,10 @@ export async function loadCountry(config) {
   const raw = await provider(config.dataUrl);
   // Normaliza fechas anuales ("2025") a ISO ("2025-01-01") para que todas las series compartan formato
   for (const ind of raw.indicators) {
-    ind.points = ind.points.map(([d, v]) => [String(d).length === 4 ? `${d}-01-01` : String(d), v]);
+    ind.points = (ind.points ?? []).map(([d, v]) => [String(d).length === 4 ? `${d}-01-01` : String(d), v]);
   }
   const byId = Object.fromEntries(raw.indicators.map((i) => [i.id, i]));
-  return { updated: raw.updated, byId, quotes: raw.quotes ?? [] };
+  return { updated: raw.updated, byId, quotes: raw.quotes ?? [], daily: raw.daily ?? {} };
 }
 
 /**
@@ -41,3 +41,5 @@ export function resolve(data, ref) {
   const points = applyTransform(ref.t ?? 'level', ind.points, ind.freq);
   return { points, freq: ind.freq, meta: ind };
 }
+
+

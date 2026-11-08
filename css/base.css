@@ -36,3 +36,5 @@ button { font: inherit; color: inherit; }
   html { scroll-behavior: auto; }
   * { animation: none !important; transition: none !important; }
 }
+
+[hidden] { display: none !important; }

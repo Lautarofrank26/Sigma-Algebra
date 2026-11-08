@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Página de inicio: panorama de las tres secciones (cada bloque lleva a su página)
  * y comparativo Argentina vs. EE.UU.
  */
@@ -11,6 +11,7 @@ import { renderKpi } from '../ui/kpi.js';
 import { renderQuotes } from '../ui/quotes.js';
 import { renderCompare } from '../ui/compare.js';
 import { renderSubnav } from '../ui/shell.js';
+import { loadCalendar, renderCalendar } from '../ui/calendar.js';
 
 const dolar = { dataUrl: 'data/dolar.json' };
 initPage('inicio');
@@ -31,7 +32,9 @@ function block({ key, title, sub, href, content }) {
 async function init() {
   try {
     const [ar, us, fx] = await Promise.all([loadCountry(argentina), loadCountry(usa), loadCountry(dolar)]);
+    const calendar = await loadCalendar().then((cal) => renderCalendar(cal)).catch(() => null); // sin calendario, la página sigue igual
     root.replaceChildren(
+      calendar,
       block({
         key: 'ar', title: 'Argentina', href: 'argentina.html', sub: argentina.tagline,
         content: el('div', {}, [
@@ -59,3 +62,4 @@ async function init() {
 }
 
 init();
+

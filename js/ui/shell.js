@@ -4,6 +4,7 @@
  */
 import { el } from './dom.js';
 import { SUBNAVS } from '../config/navigation.js';
+import { startTicker } from './ticker.js';
 
 const NAV = [
   { id: 'inicio', href: 'index.html', label: 'Inicio' },
@@ -25,11 +26,13 @@ export function renderSubnav(group, active = null) {
 export function mountShell(active, sub) {
   document.querySelector('#site-header').replaceChildren(
     el('div', { class: 'wrap' }, [
-      el('a', { class: 'brand', href: 'index.html' }, 'Pulso Macro'),
+      el('a', { class: 'brand', href: 'index.html' }, 'Macroeconomics'),
       el('nav', { 'aria-label': 'Secciones' }, NAV.map((n) =>
         el('a', { class: 'pill', href: n.href, 'aria-current': n.id === active ? 'page' : false }, n.label))),
     ]),
+    el('div', { class: 'ticker', id: 'ticker', hidden: true, 'aria-label': 'Indicadores del día' }),
   );
+  startTicker(document.querySelector('#ticker'));
 
   const subnav = document.querySelector('#subnav');
   if (subnav && sub) subnav.replaceChildren(...renderSubnav(active, sub).childNodes);
@@ -38,7 +41,7 @@ export function mountShell(active, sub) {
     el('strong', {}, 'Fuentes y método'),
     el('ul', {}, [
       el('li', {}, 'Argentina: INDEC, BCRA y Secretaría de Hacienda, vía la API de series de tiempo de datos.gob.ar.'),
-      el('li', {}, 'Series reales (salarios, crédito, dinero): nivel nominal dividido por el IPC nacional, calculado por Pulso Macro.'),
+      el('li', {}, 'Series reales (salarios, crédito, dinero): nivel nominal dividido por el IPC nacional, calculado por Macroeconomics.'),
       el('li', {}, 'Tipos de dólar: ArgentinaDatos (historia) y DolarAPI (cotización del día).'),
       el('li', {}, 'Estados Unidos: BLS (precios, empleo y vacantes), NY Fed (tasa efectiva y SOFR), U.S. Treasury (rendimientos y deuda).'),
       el('li', {}, 'Actualización: el historial se renueva todos los días y la página pide los datos más recientes a las fuentes mientras está abierta (el dólar cada minuto, el resto cada 5 minutos).'),
@@ -47,6 +50,8 @@ export function mountShell(active, sub) {
     ]),
   );
 }
+
+
 
 
 

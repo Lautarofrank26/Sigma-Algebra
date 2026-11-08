@@ -92,3 +92,52 @@ td small { display: block; color: var(--ink-3); font-size: var(--fs-xs); }
 
 /* Página activa en el menú */
 .pill[aria-current="page"] { background: var(--ink); color: var(--surface); border-color: var(--ink); }
+
+/* ---------- Barra superior de indicadores ---------- */
+.ticker {
+  margin-inline: calc(-1 * max(16px, env(safe-area-inset-left, 0px))) calc(-1 * max(16px, env(safe-area-inset-right, 0px)));
+  border-top: 1px solid var(--line);
+  background: var(--surface-2);
+  overflow: hidden;
+}
+.tk-track { display: flex; width: max-content; animation: tk-scroll 80s linear infinite; }
+.ticker:hover .tk-track { animation-play-state: paused; }
+.tk-item { display: inline-flex; align-items: baseline; gap: 0.45rem; padding: 0.4rem 1.4rem; font-size: var(--fs-xs); white-space: nowrap; }
+.tk-label { text-transform: uppercase; letter-spacing: 0.06em; color: var(--ink-3); font-weight: 600; }
+.tk-value { font-weight: 600; }
+.tk-chg { color: var(--ink-2); }
+@keyframes tk-scroll { to { transform: translateX(-50%); } }
+@media (prefers-reduced-motion: reduce) { .ticker { overflow-x: auto; } }
+
+/* Variaciones del día y de 30 días en las cotizaciones (neutras: subir el dólar no es bueno ni malo) */
+.chg { color: var(--ink-2); }
+.chg[data-dir="up"]::before { content: "▲ "; font-size: 0.7em; }
+.chg[data-dir="down"]::before { content: "▼ "; font-size: 0.7em; }
+.quote-buy { font-size: var(--fs-xs); color: var(--ink-3); }
+
+/* ---------- Calendario de próximos datos ---------- */
+.calendar { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: var(--gap-3); margin-block: var(--gap-3); padding: var(--gap-3); background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow); }
+.cal-next { display: grid; gap: var(--gap-1); align-content: start; }
+.cal-next h2 { font-size: var(--fs-xl); font-weight: 800; }
+.cal-next h2 a { text-decoration: none; }
+.cal-next p { color: var(--ink-2); }
+.cal-when { font-weight: 600; color: var(--ink) !important; }
+.cd { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: var(--gap-1); }
+.cd-box { display: grid; justify-items: center; background: var(--surface-2); border-radius: 8px; padding: 0.5rem 0.8rem; min-width: 4.25rem; }
+.cd-value { font-size: 1.9rem; font-weight: 500; line-height: 1.1; }
+.cd-label { font-size: var(--fs-xs); text-transform: uppercase; letter-spacing: 0.07em; color: var(--ink-3); }
+.cal-list { min-width: 0; }
+.cal-list ul { list-style: none; margin: 0.4rem 0; padding: 0; }
+.cal-list li a { display: grid; grid-template-columns: 8.5rem minmax(0, 1fr) auto; gap: 0.75rem; align-items: baseline; padding: 0.55rem 0; border-bottom: 1px solid var(--line); text-decoration: none; font-size: var(--fs-sm); }
+.cal-list li a:hover .cal-title { text-decoration: underline; text-underline-offset: 3px; }
+.cal-date { color: var(--ink-3); text-transform: capitalize; font-size: var(--fs-xs); }
+.cal-title { font-weight: 600; }
+.cal-title small { display: block; color: var(--ink-3); font-weight: 400; font-size: var(--fs-xs); }
+.cal-flag { font-size: var(--fs-xs); font-weight: 600; padding: 0.1rem 0.45rem; border-radius: 4px; }
+.cal-ar { background: var(--ar-soft); color: var(--ar-ink); }
+.cal-us { background: var(--us-soft); color: var(--us-ink); }
+.cal-note { font-size: var(--fs-xs); color: var(--ink-3); margin-top: var(--gap-1); }
+@media (max-width: 760px) {
+  .calendar { grid-template-columns: minmax(0, 1fr); }
+  .cal-list li a { grid-template-columns: 6rem minmax(0, 1fr) auto; }
+}

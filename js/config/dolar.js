@@ -1,4 +1,4 @@
-/**
+﻿/**
  * dolar.js — sección "Tipo de cambio": los distintos tipos de dólar en Argentina.
  * Datos: data/dolar.json (generado por tools/fetch-data.ps1).
  *   - indicators: historia mensual (promedio de la cotización de venta) y brechas
@@ -9,13 +9,13 @@ import { fmtNum, fmtDate } from '../lib/format.js';
 
 /** Orden y nombre con que se muestran las cotizaciones del día */
 export const QUOTE_ORDER = [
-  { casa: 'oficial', name: 'Oficial', note: 'Minorista, bancos' },
-  { casa: 'mayorista', name: 'Mayorista', note: 'Referencia del mercado' },
-  { casa: 'blue', name: 'Blue', note: 'Mercado informal' },
-  { casa: 'bolsa', name: 'MEP', note: 'Dólar bolsa' },
-  { casa: 'contadoconliqui', name: 'Contado con liqui', note: 'CCL' },
-  { casa: 'cripto', name: 'Cripto', note: 'Vía stablecoins' },
-  { casa: 'tarjeta', name: 'Tarjeta', note: 'Incluye impuestos' },
+  { casa: 'oficial', id: 'oficial', name: 'Oficial', note: 'Minorista, bancos' },
+  { casa: 'mayorista', id: 'mayorista', name: 'Mayorista', note: 'Referencia del mercado' },
+  { casa: 'blue', id: 'blue', name: 'Blue', note: 'Mercado informal' },
+  { casa: 'bolsa', id: 'mep', name: 'MEP', note: 'Dólar bolsa' },
+  { casa: 'contadoconliqui', id: 'ccl', name: 'Contado con liqui', note: 'CCL' },
+  { casa: 'cripto', id: 'cripto', name: 'Cripto', note: 'Vía stablecoins' },
+  { casa: 'tarjeta', id: 'tarjeta', name: 'Tarjeta', note: 'Incluye impuestos' },
 ];
 
 export const dolar = {
@@ -87,3 +87,4 @@ export const dolar = {
     return { lead, items };
   },
 };
+

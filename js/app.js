@@ -19,7 +19,7 @@ const RANGES = [
   { label: '5 años', months: 60 },
   { label: 'Todo', months: 0 },
 ];
-const STORAGE_KEY = 'pulso-macro:range';
+const STORAGE_KEY = 'macroeconomics:range';
 
 /** El período elegido se recuerda entre páginas (comodidad; si falla el storage, se usa el default) */
 function readRange() {
@@ -146,5 +146,6 @@ export function showError(root, err) {
   console.error(err);
   root.replaceChildren(el('div', { class: 'state' }, 'No se pudieron cargar los datos. Volvé a abrir la página en unos minutos.'));
 }
+
 
 

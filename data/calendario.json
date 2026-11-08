@@ -1,0 +1,24 @@
+{
+  "nota": "Fechas del Calendario de difusión del INDEC (2.º semestre de 2026) y del calendario de reuniones de la Reserva Federal. El INDEC publica en general a las 16:00 h; el calendario oficial no indica la hora.",
+  "fuentes": [
+    "https://www.indec.gob.ar/indec/web/Calendario-Fecha-0",
+    "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm"
+  ],
+  "eventos": [
+    { "date": "2026-11-11", "time": "16:00", "tz": "-03:00", "country": "ar", "source": "INDEC", "title": "Servicios públicos (ISSP)", "detail": "Agosto de 2026", "href": "actividad.html" },
+    { "date": "2026-11-12", "time": "16:00", "tz": "-03:00", "country": "ar", "source": "INDEC", "title": "Inflación (IPC)", "detail": "Octubre de 2026 · también canastas básicas", "href": "precios.html" },
+    { "date": "2026-11-13", "time": "16:00", "tz": "-03:00", "country": "ar", "source": "INDEC", "title": "Índice de salarios", "detail": "Septiembre de 2026", "href": "empleo.html" },
+    { "date": "2026-11-17", "time": "16:00", "tz": "-03:00", "country": "ar", "source": "INDEC", "title": "Precios mayoristas (SIPM)", "detail": "Octubre de 2026", "href": "precios.html" },
+    { "date": "2026-11-19", "time": "16:00", "tz": "-03:00", "country": "ar", "source": "INDEC", "title": "Comercio exterior (ICA)", "detail": "Octubre de 2026", "href": "externo.html" },
+    { "date": "2026-11-24", "time": "16:00", "tz": "-03:00", "country": "ar", "source": "INDEC", "title": "Actividad económica (EMAE)", "detail": "Septiembre de 2026", "href": "actividad.html" },
+    { "date": "2026-12-09", "time": "14:00", "tz": "-05:00", "country": "us", "source": "Reserva Federal", "title": "Decisión de tasas de la Fed", "detail": "Reunión del FOMC del 8 y 9 de diciembre", "href": "eeuu-tasas.html" },
+    { "date": "2026-12-09", "time": "16:00", "tz": "-03:00", "country": "ar", "source": "INDEC", "title": "Industria (IPI manufacturero)", "detail": "Octubre de 2026 · también construcción", "href": "actividad.html" },
+    { "date": "2026-12-15", "time": "16:00", "tz": "-03:00", "country": "ar", "source": "INDEC", "title": "Inflación (IPC)", "detail": "Noviembre de 2026 · también canastas básicas", "href": "precios.html" },
+    { "date": "2026-12-16", "time": "16:00", "tz": "-03:00", "country": "ar", "source": "INDEC", "title": "Índice de salarios", "detail": "Octubre de 2026", "href": "empleo.html" },
+    { "date": "2026-12-16", "time": "16:00", "tz": "-03:00", "country": "ar", "source": "INDEC", "title": "Nivel de actividad (PBI)", "detail": "Informe de avance del tercer trimestre de 2026", "href": "actividad.html" },
+    { "date": "2026-12-18", "time": "16:00", "tz": "-03:00", "country": "ar", "source": "INDEC", "title": "Comercio exterior (ICA)", "detail": "Noviembre de 2026", "href": "externo.html" },
+    { "date": "2026-12-18", "time": "16:00", "tz": "-03:00", "country": "ar", "source": "INDEC", "title": "Mercado de trabajo", "detail": "Desempleo del tercer trimestre de 2026", "href": "empleo.html" },
+    { "date": "2026-12-21", "time": "16:00", "tz": "-03:00", "country": "ar", "source": "INDEC", "title": "Actividad económica (EMAE)", "detail": "Octubre de 2026", "href": "actividad.html" },
+    { "date": "2026-12-22", "time": "16:00", "tz": "-03:00", "country": "ar", "source": "INDEC", "title": "Balanza de pagos", "detail": "Tercer trimestre de 2026", "href": "externo.html" }
+  ]
+}

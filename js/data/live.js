@@ -1,4 +1,4 @@
-/**
+﻿/**
  * live.js — datos en vivo, directo desde el navegador.
  *
  * 1) fetchLiveQuotes: cotizaciones del día del dólar (DolarAPI).
@@ -32,13 +32,13 @@ async function request(url, as = 'json') {
 
 function readCache(key, ttl) {
   try {
-    const c = JSON.parse(localStorage.getItem(`pulso-macro:${key}`));
+    const c = JSON.parse(localStorage.getItem(`macroeconomics:${key}`));
     if (c && Date.now() - c.t < ttl) return c.pts;
   } catch { /* storage bloqueado o dato inválido */ }
   return null;
 }
 function writeCache(key, pts) {
-  try { localStorage.setItem(`pulso-macro:${key}`, JSON.stringify({ t: Date.now(), pts })); } catch { /* sin storage */ }
+  try { localStorage.setItem(`macroeconomics:${key}`, JSON.stringify({ t: Date.now(), pts })); } catch { /* sin storage */ }
 }
 
 const ym = (d) => d.toISOString().slice(0, 7);
@@ -214,4 +214,28 @@ export function usedIds(config) {
   // La lectura macro pide series con g({ id: '...' }): se detectan en el código de analyze()
   for (const m of String(config.analyze).matchAll(/id:\s*'([a-z0-9_]+)'/g)) ids.add(m[1]);
   return [...ids];
+}
+
+
+/**
+ * Valores más recientes para la barra superior: rendimientos del Tesoro (10 y 2 años) y tasa efectiva de la Fed.
+ * Cada valor trae el cambio contra el dato anterior en puntos básicos (pb). Si una fuente falla, se omite.
+ */
+export async function fetchTickerRates() {
+  const out = {};
+  try {
+    const rows = (await fetchTreasuryMonths()).sort((a, b) => a.NEW_DATE.localeCompare(b.NEW_DATE));
+    const last = rows[rows.length - 1];
+    const prev = rows[rows.length - 2];
+    for (const [key, field] of [['y10', 'BC_10YEAR'], ['y2', 'BC_2YEAR']]) {
+      if (!last?.[field]) continue;
+      out[key] = { value: parseFloat(last[field]), chg: prev?.[field] ? (parseFloat(last[field]) - parseFloat(prev[field])) * 100 : null };
+    }
+  } catch { /* sin curva del Tesoro */ }
+  try {
+    const r = await request('https://markets.newyorkfed.org/api/rates/unsecured/effr/last/2.json');
+    const [a, b] = r.refRates ?? [];
+    if (a) out.effr = { value: Number(a.percentRate), chg: b ? (Number(a.percentRate) - Number(b.percentRate)) * 100 : null };
+  } catch { /* sin tasa de la Fed */ }
+  return out;
 }

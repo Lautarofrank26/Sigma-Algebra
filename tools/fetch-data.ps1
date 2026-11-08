@@ -13,6 +13,18 @@ New-Item -ItemType Directory -Force $out | Out-Null
 $today = (Get-Date).ToString('yyyy-MM-dd')
 
 # Lista de puntos [fecha, valor]; ArrayList evita que PowerShell aplane los arrays anidados
+
+# Si una fuente falla y la serie llega vacia, se conserva la version anterior del archivo
+# (asi una caida de BLS o de otra API nunca borra datos ya publicados).
+function Restore-Empty($list, $file) {
+  if (-not (Test-Path $file)) { return }
+  $old = Get-Content $file -Raw -Encoding utf8 | ConvertFrom-Json
+  foreach ($ind in $list) {
+    if ($ind.points -and $ind.points.Count -gt 0) { continue }
+    $prev = $old.indicators | Where-Object { $_.id -eq $ind.id } | Select-Object -First 1
+    if ($prev -and $prev.points) { $ind.points = $prev.points; Write-Warning "Serie $($ind.id): sin datos nuevos, se conserva la anterior" }
+  }
+}
 function New-Pts { New-Object System.Collections.ArrayList }
 function Add-Pt($list, $d, $v) { [void]$list.Add(@($d, [math]::Round([double]$v, 4))) }
 
@@ -90,6 +102,7 @@ $ar += Get-Real $arById['wages_pub']  $ipcPts 'Salarios reales, sector público'
 $ar += Get-Real $arById['loans']      $ipcPts 'Préstamos reales en pesos'        'loans_real'
 $ar += Get-Real $arById['m2']         $ipcPts 'M2 privado real'                  'm2_real'
 
+Restore-Empty $ar (Join-Path $out 'argentina.json')
 @{ country='AR'; updated=$today; indicators=$ar } | ConvertTo-Json -Depth 6 -Compress | Set-Content (Join-Path $out 'argentina.json') -Encoding utf8
 
 # ---------- EE.UU.: BLS ----------
@@ -186,6 +199,7 @@ try {
 
 $us += @{ id='gdp'; label='PBI real, var. anual'; unit='%'; freq='A'; source='Banco Mundial'; points=(Get-WB 'USA' 'NY.GDP.MKTP.KD.ZG') }
 
+Restore-Empty $us (Join-Path $out 'usa.json')
 @{ country='US'; updated=$today; indicators=$us } | ConvertTo-Json -Depth 6 -Compress | Set-Content (Join-Path $out 'usa.json') -Encoding utf8
 
 # ---------- ARGENTINA: tipos de dolar (ArgentinaDatos + DolarAPI) ----------
@@ -199,11 +213,15 @@ $casas = [ordered]@{
   cripto    = @('Cripto', 'cripto')
   tarjeta   = @('Tarjeta', 'tarjeta')
 }
-$dol = @(); $monthly = @{}
+$dol = @(); $monthly = @{}; $daily = @{}
 foreach ($k in $casas.Keys) {
   $pts = New-Pts; $map = [ordered]@{}
   try {
     $r = Invoke-RestMethod "https://api.argentinadatos.com/v1/cotizaciones/dolares/$($casas[$k][1])" -TimeoutSec 60
+    # Ultimos 70 dias con dato diario: sirven para la variacion del dia y de 30 dias en las tarjetas
+    $dl = New-Pts
+    foreach ($row in ($r | Where-Object { $_.venta } | Select-Object -Last 70)) { Add-Pt $dl $row.fecha $row.venta }
+    $daily[$k] = $dl
     $g = $r | Where-Object { $_.fecha -ge '2019-01-01' -and $_.venta } | Group-Object { $_.fecha.Substring(0,7) } | Sort-Object Name
     foreach ($grp in $g) { $v = ($grp.Group | Measure-Object venta -Average).Average; Add-Pt $pts ($grp.Name + '-01') $v; $map[$grp.Name] = $v }
   } catch { Write-Warning "Dolar $k : $($_.Exception.Message)" }
@@ -223,7 +241,9 @@ try {
     $quotes += @{ casa=$q.casa; nombre=$q.nombre; compra=$q.compra; venta=$q.venta; fecha=$q.fechaActualizacion }
   }
 } catch { Write-Warning "DolarAPI: $($_.Exception.Message)" }
-@{ country='AR-FX'; updated=$today; quotes=$quotes; indicators=$dol } | ConvertTo-Json -Depth 6 -Compress | Set-Content (Join-Path $out 'dolar.json') -Encoding utf8
+Restore-Empty $dol (Join-Path $out 'dolar.json')
+@{ country='AR-FX'; updated=$today; quotes=$quotes; daily=$daily; indicators=$dol } | ConvertTo-Json -Depth 6 -Compress | Set-Content (Join-Path $out 'dolar.json') -Encoding utf8
 Write-Host "Listo: $out"
+
 
 
