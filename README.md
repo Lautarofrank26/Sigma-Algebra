@@ -19,6 +19,13 @@ Sitio estático multipágina (HTML, CSS y JS sin build) con indicadores macro de
 - `data/*.json`: snapshots generados por `tools/fetch-data.ps1`
 - `.github/workflows/update-data.yml`: actualiza los datos todos los días
 
+## Clave de BLS (opcional)
+La actualización diaria de EE.UU. usa la API pública de BLS, que sin clave permite pocas consultas por día. Con una clave gratuita el límite sube a 500.
+1. Pedirla en https://data.bls.gov/registrationEngine/ (llega por correo).
+2. En GitHub: Settings → Secrets and variables → Actions → New repository secret. Nombre: `BLS_API_KEY`. Valor: la clave.
+3. Correr el workflow "Actualizar datos" a mano para probarla.
+La clave nunca va en el código de la página ni en archivos del repositorio: solo la usa el workflow.
+
 ## Calendario de próximos datos
 - Vive en `data/calendario.json` (fecha, hora, huso horario, título y enlace de cada evento) y se muestra en el inicio con cuenta regresiva.
 - Las fechas del INDEC salen de su calendario de difusión (https://www.indec.gob.ar/indec/web/Calendario-Fecha-0) y las de la Fed, de https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm.

@@ -19,6 +19,9 @@ jobs:
 
       - name: Descargar series (PowerShell 7 viene instalado en el runner)
         shell: pwsh
+        env:
+          # Clave gratuita de BLS (opcional): sube el límite de consultas diarias. Ver README.
+          BLS_API_KEY: ${{ secrets.BLS_API_KEY }}
         run: ./tools/fetch-data.ps1
 
       - name: Validar que no haya series vacías

@@ -112,11 +112,17 @@ $blsIds = @{
   'CUSR0000SA0E'='cpi_energy'; 'CUSR0000SAF1'='cpi_food'; 'CUSR0000SAH1'='cpi_shelter'; 'CUSR0000SASLE'='cpi_services'
   'WPSFD4'='ppi'; 'LNS13327709'='u6'; 'LNS12300000'='epop'; 'CES0500000002'='hours'; 'JTS000000000000000JOL'='jolts_openings'
 }
-# la API v1 de BLS permite 10 anios de historia
-$body = @{ seriesid=@($blsIds.Keys); startyear=((Get-Date).Year - 9).ToString(); endyear=(Get-Date).Year.ToString() } | ConvertTo-Json
+# Sin clave se usa la API v1 (10 anios de historia, ~25 consultas por dia por IP).
+# Con la variable de entorno BLS_API_KEY (secreto de GitHub Actions) se usa la v2 (hasta 500 consultas por dia).
+$blsKey = $env:BLS_API_KEY
+$blsBody = @{ seriesid=@($blsIds.Keys); startyear=((Get-Date).Year - 9).ToString(); endyear=(Get-Date).Year.ToString() }
+$blsUrl = 'https://api.bls.gov/publicAPI/v1/timeseries/data/'
+if ($blsKey) { $blsBody.registrationkey = $blsKey; $blsUrl = 'https://api.bls.gov/publicAPI/v2/timeseries/data/' }
+$body = $blsBody | ConvertTo-Json
 $bls = @{}
 try {
-  $r = Invoke-RestMethod 'https://api.bls.gov/publicAPI/v1/timeseries/data/' -Method Post -Body $body -ContentType 'application/json' -TimeoutSec 60
+  $r = Invoke-RestMethod $blsUrl -Method Post -Body $body -ContentType 'application/json' -TimeoutSec 60
+  if ($r.status -ne 'REQUEST_SUCCEEDED') { Write-Warning "BLS: $($r.message -join ' ')" }
   foreach ($s in $r.Results.series) {
     $pts = New-Pts
     foreach ($d in ($s.data | Sort-Object { "$($_.year)$($_.period)" })) {
