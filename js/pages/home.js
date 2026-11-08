@@ -34,7 +34,7 @@ async function init() {
   try {
     const [ar, us, fx] = await Promise.all([loadCountry(argentina), loadCountry(usa), loadCountry(dolar)]);
     mountWorld(document.querySelector('#world-root'), fx); // portada: mapa del mundo con datos del día
-    const calendar = await loadCalendar().then((cal) => renderCalendar(cal)).catch(() => null); // sin calendario, la página sigue igual
+    const calendar = await loadCalendar().then((cal) => renderCalendar(cal, { ar, us })).catch(() => null); // sin calendario, la página sigue igual
     root.replaceChildren(
       calendar,
       block({

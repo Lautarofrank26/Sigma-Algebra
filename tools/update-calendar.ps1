@@ -23,15 +23,15 @@ $mesesEs    = @('enero','febrero','marzo','abril','mayo','junio','julio','agosto
 # Publicaciones del INDEC que se muestran (el resto del calendario se ignora)
 # Patron sobre el texto del PDF (la I con tilde se reemplaza por "." para no depender de la codificacion)
 $indecMap = @(
-  @{ p = '^.ndice de precios al consumidor';                     title = 'Inflación (IPC)';               href = 'precios.html' },
+  @{ p = '^.ndice de precios al consumidor';                     title = 'Inflación (IPC)';               href = 'precios.html'; previo = @{ file='ar'; id='ipc'; t='pct1'; decimals=1; suffix='%'; label='Anterior (m/m)' } },
   @{ p = '^Sistema de .ndices de precios mayoristas';            title = 'Precios mayoristas (SIPM)';     href = 'precios.html' },
-  @{ p = '^.ndice de salarios';                                  title = 'Índice de salarios';            href = 'empleo.html' },
-  @{ p = '^Mercado de trabajo';                                  title = 'Mercado de trabajo';            href = 'empleo.html'; detailPrefix = 'Desempleo del ' },
-  @{ p = '^Intercambio comercial argentino';                     title = 'Comercio exterior (ICA)';       href = 'externo.html' },
+  @{ p = '^.ndice de salarios';                                  title = 'Índice de salarios';            href = 'empleo.html'; previo = @{ file='ar'; id='wages'; t='pct1'; decimals=1; suffix='%'; label='Anterior (m/m)' } },
+  @{ p = '^Mercado de trabajo';                                  title = 'Mercado de trabajo';            href = 'empleo.html'; detailPrefix = 'Desempleo del '; previo = @{ file='ar'; id='unemp'; t='level'; decimals=1; suffix='%'; label='Anterior' } },
+  @{ p = '^Intercambio comercial argentino';                     title = 'Comercio exterior (ICA)';       href = 'externo.html'; previo = @{ file='ar'; id='trade_balance'; t='level'; decimals=0; prefix='USD '; suffix=' M'; label='Saldo anterior' } },
   @{ p = '^Balanza de pagos';                                    title = 'Balanza de pagos';              href = 'externo.html' },
-  @{ p = '^Estimador mensual de actividad econ.mica';            title = 'Actividad económica (EMAE)';    href = 'actividad.html' },
-  @{ p = '^Informe de avance del nivel de actividad';            title = 'Nivel de actividad (PBI)';      href = 'actividad.html'; detailPrefix = 'Informe de avance del ' },
-  @{ p = '^.ndice de producci.n industrial manufacturero';       title = 'Industria (IPI manufacturero)'; href = 'actividad.html' },
+  @{ p = '^Estimador mensual de actividad econ.mica';            title = 'Actividad económica (EMAE)';    href = 'actividad.html'; previo = @{ file='ar'; id='emae'; t='pct1'; decimals=1; suffix='%'; signed=$true; label='Anterior (m/m)' } },
+  @{ p = '^Informe de avance del nivel de actividad';            title = 'Nivel de actividad (PBI)';      href = 'actividad.html'; detailPrefix = 'Informe de avance del '; previo = @{ file='ar'; id='gdp_level'; t='yoy'; decimals=1; suffix='%'; signed=$true; label='Anterior (i.a.)' } },
+  @{ p = '^.ndice de producci.n industrial manufacturero';       title = 'Industria (IPI manufacturero)'; href = 'actividad.html'; previo = @{ file='ar'; id='ipi'; t='pct1'; decimals=1; suffix='%'; signed=$true; label='Anterior (m/m)' } },
   @{ p = '^Indicador sint.tico de servicios p.blicos';           title = 'Servicios públicos (ISSP)';     href = 'actividad.html' }
 )
 
@@ -107,7 +107,7 @@ foreach ($y in $years) {
           $detail = ($r.texto -split '\.\s+' | Where-Object { $_.Trim() } | Select-Object -Last 1).Trim().TrimEnd('.')
           if ($map.detailPrefix) { $detail = $map.detailPrefix + $detail.Substring(0, 1).ToLower() + $detail.Substring(1) }
           if ($map.title -eq 'Inflación (IPC)' -and ($rows | Where-Object { $_.fecha -eq $r.fecha -and $_.texto -match 'canasta b.sica alimentaria' })) { $detail += ' · también canastas básicas' }
-          [void]$events.Add([ordered]@{ date = $r.fecha; time = '16:00'; tz = '-03:00'; country = 'ar'; source = 'INDEC'; title = $map.title; detail = $detail; href = $map.href })
+          [void]$events.Add([ordered]@{ date = $r.fecha; time = '16:00'; tz = '-03:00'; country = 'ar'; source = 'INDEC'; title = $map.title; detail = $detail; href = $map.href; previo = $map.previo })
           $found++
           break
         }
@@ -141,7 +141,7 @@ try {
       $date = Get-Date -Year $y -Month $mes -Day $d2
       $tz = if (Test-UsDst $date) { '-04:00' } else { '-05:00' }
       $detail = if ($d1 -ne $d2) { "Reunión del FOMC del $d1 y $d2 de $($mesesEs[$mes - 1])" } else { "Reunión del FOMC del $d1 de $($mesesEs[$mes - 1])" }
-      [void]$events.Add([ordered]@{ date = ('{0:0000}-{1:00}-{2:00}' -f $y, $mes, $d2); time = '14:00'; tz = $tz; country = 'us'; source = 'Reserva Federal'; title = 'Decisión de tasas de la Fed'; detail = $detail; href = 'eeuu-tasas.html' })
+      [void]$events.Add([ordered]@{ date = ('{0:0000}-{1:00}-{2:00}' -f $y, $mes, $d2); time = '14:00'; tz = $tz; country = 'us'; source = 'Reserva Federal'; title = 'Decisión de tasas de la Fed'; detail = $detail; href = 'eeuu-tasas.html'; previo = @{ file='us'; id='fedfunds'; t='level'; decimals=2; suffix='%'; label='Tasa actual' } })
       $fedOk = $true
     }
   }
@@ -153,7 +153,7 @@ if (Test-Path $manualFile) {
   try {
     $manual = Get-Content $manualFile -Raw -Encoding utf8 | ConvertFrom-Json
     foreach ($e in @($manual.eventos)) {
-      [void]$events.Add([ordered]@{ date = $e.date; time = $e.time; tz = $e.tz; country = $e.country; source = $e.source; title = $e.title; detail = $e.detail; href = $e.href })
+      [void]$events.Add([ordered]@{ date = $e.date; time = $e.time; tz = $e.tz; country = $e.country; source = $e.source; title = $e.title; detail = $e.detail; href = $e.href; previo = $e.previo; consenso = $e.consenso })
     }
     Write-Host "Manuales: $(@($manual.eventos).Count) eventos"
   } catch { Write-Host "Manuales: archivo invalido ($($_.Exception.Message))" }

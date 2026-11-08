@@ -37,7 +37,9 @@ Paleta y tipografía en `css/tokens.css`: gris frío, superficies blancas con fi
 ## Calendario de próximos datos
 - Se genera solo: el workflow diario corre `tools/update-calendar.ps1`, que lee el PDF oficial del calendario de difusión del INDEC (`calendario_<semestre>sem<año>.pdf`) y la página de reuniones de la Fed, y escribe `data/calendario.json`. Cuando el INDEC publica el calendario del próximo semestre, entra solo.
 - Qué publicaciones del INDEC se muestran: la lista `$indecMap` del script (IPC, salarios, ICA, EMAE, IPI, PBI, mercado de trabajo, balanza de pagos, SIPM y servicios públicos).
-- Eventos que no se pueden leer automáticamente (por ejemplo los de BLS, cuyo sitio bloquea la lectura) se cargan a mano en `data/calendario-manual.json` y se mezclan en cada corrida.
+- Eventos que no se pueden leer automáticamente (los del BLS y las actas de la Fed, cuyo sitio bloquea la lectura) se cargan a mano en `data/calendario-manual.json` y se mezclan en cada corrida. Las fechas de noviembre de 2026 a enero de 2027 se tomaron de Forex Factory y se verificaron contra el horario oficial del BLS (8:30 hora del Este). Hay que repasarlas cada tanto: Forex Factory solo muestra unas semanas por delante.
+- Cada evento puede traer `previo`, que indica qué dato anterior mostrar tomándolo de nuestras propias series (por ejemplo "Anterior (m/m): +0,6% (sep 2026)"). Es el último valor que tenemos, que puede estar unos días detrás de la publicación oficial: por eso se muestra con su mes.
+- `consenso` es un texto opcional que se muestra tal cual ("Consenso: ..."). Se deja vacío a propósito: los pronósticos de Forex Factory no se copian porque sus condiciones de uso no permiten republicarlos.
 - Si el INDEC o la Fed no responden, se conserva el calendario anterior. El horario de las publicaciones del INDEC (16:00 h) es el habitual: su calendario no lo indica.
 - Se corre a mano con `powershell -File tools\update-calendar.ps1`.
 

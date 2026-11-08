@@ -1,1 +1,194 @@
-﻿{ "nota": "Eventos que se cargan a mano (por ejemplo los de BLS, cuyo sitio no se puede leer automáticamente). Formato de cada evento: date (AAAA-MM-DD), time (HH:MM), tz (huso, p. ej. -05:00), country (ar o us), source, title, detail y href (página del sitio).", "eventos": [] }
+{
+    "nota":  "Eventos que se cargan a mano: fechas del BLS y de la Fed que el script no puede leer solo (el sitio del BLS bloquea la lectura automática). Las fechas se tomaron de Forex Factory y se verificaron contra el horario oficial del BLS (8:30 hora del Este). Campos de cada evento: date (AAAA-MM-DD), time (HH:MM), tz (huso), country (ar o us), source, title, detail, href, previo (qué dato anterior mostrar) y consenso (texto opcional, se muestra tal cual).",
+    "actualizado":  "2026-11-08",
+    "eventos":  [
+                    {
+                        "date":  "2026-11-10",
+                        "time":  "08:30",
+                        "tz":  "-05:00",
+                        "country":  "us",
+                        "source":  "BLS / Fed",
+                        "title":  "Inflación (CPI)",
+                        "detail":  "Octubre de 2026",
+                        "href":  "eeuu-precios.html",
+                        "previo":  {
+                                       "id":  "cpi",
+                                       "suffix":  "%",
+                                       "t":  "pct1",
+                                       "signed":  true,
+                                       "decimals":  1,
+                                       "label":  "Anterior (m/m)",
+                                       "file":  "us"
+                                   }
+                    },
+                    {
+                        "date":  "2026-11-13",
+                        "time":  "08:30",
+                        "tz":  "-05:00",
+                        "country":  "us",
+                        "source":  "BLS / Fed",
+                        "title":  "Precios al productor (PPI)",
+                        "detail":  "Octubre de 2026",
+                        "href":  "eeuu-precios.html",
+                        "previo":  {
+                                       "id":  "ppi",
+                                       "suffix":  "%",
+                                       "t":  "pct1",
+                                       "signed":  true,
+                                       "decimals":  1,
+                                       "label":  "Anterior (m/m)",
+                                       "file":  "us"
+                                   }
+                    },
+                    {
+                        "date":  "2026-11-18",
+                        "time":  "14:00",
+                        "tz":  "-05:00",
+                        "country":  "us",
+                        "source":  "BLS / Fed",
+                        "title":  "Actas de la Fed",
+                        "detail":  "Minutas de la reunión de octubre del FOMC",
+                        "href":  "eeuu-tasas.html",
+                        "previo":  {
+                                       "id":  "fedfunds",
+                                       "suffix":  "%",
+                                       "t":  "level",
+                                       "decimals":  2,
+                                       "label":  "Tasa actual",
+                                       "file":  "us"
+                                   }
+                    },
+                    {
+                        "date":  "2026-12-01",
+                        "time":  "10:00",
+                        "tz":  "-05:00",
+                        "country":  "us",
+                        "source":  "BLS / Fed",
+                        "title":  "Vacantes de empleo (JOLTS)",
+                        "detail":  "Octubre de 2026",
+                        "href":  "eeuu-empleo.html",
+                        "previo":  {
+                                       "id":  "jolts_openings",
+                                       "suffix":  " mil",
+                                       "t":  "level",
+                                       "decimals":  0,
+                                       "label":  "Anterior",
+                                       "file":  "us"
+                                   }
+                    },
+                    {
+                        "date":  "2026-12-04",
+                        "time":  "08:30",
+                        "tz":  "-05:00",
+                        "country":  "us",
+                        "source":  "BLS / Fed",
+                        "title":  "Informe de empleo",
+                        "detail":  "Noviembre de 2026 · puestos, desempleo y salarios",
+                        "href":  "eeuu-empleo.html",
+                        "previo":  [
+                                       {
+                                           "id":  "payrolls",
+                                           "suffix":  " mil",
+                                           "t":  "diff",
+                                           "signed":  true,
+                                           "decimals":  0,
+                                           "label":  "Puestos anterior",
+                                           "file":  "us"
+                                       },
+                                       {
+                                           "id":  "unemp",
+                                           "suffix":  "%",
+                                           "t":  "level",
+                                           "decimals":  1,
+                                           "label":  "Desempleo anterior",
+                                           "file":  "us"
+                                       }
+                                   ]
+                    },
+                    {
+                        "date":  "2026-12-10",
+                        "time":  "08:30",
+                        "tz":  "-05:00",
+                        "country":  "us",
+                        "source":  "BLS / Fed",
+                        "title":  "Inflación (CPI)",
+                        "detail":  "Noviembre de 2026",
+                        "href":  "eeuu-precios.html",
+                        "previo":  {
+                                       "id":  "cpi",
+                                       "suffix":  "%",
+                                       "t":  "pct1",
+                                       "signed":  true,
+                                       "decimals":  1,
+                                       "label":  "Anterior (m/m)",
+                                       "file":  "us"
+                                   }
+                    },
+                    {
+                        "date":  "2026-12-15",
+                        "time":  "08:30",
+                        "tz":  "-05:00",
+                        "country":  "us",
+                        "source":  "BLS / Fed",
+                        "title":  "Precios al productor (PPI)",
+                        "detail":  "Noviembre de 2026",
+                        "href":  "eeuu-precios.html",
+                        "previo":  {
+                                       "id":  "ppi",
+                                       "suffix":  "%",
+                                       "t":  "pct1",
+                                       "signed":  true,
+                                       "decimals":  1,
+                                       "label":  "Anterior (m/m)",
+                                       "file":  "us"
+                                   }
+                    },
+                    {
+                        "date":  "2026-12-30",
+                        "time":  "14:00",
+                        "tz":  "-05:00",
+                        "country":  "us",
+                        "source":  "BLS / Fed",
+                        "title":  "Actas de la Fed",
+                        "detail":  "Minutas de la reunión de diciembre del FOMC",
+                        "href":  "eeuu-tasas.html",
+                        "previo":  {
+                                       "id":  "fedfunds",
+                                       "suffix":  "%",
+                                       "t":  "level",
+                                       "decimals":  2,
+                                       "label":  "Tasa actual",
+                                       "file":  "us"
+                                   }
+                    },
+                    {
+                        "date":  "2027-01-08",
+                        "time":  "08:30",
+                        "tz":  "-05:00",
+                        "country":  "us",
+                        "source":  "BLS / Fed",
+                        "title":  "Informe de empleo",
+                        "detail":  "Diciembre de 2026 · puestos, desempleo y salarios",
+                        "href":  "eeuu-empleo.html",
+                        "previo":  [
+                                       {
+                                           "id":  "payrolls",
+                                           "suffix":  " mil",
+                                           "t":  "diff",
+                                           "signed":  true,
+                                           "decimals":  0,
+                                           "label":  "Puestos anterior",
+                                           "file":  "us"
+                                       },
+                                       {
+                                           "id":  "unemp",
+                                           "suffix":  "%",
+                                           "t":  "level",
+                                           "decimals":  1,
+                                           "label":  "Desempleo anterior",
+                                           "file":  "us"
+                                       }
+                                   ]
+                    }
+                ]
+}

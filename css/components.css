@@ -193,3 +193,7 @@ td small { display: block; color: var(--ink-3); font-size: var(--fs-xs); }
 .panel .src { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 0.5rem; }
 .csv-btn { font-size: var(--fs-xs); font-weight: 600; color: var(--ink-2); background: none; border: 1px solid var(--line); border-radius: var(--radius); padding: 0.2rem 0.6rem; cursor: pointer; }
 .csv-btn:hover { color: var(--ink); border-color: var(--ink-3); }
+
+/* Dato anterior en el calendario */
+.cal-prev { font-size: var(--fs-xs); color: var(--ink-2); font-weight: 500; }
+.cal-title small.cal-prev { color: var(--ink-2); }
