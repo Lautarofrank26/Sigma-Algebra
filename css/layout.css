@@ -1,4 +1,4 @@
-/* layout.css — estructura de página: header, hero, secciones, grillas, footer */
+﻿/* layout.css — estructura de página: header, hero, secciones, grillas, footer */
 .wrap { max-width: var(--maxw); margin: 0 auto; }
 
 /* ---------- Barra superior fija ---------- */
@@ -8,7 +8,7 @@
   z-index: 20;
   margin-inline: calc(-1 * max(16px, env(safe-area-inset-left, 0px))) calc(-1 * max(16px, env(safe-area-inset-right, 0px)));
   padding-inline: max(16px, env(safe-area-inset-left, 0px)) max(16px, env(safe-area-inset-right, 0px));
-  background: rgba(245, 247, 250, 0.92);
+  background: rgba(250, 246, 236, 0.92);
   backdrop-filter: blur(8px);
   border-bottom: 1px solid var(--line);
 }
@@ -46,3 +46,17 @@
   .chart-grid { grid-template-columns: minmax(0, 1fr); }
   .hero { padding-block-start: var(--gap-3); }
 }
+
+
+/* ---------- Multipágina ---------- */
+.country--page { border-top: 0; padding-block-start: var(--gap-2); }
+.country--block { padding-block: var(--gap-3); }
+.country--block .country-head { margin-bottom: var(--gap-1); }
+.country-head h2 a { text-decoration: none; }
+.country-head h2 a:hover { text-decoration: underline; text-underline-offset: 4px; }
+.block-sub { margin-bottom: var(--gap-2); }
+.site-footer { margin-top: var(--gap-4); }
+
+/* Submenú de Argentina */
+.subnav { display: flex; flex-wrap: wrap; gap: var(--gap-1); padding-top: var(--gap-2); }
+.country--block .subnav { padding-top: var(--gap-2); }

@@ -3,7 +3,8 @@
  */
 import { el } from './dom.js';
 import { resolve } from '../data/loader.js';
-import { fmtNum, fmtSigned, fmtDate } from '../lib/format.js';
+import { fmtNum, fmtSigned, fmtDate, fmtAge } from '../lib/format.js';
+import { renderSpark } from './spark.js';
 
 /** Determina el tono (bueno/malo/neutro) del cambio según la polaridad del indicador */
 export function toneOf(delta, polarity) {
@@ -21,10 +22,13 @@ export function changeInfo(points, isPercent, decimals) {
   const last = points[points.length - 1][1];
   const prev = points[points.length - 2][1];
   if (isPercent) {
-    const d = last - prev;
-    return { raw: d, text: `${fmtSigned(d, decimals === 0 ? 1 : decimals)} pp` };
+    const dec = decimals === 0 ? 1 : decimals;
+    const d = Number((last - prev).toFixed(dec)); // redondeado como se muestra: +0,0 cuenta como sin cambio
+    return { raw: d, text: `${fmtSigned(d, dec)} pp` };
   }
-  const d = (last / prev - 1) * 100;
+  if (prev === 0) return null;
+  // Con base negativa se usa el valor absoluto, así el signo siempre indica la dirección del cambio
+  const d = Number((((last - prev) / Math.abs(prev)) * 100).toFixed(1));
   return { raw: d, text: `${fmtSigned(d, 1)}%` };
 }
 
@@ -36,15 +40,19 @@ export function renderKpi(data, spec) {
   const isPercent = spec.suffix === '%';
   const change = changeInfo(s.points, isPercent, spec.decimals);
 
+  const tone = change ? toneOf(change.raw, spec.polarity) : 'flat';
+  const verdict = { good: 'Mejor', bad: 'Peor' }[tone]; // solo si el indicador tiene polaridad
+
   return el('div', { class: 'kpi' }, [
     el('span', { class: 'label' }, spec.label),
     el('div', { class: 'kpi-value' }, [
       `${spec.prefix ?? ''}${fmtNum(last[1], spec.decimals)}`,
       spec.suffix ? el('small', {}, spec.suffix) : null,
     ]),
+    renderSpark(s.points),
     el('div', { class: 'kpi-foot' }, [
-      change ? el('span', { class: 'delta', 'data-tone': toneOf(change.raw, spec.polarity) }, change.text) : null,
-      el('span', {}, `${fmtDate(last[0], s.freq)}`),
+      change ? el('span', { class: 'delta', 'data-tone': tone }, verdict ? `${verdict} · ${change.text}` : change.text) : null,
+      el('span', {}, `${fmtDate(last[0], s.freq)} · ${fmtAge(last[0], s.freq)}`),
     ]),
   ]);
 }

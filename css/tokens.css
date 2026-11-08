@@ -1,4 +1,4 @@
-/* ==========================================================================
+﻿/* ==========================================================================
    tokens.css — Sistema de diseño (única fuente de colores, tipografía, espacio)
    Concepto de layout: columna única con ancho máximo; cada país es una banda
    con su acento (Argentina = celeste, EE.UU. = ámbar). Resumen arriba, detalle abajo.
@@ -8,29 +8,29 @@
   color-scheme: light;
 
   /* Neutros con leve sesgo azul */
-  --bg:        #F5F7FA;
-  --surface:   #FFFFFF;
-  --surface-2: #EDF1F6;
-  --ink:       #14213D;
-  --ink-2:     #4A5873;
-  --ink-3:     #7A889F;
-  --line:      #DCE3EC;
-  --grid:      #E8EDF3;
+  --bg:        #FAF6EC;
+  --surface:   #FFFDF8;
+  --surface-2: #F3EDDD;
+  --ink:       #1F2A44;
+  --ink-2:     #4D566D;
+  --ink-3:     #7C8196;
+  --line:      #E6DFCF;
+  --grid:      #EEE8D8;
 
   /* Acentos por país */
-  --ar:        #2E8BD0;
-  --ar-soft:   #E3F0FA;
-  --ar-ink:    #1B5F96;
-  --us:        #D98E1F;
-  --us-soft:   #FCF0DA;
-  --us-ink:    #8F5A08;
+  --ar:        #2679B8;
+  --ar-soft:   #E6EFF1;
+  --ar-ink:    #1B5A8C;
+  --us:        #B8740F;
+  --us-soft:   #F6E9CC;
+  --us-ink:    #7A4A06;
   --series-2:  #5B6B86;   /* segunda serie de un gráfico */
 
   /* Tipos de dólar (sección Tipo de cambio) */
-  --fx-oficial: #2E8BD0;
-  --fx-blue:    #E0612B;
-  --fx-mep:     #2E9E6B;
-  --fx-ccl:     #8E5BD0;
+  --fx-oficial: #2679B8;
+  --fx-blue:    #D4541F;
+  --fx-mep:     #2A8F60;
+  --fx-ccl:     #7E4FC0;
 
   /* Semántica (separada del acento) */
   --good:      #2E8B57;
@@ -57,5 +57,6 @@
   --gap-5: 4rem;
   --radius: 10px;
   --maxw: 1180px;
-  --shadow: 0 1px 2px rgba(20, 33, 61, 0.05), 0 4px 16px rgba(20, 33, 61, 0.04);
+  --shadow: 0 1px 2px rgba(60, 45, 20, 0.06), 0 4px 16px rgba(60, 45, 20, 0.05);
 }
+

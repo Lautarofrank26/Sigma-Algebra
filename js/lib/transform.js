@@ -1,4 +1,4 @@
-/**
+﻿/**
  * transform.js — transformaciones de series temporales.
  * Una serie es un array de puntos [fechaISO, valor] ordenado ascendente.
  * Para agregar una transformación nueva, sumarla al objeto TRANSFORMS.
@@ -24,6 +24,15 @@ export const TRANSFORMS = {
 
   /** Diferencia absoluta contra el período anterior */
   diff: (points) => points.slice(1).map(([d, v], i) => [d, v - points[i][1]]),
+
+  /** Valor dividido 1000 (p. ej. millones -> miles de millones) */
+  k: (points) => points.map(([d, v]) => [d, v / 1000]),
+
+  /** Suma móvil de 12 períodos (acumulado de 12 meses) */
+  sum12: (points) => points.slice(11).map(([d], i) => [d, points.slice(i, i + 12).reduce((a, p) => a + p[1], 0)]),
+
+  /** Acumulado de 12 meses, en miles (millones -> miles de millones) */
+  sum12k: (points) => points.slice(11).map(([d], i) => [d, points.slice(i, i + 12).reduce((a, p) => a + p[1], 0) / 1000]),
 
   /** Promedio móvil de 3 períodos de la diferencia absoluta */
   diff3avg: (points) => {
@@ -66,3 +75,4 @@ export function lastAndPrev(points, back = 3) {
     back: n > back ? points[n - 1 - back][1] : null,
   };
 }
+

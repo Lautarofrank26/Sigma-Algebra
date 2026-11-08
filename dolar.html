@@ -1,0 +1,39 @@
+﻿<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tipo de cambio · Pulso Macro</title>
+<meta name="description" content="Cotización de los distintos tipos de dólar en Argentina y brecha cambiaria.">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="css/tokens.css">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/layout.css">
+<link rel="stylesheet" href="css/components.css">
+</head>
+<body>
+<header class="topbar" id="site-header"></header>
+
+<main class="wrap">
+  <section class="hero">
+    <span class="label">Mercado cambiario argentino</span>
+    <h1>Tipo de cambio</h1>
+    <p>Oficial, blue, MEP, contado con liqui, cripto y tarjeta, con la brecha contra el dólar oficial.</p>
+    <div class="hero-meta">
+      <span class="label" id="updated">Cargando datos…</span>
+      <div class="range" id="range" role="group" aria-label="Período de los gráficos"></div>
+    </div>
+  </section>
+
+  <section class="country country--page" data-country="fx">
+    <div id="root"><div class="state">Cargando…</div></div>
+  </section>
+</main>
+
+<footer class="wrap site-footer" id="site-footer"></footer>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.js"></script>
+<script type="module" src="js/pages/dolar.js"></script>
+</body>
+</html>

@@ -22,6 +22,20 @@ export function fmtSigned(value, decimals = 1) {
 }
 
 /**
+ * Antigüedad de un dato: días desde el cierre del período que cubre.
+ * Mensual: fin de mes · trimestral: fin de trimestre · anual: 31/12.
+ * @returns {string} "hace 68 días" / "hoy"
+ */
+export function fmtAge(iso, freq = 'M', now = new Date()) {
+  const [y, m] = iso.split('-').map(Number);
+  const months = freq === 'A' ? 12 : freq === 'Q' ? 3 : 1;
+  const end = Date.UTC(y, m - 1 + months, 0); // último día del período
+  const days = Math.max(0, Math.floor((now.getTime() - end) / 86400000));
+  if (days === 0) return 'hoy';
+  return days === 1 ? 'hace 1 día' : `hace ${days} días`;
+}
+
+/**
  * Fecha ISO (YYYY-MM-DD) -> texto según frecuencia.
  * @param {'long'|'short'} style long: "mar 2026" / "T1 2026"; short: "mar 26" / "T1 26"
  */

@@ -1,0 +1,42 @@
+﻿<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sector externo · Pulso Macro</title>
+<meta name="description" content="Exportaciones, importaciones, saldo comercial, reservas y dólar de Argentina.">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="css/tokens.css">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/layout.css">
+<link rel="stylesheet" href="css/components.css">
+</head>
+<body data-tema="externo">
+<header class="topbar" id="site-header"></header>
+
+<main class="wrap">
+  <nav class="subnav" id="subnav" aria-label="Indicadores de Argentina"></nav>
+  <section class="hero">
+    <span class="label">Argentina · Comercio exterior</span>
+    <h1>Sector externo</h1>
+    <p>Exportaciones, importaciones, saldo comercial, reservas y tipo de cambio.</p>
+    <div class="hero-meta">
+      <span class="label" id="updated">Cargando datos…</span>
+      <div class="range" id="range" role="group" aria-label="Período de los gráficos"></div>
+    </div>
+  </section>
+
+  <section class="country country--page" data-country="ar">
+    <div id="root"><div class="state">Cargando…</div></div>
+  </section>
+</main>
+
+<footer class="wrap site-footer" id="site-footer"></footer>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.js"></script>
+<script type="module" src="js/pages/ar-tema.js"></script>
+</body>
+</html>
+
+

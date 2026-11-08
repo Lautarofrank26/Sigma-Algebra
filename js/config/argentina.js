@@ -1,4 +1,4 @@
-/**
+﻿/**
  * argentina.js — configuración de la sección Argentina.
  *
  * Para agregar un indicador:
@@ -23,6 +23,16 @@ export const argentina = {
     { label: 'Actividad (EMAE) i.a.', ref: { id: 'emae', t: 'yoy' }, decimals: 1, suffix: '%', polarity: 'up' },
     { label: 'Desempleo', ref: { id: 'unemp' }, decimals: 1, suffix: '%', polarity: 'down' },
     { label: 'Dólar mayorista', ref: { id: 'fx' }, decimals: 0, prefix: '$', polarity: 'none' },
+  ],
+
+  /** Tabla resumen: indicadores mensuales, últimos 6 meses (ver ui/summary.js) */
+  summary: [
+    { label: 'Inflación mensual', note: 'INDEC · var. %', ref: { id: 'ipc', t: 'pct1' }, decimals: 1, kind: 'change', trend: true, polarity: 'down' },
+    { label: 'Inflación interanual', note: 'INDEC · var. %', ref: { id: 'ipc', t: 'yoy' }, decimals: 1, kind: 'change', trend: true, polarity: 'down' },
+    { label: 'EMAE', note: 'INDEC · var. mensual desest.', ref: { id: 'emae', t: 'pct1' }, decimals: 1, kind: 'change', polarity: 'up' },
+    { label: 'EMAE interanual', note: 'INDEC · var. %', ref: { id: 'emae', t: 'yoy' }, decimals: 1, kind: 'change', polarity: 'up' },
+    { label: 'Dólar mayorista', note: 'BCRA · var. mensual', ref: { id: 'fx', t: 'pct1' }, decimals: 1, kind: 'change', polarity: 'none' },
+    { label: 'Reservas', note: 'BCRA · var. mensual', ref: { id: 'reserves', t: 'pct1' }, decimals: 1, kind: 'change', polarity: 'up' },
   ],
 
   /** Paneles de gráfico */
@@ -145,3 +155,4 @@ export const argentina = {
     return { lead, items };
   },
 };
+
