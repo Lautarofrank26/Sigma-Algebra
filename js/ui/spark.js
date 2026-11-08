@@ -28,6 +28,7 @@ export function renderSpark(points, n = 24) {
 
   const line = document.createElementNS(NS, 'path');
   line.setAttribute('d', d);
+  line.setAttribute('pathLength', '1'); // longitud normalizada: permite animar el trazo (ver components.css)
   line.setAttribute('fill', 'none');
   line.setAttribute('stroke', 'currentColor');
   line.setAttribute('stroke-width', '1.75');

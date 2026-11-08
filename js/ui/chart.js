@@ -1,4 +1,4 @@
-/**
+﻿/**
  * chart.js — envoltorio sobre Chart.js (cargado por CDN como global `Chart`).
  * Construye un gráfico a partir de la especificación de un panel.
  */
@@ -37,6 +37,26 @@ function buildSeries(data, panel, months) {
   const dates = [...new Set(sliced.flatMap((d) => d.pts.map((p) => p[0])))].filter((d) => d >= start).sort();
   return { freq, dates, sliced };
 }
+
+/** Cruz vertical que acompaña al mouse sobre el gráfico */
+const crosshair = {
+  id: 'crosshair',
+  afterDatasetsDraw(chart) {
+    const active = chart.tooltip?.getActiveElements?.() ?? [];
+    if (!active.length) return;
+    const { ctx, chartArea } = chart;
+    const x = active[0].element.x;
+    ctx.save();
+    ctx.beginPath();
+    ctx.moveTo(x, chartArea.top);
+    ctx.lineTo(x, chartArea.bottom);
+    ctx.lineWidth = 1;
+    ctx.setLineDash([4, 4]);
+    ctx.strokeStyle = getComputedStyle(chart.canvas).getPropertyValue('--ink-3').trim() || '#76839A';
+    ctx.stroke();
+    ctx.restore();
+  },
+};
 
 export function drawChart(canvas, data, panel, months, previous) {
   if (previous) previous.destroy();
@@ -78,11 +98,12 @@ export function drawChart(canvas, data, panel, months, previous) {
   });
 
   return new Chart(canvas, {
+    plugins: [crosshair],
     data: { labels: dates, datasets },
     options: {
       responsive: true,
       maintainAspectRatio: false,
-      animation: { duration: 350 },
+      animation: { duration: 900, easing: 'easeOutQuart' },
       interaction: { mode: 'index', intersect: false },
       plugins: {
         legend: {
@@ -139,3 +160,4 @@ export function drawChart(canvas, data, panel, months, previous) {
     },
   });
 }
+

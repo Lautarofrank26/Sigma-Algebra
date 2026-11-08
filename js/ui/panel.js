@@ -10,12 +10,13 @@ import { seriesToCsv, downloadCsv } from '../lib/csv.js';
 
 export function createPanel(data, panel) {
   const head = resolve(data, panel.headline.ref);
-  const canvas = el('canvas', { role: 'img', 'aria-label': `Gráfico de ${panel.title}` });
+  const lastValue = head ? `${panel.headline.prefix ?? ''}${fmtNum(head.points[head.points.length - 1][1], panel.headline.decimals)}${panel.headline.suffix ?? ''}` : null;
+  const canvas = el('canvas', { role: 'img', 'aria-label': `Gráfico de ${panel.title}. ${panel.unit}.${lastValue ? ` Último dato: ${lastValue}.` : ''} Los datos completos se pueden descargar en CSV.` });
   let chart = null;
 
   const now = head
     ? el('div', { class: 'panel-now' }, [
-        el('div', { class: 'kpi-value' }, `${panel.headline.prefix ?? ''}${fmtNum(head.points[head.points.length - 1][1], panel.headline.decimals)}${panel.headline.suffix ?? ''}`),
+        el('div', { class: 'kpi-value', 'data-count': head.points[head.points.length - 1][1], 'data-dec': panel.headline.decimals, 'data-prefix': panel.headline.prefix ?? '', 'data-suffix': panel.headline.suffix ?? '' }, `${panel.headline.prefix ?? ''}${fmtNum(head.points[head.points.length - 1][1], panel.headline.decimals)}${panel.headline.suffix ?? ''}`),
         el('div', { class: 'unit' }, `${fmtDate(head.points[head.points.length - 1][0], head.freq)} · ${fmtAge(head.points[head.points.length - 1][0], head.freq)}`),
       ])
     : null;
@@ -48,5 +49,6 @@ export function createPanel(data, panel) {
     },
   };
 }
+
 
 

@@ -4,7 +4,7 @@
 .pill {
   border: 1px solid var(--line);
   background: var(--surface);
-  border-radius: var(--radius);
+  border-radius: var(--radius-lg);
   padding: 0.3rem 0.7rem;
   font-size: var(--fs-sm);
   text-decoration: none;
@@ -21,7 +21,7 @@
 .kpi {
   background: var(--surface);
   border: 1px solid var(--line);
-  border-radius: var(--radius);
+  border-radius: var(--radius-lg);
   padding: var(--gap-2);
   display: grid;
   gap: 0.35rem;
@@ -46,7 +46,7 @@
 .quote-foot { font-size: var(--fs-xs); color: var(--ink-3); margin: calc(-1 * var(--gap-1)) 0 var(--gap-3); }
 
 /* ---------- Panel de gráfico ---------- */
-.panel { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow); padding: var(--gap-2) var(--gap-2) var(--gap-1); display: grid; gap: var(--gap-1); min-width: 0; align-content: start; }
+.panel { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-lg); box-shadow: var(--shadow); padding: var(--gap-2) var(--gap-2) var(--gap-1); display: grid; gap: var(--gap-1); min-width: 0; align-content: start; }
 .panel-head { display: flex; justify-content: space-between; align-items: start; gap: var(--gap-2); flex-wrap: wrap; }
 .panel h3 { font-size: var(--fs-lg); font-weight: 700; }
 .panel .unit { font-size: var(--fs-xs); color: var(--ink-3); margin-top: 0.15rem; }
@@ -59,7 +59,7 @@
 .panel .src { font-size: var(--fs-xs); color: var(--ink-3); padding-bottom: 0.4rem; }
 
 /* ---------- Lectura macro ---------- */
-.analysis { background: var(--surface); border: 1px solid var(--line); border-top: 3px solid var(--accent); border-radius: var(--radius); padding: var(--gap-3); display: grid; gap: var(--gap-2); }
+.analysis { background: var(--surface); border: 1px solid var(--line); border-top: 3px solid var(--accent); border-radius: var(--radius-lg); padding: var(--gap-3); display: grid; gap: var(--gap-2); }
 .analysis h3 { font-family: var(--font-body); font-size: var(--fs-xs); font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: var(--accent-ink); }
 .analysis .lead { font-family: var(--font-display); font-size: 1.5rem; line-height: 1.3; font-weight: 600; max-width: 44ch; text-wrap: balance; }
 .analysis ul { margin: 0; padding: 0; list-style: none; display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: var(--gap-3); }
@@ -67,7 +67,7 @@
 .analysis li strong { display: block; color: var(--ink); font-size: var(--fs-xs); text-transform: uppercase; letter-spacing: 0.07em; margin-bottom: 0.25rem; }
 .analysis .note { font-size: var(--fs-xs); color: var(--ink-3); }
 /* ---------- Tabla comparativa ---------- */
-.table-scroll { overflow-x: auto; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); }
+.table-scroll { overflow-x: auto; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-lg); }
 table { border-collapse: collapse; width: 100%; min-width: 520px; font-size: var(--fs-sm); }
 th, td { padding: 0.75rem 1rem; text-align: right; border-bottom: 1px solid var(--line); }
 th:first-child, td:first-child { text-align: left; }
@@ -86,7 +86,7 @@ td small { display: block; color: var(--ink-3); font-size: var(--fs-xs); }
 .t-none { color: var(--ink-3); }
 
 /* ---------- Estados ---------- */
-.state { padding: var(--gap-3); border: 1px dashed var(--line); border-radius: var(--radius); color: var(--ink-2); text-align: center; }
+.state { padding: var(--gap-3); border: 1px dashed var(--line); border-radius: var(--radius-lg); color: var(--ink-2); text-align: center; }
 
 
 /* Página activa en el menú */
@@ -115,14 +115,14 @@ td small { display: block; color: var(--ink-3); font-size: var(--fs-xs); }
 .quote-buy { font-size: var(--fs-xs); color: var(--ink-3); }
 
 /* ---------- Calendario de próximos datos ---------- */
-.calendar { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: var(--gap-3); margin-block: var(--gap-3); padding: var(--gap-3); background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow); }
+.calendar { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: var(--gap-3); margin-block: var(--gap-3); padding: var(--gap-3); background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-lg); box-shadow: var(--shadow); }
 .cal-next { display: grid; gap: var(--gap-1); align-content: start; }
 .cal-next h2 { font-size: var(--fs-xl); font-weight: 700; }
 .cal-next h2 a { text-decoration: none; }
 .cal-next p { color: var(--ink-2); }
 .cal-when { font-weight: 600; color: var(--ink) !important; }
 .cd { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: var(--gap-1); }
-.cd-box { display: grid; justify-items: center; background: var(--surface-2); border-radius: var(--radius); padding: 0.5rem 0.8rem; min-width: 4.25rem; }
+.cd-box { display: grid; justify-items: center; background: var(--surface-2); border-radius: var(--radius-lg); padding: 0.5rem 0.8rem; min-width: 4.25rem; }
 .cd-value { font-size: 1.9rem; font-weight: 500; line-height: 1.1; }
 .cd-label { font-size: var(--fs-xs); text-transform: uppercase; letter-spacing: 0.07em; color: var(--ink-3); }
 .cal-list { min-width: 0; }
@@ -153,7 +153,7 @@ td small { display: block; color: var(--ink-3); font-size: var(--fs-xs); }
 .world-status.is-live { color: var(--good); font-weight: 600; }
 
 .world-stage { position: relative; }
-.world-map { position: relative; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; }
+.world-map { position: relative; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-lg); overflow: hidden; }
 .world-canvas { position: absolute; inset: 0; display: block; }
 .hub { position: absolute; transform: translate(-50%, -50%); background: none; border: 0; padding: 0.9rem; cursor: pointer; color: var(--ink-3); }
 .hub-dot { display: block; width: 6px; height: 6px; }
@@ -163,7 +163,7 @@ td small { display: block; color: var(--ink-3); font-size: var(--fs-xs); }
 .hub.is-active { color: var(--ink); }
 .hub:focus-visible { outline: 2px solid var(--ink); outline-offset: -4px; }
 
-.hub-card { position: absolute; left: var(--x); top: var(--y); transform: translate(22px, -50%); width: 15.5rem; display: grid; gap: 0.2rem; padding: 0.8rem 0.95rem; background: var(--surface); border: 1px solid var(--line); border-left: 3px solid var(--ar); border-radius: var(--radius); box-shadow: 0 6px 18px rgba(14, 30, 51, 0.1); z-index: 2; pointer-events: none; }
+.hub-card { position: absolute; left: var(--x); top: var(--y); transform: translate(22px, -50%); width: 15.5rem; display: grid; gap: 0.2rem; padding: 0.8rem 0.95rem; background: var(--surface); border: 1px solid var(--line); border-left: 3px solid var(--ar); border-radius: var(--radius-lg); box-shadow: 0 6px 18px rgba(14, 30, 51, 0.1); z-index: 2; pointer-events: none; }
 .hub-card.flip { transform: translate(calc(-100% - 22px), -50%); }
 .hub-card.up { transform: translate(22px, -88%); }
 .hub-card.flip.up { transform: translate(calc(-100% - 22px), -88%); }
@@ -191,9 +191,85 @@ td small { display: block; color: var(--ink-3); font-size: var(--fs-xs); }
 
 /* Pie del panel: fuente y descarga */
 .panel .src { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 0.5rem; }
-.csv-btn { font-size: var(--fs-xs); font-weight: 600; color: var(--ink-2); background: none; border: 1px solid var(--line); border-radius: var(--radius); padding: 0.2rem 0.6rem; cursor: pointer; }
+.csv-btn { font-size: var(--fs-xs); font-weight: 600; color: var(--ink-2); background: none; border: 1px solid var(--line); border-radius: var(--radius-lg); padding: 0.2rem 0.6rem; cursor: pointer; }
 .csv-btn:hover { color: var(--ink); border-color: var(--ink-3); }
 
 /* Dato anterior en el calendario */
 .cal-prev { font-size: var(--fs-xs); color: var(--ink-2); font-weight: 500; }
 .cal-title small.cal-prev { color: var(--ink-2); }
+
+
+/* ==========================================================================
+   Forma y movimiento
+   ========================================================================== */
+
+/* Botones y etiquetas en píldora; tarjetas con esquinas redondeadas y sombra suave */
+.pill, .csv-btn, .delta, .cal-flag { border-radius: var(--radius-pill); }
+.delta { padding: 0.12rem 0.6rem; }
+.cal-flag { padding: 0.12rem 0.6rem; }
+.kpi, .world-stats li { box-shadow: var(--shadow); }
+.hub-card { border-left-width: 1px; border-top: 3px solid var(--ar); }
+.world-stats { gap: var(--gap-1); border: 0; }
+.world-stats li { border: 1px solid var(--line); border-radius: var(--radius-lg); }
+.table-scroll { box-shadow: var(--shadow); }
+.panel details { border-top-style: dashed; }
+
+/* Interacción: las tarjetas se elevan un poco al pasar el mouse */
+.kpi, .panel, .world-stats li, .calendar, .analysis {
+  transition: transform 0.28s var(--ease), box-shadow 0.28s var(--ease), border-color 0.2s;
+}
+.kpi:hover, .panel:hover, .world-stats li:hover { transform: translateY(-3px); box-shadow: var(--shadow-hover); border-color: var(--ink-3); }
+.pill { transition: background 0.18s, border-color 0.18s, color 0.18s, transform 0.18s var(--ease); }
+.pill:hover { transform: translateY(-1px); }
+.csv-btn { transition: background 0.18s, color 0.18s, border-color 0.18s; }
+.csv-btn:hover { background: var(--surface-2); }
+tbody tr { transition: background 0.15s; }
+tbody tr:hover td { background: var(--surface-2); }
+.cal-list li a { transition: padding-left 0.2s var(--ease); }
+.cal-list li a:hover { padding-left: 0.4rem; }
+
+/* Estado "en vivo": el punto late suave */
+.world-status.is-live, .live { animation: blink 2.6s ease-in-out infinite; }
+@keyframes blink { 50% { opacity: 0.55; } }
+
+/* Aparición al hacer scroll (solo si hay JavaScript: reveal.js agrega la clase js-reveal) */
+.js-reveal [data-reveal]:not(.in) { opacity: 0; }
+.js-reveal [data-reveal].in { animation: rise 0.65s var(--ease) backwards; animation-delay: var(--d, 0ms); }
+@keyframes rise { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
+.no-anim, .no-anim * { animation: none !important; }
+
+/* La línea de tendencia de las tarjetas se dibuja al aparecer */
+.js-reveal [data-reveal]:not(.in) .spark path:last-child { stroke-dasharray: 1; stroke-dashoffset: 1; }
+.js-reveal [data-reveal].in .spark path:last-child { stroke-dasharray: 1; animation: draw 1.2s var(--ease) 0.15s both; }
+.no-anim .spark path:last-child { stroke-dashoffset: 0; }
+@keyframes draw { from { stroke-dashoffset: 1; } to { stroke-dashoffset: 0; } }
+
+/* Transición suave entre páginas (navegadores que la soportan) */
+@view-transition { navigation: auto; }
+.topbar { view-transition-name: topbar; }
+::view-transition-old(root), ::view-transition-new(root) { animation-duration: 0.22s; }
+
+/* ---------- Accesibilidad ---------- */
+.skip { position: absolute; left: -9999px; top: 0.5rem; z-index: 100; background: var(--ink); color: #fff; padding: 0.5rem 0.9rem; border-radius: var(--radius-pill); font-size: var(--fs-sm); text-decoration: none; }
+.skip:focus { left: max(16px, env(safe-area-inset-left, 0px)); }
+
+/* ---------- Celular: menús en una sola línea con desplazamiento y primera columna fija ---------- */
+@media (max-width: 760px) {
+  .topbar nav, .subnav { flex-wrap: nowrap; overflow-x: auto; max-width: 100%; min-width: 0; scrollbar-width: none; padding-bottom: 2px; }
+  .topbar nav::-webkit-scrollbar, .subnav::-webkit-scrollbar { display: none; }
+  .topbar nav .pill, .subnav .pill { flex: none; white-space: nowrap; }
+  .summary td:first-child, .summary th:first-child, .table-scroll td:first-child, .table-scroll th:first-child { position: sticky; left: 0; z-index: 1; background: var(--surface); box-shadow: 1px 0 0 var(--line); }
+  .table-scroll thead th:first-child { background: var(--surface-2); }
+  .kpi:hover, .panel:hover, .world-stats li:hover { transform: none; }
+}
+
+/* ---------- Impresión: sin menús, ticker, mapa ni botones; las tarjetas no se cortan ---------- */
+@media print {
+  @page { margin: 12mm; }
+  body { background: #fff; padding: 0; }
+  .topbar, .ticker, .subnav, .skip, .range, .csv-btn, .world-canvas, .hub, .hub-card, .calendar, .site-footer ul + * { display: none !important; }
+  .panel, .kpi, .analysis, .table-scroll, .world-stats li { box-shadow: none; break-inside: avoid; transform: none !important; }
+  .js-reveal [data-reveal]:not(.in) { opacity: 1; }
+  .chart-grid { grid-template-columns: 1fr 1fr; }
+  a { text-decoration: none; }
+}

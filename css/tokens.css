@@ -14,7 +14,7 @@
   --surface-2: #ECF0F5;
   --ink:       #0E1E33;
   --ink-2:     #44546A;
-  --ink-3:     #76839A;
+  --ink-3:     #5E6B82;
   --line:      #D7DEE8;
   --grid:      #E5E9F0;
 
@@ -40,7 +40,7 @@
   /* Semántica (separada del acento) */
   --good:      #1E7F5C;
   --bad:       #B3372F;
-  --flat:      #76839A;
+  --flat:      #5E6B82;
 
   /* Tipografía */
   --font-display: "Source Serif 4", "Georgia", "Times New Roman", serif;
@@ -60,7 +60,12 @@
   --gap-3: 1.5rem;
   --gap-4: 2.5rem;
   --gap-5: 4rem;
-  --radius: 3px;
+  --radius: 10px;        /* controles y chips grandes */
+  --radius-lg: 14px;     /* tarjetas, paneles, tablas */
+  --radius-pill: 999px;  /* botones y etiquetas */
   --maxw: 1180px;
-  --shadow: none;
+  --shadow: 0 1px 2px rgba(14, 30, 51, 0.04), 0 8px 24px rgba(14, 30, 51, 0.05);
+  --shadow-hover: 0 2px 4px rgba(14, 30, 51, 0.06), 0 14px 32px rgba(14, 30, 51, 0.1);
+  --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
 }
+

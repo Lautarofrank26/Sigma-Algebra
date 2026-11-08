@@ -32,7 +32,19 @@ La clave nunca va en el código de la página ni en archivos del repositorio: so
 - No hay petróleo, oro ni bolsas porque no encontré fuentes gratuitas que permitan consultas desde el navegador.
 
 ## Diseño
-Paleta y tipografía en `css/tokens.css`: gris frío, superficies blancas con filete, azul marino, serif editorial (Source Serif 4) para títulos y mono tabular (IBM Plex Mono) para cifras. Acentos por país solo en filetes y series de gráficos.
+Paleta y tipografía en `css/tokens.css`: gris frío, superficies blancas, azul marino, serif editorial (Source Serif 4) para títulos y mono tabular (IBM Plex Mono) para cifras. Acentos por país solo en filetes y series de gráficos. Tarjetas con esquinas redondeadas (`--radius-lg`), botones y etiquetas en píldora (`--radius-pill`) y sombra suave.
+
+### Movimiento (`js/ui/reveal.js` y `css/components.css`, sección "Forma y movimiento")
+- Las tarjetas suben y aparecen al entrar en pantalla, de a una; las cifras grandes cuentan desde cero.
+- La línea de tendencia de cada tarjeta se dibuja sola; los gráficos tienen una cruz vertical al pasar el mouse.
+- Las tarjetas se elevan al pasar el mouse y el cambio entre páginas es una transición suave.
+- Con "reducir movimiento" activado en el sistema no hay animaciones, y sin JavaScript todo se ve de una vez.
+
+### Compartir, accesibilidad e impresión
+- Cada página trae etiquetas Open Graph y una imagen de vista previa (`og-image.png`, 1200×630). Las direcciones absolutas apuntan a `https://lautarofrank26.github.io/pulso-macro/`: si se renombra el repositorio o se usa un dominio propio, hay que actualizarlas en los `.html` y en la imagen.
+- Hay un enlace "Saltar al contenido" para teclado, un aviso `<noscript>` y descripciones de los gráficos para lectores de pantalla.
+- Al imprimir (o guardar como PDF) se ocultan menús, ticker, mapa, calendario y botones.
+- En celular los menús se desplazan de costado y la primera columna de las tablas queda fija.
 
 ## Calendario de próximos datos
 - Se genera solo: el workflow diario corre `tools/update-calendar.ps1`, que lee el PDF oficial del calendario de difusión del INDEC (`calendario_<semestre>sem<año>.pdf`) y la página de reuniones de la Fed, y escribe `data/calendario.json`. Cuando el INDEC publica el calendario del próximo semestre, entra solo.

@@ -11,6 +11,7 @@ import { renderSummary } from './ui/summary.js';
 import { renderQuotes } from './ui/quotes.js';
 import { fetchLiveQuotes, refreshData, usedIds, REFRESH_MS, DATA_REFRESH_MS } from './data/live.js';
 import { mountShell } from './ui/shell.js';
+import { revealIn } from './ui/reveal.js';
 import { fmtDate } from './lib/format.js';
 
 const RANGES = [
@@ -70,6 +71,7 @@ function buildPanels(page, data, specs) {
  * @param {'ar'|'us'} [group] si se indica, la página se actualiza en vivo (ver data/live.js)
  */
 export function mountCountry(page, country, data, root, group) {
+  let firstRender = true; // la animación de entrada solo se hace una vez; los redibujos en vivo no animan
   const render = () => {
     page.panels.forEach((p) => p.destroy());
     page.panels.length = 0;
@@ -79,6 +81,8 @@ export function mountCountry(page, country, data, root, group) {
       renderSummary(data, country.summary ?? []),
       buildPanels(page, data, country.panels),
     );
+    revealIn(root, { animate: firstRender });
+    firstRender = false;
     finish(page, data);
   };
   render();
@@ -107,6 +111,7 @@ export function mountFx(page, dolar, data, root) {
     quotesBox,
     buildPanels(page, data, dolar.panels),
   );
+  revealIn(root);
   startLiveQuotes(data, quotesBox);
   finish(page, data);
 }

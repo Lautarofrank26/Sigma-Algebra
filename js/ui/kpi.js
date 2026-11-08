@@ -1,4 +1,4 @@
-/**
+﻿/**
  * kpi.js — tarjeta de resumen: valor actual, variación y fecha del dato.
  */
 import { el } from './dom.js';
@@ -45,7 +45,7 @@ export function renderKpi(data, spec) {
 
   return el('div', { class: 'kpi' }, [
     el('span', { class: 'label' }, spec.label),
-    el('div', { class: 'kpi-value' }, [
+    el('div', { class: 'kpi-value', 'data-count': last[1], 'data-dec': spec.decimals, 'data-prefix': spec.prefix ?? '' }, [
       `${spec.prefix ?? ''}${fmtNum(last[1], spec.decimals)}`,
       spec.suffix ? el('small', {}, spec.suffix) : null,
     ]),
@@ -56,3 +56,4 @@ export function renderKpi(data, spec) {
     ]),
   ]);
 }
+

@@ -13,6 +13,7 @@ import { renderCompare } from '../ui/compare.js';
 import { renderSubnav } from '../ui/shell.js';
 import { loadCalendar, renderCalendar } from '../ui/calendar.js';
 import { mountWorld } from '../ui/worldhero.js';
+import { revealIn } from '../ui/reveal.js';
 
 const dolar = { dataUrl: 'data/dolar.json' };
 initPage('inicio');
@@ -57,6 +58,7 @@ async function init() {
       }),
       el('section', { class: 'compare' }, [el('h2', {}, 'Comparativo'), renderCompare(ar, us)]),
     );
+    revealIn(root);
     setUpdated(ar.updated < us.updated ? ar.updated : us.updated);
   } catch (err) {
     showError(root, err);
