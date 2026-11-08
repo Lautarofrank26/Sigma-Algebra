@@ -188,3 +188,8 @@ td small { display: block; color: var(--ink-3); font-size: var(--fs-xs); }
 @media (prefers-reduced-motion: reduce) { .flash { animation: none; } }
 
 .hub.is-active .hub-name { visibility: hidden; } /* el nombre ya está en la tarjeta */
+
+/* Pie del panel: fuente y descarga */
+.panel .src { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 0.5rem; }
+.csv-btn { font-size: var(--fs-xs); font-weight: 600; color: var(--ink-2); background: none; border: 1px solid var(--line); border-radius: var(--radius); padding: 0.2rem 0.6rem; cursor: pointer; }
+.csv-btn:hover { color: var(--ink); border-color: var(--ink-3); }

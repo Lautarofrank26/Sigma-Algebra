@@ -24,6 +24,12 @@ jobs:
           BLS_API_KEY: ${{ secrets.BLS_API_KEY }}
         run: ./tools/fetch-data.ps1
 
+      # Lee los calendarios oficiales del INDEC y de la Fed; si no responden, conserva el anterior
+      - name: Actualizar calendario de próximos datos
+        shell: pwsh
+        continue-on-error: true
+        run: ./tools/update-calendar.ps1
+
       - name: Validar que no haya series vacías
         shell: pwsh
         run: |
@@ -33,6 +39,8 @@ jobs:
               if (-not $i.points -or $i.points.Count -eq 0) { throw "Serie vacía: $f/$($i.id)" }
             }
           }
+          $c = Get-Content "data/calendario.json" -Raw | ConvertFrom-Json
+          if (-not $c.eventos -or $c.eventos.Count -eq 0) { throw "Calendario sin eventos" }
 
       - name: Guardar cambios
         run: |

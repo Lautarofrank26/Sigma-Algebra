@@ -1,0 +1,1 @@
+﻿{ "nota": "Eventos que se cargan a mano (por ejemplo los de BLS, cuyo sitio no se puede leer automáticamente). Formato de cada evento: date (AAAA-MM-DD), time (HH:MM), tz (huso, p. ej. -05:00), country (ar o us), source, title, detail y href (página del sitio).", "eventos": [] }

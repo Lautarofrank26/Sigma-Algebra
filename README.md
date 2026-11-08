@@ -35,10 +35,14 @@ La clave nunca va en el código de la página ni en archivos del repositorio: so
 Paleta y tipografía en `css/tokens.css`: gris frío, superficies blancas con filete, azul marino, serif editorial (Source Serif 4) para títulos y mono tabular (IBM Plex Mono) para cifras. Acentos por país solo en filetes y series de gráficos.
 
 ## Calendario de próximos datos
-- Vive en `data/calendario.json` (fecha, hora, huso horario, título y enlace de cada evento) y se muestra en el inicio con cuenta regresiva.
-- Las fechas del INDEC salen de su calendario de difusión (https://www.indec.gob.ar/indec/web/Calendario-Fecha-0) y las de la Fed, de https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm.
-- Hay que cargar a mano los eventos de cada semestre. Los de BLS (empleo y CPI de EE.UU.) no están: su sitio bloquea la lectura automática.
+- Se genera solo: el workflow diario corre `tools/update-calendar.ps1`, que lee el PDF oficial del calendario de difusión del INDEC (`calendario_<semestre>sem<año>.pdf`) y la página de reuniones de la Fed, y escribe `data/calendario.json`. Cuando el INDEC publica el calendario del próximo semestre, entra solo.
+- Qué publicaciones del INDEC se muestran: la lista `$indecMap` del script (IPC, salarios, ICA, EMAE, IPI, PBI, mercado de trabajo, balanza de pagos, SIPM y servicios públicos).
+- Eventos que no se pueden leer automáticamente (por ejemplo los de BLS, cuyo sitio bloquea la lectura) se cargan a mano en `data/calendario-manual.json` y se mezclan en cada corrida.
+- Si el INDEC o la Fed no responden, se conserva el calendario anterior. El horario de las publicaciones del INDEC (16:00 h) es el habitual: su calendario no lo indica.
+- Se corre a mano con `powershell -File tools\update-calendar.ps1`.
 
+## Descarga de datos
+Cada gráfico tiene un botón "Descargar CSV" (`js/lib/csv.js`): baja todo el historial disponible de las series del gráfico, con separador `;`, coma decimal y UTF-8 con BOM, listo para abrir en Excel en español.
 ## Barra superior
 `js/ui/ticker.js`: dólares con variación del día, brecha CCL y tasas de EE.UU. Se actualiza cada 60 s. La variación del día y de 30 días sale de los últimos 70 días de `data/dolar.json` (campo `daily`).
 
@@ -60,4 +64,5 @@ Paleta y tipografía en `css/tokens.css`: gris frío, superficies blancas con fi
 
 ## Probar en local
 `powershell -File tools\serve.ps1` y abrir http://localhost:8765
+
 

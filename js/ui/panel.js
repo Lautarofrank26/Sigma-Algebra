@@ -6,6 +6,7 @@ import { el } from './dom.js';
 import { drawChart } from './chart.js';
 import { resolve } from '../data/loader.js';
 import { fmtNum, fmtDate, fmtAge } from '../lib/format.js';
+import { seriesToCsv, downloadCsv } from '../lib/csv.js';
 
 export function createPanel(data, panel) {
   const head = resolve(data, panel.headline.ref);
@@ -19,6 +20,13 @@ export function createPanel(data, panel) {
       ])
     : null;
 
+  // Descarga todo el historial disponible de las series del gráfico (no solo el período elegido)
+  const csvButton = el('button', { class: 'csv-btn', type: 'button', title: 'Descargar los datos del gráfico en CSV' }, 'Descargar CSV');
+  csvButton.addEventListener('click', () => {
+    const columns = panel.datasets.map((d) => ({ label: d.label, points: resolve(data, d.ref)?.points ?? [] })).filter((c) => c.points.length);
+    if (columns.length) downloadCsv(`macroeconomics-${panel.id}-${new Date().toISOString().slice(0, 10)}.csv`, seriesToCsv(columns));
+  });
+
   const node = el('article', { class: 'panel' }, [
     el('div', { class: 'panel-head' }, [
       el('div', {}, [el('h3', {}, panel.title), el('div', { class: 'unit' }, panel.unit)]),
@@ -26,7 +34,7 @@ export function createPanel(data, panel) {
     ]),
     el('div', { class: 'chart-box' }, canvas),
     el('details', {}, [el('summary', {}, 'Cómo leerlo'), el('p', {}, panel.read)]),
-    el('div', { class: 'src' }, `Fuente: ${panel.source}`),
+    el('div', { class: 'src' }, [el('span', {}, `Fuente: ${panel.source}`), csvButton]),
   ]);
 
   return {
@@ -40,4 +48,5 @@ export function createPanel(data, panel) {
     },
   };
 }
+
 

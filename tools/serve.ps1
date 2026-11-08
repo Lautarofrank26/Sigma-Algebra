@@ -1,4 +1,4 @@
-# serve.ps1 — servidor estatico minimo para probar la pagina en local (los modulos ES no andan con file://)
+﻿# serve.ps1 — servidor estatico minimo para probar la pagina en local (los modulos ES no andan con file://)
 # Uso: powershell -File tools\serve.ps1 [-Port 8765]
 param([int]$Port = 8765)
 $root = Split-Path $PSScriptRoot -Parent
