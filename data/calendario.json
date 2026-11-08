@@ -1,665 +1,665 @@
-﻿{
-    "nota":  "Fechas del calendario de difusión del INDEC y del calendario de reuniones de la Reserva Federal, más los eventos de data/calendario-manual.json. El INDEC publica en general a las 16:00 h; su calendario oficial no indica la hora.",
-    "fuentes":  [
-                    "https://www.indec.gob.ar/indec/web/Calendario-Fecha-0",
-                    "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm"
-                ],
-    "actualizado":  "2026-11-08",
-    "eventos":  [
-                    {
-                        "date":  "2026-10-28",
-                        "time":  "14:00",
-                        "tz":  "-04:00",
-                        "country":  "us",
-                        "source":  "Reserva Federal",
-                        "title":  "Decisión de tasas de la Fed",
-                        "detail":  "Reunión del FOMC del 27 y 28 de octubre",
-                        "href":  "eeuu-tasas.html",
-                        "previo":  {
-                                       "id":  "fedfunds",
-                                       "suffix":  "%",
-                                       "t":  "level",
-                                       "decimals":  2,
-                                       "label":  "Tasa actual",
-                                       "file":  "us"
-                                   }
-                    },
-                    {
-                        "date":  "2026-11-06",
-                        "time":  "16:00",
-                        "tz":  "-03:00",
-                        "country":  "ar",
-                        "source":  "INDEC",
-                        "title":  "Industria (IPI manufacturero)",
-                        "detail":  "Septiembre de 2026",
-                        "href":  "actividad.html",
-                        "previo":  {
-                                       "id":  "ipi",
-                                       "suffix":  "%",
-                                       "t":  "pct1",
-                                       "signed":  true,
-                                       "decimals":  1,
-                                       "label":  "Anterior (m/m)",
-                                       "file":  "ar"
-                                   }
-                    },
-                    {
-                        "date":  "2026-11-10",
-                        "time":  "08:30",
-                        "tz":  "-05:00",
-                        "country":  "us",
-                        "source":  "BLS / Fed",
-                        "title":  "Inflación (CPI)",
-                        "detail":  "Octubre de 2026",
-                        "href":  "eeuu-precios.html",
-                        "previo":  {
-                                       "id":  "cpi",
-                                       "suffix":  "%",
-                                       "t":  "pct1",
-                                       "signed":  true,
-                                       "decimals":  1,
-                                       "label":  "Anterior (m/m)",
-                                       "file":  "us"
-                                   },
-                        "consenso":  null
-                    },
-                    {
-                        "date":  "2026-11-11",
-                        "time":  "16:00",
-                        "tz":  "-03:00",
-                        "country":  "ar",
-                        "source":  "INDEC",
-                        "title":  "Servicios públicos (ISSP)",
-                        "detail":  "Agosto de 2026",
-                        "href":  "actividad.html",
-                        "previo":  null
-                    },
-                    {
-                        "date":  "2026-11-12",
-                        "time":  "16:00",
-                        "tz":  "-03:00",
-                        "country":  "ar",
-                        "source":  "INDEC",
-                        "title":  "Inflación (IPC)",
-                        "detail":  "Octubre de 2026 · también canastas básicas",
-                        "href":  "precios.html",
-                        "previo":  {
-                                       "id":  "ipc",
-                                       "suffix":  "%",
-                                       "t":  "pct1",
-                                       "decimals":  1,
-                                       "label":  "Anterior (m/m)",
-                                       "file":  "ar"
-                                   }
-                    },
-                    {
-                        "date":  "2026-11-13",
-                        "time":  "08:30",
-                        "tz":  "-05:00",
-                        "country":  "us",
-                        "source":  "BLS / Fed",
-                        "title":  "Precios al productor (PPI)",
-                        "detail":  "Octubre de 2026",
-                        "href":  "eeuu-precios.html",
-                        "previo":  {
-                                       "id":  "ppi",
-                                       "suffix":  "%",
-                                       "t":  "pct1",
-                                       "signed":  true,
-                                       "decimals":  1,
-                                       "label":  "Anterior (m/m)",
-                                       "file":  "us"
-                                   },
-                        "consenso":  null
-                    },
-                    {
-                        "date":  "2026-11-13",
-                        "time":  "16:00",
-                        "tz":  "-03:00",
-                        "country":  "ar",
-                        "source":  "INDEC",
-                        "title":  "Índice de salarios",
-                        "detail":  "Septiembre de 2026",
-                        "href":  "empleo.html",
-                        "previo":  {
-                                       "id":  "wages",
-                                       "suffix":  "%",
-                                       "t":  "pct1",
-                                       "decimals":  1,
-                                       "label":  "Anterior (m/m)",
-                                       "file":  "ar"
-                                   }
-                    },
-                    {
-                        "date":  "2026-11-17",
-                        "time":  "16:00",
-                        "tz":  "-03:00",
-                        "country":  "ar",
-                        "source":  "INDEC",
-                        "title":  "Precios mayoristas (SIPM)",
-                        "detail":  "Octubre de 2026",
-                        "href":  "precios.html",
-                        "previo":  null
-                    },
-                    {
-                        "date":  "2026-11-18",
-                        "time":  "14:00",
-                        "tz":  "-05:00",
-                        "country":  "us",
-                        "source":  "BLS / Fed",
-                        "title":  "Actas de la Fed",
-                        "detail":  "Minutas de la reunión de octubre del FOMC",
-                        "href":  "eeuu-tasas.html",
-                        "previo":  {
-                                       "id":  "fedfunds",
-                                       "suffix":  "%",
-                                       "t":  "level",
-                                       "decimals":  2,
-                                       "label":  "Tasa actual",
-                                       "file":  "us"
-                                   },
-                        "consenso":  null
-                    },
-                    {
-                        "date":  "2026-11-19",
-                        "time":  "16:00",
-                        "tz":  "-03:00",
-                        "country":  "ar",
-                        "source":  "INDEC",
-                        "title":  "Comercio exterior (ICA)",
-                        "detail":  "Octubre de 2026",
-                        "href":  "externo.html",
-                        "previo":  {
-                                       "id":  "trade_balance",
-                                       "suffix":  " M",
-                                       "prefix":  "USD ",
-                                       "t":  "level",
-                                       "decimals":  0,
-                                       "label":  "Saldo anterior",
-                                       "file":  "ar"
-                                   }
-                    },
-                    {
-                        "date":  "2026-11-24",
-                        "time":  "16:00",
-                        "tz":  "-03:00",
-                        "country":  "ar",
-                        "source":  "INDEC",
-                        "title":  "Actividad económica (EMAE)",
-                        "detail":  "Septiembre de 2026",
-                        "href":  "actividad.html",
-                        "previo":  {
-                                       "id":  "emae",
-                                       "suffix":  "%",
-                                       "t":  "pct1",
-                                       "signed":  true,
-                                       "decimals":  1,
-                                       "label":  "Anterior (m/m)",
-                                       "file":  "ar"
-                                   }
-                    },
-                    {
-                        "date":  "2026-12-01",
-                        "time":  "10:00",
-                        "tz":  "-05:00",
-                        "country":  "us",
-                        "source":  "BLS / Fed",
-                        "title":  "Vacantes de empleo (JOLTS)",
-                        "detail":  "Octubre de 2026",
-                        "href":  "eeuu-empleo.html",
-                        "previo":  {
-                                       "id":  "jolts_openings",
-                                       "suffix":  " mil",
-                                       "t":  "level",
-                                       "decimals":  0,
-                                       "label":  "Anterior",
-                                       "file":  "us"
-                                   },
-                        "consenso":  null
-                    },
-                    {
-                        "date":  "2026-12-04",
-                        "time":  "08:30",
-                        "tz":  "-05:00",
-                        "country":  "us",
-                        "source":  "BLS / Fed",
-                        "title":  "Informe de empleo",
-                        "detail":  "Noviembre de 2026 · puestos, desempleo y salarios",
-                        "href":  "eeuu-empleo.html",
-                        "previo":  [
-                                       {
-                                           "id":  "payrolls",
-                                           "suffix":  " mil",
-                                           "t":  "diff",
-                                           "signed":  true,
-                                           "decimals":  0,
-                                           "label":  "Puestos anterior",
-                                           "file":  "us"
-                                       },
-                                       {
-                                           "id":  "unemp",
-                                           "suffix":  "%",
-                                           "t":  "level",
-                                           "decimals":  1,
-                                           "label":  "Desempleo anterior",
-                                           "file":  "us"
-                                       }
-                                   ],
-                        "consenso":  null
-                    },
-                    {
-                        "date":  "2026-12-09",
-                        "time":  "14:00",
-                        "tz":  "-05:00",
-                        "country":  "us",
-                        "source":  "Reserva Federal",
-                        "title":  "Decisión de tasas de la Fed",
-                        "detail":  "Reunión del FOMC del 8 y 9 de diciembre",
-                        "href":  "eeuu-tasas.html",
-                        "previo":  {
-                                       "id":  "fedfunds",
-                                       "suffix":  "%",
-                                       "t":  "level",
-                                       "decimals":  2,
-                                       "label":  "Tasa actual",
-                                       "file":  "us"
-                                   }
-                    },
-                    {
-                        "date":  "2026-12-09",
-                        "time":  "16:00",
-                        "tz":  "-03:00",
-                        "country":  "ar",
-                        "source":  "INDEC",
-                        "title":  "Industria (IPI manufacturero)",
-                        "detail":  "Octubre de 2026",
-                        "href":  "actividad.html",
-                        "previo":  {
-                                       "id":  "ipi",
-                                       "suffix":  "%",
-                                       "t":  "pct1",
-                                       "signed":  true,
-                                       "decimals":  1,
-                                       "label":  "Anterior (m/m)",
-                                       "file":  "ar"
-                                   }
-                    },
-                    {
-                        "date":  "2026-12-10",
-                        "time":  "08:30",
-                        "tz":  "-05:00",
-                        "country":  "us",
-                        "source":  "BLS / Fed",
-                        "title":  "Inflación (CPI)",
-                        "detail":  "Noviembre de 2026",
-                        "href":  "eeuu-precios.html",
-                        "previo":  {
-                                       "id":  "cpi",
-                                       "suffix":  "%",
-                                       "t":  "pct1",
-                                       "signed":  true,
-                                       "decimals":  1,
-                                       "label":  "Anterior (m/m)",
-                                       "file":  "us"
-                                   },
-                        "consenso":  null
-                    },
-                    {
-                        "date":  "2026-12-10",
-                        "time":  "16:00",
-                        "tz":  "-03:00",
-                        "country":  "ar",
-                        "source":  "INDEC",
-                        "title":  "Servicios públicos (ISSP)",
-                        "detail":  "Septiembre de 2026",
-                        "href":  "actividad.html",
-                        "previo":  null
-                    },
-                    {
-                        "date":  "2026-12-15",
-                        "time":  "08:30",
-                        "tz":  "-05:00",
-                        "country":  "us",
-                        "source":  "BLS / Fed",
-                        "title":  "Precios al productor (PPI)",
-                        "detail":  "Noviembre de 2026",
-                        "href":  "eeuu-precios.html",
-                        "previo":  {
-                                       "id":  "ppi",
-                                       "suffix":  "%",
-                                       "t":  "pct1",
-                                       "signed":  true,
-                                       "decimals":  1,
-                                       "label":  "Anterior (m/m)",
-                                       "file":  "us"
-                                   },
-                        "consenso":  null
-                    },
-                    {
-                        "date":  "2026-12-15",
-                        "time":  "16:00",
-                        "tz":  "-03:00",
-                        "country":  "ar",
-                        "source":  "INDEC",
-                        "title":  "Inflación (IPC)",
-                        "detail":  "Noviembre de 2026 · también canastas básicas",
-                        "href":  "precios.html",
-                        "previo":  {
-                                       "id":  "ipc",
-                                       "suffix":  "%",
-                                       "t":  "pct1",
-                                       "decimals":  1,
-                                       "label":  "Anterior (m/m)",
-                                       "file":  "ar"
-                                   }
-                    },
-                    {
-                        "date":  "2026-12-16",
-                        "time":  "16:00",
-                        "tz":  "-03:00",
-                        "country":  "ar",
-                        "source":  "INDEC",
-                        "title":  "Nivel de actividad (PBI)",
-                        "detail":  "Informe de avance del tercer trimestre de 2026",
-                        "href":  "actividad.html",
-                        "previo":  {
-                                       "id":  "gdp_level",
-                                       "suffix":  "%",
-                                       "t":  "yoy",
-                                       "signed":  true,
-                                       "decimals":  1,
-                                       "label":  "Anterior (i.a.)",
-                                       "file":  "ar"
-                                   }
-                    },
-                    {
-                        "date":  "2026-12-16",
-                        "time":  "16:00",
-                        "tz":  "-03:00",
-                        "country":  "ar",
-                        "source":  "INDEC",
-                        "title":  "Índice de salarios",
-                        "detail":  "Octubre de 2026",
-                        "href":  "empleo.html",
-                        "previo":  {
-                                       "id":  "wages",
-                                       "suffix":  "%",
-                                       "t":  "pct1",
-                                       "decimals":  1,
-                                       "label":  "Anterior (m/m)",
-                                       "file":  "ar"
-                                   }
-                    },
-                    {
-                        "date":  "2026-12-17",
-                        "time":  "16:00",
-                        "tz":  "-03:00",
-                        "country":  "ar",
-                        "source":  "INDEC",
-                        "title":  "Precios mayoristas (SIPM)",
-                        "detail":  "Noviembre de 2026",
-                        "href":  "precios.html",
-                        "previo":  null
-                    },
-                    {
-                        "date":  "2026-12-18",
-                        "time":  "16:00",
-                        "tz":  "-03:00",
-                        "country":  "ar",
-                        "source":  "INDEC",
-                        "title":  "Mercado de trabajo",
-                        "detail":  "Desempleo del tercer trimestre de 2026",
-                        "href":  "empleo.html",
-                        "previo":  {
-                                       "id":  "unemp",
-                                       "suffix":  "%",
-                                       "t":  "level",
-                                       "decimals":  1,
-                                       "label":  "Anterior",
-                                       "file":  "ar"
-                                   }
-                    },
-                    {
-                        "date":  "2026-12-18",
-                        "time":  "16:00",
-                        "tz":  "-03:00",
-                        "country":  "ar",
-                        "source":  "INDEC",
-                        "title":  "Comercio exterior (ICA)",
-                        "detail":  "Noviembre de 2026",
-                        "href":  "externo.html",
-                        "previo":  {
-                                       "id":  "trade_balance",
-                                       "suffix":  " M",
-                                       "prefix":  "USD ",
-                                       "t":  "level",
-                                       "decimals":  0,
-                                       "label":  "Saldo anterior",
-                                       "file":  "ar"
-                                   }
-                    },
-                    {
-                        "date":  "2026-12-21",
-                        "time":  "16:00",
-                        "tz":  "-03:00",
-                        "country":  "ar",
-                        "source":  "INDEC",
-                        "title":  "Actividad económica (EMAE)",
-                        "detail":  "Octubre de 2026",
-                        "href":  "actividad.html",
-                        "previo":  {
-                                       "id":  "emae",
-                                       "suffix":  "%",
-                                       "t":  "pct1",
-                                       "signed":  true,
-                                       "decimals":  1,
-                                       "label":  "Anterior (m/m)",
-                                       "file":  "ar"
-                                   }
-                    },
-                    {
-                        "date":  "2026-12-22",
-                        "time":  "16:00",
-                        "tz":  "-03:00",
-                        "country":  "ar",
-                        "source":  "INDEC",
-                        "title":  "Balanza de pagos",
-                        "detail":  "Tercer trimestre de 2026",
-                        "href":  "externo.html",
-                        "previo":  null
-                    },
-                    {
-                        "date":  "2026-12-30",
-                        "time":  "14:00",
-                        "tz":  "-05:00",
-                        "country":  "us",
-                        "source":  "BLS / Fed",
-                        "title":  "Actas de la Fed",
-                        "detail":  "Minutas de la reunión de diciembre del FOMC",
-                        "href":  "eeuu-tasas.html",
-                        "previo":  {
-                                       "id":  "fedfunds",
-                                       "suffix":  "%",
-                                       "t":  "level",
-                                       "decimals":  2,
-                                       "label":  "Tasa actual",
-                                       "file":  "us"
-                                   },
-                        "consenso":  null
-                    },
-                    {
-                        "date":  "2027-01-08",
-                        "time":  "08:30",
-                        "tz":  "-05:00",
-                        "country":  "us",
-                        "source":  "BLS / Fed",
-                        "title":  "Informe de empleo",
-                        "detail":  "Diciembre de 2026 · puestos, desempleo y salarios",
-                        "href":  "eeuu-empleo.html",
-                        "previo":  [
-                                       {
-                                           "id":  "payrolls",
-                                           "suffix":  " mil",
-                                           "t":  "diff",
-                                           "signed":  true,
-                                           "decimals":  0,
-                                           "label":  "Puestos anterior",
-                                           "file":  "us"
-                                       },
-                                       {
-                                           "id":  "unemp",
-                                           "suffix":  "%",
-                                           "t":  "level",
-                                           "decimals":  1,
-                                           "label":  "Desempleo anterior",
-                                           "file":  "us"
-                                       }
-                                   ],
-                        "consenso":  null
-                    },
-                    {
-                        "date":  "2027-01-27",
-                        "time":  "14:00",
-                        "tz":  "-05:00",
-                        "country":  "us",
-                        "source":  "Reserva Federal",
-                        "title":  "Decisión de tasas de la Fed",
-                        "detail":  "Reunión del FOMC del 26 y 27 de enero",
-                        "href":  "eeuu-tasas.html",
-                        "previo":  {
-                                       "id":  "fedfunds",
-                                       "suffix":  "%",
-                                       "t":  "level",
-                                       "decimals":  2,
-                                       "label":  "Tasa actual",
-                                       "file":  "us"
-                                   }
-                    },
-                    {
-                        "date":  "2027-03-17",
-                        "time":  "14:00",
-                        "tz":  "-04:00",
-                        "country":  "us",
-                        "source":  "Reserva Federal",
-                        "title":  "Decisión de tasas de la Fed",
-                        "detail":  "Reunión del FOMC del 16 y 17 de marzo",
-                        "href":  "eeuu-tasas.html",
-                        "previo":  {
-                                       "id":  "fedfunds",
-                                       "suffix":  "%",
-                                       "t":  "level",
-                                       "decimals":  2,
-                                       "label":  "Tasa actual",
-                                       "file":  "us"
-                                   }
-                    },
-                    {
-                        "date":  "2027-04-28",
-                        "time":  "14:00",
-                        "tz":  "-04:00",
-                        "country":  "us",
-                        "source":  "Reserva Federal",
-                        "title":  "Decisión de tasas de la Fed",
-                        "detail":  "Reunión del FOMC del 27 y 28 de abril",
-                        "href":  "eeuu-tasas.html",
-                        "previo":  {
-                                       "id":  "fedfunds",
-                                       "suffix":  "%",
-                                       "t":  "level",
-                                       "decimals":  2,
-                                       "label":  "Tasa actual",
-                                       "file":  "us"
-                                   }
-                    },
-                    {
-                        "date":  "2027-06-09",
-                        "time":  "14:00",
-                        "tz":  "-04:00",
-                        "country":  "us",
-                        "source":  "Reserva Federal",
-                        "title":  "Decisión de tasas de la Fed",
-                        "detail":  "Reunión del FOMC del 8 y 9 de junio",
-                        "href":  "eeuu-tasas.html",
-                        "previo":  {
-                                       "id":  "fedfunds",
-                                       "suffix":  "%",
-                                       "t":  "level",
-                                       "decimals":  2,
-                                       "label":  "Tasa actual",
-                                       "file":  "us"
-                                   }
-                    },
-                    {
-                        "date":  "2027-07-28",
-                        "time":  "14:00",
-                        "tz":  "-04:00",
-                        "country":  "us",
-                        "source":  "Reserva Federal",
-                        "title":  "Decisión de tasas de la Fed",
-                        "detail":  "Reunión del FOMC del 27 y 28 de julio",
-                        "href":  "eeuu-tasas.html",
-                        "previo":  {
-                                       "id":  "fedfunds",
-                                       "suffix":  "%",
-                                       "t":  "level",
-                                       "decimals":  2,
-                                       "label":  "Tasa actual",
-                                       "file":  "us"
-                                   }
-                    },
-                    {
-                        "date":  "2027-09-15",
-                        "time":  "14:00",
-                        "tz":  "-04:00",
-                        "country":  "us",
-                        "source":  "Reserva Federal",
-                        "title":  "Decisión de tasas de la Fed",
-                        "detail":  "Reunión del FOMC del 14 y 15 de septiembre",
-                        "href":  "eeuu-tasas.html",
-                        "previo":  {
-                                       "id":  "fedfunds",
-                                       "suffix":  "%",
-                                       "t":  "level",
-                                       "decimals":  2,
-                                       "label":  "Tasa actual",
-                                       "file":  "us"
-                                   }
-                    },
-                    {
-                        "date":  "2027-10-27",
-                        "time":  "14:00",
-                        "tz":  "-04:00",
-                        "country":  "us",
-                        "source":  "Reserva Federal",
-                        "title":  "Decisión de tasas de la Fed",
-                        "detail":  "Reunión del FOMC del 26 y 27 de octubre",
-                        "href":  "eeuu-tasas.html",
-                        "previo":  {
-                                       "id":  "fedfunds",
-                                       "suffix":  "%",
-                                       "t":  "level",
-                                       "decimals":  2,
-                                       "label":  "Tasa actual",
-                                       "file":  "us"
-                                   }
-                    },
-                    {
-                        "date":  "2027-12-08",
-                        "time":  "14:00",
-                        "tz":  "-05:00",
-                        "country":  "us",
-                        "source":  "Reserva Federal",
-                        "title":  "Decisión de tasas de la Fed",
-                        "detail":  "Reunión del FOMC del 7 y 8 de diciembre",
-                        "href":  "eeuu-tasas.html",
-                        "previo":  {
-                                       "id":  "fedfunds",
-                                       "suffix":  "%",
-                                       "t":  "level",
-                                       "decimals":  2,
-                                       "label":  "Tasa actual",
-                                       "file":  "us"
-                                   }
-                    }
-                ]
+{
+  "nota": "Fechas del calendario de difusión del INDEC y del calendario de reuniones de la Reserva Federal, más los eventos de data/calendario-manual.json. El INDEC publica en general a las 16:00 h; su calendario oficial no indica la hora.",
+  "fuentes": [
+    "https://www.indec.gob.ar/indec/web/Calendario-Fecha-0",
+    "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm"
+  ],
+  "actualizado": "2026-11-08",
+  "eventos": [
+    {
+      "date": "2026-10-28",
+      "time": "14:00",
+      "tz": "-04:00",
+      "country": "us",
+      "source": "Reserva Federal",
+      "title": "Decisión de tasas de la Fed",
+      "detail": "Reunión del FOMC del 27 y 28 de octubre",
+      "href": "eeuu-tasas.html",
+      "previo": {
+        "suffix": "%",
+        "id": "fedfunds",
+        "file": "us",
+        "label": "Tasa actual",
+        "decimals": 2,
+        "t": "level"
+      }
+    },
+    {
+      "date": "2026-11-06",
+      "time": "16:00",
+      "tz": "-03:00",
+      "country": "ar",
+      "source": "INDEC",
+      "title": "Industria (IPI manufacturero)",
+      "detail": "Septiembre de 2026",
+      "href": "actividad.html",
+      "previo": {
+        "suffix": "%",
+        "id": "ipi",
+        "file": "ar",
+        "signed": true,
+        "decimals": 1,
+        "label": "Anterior (m/m)",
+        "t": "pct1"
+      }
+    },
+    {
+      "date": "2026-11-10",
+      "time": "08:30",
+      "tz": "-05:00",
+      "country": "us",
+      "source": "BLS / Fed",
+      "title": "Inflación (CPI)",
+      "detail": "Octubre de 2026",
+      "href": "eeuu-precios.html",
+      "previo": {
+        "id": "cpi",
+        "suffix": "%",
+        "t": "pct1",
+        "signed": true,
+        "decimals": 1,
+        "label": "Anterior (m/m)",
+        "file": "us"
+      },
+      "consenso": null
+    },
+    {
+      "date": "2026-11-11",
+      "time": "16:00",
+      "tz": "-03:00",
+      "country": "ar",
+      "source": "INDEC",
+      "title": "Servicios públicos (ISSP)",
+      "detail": "Agosto de 2026",
+      "href": "actividad.html",
+      "previo": null
+    },
+    {
+      "date": "2026-11-12",
+      "time": "16:00",
+      "tz": "-03:00",
+      "country": "ar",
+      "source": "INDEC",
+      "title": "Inflación (IPC)",
+      "detail": "Octubre de 2026 · también canastas básicas",
+      "href": "precios.html",
+      "previo": {
+        "suffix": "%",
+        "id": "ipc",
+        "file": "ar",
+        "label": "Anterior (m/m)",
+        "decimals": 1,
+        "t": "pct1"
+      }
+    },
+    {
+      "date": "2026-11-13",
+      "time": "08:30",
+      "tz": "-05:00",
+      "country": "us",
+      "source": "BLS / Fed",
+      "title": "Precios al productor (PPI)",
+      "detail": "Octubre de 2026",
+      "href": "eeuu-precios.html",
+      "previo": {
+        "id": "ppi",
+        "suffix": "%",
+        "t": "pct1",
+        "signed": true,
+        "decimals": 1,
+        "label": "Anterior (m/m)",
+        "file": "us"
+      },
+      "consenso": null
+    },
+    {
+      "date": "2026-11-13",
+      "time": "16:00",
+      "tz": "-03:00",
+      "country": "ar",
+      "source": "INDEC",
+      "title": "Índice de salarios",
+      "detail": "Septiembre de 2026",
+      "href": "empleo.html",
+      "previo": {
+        "suffix": "%",
+        "id": "wages",
+        "file": "ar",
+        "label": "Anterior (m/m)",
+        "decimals": 1,
+        "t": "pct1"
+      }
+    },
+    {
+      "date": "2026-11-17",
+      "time": "16:00",
+      "tz": "-03:00",
+      "country": "ar",
+      "source": "INDEC",
+      "title": "Precios mayoristas (SIPM)",
+      "detail": "Octubre de 2026",
+      "href": "precios.html",
+      "previo": null
+    },
+    {
+      "date": "2026-11-18",
+      "time": "14:00",
+      "tz": "-05:00",
+      "country": "us",
+      "source": "BLS / Fed",
+      "title": "Actas de la Fed",
+      "detail": "Minutas de la reunión de octubre del FOMC",
+      "href": "eeuu-tasas.html",
+      "previo": {
+        "id": "fedfunds",
+        "suffix": "%",
+        "t": "level",
+        "decimals": 2,
+        "label": "Tasa actual",
+        "file": "us"
+      },
+      "consenso": null
+    },
+    {
+      "date": "2026-11-19",
+      "time": "16:00",
+      "tz": "-03:00",
+      "country": "ar",
+      "source": "INDEC",
+      "title": "Comercio exterior (ICA)",
+      "detail": "Octubre de 2026",
+      "href": "externo.html",
+      "previo": {
+        "suffix": " M",
+        "id": "trade_balance",
+        "file": "ar",
+        "label": "Saldo anterior",
+        "decimals": 0,
+        "prefix": "USD ",
+        "t": "level"
+      }
+    },
+    {
+      "date": "2026-11-24",
+      "time": "16:00",
+      "tz": "-03:00",
+      "country": "ar",
+      "source": "INDEC",
+      "title": "Actividad económica (EMAE)",
+      "detail": "Septiembre de 2026",
+      "href": "actividad.html",
+      "previo": {
+        "suffix": "%",
+        "id": "emae",
+        "file": "ar",
+        "signed": true,
+        "decimals": 1,
+        "label": "Anterior (m/m)",
+        "t": "pct1"
+      }
+    },
+    {
+      "date": "2026-12-01",
+      "time": "10:00",
+      "tz": "-05:00",
+      "country": "us",
+      "source": "BLS / Fed",
+      "title": "Vacantes de empleo (JOLTS)",
+      "detail": "Octubre de 2026",
+      "href": "eeuu-empleo.html",
+      "previo": {
+        "id": "jolts_openings",
+        "suffix": " mil",
+        "t": "level",
+        "decimals": 0,
+        "label": "Anterior",
+        "file": "us"
+      },
+      "consenso": null
+    },
+    {
+      "date": "2026-12-04",
+      "time": "08:30",
+      "tz": "-05:00",
+      "country": "us",
+      "source": "BLS / Fed",
+      "title": "Informe de empleo",
+      "detail": "Noviembre de 2026 · puestos, desempleo y salarios",
+      "href": "eeuu-empleo.html",
+      "previo": [
+        {
+          "id": "payrolls",
+          "suffix": " mil",
+          "t": "diff",
+          "signed": true,
+          "decimals": 0,
+          "label": "Puestos anterior",
+          "file": "us"
+        },
+        {
+          "id": "unemp",
+          "suffix": "%",
+          "t": "level",
+          "decimals": 1,
+          "label": "Desempleo anterior",
+          "file": "us"
+        }
+      ],
+      "consenso": null
+    },
+    {
+      "date": "2026-12-09",
+      "time": "14:00",
+      "tz": "-05:00",
+      "country": "us",
+      "source": "Reserva Federal",
+      "title": "Decisión de tasas de la Fed",
+      "detail": "Reunión del FOMC del 8 y 9 de diciembre",
+      "href": "eeuu-tasas.html",
+      "previo": {
+        "suffix": "%",
+        "id": "fedfunds",
+        "file": "us",
+        "label": "Tasa actual",
+        "decimals": 2,
+        "t": "level"
+      }
+    },
+    {
+      "date": "2026-12-09",
+      "time": "16:00",
+      "tz": "-03:00",
+      "country": "ar",
+      "source": "INDEC",
+      "title": "Industria (IPI manufacturero)",
+      "detail": "Octubre de 2026",
+      "href": "actividad.html",
+      "previo": {
+        "suffix": "%",
+        "id": "ipi",
+        "file": "ar",
+        "signed": true,
+        "decimals": 1,
+        "label": "Anterior (m/m)",
+        "t": "pct1"
+      }
+    },
+    {
+      "date": "2026-12-10",
+      "time": "08:30",
+      "tz": "-05:00",
+      "country": "us",
+      "source": "BLS / Fed",
+      "title": "Inflación (CPI)",
+      "detail": "Noviembre de 2026",
+      "href": "eeuu-precios.html",
+      "previo": {
+        "id": "cpi",
+        "suffix": "%",
+        "t": "pct1",
+        "signed": true,
+        "decimals": 1,
+        "label": "Anterior (m/m)",
+        "file": "us"
+      },
+      "consenso": null
+    },
+    {
+      "date": "2026-12-10",
+      "time": "16:00",
+      "tz": "-03:00",
+      "country": "ar",
+      "source": "INDEC",
+      "title": "Servicios públicos (ISSP)",
+      "detail": "Septiembre de 2026",
+      "href": "actividad.html",
+      "previo": null
+    },
+    {
+      "date": "2026-12-15",
+      "time": "08:30",
+      "tz": "-05:00",
+      "country": "us",
+      "source": "BLS / Fed",
+      "title": "Precios al productor (PPI)",
+      "detail": "Noviembre de 2026",
+      "href": "eeuu-precios.html",
+      "previo": {
+        "id": "ppi",
+        "suffix": "%",
+        "t": "pct1",
+        "signed": true,
+        "decimals": 1,
+        "label": "Anterior (m/m)",
+        "file": "us"
+      },
+      "consenso": null
+    },
+    {
+      "date": "2026-12-15",
+      "time": "16:00",
+      "tz": "-03:00",
+      "country": "ar",
+      "source": "INDEC",
+      "title": "Inflación (IPC)",
+      "detail": "Noviembre de 2026 · también canastas básicas",
+      "href": "precios.html",
+      "previo": {
+        "suffix": "%",
+        "id": "ipc",
+        "file": "ar",
+        "label": "Anterior (m/m)",
+        "decimals": 1,
+        "t": "pct1"
+      }
+    },
+    {
+      "date": "2026-12-16",
+      "time": "16:00",
+      "tz": "-03:00",
+      "country": "ar",
+      "source": "INDEC",
+      "title": "Nivel de actividad (PBI)",
+      "detail": "Informe de avance del tercer trimestre de 2026",
+      "href": "actividad.html",
+      "previo": {
+        "suffix": "%",
+        "id": "gdp_level",
+        "file": "ar",
+        "signed": true,
+        "decimals": 1,
+        "label": "Anterior (i.a.)",
+        "t": "yoy"
+      }
+    },
+    {
+      "date": "2026-12-16",
+      "time": "16:00",
+      "tz": "-03:00",
+      "country": "ar",
+      "source": "INDEC",
+      "title": "Índice de salarios",
+      "detail": "Octubre de 2026",
+      "href": "empleo.html",
+      "previo": {
+        "suffix": "%",
+        "id": "wages",
+        "file": "ar",
+        "label": "Anterior (m/m)",
+        "decimals": 1,
+        "t": "pct1"
+      }
+    },
+    {
+      "date": "2026-12-17",
+      "time": "16:00",
+      "tz": "-03:00",
+      "country": "ar",
+      "source": "INDEC",
+      "title": "Precios mayoristas (SIPM)",
+      "detail": "Noviembre de 2026",
+      "href": "precios.html",
+      "previo": null
+    },
+    {
+      "date": "2026-12-18",
+      "time": "16:00",
+      "tz": "-03:00",
+      "country": "ar",
+      "source": "INDEC",
+      "title": "Mercado de trabajo",
+      "detail": "Desempleo del tercer trimestre de 2026",
+      "href": "empleo.html",
+      "previo": {
+        "suffix": "%",
+        "id": "unemp",
+        "file": "ar",
+        "label": "Anterior",
+        "decimals": 1,
+        "t": "level"
+      }
+    },
+    {
+      "date": "2026-12-18",
+      "time": "16:00",
+      "tz": "-03:00",
+      "country": "ar",
+      "source": "INDEC",
+      "title": "Comercio exterior (ICA)",
+      "detail": "Noviembre de 2026",
+      "href": "externo.html",
+      "previo": {
+        "suffix": " M",
+        "id": "trade_balance",
+        "file": "ar",
+        "label": "Saldo anterior",
+        "decimals": 0,
+        "prefix": "USD ",
+        "t": "level"
+      }
+    },
+    {
+      "date": "2026-12-21",
+      "time": "16:00",
+      "tz": "-03:00",
+      "country": "ar",
+      "source": "INDEC",
+      "title": "Actividad económica (EMAE)",
+      "detail": "Octubre de 2026",
+      "href": "actividad.html",
+      "previo": {
+        "suffix": "%",
+        "id": "emae",
+        "file": "ar",
+        "signed": true,
+        "decimals": 1,
+        "label": "Anterior (m/m)",
+        "t": "pct1"
+      }
+    },
+    {
+      "date": "2026-12-22",
+      "time": "16:00",
+      "tz": "-03:00",
+      "country": "ar",
+      "source": "INDEC",
+      "title": "Balanza de pagos",
+      "detail": "Tercer trimestre de 2026",
+      "href": "externo.html",
+      "previo": null
+    },
+    {
+      "date": "2026-12-30",
+      "time": "14:00",
+      "tz": "-05:00",
+      "country": "us",
+      "source": "BLS / Fed",
+      "title": "Actas de la Fed",
+      "detail": "Minutas de la reunión de diciembre del FOMC",
+      "href": "eeuu-tasas.html",
+      "previo": {
+        "id": "fedfunds",
+        "suffix": "%",
+        "t": "level",
+        "decimals": 2,
+        "label": "Tasa actual",
+        "file": "us"
+      },
+      "consenso": null
+    },
+    {
+      "date": "2027-01-08",
+      "time": "08:30",
+      "tz": "-05:00",
+      "country": "us",
+      "source": "BLS / Fed",
+      "title": "Informe de empleo",
+      "detail": "Diciembre de 2026 · puestos, desempleo y salarios",
+      "href": "eeuu-empleo.html",
+      "previo": [
+        {
+          "id": "payrolls",
+          "suffix": " mil",
+          "t": "diff",
+          "signed": true,
+          "decimals": 0,
+          "label": "Puestos anterior",
+          "file": "us"
+        },
+        {
+          "id": "unemp",
+          "suffix": "%",
+          "t": "level",
+          "decimals": 1,
+          "label": "Desempleo anterior",
+          "file": "us"
+        }
+      ],
+      "consenso": null
+    },
+    {
+      "date": "2027-01-27",
+      "time": "14:00",
+      "tz": "-05:00",
+      "country": "us",
+      "source": "Reserva Federal",
+      "title": "Decisión de tasas de la Fed",
+      "detail": "Reunión del FOMC del 26 y 27 de enero",
+      "href": "eeuu-tasas.html",
+      "previo": {
+        "suffix": "%",
+        "id": "fedfunds",
+        "file": "us",
+        "label": "Tasa actual",
+        "decimals": 2,
+        "t": "level"
+      }
+    },
+    {
+      "date": "2027-03-17",
+      "time": "14:00",
+      "tz": "-04:00",
+      "country": "us",
+      "source": "Reserva Federal",
+      "title": "Decisión de tasas de la Fed",
+      "detail": "Reunión del FOMC del 16 y 17 de marzo",
+      "href": "eeuu-tasas.html",
+      "previo": {
+        "suffix": "%",
+        "id": "fedfunds",
+        "file": "us",
+        "label": "Tasa actual",
+        "decimals": 2,
+        "t": "level"
+      }
+    },
+    {
+      "date": "2027-04-28",
+      "time": "14:00",
+      "tz": "-04:00",
+      "country": "us",
+      "source": "Reserva Federal",
+      "title": "Decisión de tasas de la Fed",
+      "detail": "Reunión del FOMC del 27 y 28 de abril",
+      "href": "eeuu-tasas.html",
+      "previo": {
+        "suffix": "%",
+        "id": "fedfunds",
+        "file": "us",
+        "label": "Tasa actual",
+        "decimals": 2,
+        "t": "level"
+      }
+    },
+    {
+      "date": "2027-06-09",
+      "time": "14:00",
+      "tz": "-04:00",
+      "country": "us",
+      "source": "Reserva Federal",
+      "title": "Decisión de tasas de la Fed",
+      "detail": "Reunión del FOMC del 8 y 9 de junio",
+      "href": "eeuu-tasas.html",
+      "previo": {
+        "suffix": "%",
+        "id": "fedfunds",
+        "file": "us",
+        "label": "Tasa actual",
+        "decimals": 2,
+        "t": "level"
+      }
+    },
+    {
+      "date": "2027-07-28",
+      "time": "14:00",
+      "tz": "-04:00",
+      "country": "us",
+      "source": "Reserva Federal",
+      "title": "Decisión de tasas de la Fed",
+      "detail": "Reunión del FOMC del 27 y 28 de julio",
+      "href": "eeuu-tasas.html",
+      "previo": {
+        "suffix": "%",
+        "id": "fedfunds",
+        "file": "us",
+        "label": "Tasa actual",
+        "decimals": 2,
+        "t": "level"
+      }
+    },
+    {
+      "date": "2027-09-15",
+      "time": "14:00",
+      "tz": "-04:00",
+      "country": "us",
+      "source": "Reserva Federal",
+      "title": "Decisión de tasas de la Fed",
+      "detail": "Reunión del FOMC del 14 y 15 de septiembre",
+      "href": "eeuu-tasas.html",
+      "previo": {
+        "suffix": "%",
+        "id": "fedfunds",
+        "file": "us",
+        "label": "Tasa actual",
+        "decimals": 2,
+        "t": "level"
+      }
+    },
+    {
+      "date": "2027-10-27",
+      "time": "14:00",
+      "tz": "-04:00",
+      "country": "us",
+      "source": "Reserva Federal",
+      "title": "Decisión de tasas de la Fed",
+      "detail": "Reunión del FOMC del 26 y 27 de octubre",
+      "href": "eeuu-tasas.html",
+      "previo": {
+        "suffix": "%",
+        "id": "fedfunds",
+        "file": "us",
+        "label": "Tasa actual",
+        "decimals": 2,
+        "t": "level"
+      }
+    },
+    {
+      "date": "2027-12-08",
+      "time": "14:00",
+      "tz": "-05:00",
+      "country": "us",
+      "source": "Reserva Federal",
+      "title": "Decisión de tasas de la Fed",
+      "detail": "Reunión del FOMC del 7 y 8 de diciembre",
+      "href": "eeuu-tasas.html",
+      "previo": {
+        "suffix": "%",
+        "id": "fedfunds",
+        "file": "us",
+        "label": "Tasa actual",
+        "decimals": 2,
+        "t": "level"
+      }
+    }
+  ]
 }
