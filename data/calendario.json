@@ -4,7 +4,7 @@
     "https://www.indec.gob.ar/indec/web/Calendario-Fecha-0",
     "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm"
   ],
-  "actualizado": "2026-11-08",
+  "actualizado": "2026-11-09",
   "eventos": [
     {
       "date": "2026-10-28",
@@ -17,11 +17,11 @@
       "href": "eeuu-tasas.html",
       "previo": {
         "suffix": "%",
-        "id": "fedfunds",
-        "file": "us",
+        "t": "level",
         "label": "Tasa actual",
         "decimals": 2,
-        "t": "level"
+        "id": "fedfunds",
+        "file": "us"
       }
     },
     {
@@ -35,12 +35,12 @@
       "href": "actividad.html",
       "previo": {
         "suffix": "%",
-        "id": "ipi",
-        "file": "ar",
+        "t": "pct1",
         "signed": true,
-        "decimals": 1,
         "label": "Anterior (m/m)",
-        "t": "pct1"
+        "decimals": 1,
+        "id": "ipi",
+        "file": "ar"
       }
     },
     {
@@ -85,11 +85,11 @@
       "href": "precios.html",
       "previo": {
         "suffix": "%",
-        "id": "ipc",
-        "file": "ar",
+        "t": "pct1",
         "label": "Anterior (m/m)",
         "decimals": 1,
-        "t": "pct1"
+        "id": "ipc",
+        "file": "ar"
       }
     },
     {
@@ -123,11 +123,11 @@
       "href": "empleo.html",
       "previo": {
         "suffix": "%",
-        "id": "wages",
-        "file": "ar",
+        "t": "pct1",
         "label": "Anterior (m/m)",
         "decimals": 1,
-        "t": "pct1"
+        "id": "wages",
+        "file": "ar"
       }
     },
     {
@@ -171,12 +171,12 @@
       "href": "externo.html",
       "previo": {
         "suffix": " M",
+        "t": "level",
+        "prefix": "USD ",
+        "decimals": 0,
         "id": "trade_balance",
         "file": "ar",
-        "label": "Saldo anterior",
-        "decimals": 0,
-        "prefix": "USD ",
-        "t": "level"
+        "label": "Saldo anterior"
       }
     },
     {
@@ -190,12 +190,12 @@
       "href": "actividad.html",
       "previo": {
         "suffix": "%",
-        "id": "emae",
-        "file": "ar",
+        "t": "pct1",
         "signed": true,
-        "decimals": 1,
         "label": "Anterior (m/m)",
-        "t": "pct1"
+        "decimals": 1,
+        "id": "emae",
+        "file": "ar"
       }
     },
     {
@@ -258,11 +258,11 @@
       "href": "eeuu-tasas.html",
       "previo": {
         "suffix": "%",
-        "id": "fedfunds",
-        "file": "us",
+        "t": "level",
         "label": "Tasa actual",
         "decimals": 2,
-        "t": "level"
+        "id": "fedfunds",
+        "file": "us"
       }
     },
     {
@@ -276,12 +276,12 @@
       "href": "actividad.html",
       "previo": {
         "suffix": "%",
-        "id": "ipi",
-        "file": "ar",
+        "t": "pct1",
         "signed": true,
-        "decimals": 1,
         "label": "Anterior (m/m)",
-        "t": "pct1"
+        "decimals": 1,
+        "id": "ipi",
+        "file": "ar"
       }
     },
     {
@@ -346,11 +346,11 @@
       "href": "precios.html",
       "previo": {
         "suffix": "%",
-        "id": "ipc",
-        "file": "ar",
+        "t": "pct1",
         "label": "Anterior (m/m)",
         "decimals": 1,
-        "t": "pct1"
+        "id": "ipc",
+        "file": "ar"
       }
     },
     {
@@ -364,12 +364,12 @@
       "href": "actividad.html",
       "previo": {
         "suffix": "%",
-        "id": "gdp_level",
-        "file": "ar",
+        "t": "yoy",
         "signed": true,
-        "decimals": 1,
         "label": "Anterior (i.a.)",
-        "t": "yoy"
+        "decimals": 1,
+        "id": "gdp_level",
+        "file": "ar"
       }
     },
     {
@@ -383,11 +383,11 @@
       "href": "empleo.html",
       "previo": {
         "suffix": "%",
-        "id": "wages",
-        "file": "ar",
+        "t": "pct1",
         "label": "Anterior (m/m)",
         "decimals": 1,
-        "t": "pct1"
+        "id": "wages",
+        "file": "ar"
       }
     },
     {
@@ -412,11 +412,11 @@
       "href": "empleo.html",
       "previo": {
         "suffix": "%",
-        "id": "unemp",
-        "file": "ar",
+        "t": "level",
         "label": "Anterior",
         "decimals": 1,
-        "t": "level"
+        "id": "unemp",
+        "file": "ar"
       }
     },
     {
@@ -430,12 +430,12 @@
       "href": "externo.html",
       "previo": {
         "suffix": " M",
+        "t": "level",
+        "prefix": "USD ",
+        "decimals": 0,
         "id": "trade_balance",
         "file": "ar",
-        "label": "Saldo anterior",
-        "decimals": 0,
-        "prefix": "USD ",
-        "t": "level"
+        "label": "Saldo anterior"
       }
     },
     {
@@ -449,12 +449,12 @@
       "href": "actividad.html",
       "previo": {
         "suffix": "%",
-        "id": "emae",
-        "file": "ar",
+        "t": "pct1",
         "signed": true,
-        "decimals": 1,
         "label": "Anterior (m/m)",
-        "t": "pct1"
+        "decimals": 1,
+        "id": "emae",
+        "file": "ar"
       }
     },
     {
@@ -528,11 +528,11 @@
       "href": "eeuu-tasas.html",
       "previo": {
         "suffix": "%",
-        "id": "fedfunds",
-        "file": "us",
+        "t": "level",
         "label": "Tasa actual",
         "decimals": 2,
-        "t": "level"
+        "id": "fedfunds",
+        "file": "us"
       }
     },
     {
@@ -546,11 +546,11 @@
       "href": "eeuu-tasas.html",
       "previo": {
         "suffix": "%",
-        "id": "fedfunds",
-        "file": "us",
+        "t": "level",
         "label": "Tasa actual",
         "decimals": 2,
-        "t": "level"
+        "id": "fedfunds",
+        "file": "us"
       }
     },
     {
@@ -564,11 +564,11 @@
       "href": "eeuu-tasas.html",
       "previo": {
         "suffix": "%",
-        "id": "fedfunds",
-        "file": "us",
+        "t": "level",
         "label": "Tasa actual",
         "decimals": 2,
-        "t": "level"
+        "id": "fedfunds",
+        "file": "us"
       }
     },
     {
@@ -582,11 +582,11 @@
       "href": "eeuu-tasas.html",
       "previo": {
         "suffix": "%",
-        "id": "fedfunds",
-        "file": "us",
+        "t": "level",
         "label": "Tasa actual",
         "decimals": 2,
-        "t": "level"
+        "id": "fedfunds",
+        "file": "us"
       }
     },
     {
@@ -600,11 +600,11 @@
       "href": "eeuu-tasas.html",
       "previo": {
         "suffix": "%",
-        "id": "fedfunds",
-        "file": "us",
+        "t": "level",
         "label": "Tasa actual",
         "decimals": 2,
-        "t": "level"
+        "id": "fedfunds",
+        "file": "us"
       }
     },
     {
@@ -618,11 +618,11 @@
       "href": "eeuu-tasas.html",
       "previo": {
         "suffix": "%",
-        "id": "fedfunds",
-        "file": "us",
+        "t": "level",
         "label": "Tasa actual",
         "decimals": 2,
-        "t": "level"
+        "id": "fedfunds",
+        "file": "us"
       }
     },
     {
@@ -636,11 +636,11 @@
       "href": "eeuu-tasas.html",
       "previo": {
         "suffix": "%",
-        "id": "fedfunds",
-        "file": "us",
+        "t": "level",
         "label": "Tasa actual",
         "decimals": 2,
-        "t": "level"
+        "id": "fedfunds",
+        "file": "us"
       }
     },
     {
@@ -654,11 +654,11 @@
       "href": "eeuu-tasas.html",
       "previo": {
         "suffix": "%",
-        "id": "fedfunds",
-        "file": "us",
+        "t": "level",
         "label": "Tasa actual",
         "decimals": 2,
-        "t": "level"
+        "id": "fedfunds",
+        "file": "us"
       }
     }
   ]
