@@ -4,7 +4,7 @@
     "https://www.indec.gob.ar/indec/web/Calendario-Fecha-0",
     "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm"
   ],
-  "actualizado": "2026-11-09",
+  "actualizado": "2026-11-10",
   "eventos": [
     {
       "date": "2026-10-28",
@@ -16,11 +16,11 @@
       "detail": "Reunión del FOMC del 27 y 28 de octubre",
       "href": "eeuu-tasas.html",
       "previo": {
-        "suffix": "%",
-        "t": "level",
         "label": "Tasa actual",
-        "decimals": 2,
         "id": "fedfunds",
+        "t": "level",
+        "decimals": 2,
+        "suffix": "%",
         "file": "us"
       }
     },
@@ -34,12 +34,12 @@
       "detail": "Septiembre de 2026",
       "href": "actividad.html",
       "previo": {
-        "suffix": "%",
-        "t": "pct1",
-        "signed": true,
         "label": "Anterior (m/m)",
-        "decimals": 1,
+        "signed": true,
         "id": "ipi",
+        "t": "pct1",
+        "decimals": 1,
+        "suffix": "%",
         "file": "ar"
       }
     },
@@ -84,11 +84,11 @@
       "detail": "Octubre de 2026 · también canastas básicas",
       "href": "precios.html",
       "previo": {
-        "suffix": "%",
-        "t": "pct1",
         "label": "Anterior (m/m)",
-        "decimals": 1,
         "id": "ipc",
+        "t": "pct1",
+        "decimals": 1,
+        "suffix": "%",
         "file": "ar"
       }
     },
@@ -122,11 +122,11 @@
       "detail": "Septiembre de 2026",
       "href": "empleo.html",
       "previo": {
-        "suffix": "%",
-        "t": "pct1",
         "label": "Anterior (m/m)",
-        "decimals": 1,
         "id": "wages",
+        "t": "pct1",
+        "decimals": 1,
+        "suffix": "%",
         "file": "ar"
       }
     },
@@ -171,12 +171,12 @@
       "href": "externo.html",
       "previo": {
         "suffix": " M",
-        "t": "level",
-        "prefix": "USD ",
-        "decimals": 0,
         "id": "trade_balance",
-        "file": "ar",
-        "label": "Saldo anterior"
+        "t": "level",
+        "label": "Saldo anterior",
+        "decimals": 0,
+        "prefix": "USD ",
+        "file": "ar"
       }
     },
     {
@@ -189,12 +189,12 @@
       "detail": "Septiembre de 2026",
       "href": "actividad.html",
       "previo": {
-        "suffix": "%",
-        "t": "pct1",
-        "signed": true,
         "label": "Anterior (m/m)",
-        "decimals": 1,
+        "signed": true,
         "id": "emae",
+        "t": "pct1",
+        "decimals": 1,
+        "suffix": "%",
         "file": "ar"
       }
     },
@@ -257,11 +257,11 @@
       "detail": "Reunión del FOMC del 8 y 9 de diciembre",
       "href": "eeuu-tasas.html",
       "previo": {
-        "suffix": "%",
-        "t": "level",
         "label": "Tasa actual",
-        "decimals": 2,
         "id": "fedfunds",
+        "t": "level",
+        "decimals": 2,
+        "suffix": "%",
         "file": "us"
       }
     },
@@ -275,12 +275,12 @@
       "detail": "Octubre de 2026",
       "href": "actividad.html",
       "previo": {
-        "suffix": "%",
-        "t": "pct1",
-        "signed": true,
         "label": "Anterior (m/m)",
-        "decimals": 1,
+        "signed": true,
         "id": "ipi",
+        "t": "pct1",
+        "decimals": 1,
+        "suffix": "%",
         "file": "ar"
       }
     },
@@ -345,11 +345,11 @@
       "detail": "Noviembre de 2026 · también canastas básicas",
       "href": "precios.html",
       "previo": {
-        "suffix": "%",
-        "t": "pct1",
         "label": "Anterior (m/m)",
-        "decimals": 1,
         "id": "ipc",
+        "t": "pct1",
+        "decimals": 1,
+        "suffix": "%",
         "file": "ar"
       }
     },
@@ -363,12 +363,12 @@
       "detail": "Informe de avance del tercer trimestre de 2026",
       "href": "actividad.html",
       "previo": {
-        "suffix": "%",
-        "t": "yoy",
-        "signed": true,
         "label": "Anterior (i.a.)",
-        "decimals": 1,
+        "signed": true,
         "id": "gdp_level",
+        "t": "yoy",
+        "decimals": 1,
+        "suffix": "%",
         "file": "ar"
       }
     },
@@ -382,11 +382,11 @@
       "detail": "Octubre de 2026",
       "href": "empleo.html",
       "previo": {
-        "suffix": "%",
-        "t": "pct1",
         "label": "Anterior (m/m)",
-        "decimals": 1,
         "id": "wages",
+        "t": "pct1",
+        "decimals": 1,
+        "suffix": "%",
         "file": "ar"
       }
     },
@@ -411,11 +411,11 @@
       "detail": "Desempleo del tercer trimestre de 2026",
       "href": "empleo.html",
       "previo": {
-        "suffix": "%",
-        "t": "level",
         "label": "Anterior",
-        "decimals": 1,
         "id": "unemp",
+        "t": "level",
+        "decimals": 1,
+        "suffix": "%",
         "file": "ar"
       }
     },
@@ -430,12 +430,12 @@
       "href": "externo.html",
       "previo": {
         "suffix": " M",
-        "t": "level",
-        "prefix": "USD ",
-        "decimals": 0,
         "id": "trade_balance",
-        "file": "ar",
-        "label": "Saldo anterior"
+        "t": "level",
+        "label": "Saldo anterior",
+        "decimals": 0,
+        "prefix": "USD ",
+        "file": "ar"
       }
     },
     {
@@ -448,12 +448,12 @@
       "detail": "Octubre de 2026",
       "href": "actividad.html",
       "previo": {
-        "suffix": "%",
-        "t": "pct1",
-        "signed": true,
         "label": "Anterior (m/m)",
-        "decimals": 1,
+        "signed": true,
         "id": "emae",
+        "t": "pct1",
+        "decimals": 1,
+        "suffix": "%",
         "file": "ar"
       }
     },
@@ -527,11 +527,11 @@
       "detail": "Reunión del FOMC del 26 y 27 de enero",
       "href": "eeuu-tasas.html",
       "previo": {
-        "suffix": "%",
-        "t": "level",
         "label": "Tasa actual",
-        "decimals": 2,
         "id": "fedfunds",
+        "t": "level",
+        "decimals": 2,
+        "suffix": "%",
         "file": "us"
       }
     },
@@ -545,11 +545,11 @@
       "detail": "Reunión del FOMC del 16 y 17 de marzo",
       "href": "eeuu-tasas.html",
       "previo": {
-        "suffix": "%",
-        "t": "level",
         "label": "Tasa actual",
-        "decimals": 2,
         "id": "fedfunds",
+        "t": "level",
+        "decimals": 2,
+        "suffix": "%",
         "file": "us"
       }
     },
@@ -563,11 +563,11 @@
       "detail": "Reunión del FOMC del 27 y 28 de abril",
       "href": "eeuu-tasas.html",
       "previo": {
-        "suffix": "%",
-        "t": "level",
         "label": "Tasa actual",
-        "decimals": 2,
         "id": "fedfunds",
+        "t": "level",
+        "decimals": 2,
+        "suffix": "%",
         "file": "us"
       }
     },
@@ -581,11 +581,11 @@
       "detail": "Reunión del FOMC del 8 y 9 de junio",
       "href": "eeuu-tasas.html",
       "previo": {
-        "suffix": "%",
-        "t": "level",
         "label": "Tasa actual",
-        "decimals": 2,
         "id": "fedfunds",
+        "t": "level",
+        "decimals": 2,
+        "suffix": "%",
         "file": "us"
       }
     },
@@ -599,11 +599,11 @@
       "detail": "Reunión del FOMC del 27 y 28 de julio",
       "href": "eeuu-tasas.html",
       "previo": {
-        "suffix": "%",
-        "t": "level",
         "label": "Tasa actual",
-        "decimals": 2,
         "id": "fedfunds",
+        "t": "level",
+        "decimals": 2,
+        "suffix": "%",
         "file": "us"
       }
     },
@@ -617,11 +617,11 @@
       "detail": "Reunión del FOMC del 14 y 15 de septiembre",
       "href": "eeuu-tasas.html",
       "previo": {
-        "suffix": "%",
-        "t": "level",
         "label": "Tasa actual",
-        "decimals": 2,
         "id": "fedfunds",
+        "t": "level",
+        "decimals": 2,
+        "suffix": "%",
         "file": "us"
       }
     },
@@ -635,11 +635,11 @@
       "detail": "Reunión del FOMC del 26 y 27 de octubre",
       "href": "eeuu-tasas.html",
       "previo": {
-        "suffix": "%",
-        "t": "level",
         "label": "Tasa actual",
-        "decimals": 2,
         "id": "fedfunds",
+        "t": "level",
+        "decimals": 2,
+        "suffix": "%",
         "file": "us"
       }
     },
@@ -653,11 +653,11 @@
       "detail": "Reunión del FOMC del 7 y 8 de diciembre",
       "href": "eeuu-tasas.html",
       "previo": {
-        "suffix": "%",
-        "t": "level",
         "label": "Tasa actual",
-        "decimals": 2,
         "id": "fedfunds",
+        "t": "level",
+        "decimals": 2,
+        "suffix": "%",
         "file": "us"
       }
     }
