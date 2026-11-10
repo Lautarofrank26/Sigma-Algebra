@@ -7,6 +7,7 @@ import { drawChart } from './chart.js';
 import { resolve } from '../data/loader.js';
 import { fmtNum, fmtDate, fmtAge } from '../lib/format.js';
 import { seriesToCsv, downloadCsv } from '../lib/csv.js';
+import { openFocus } from './focus.js';
 
 export function createPanel(data, panel) {
   const head = resolve(data, panel.headline.ref);
@@ -28,19 +29,26 @@ export function createPanel(data, panel) {
     if (columns.length) downloadCsv(`macroeconomics-${panel.id}-${new Date().toISOString().slice(0, 10)}.csv`, seriesToCsv(columns));
   });
 
-  const node = el('article', { class: 'panel' }, [
+  const exportCsv = () => csvButton.click();
+  let lastMonths = 36;
+  const focusButton = el('button', { class: 'csv-btn', type: 'button', title: 'Ver el gráfico en grande, con sus últimos datos' }, 'Ampliar');
+  focusButton.addEventListener('click', () => openFocus(data, panel, lastMonths, node, exportCsv));
+
+  // El id permite llegar al gráfico desde el buscador (pagina.html#id)
+  const node = el('article', { class: 'panel', id: panel.id }, [
     el('div', { class: 'panel-head' }, [
       el('div', {}, [el('h3', {}, panel.title), el('div', { class: 'unit' }, panel.unit)]),
       now,
     ]),
     el('div', { class: 'chart-box' }, canvas),
     el('details', {}, [el('summary', {}, 'Cómo leerlo'), el('p', {}, panel.read)]),
-    el('div', { class: 'src' }, [el('span', {}, `Fuente: ${panel.source}`), csvButton]),
+    el('div', { class: 'src' }, [el('span', {}, `Fuente: ${panel.source}`), el('span', { class: 'panel-actions' }, [focusButton, csvButton])]),
   ]);
 
   return {
     node,
     update(months) {
+      lastMonths = months;
       chart = drawChart(canvas, data, panel, months, chart);
     },
     destroy() {

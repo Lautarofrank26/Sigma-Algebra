@@ -34,6 +34,13 @@ La clave nunca va en el código de la página ni en archivos del repositorio: so
 ## Diseño
 Paleta y tipografía en `css/tokens.css`: gris frío, superficies blancas, azul marino, serif editorial (Source Serif 4) para títulos y mono tabular (IBM Plex Mono) para cifras. Acentos por país solo en filetes y series de gráficos. Tarjetas con esquinas redondeadas (`--radius-lg`), botones y etiquetas en píldora (`--radius-pill`) y sombra suave.
 
+### Estructura de plataforma (`css/platform.css`, `js/ui/shell.js`)
+- **Barra lateral** azul marino con toda la navegación (Panorama, Argentina y sus temas, Tipo de cambio, Estados Unidos y sus temas) y la hora de Buenos Aires y Nueva York. En pantallas de menos de 1100 px es un panel que se abre con el botón de menú. Las páginas salen de `SUBNAVS` (`js/config/navigation.js`).
+- **Barra superior** con la ubicación, la fecha, el buscador y la cinta de indicadores.
+- **Buscador** (`js/ui/palette.js`): se abre con Ctrl+K, con "/" o con el botón. Indexa todas las páginas y todos los gráficos a partir de las configuraciones, así un indicador nuevo aparece solo. Cada resultado lleva a `pagina.html#id-del-grafico`, que se resalta al llegar.
+- **Vista ampliada** (`js/ui/focus.js`): el botón "Ampliar" de cada gráfico abre un diálogo con el gráfico grande, su propio selector de período, las últimas 12 observaciones, la explicación y la descarga.
+- **Cifras clave**: las tarjetas de resumen forman un solo tablero dividido por filetes.
+
 ### Movimiento (`js/ui/reveal.js` y `css/components.css`, sección "Forma y movimiento")
 - Las tarjetas suben y aparecen al entrar en pantalla, de a una; las cifras grandes cuentan desde cero.
 - La línea de tendencia de cada tarjeta se dibuja sola; los gráficos tienen una cruz vertical al pasar el mouse.

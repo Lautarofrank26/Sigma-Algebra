@@ -133,7 +133,21 @@ function startLiveQuotes(data, box) {
 export function finish(page, data) {
   page.panels.forEach((p) => p.update(page.months));
   setUpdated(data.updated);
+  if (!page.hashDone) { page.hashDone = true; focusHashPanel(); }
 }
+
+/** Si la dirección trae #id de un gráfico (p. ej. desde el buscador), lo lleva a la vista y lo resalta */
+function focusHashPanel() {
+  const id = decodeURIComponent(location.hash.slice(1));
+  const node = id ? document.getElementById(id) : null;
+  if (!node?.classList.contains('panel')) return;
+  node.setAttribute('data-reveal', '');
+  node.classList.add('in', 'is-target');
+  // Se espera un instante a que la página termine de acomodarse (tipografías, gráficos) antes de saltar
+  setTimeout(() => node.scrollIntoView({ block: 'center', behavior: 'instant' }), 350);
+  setTimeout(() => node.classList.remove('is-target'), 3200);
+}
+window.addEventListener('hashchange', focusHashPanel);
 
 let liveAt = null; // hora de la última actualización en vivo exitosa
 

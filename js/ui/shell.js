@@ -1,41 +1,106 @@
 ﻿/**
- * shell.js — elementos comunes a todas las páginas: barra superior y pie.
- * Para agregar una página al menú, sumarla a NAV.
+ * shell.js — estructura común de la plataforma:
+ *   - barra lateral con toda la navegación (en celular es un panel que se abre con el botón de menú)
+ *   - barra superior con la ubicación, la fecha, el buscador y la cinta de indicadores
+ *   - pie con fuentes y método
+ * Para agregar una página al menú, sumarla a SUBNAVS (js/config/navigation.js).
  */
 import { el } from './dom.js';
 import { SUBNAVS } from '../config/navigation.js';
 import { startTicker } from './ticker.js';
+import { mountPalette, openPalette } from './palette.js';
 
-const NAV = [
-  { id: 'inicio', href: 'index.html', label: 'Inicio' },
-  { id: 'argentina', href: 'argentina.html', label: 'Argentina' },
-  { id: 'dolar', href: 'dolar.html', label: 'Dólar' },
-  { id: 'eeuu', href: 'eeuu.html', label: 'EE.UU.' },
+/** Grupos de la barra lateral */
+const GROUPS = [
+  { key: 'home', label: null, items: [{ href: 'index.html', label: 'Panorama' }] },
+  { key: 'ar', label: 'Argentina', items: [...SUBNAVS.argentina, { href: 'dolar.html', label: 'Tipo de cambio' }] },
+  { key: 'us', label: 'Estados Unidos', items: SUBNAVS.eeuu },
 ];
 
-/** Pills de subsecciones de un grupo ("argentina" o "eeuu"). "active" marca la página actual (o null). */
+const ICONS = {
+  menu: '<svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true"><path d="M3 5.5h14M3 10h14M3 14.5h14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>',
+  search: '<svg viewBox="0 0 20 20" width="16" height="16" aria-hidden="true"><circle cx="9" cy="9" r="5.5" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M13.2 13.2 17 17" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>',
+};
+/** Ícono SVG a partir de un texto fijo del propio código (nunca de datos externos) */
+function icon(name) {
+  const span = el('span', { class: 'icon' });
+  span.innerHTML = ICONS[name];
+  return span;
+}
+
+const currentFile = () => location.pathname.split('/').pop() || 'index.html';
+const clock = (timeZone) => new Intl.DateTimeFormat('es-AR', { hour: '2-digit', minute: '2-digit', hour12: false, timeZone }).format(new Date());
+
+/** Pills de subsecciones de un grupo ("argentina" o "eeuu"); se usan como accesos en el Panorama */
 export function renderSubnav(group, active = null) {
   return el('nav', { class: 'subnav', 'aria-label': 'Indicadores' }, (SUBNAVS[group] ?? []).map((n) =>
     el('a', { class: 'pill', href: n.href, 'aria-current': n.id === active ? 'page' : false }, n.label)));
 }
 
-/**
- * @param {string} active id de la página actual (ver NAV)
- * @param {string} [sub] id de la subsección de Argentina (ver SUBNAVS); muestra el submenú en #subnav
- */
-export function mountShell(active, sub) {
+function buildSidebar(file) {
+  const ba = el('b', {}, clock('America/Argentina/Buenos_Aires'));
+  const ny = el('b', {}, clock('America/New_York'));
+  setInterval(() => {
+    ba.textContent = clock('America/Argentina/Buenos_Aires');
+    ny.textContent = clock('America/New_York');
+  }, 20_000);
+
+  return el('aside', { class: 'side', id: 'side', 'aria-label': 'Navegación principal' }, [
+    el('a', { class: 'side-brand', href: 'index.html' }, [el('strong', {}, 'Macroeconomics'), el('span', {}, 'Argentina · Estados Unidos')]),
+    el('nav', { class: 'side-nav' }, GROUPS.map((g) =>
+      el('div', { class: 'side-group', 'data-g': g.key }, [
+        g.label ? el('span', { class: 'side-label' }, g.label) : null,
+        ...g.items.map((i) => el('a', { class: 'side-link', href: i.href, 'aria-current': i.href === file ? 'page' : false }, i.label)),
+      ]))),
+    el('div', { class: 'side-foot' }, [
+      el('div', { class: 'side-clock' }, [el('span', {}, 'Buenos Aires'), ba]),
+      el('div', { class: 'side-clock' }, [el('span', {}, 'Nueva York'), ny]),
+    ]),
+  ]);
+}
+
+/** Arma la estructura común. Los parámetros se conservan por compatibilidad: la página activa se deduce de la dirección. */
+export function mountShell() {
+  const file = currentFile();
+  const group = GROUPS.find((g) => g.items.some((i) => i.href === file));
+  const item = group?.items.find((i) => i.href === file);
+
+  // Barra lateral y fondo para cerrarla en celular
+  const side = buildSidebar(file);
+  const backdrop = el('div', { class: 'side-backdrop' });
+  document.body.prepend(side, backdrop);
+
+  const menuBtn = el('button', { class: 'menu-btn', type: 'button', 'aria-label': 'Abrir el menú', 'aria-controls': 'side', 'aria-expanded': 'false' }, icon('menu'));
+  const setOpen = (open) => {
+    document.body.classList.toggle('side-open', open);
+    menuBtn.setAttribute('aria-expanded', String(open));
+    if (open) side.querySelector('[aria-current="page"], .side-link')?.focus();
+  };
+  menuBtn.addEventListener('click', () => setOpen(!document.body.classList.contains('side-open')));
+  backdrop.addEventListener('click', () => setOpen(false));
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && document.body.classList.contains('side-open')) { setOpen(false); menuBtn.focus(); }
+  });
+
+  // Barra superior
+  const searchBtn = el('button', { class: 'search-btn', type: 'button', 'aria-label': 'Buscar un indicador' }, [
+    icon('search'), el('span', { class: 'search-text' }, 'Buscar indicador'), el('kbd', {}, 'Ctrl K'),
+  ]);
+  searchBtn.addEventListener('click', openPalette);
+  const today = new Intl.DateTimeFormat('es-AR', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' }).format(new Date());
+
   document.querySelector('#site-header').replaceChildren(
-    el('div', { class: 'wrap' }, [
-      el('a', { class: 'brand', href: 'index.html' }, 'Macroeconomics'),
-      el('nav', { 'aria-label': 'Secciones' }, NAV.map((n) =>
-        el('a', { class: 'pill', href: n.href, 'aria-current': n.id === active ? 'page' : false }, n.label))),
+    el('div', { class: 'bar' }, [
+      menuBtn,
+      el('a', { class: 'brand brand-mini', href: 'index.html' }, 'Macroeconomics'),
+      el('p', { class: 'crumbs' }, [group?.label ? el('span', {}, `${group.label} /`) : null, el('b', {}, item?.label ?? 'Panorama')]),
+      el('span', { class: 'bar-date' }, today),
+      searchBtn,
     ]),
     el('div', { class: 'ticker', id: 'ticker', hidden: true, 'aria-label': 'Indicadores del día' }),
   );
   startTicker(document.querySelector('#ticker'));
-
-  const subnav = document.querySelector('#subnav');
-  if (subnav && sub) subnav.replaceChildren(...renderSubnav(active, sub).childNodes);
+  mountPalette();
 
   document.querySelector('#site-footer').replaceChildren(
     el('strong', {}, 'Fuentes y método'),
@@ -50,8 +115,3 @@ export function mountShell(active, sub) {
     ]),
   );
 }
-
-
-
-
-
