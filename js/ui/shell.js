@@ -109,7 +109,7 @@ export function mountShell() {
       el('li', {}, 'Series reales (salarios, crédito, dinero): nivel nominal dividido por el IPC nacional, calculado por Macroeconomics.'),
       el('li', {}, 'Tipos de dólar: ArgentinaDatos (historia) y DolarAPI (cotización del día).'),
       el('li', {}, 'Estados Unidos: BLS (precios, empleo y vacantes), NY Fed (tasa efectiva y SOFR), U.S. Treasury (rendimientos y deuda).'),
-      el('li', {}, 'Actualización: el historial se renueva todos los días y la página pide los datos más recientes a las fuentes mientras está abierta (el dólar cada minuto, el resto cada 5 minutos).'),
+      el('li', {}, 'Actualización: el historial se renueva cuatro veces por día, después de las publicaciones, y la página pide los datos más recientes a las fuentes mientras está abierta (el dólar cada minuto, el resto cada 5 minutos).'),
       el('li', {}, 'PBI anual de ambos países: Banco Mundial (crecimiento real).'),
       el('li', {}, 'Las variaciones interanuales y mensuales se calculan a partir de los niveles originales de cada serie.'),
     ]),

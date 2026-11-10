@@ -5,7 +5,11 @@ name: Actualizar datos
 
 on:
   schedule:
-    - cron: '30 11 * * *'   # todos los días 11:30 UTC (8:30 en Argentina)
+    # Cuatro corridas por día, pensadas para caer después de las publicaciones (horas UTC; Argentina = UTC-3):
+    - cron: '30 11 * * *'   # 8:30 ARG: línea de base del día
+    - cron: '15 14 * * *'   # 11:15 ARG: después de CPI, PPI y empleo de EE.UU. (8:30 hora del Este)
+    - cron: '0 16 * * *'    # 13:00 ARG: después de JOLTS (10:00 hora del Este)
+    - cron: '30 19 * * *'   # 16:30 ARG: después de las publicaciones del INDEC (16:00)
   workflow_dispatch:         # permite correrlo a mano desde la pestaña Actions
 
 permissions:

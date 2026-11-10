@@ -30,12 +30,34 @@ async function request(url, as = 'json') {
   }
 }
 
-function readCache(key, ttl) {
+/** `notBefore`: una copia guardada antes de ese instante se descarta aunque no haya vencido (p. ej. salió un dato nuevo) */
+function readCache(key, ttl, notBefore = 0) {
   try {
     const c = JSON.parse(localStorage.getItem(`macroeconomics:${key}`));
-    if (c && Date.now() - c.t < ttl) return c.pts;
+    if (c && Date.now() - c.t < ttl && c.t > notBefore) return c.pts;
   } catch { /* storage bloqueado o dato inválido */ }
   return null;
+}
+
+const RELEASE_GRACE_MS = 10 * 60_000; // BLS tarda unos minutos en reflejar una publicación en su API
+let releasesPromise = null;
+
+/**
+ * Instante de la última publicación del BLS ya ocurrida (según data/calendario.json), más un margen.
+ * Sirve para no reutilizar copias guardadas antes de esa publicación.
+ */
+function lastBlsRelease() {
+  releasesPromise ??= request('data/calendario.json')
+    .then((cal) => {
+      const now = Date.now();
+      const times = (cal.eventos ?? [])
+        .filter((e) => /^BLS/.test(e.source ?? ''))
+        .map((e) => Date.parse(`${e.date}T${e.time}:00${e.tz}`))
+        .filter((t) => Number.isFinite(t) && t + RELEASE_GRACE_MS <= now);
+      return times.length ? Math.max(...times) + RELEASE_GRACE_MS : 0;
+    })
+    .catch(() => 0);
+  return releasesPromise;
 }
 function writeCache(key, pts) {
   try { localStorage.setItem(`macroeconomics:${key}`, JSON.stringify({ t: Date.now(), pts })); } catch { /* sin storage */ }
@@ -77,7 +99,7 @@ async function fetchDatosGob(spec) {
 }
 
 async function fetchBls(spec) {
-  const cached = readCache(`bls:${spec.ref}`, BLS_TTL_MS);
+  const cached = readCache(`bls:${spec.ref}`, BLS_TTL_MS, await lastBlsRelease());
   if (cached) return cached;
   const r = await request(`https://api.bls.gov/publicAPI/v1/timeseries/data/${spec.ref}`);
   if (r.status !== 'REQUEST_SUCCEEDED') throw new Error('BLS no respondió');

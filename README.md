@@ -17,7 +17,7 @@ Sitio estático multipágina (HTML, CSS y JS sin build) con indicadores macro de
 - `js/data/`: carga de datos (`loader.js` snapshots, `live.js` dólar en vivo)
 - `js/lib/`, `js/ui/`: utilidades y componentes (`shell.js` es el menú y el pie comunes)
 - `data/*.json`: snapshots generados por `tools/fetch-data.ps1`
-- `.github/workflows/update-data.yml`: actualiza los datos todos los días
+- `.github/workflows/update-data.yml`: actualiza los datos cuatro veces por día
 
 ## Clave de BLS (opcional)
 La actualización diaria de EE.UU. usa la API pública de BLS, que sin clave permite pocas consultas por día. Con una clave gratuita el límite sube a 500.
@@ -78,7 +78,8 @@ Cada gráfico tiene un botón "Descargar CSV" (`js/lib/csv.js`): baja todo el hi
 3. Sumarla a `NAV` en `js/ui/shell.js`.
 
 ## Cómo se actualizan los datos
-- **Diario:** GitHub Actions corre `tools/fetch-data.ps1` y sube los JSON (historial). También se puede correr a mano en la pestaña Actions.
+- **Cuatro veces por día:** GitHub Actions corre `tools/fetch-data.ps1` y sube los JSON (historial) a las 8:30, 11:15, 13:00 y 16:30 de Argentina, elegidas para caer después de las publicaciones de EE.UU. (8:30 y 10:00 hora del Este) y del INDEC (16:00). También se puede correr a mano en la pestaña Actions. GitHub puede demorar unos minutos las corridas programadas.
+- **Copia en el navegador:** las series de BLS que pide la página se guardan 6 horas, pero esa copia se descarta cuando `data/calendario.json` registra una publicación del BLS posterior a ella (con 10 minutos de margen). Por eso las fechas del BLS en el calendario también sirven para refrescar el dato el día de la publicación.
 - **En vivo:** mientras la página está abierta, `js/data/live.js` pide los últimos datos a las fuentes y los combina con el historial: cada 5 minutos las series macro y cada 60 s las cotizaciones del dólar. Si algo falla, la página sigue con el historial. El catálogo de series en vivo está en `js/data/live-sources.js` y debe coincidir con `tools/fetch-data.ps1`.
 - **Límite de BLS:** su API pública permite unas 25 consultas por día por IP, por eso esas series se guardan 6 horas en el navegador. Si el límite se agota, la página usa el historial; y si el descargador recibe series vacías, conserva las anteriores (`Restore-Empty`).
 - **Qué es "tiempo real":** casi todos los indicadores se publican una vez al mes o al trimestre; en vivo cambian el dólar, las tasas y los datos nuevos apenas la fuente los publica.
