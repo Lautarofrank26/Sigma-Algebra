@@ -36,6 +36,8 @@
   /* Inicio: mapa de calor (rojo = peor, verde = mejor; --bad y --good vienen de arriba) */
   --heat-mid:   #E0B33A;
   --heat-none:  #DDE3EC;
+  --heat-seq-lo: #DCE6F2;   /* "Peso en el PBI mundial": escala azul de claro (poco peso) a oscuro (mucho) */
+  --heat-seq-hi: #0F3A6B;
 
   /* Semántica (separada del acento) */
   --good:      #1E7F5C;

@@ -177,6 +177,42 @@ td small { display: block; color: var(--ink-3); font-size: var(--fs-xs); }
 .heat-how { color: var(--ink-2); }
 .src-line { display: flex; flex-wrap: wrap; align-items: center; gap: 0.4rem; }
 
+/* Debajo del mapa: leyenda y datos a la izquierda, comparador de países a la derecha */
+.heat-lower { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 27rem); gap: var(--gap-2); align-items: start; margin-top: var(--gap-1); }
+.heat-info { min-width: 0; }
+.heat-info .heat-legend { margin-top: 0; }
+
+/* Evolución dentro de la tarjeta del cursor */
+.heat-spark-wrap { margin-top: 0.35rem; }
+.heat-spark { display: block; width: 100%; height: auto; }
+.heat-spark .line { fill: none; stroke: #fff; stroke-width: 1.8; stroke-linejoin: round; stroke-linecap: round; }
+.heat-spark .zero { stroke: rgba(255, 255, 255, 0.35); stroke-width: 1; stroke-dasharray: 3 3; }
+.heat-spark .last { fill: #E0B33A; stroke: #fff; stroke-width: 1.5; }
+.heat-spark-axis { display: flex; justify-content: space-between; gap: 0.4rem; font-size: 0.6875rem; color: #B8C4D6; }
+
+/* Comparar países */
+.cmp { min-width: 0; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-lg); box-shadow: var(--shadow); padding: 1rem 1.1rem; display: grid; gap: 0.8rem; }
+.cmp-head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 0.4rem; }
+.cmp-head h2 { font-size: var(--fs-lg); margin: 0; }
+.cmp-controls { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.6rem; }
+.cmp-controls label { display: flex; align-items: center; gap: 0.45rem; min-width: 0; }
+.cmp-select { flex: 1; min-width: 0; font: inherit; font-size: var(--fs-sm); color: var(--ink); background: var(--surface-2); border: 1px solid var(--line); border-radius: var(--radius); padding: 0.4rem 0.5rem; }
+.cmp-select:focus-visible { outline: 2px solid var(--ink); outline-offset: 1px; }
+.cmp-dot { width: 12px; height: 12px; border-radius: 50%; flex: none; }
+.cmp-dot.a { background: var(--ar); }
+.cmp-dot.b { background: var(--us); }
+.cmp-tabs .pill { font-size: var(--fs-xs); padding: 0.3rem 0.8rem; }
+.cmp-chart { height: 220px; }
+.cmp-empty { color: var(--ink-2); font-size: var(--fs-sm); padding: 0.4rem 0; }
+.cmp-empty[hidden], .cmp-chart[hidden] { display: none; }
+.cmp-summary { display: grid; gap: 0.4rem; }
+.cmp-card { display: flex; align-items: center; flex-wrap: wrap; gap: 0.2rem 0.5rem; font-size: var(--fs-sm); color: var(--ink-2); }
+.cmp-card b { color: var(--ink); }
+
+@media (max-width: 980px) {
+  .heat-lower { grid-template-columns: minmax(0, 1fr); }
+}
+
 /* Celular: el mapa mantiene un ancho mínimo y se desplaza horizontalmente dentro de su caja */
 @media (max-width: 760px) {
   .heat-map { min-width: 640px; }

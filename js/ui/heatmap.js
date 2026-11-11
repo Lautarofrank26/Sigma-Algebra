@@ -1,26 +1,30 @@
 /**
- * heatmap.js — portada: mapa de calor del mundo.
+ * heatmap.js — portada: mapa de calor del mundo + comparador de países.
  *
- * - Cada país se pinta de rojo (peor) a amarillo (intermedio) y verde (mejor) según el indicador elegido:
- *   crecimiento del PBI, inflación o desempleo. Los datos salen de data/mundo.json
- *   (tools/fetch-mundo.ps1) y las formas de data/paises.json (tools/build-paises.ps1).
- * - Al pasar el mouse (o tocar) aparece una tarjeta con el valor, el año y el puesto entre los países con dato.
+ * - Cada país se pinta según el indicador elegido. PBI, inflación y desempleo van de rojo (peor) a amarillo
+ *   (intermedio) y verde (mejor). "Peso en el PBI mundial" no tiene mejor ni peor: usa una escala azul
+ *   (más oscuro = más peso, en escala logarítmica porque EE.UU. y China concentran casi la mitad).
+ * - Datos: data/mundo.json (último dato de cada país), data/mundo-series.json (serie anual desde 2000) y
+ *   data/paises.json (formas). Se generan con tools/fetch-mundo.ps1 y tools/build-paises.ps1.
+ * - Al pasar el mouse (o tocar) un país aparece una tarjeta con el valor, el puesto y cómo evolucionó el indicador.
+ * - "Comparar países": dos países y un indicador (PBI, inflación o desempleo) sobre el mismo gráfico.
  * - Argentina y EE.UU. quedan remarcadas, con su valor y puesto debajo del mapa.
- * - Los colores se animan al entrar y al cambiar de indicador. Con "reducir movimiento" el cambio es directo.
  * Para sumar un indicador: agregarlo en fetch-mundo.ps1 y una entrada en METRICS.
  */
 import { el } from './dom.js';
 import { fmtNum, fmtSigned } from '../lib/format.js';
 import { downloadCsv } from '../lib/csv.js';
+import { drawChart } from './chart.js';
 
 const LAT_TOP = 84;
 const LAT_BOTTOM = -58;
 const REDUCED = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 const HIGHLIGHT = { ARG: 'Argentina', USA: 'EE.UU.' };
+const SVG_NS = 'http://www.w3.org/2000/svg';
 
 /**
- * Indicadores. `score(v)` devuelve 0 (peor) … 1 (mejor) con tramos lineales entre los puntos de `stops`
- * ([valor, puntaje]); `rank(v)` ordena de mejor a peor sin recortar los extremos.
+ * Indicadores. `score(v)` devuelve 0 … 1 con tramos lineales entre los puntos de `stops`
+ * ([valor, puntaje]); `rank(v)` ordena de mejor a peor (o de mayor a menor) sin recortar los extremos.
  */
 const interp = (stops, x) => {
   if (x <= stops[0][0]) return stops[0][1];
@@ -38,27 +42,37 @@ const inflDist = (v) => Math.max(0, (v >= 2 ? v - 2 : (2 - v) * 1.5) - 1);
 
 const METRICS = [
   {
-    key: 'gdp', tab: 'PBI', title: 'Crecimiento del PBI', unit: 'variación anual real',
+    key: 'gdp', tab: 'PBI', title: 'Crecimiento del PBI', unit: 'variación anual real', short: '% anual', decimals: 1,
     fmt: (v) => `${fmtSigned(v, 1)}%`,
     score: (v) => interp([[-2, 0], [2.5, 0.5], [6, 1]], v), rank: (v) => v,
-    worst: '−2% o menos', mid: '2,5%', best: '6% o más',
+    ends: ['Peor', 'Mejor'], worst: '−2% o menos', mid: '2,5%', best: '6% o más',
     how: 'Más crecimiento, mejor.',
   },
   {
-    key: 'infl', tab: 'Inflación', title: 'Inflación', unit: 'promedio anual de precios al consumidor',
+    key: 'infl', tab: 'Inflación', title: 'Inflación', unit: 'promedio anual de precios al consumidor', short: '% anual', decimals: 1,
     fmt: (v) => `${fmtNum(v, 1)}%`,
     score: (v) => interp([[0, 1], [5, 0.5], [25, 0]], inflDist(v)), rank: (v) => -inflDist(v) - v / 1e4,
-    worst: '25% o más', mid: '8%', best: 'entre 1% y 3%',
+    ends: ['Peor', 'Mejor'], worst: '25% o más', mid: '8%', best: 'entre 1% y 3%',
     how: 'Lo mejor es una inflación baja y estable; la deflación también cuenta como señal débil.',
   },
   {
-    key: 'unemp', tab: 'Desempleo', title: 'Desempleo', unit: '% de la fuerza laboral',
+    key: 'unemp', tab: 'Desempleo', title: 'Desempleo', unit: '% de la fuerza laboral', short: '% de la fuerza laboral', decimals: 1,
     fmt: (v) => `${fmtNum(v, 1)}%`,
     score: (v) => interp([[3, 1], [7, 0.5], [14, 0]], v), rank: (v) => -v,
-    worst: '14% o más', mid: '7%', best: '3% o menos',
+    ends: ['Peor', 'Mejor'], worst: '14% o más', mid: '7%', best: '3% o menos',
     how: 'Menos desempleo, mejor.',
   },
+  {
+    key: 'share', tab: 'Peso en el PBI mundial', title: 'Peso en el PBI mundial', unit: 'PBI en US$ corrientes del país sobre el PBI mundial', short: '% del PBI mundial', decimals: 2,
+    seq: true,
+    fmt: (v) => `${fmtNum(v, v >= 10 ? 1 : 2)}%`,
+    // escala logarítmica: 0,01 % → 0 y 25 % → 1
+    score: (v) => Math.min(1, Math.max(0, (Math.log10(Math.max(v, 0.001)) + 2) / (Math.log10(25) + 2))), rank: (v) => v,
+    ends: ['Menos peso', 'Más peso'], worst: '0,01% o menos', mid: '0,5%', best: '25% o más',
+    how: 'No indica mejor ni peor: cuanto más oscuro, mayor participación en la producción mundial.',
+  },
 ];
+const COMPARABLE = ['gdp', 'infl', 'unemp'];
 
 /* ---------- colores ---------- */
 
@@ -76,7 +90,7 @@ const ease = (t) => 1 - (1 - t) ** 3;
 const projX = (lon) => (lon + 180) / 360;
 const projY = (lat) => (LAT_TOP - lat) / (LAT_TOP - LAT_BOTTOM);
 
-/** Punto dentro de un anillo (regla par-impar; sirve también para agujeros) */
+/** Punto dentro de un conjunto de anillos (regla par-impar; sirve también para agujeros) */
 function inRings(rings, lon, lat) {
   let inside = false;
   for (const ring of rings) {
@@ -93,9 +107,9 @@ function inRings(rings, lon, lat) {
 
 /**
  * @param {HTMLElement} root contenedor de la portada
- * @param {{shapes:object, world:object}} data formas por país (ISO3) y datos de data/mundo.json
+ * @param {{shapes:object, world:object, series:object|null}} data formas por país (ISO3), último dato y series anuales
  */
-export function mountHeatmap(root, { shapes, world }) {
+export function mountHeatmap(root, { shapes, world, series }) {
   const countries = Object.keys(shapes).map((iso) => {
     const rings = shapes[iso];
     let x0 = 180; let x1 = -180; let y0 = 90; let y1 = -90;
@@ -108,13 +122,17 @@ export function mountHeatmap(root, { shapes, world }) {
     const code = world.countries[iso]?.n;
     try { return (code && names?.of(code)) || HIGHLIGHT[iso] || iso; } catch { return HIGHLIGHT[iso] || iso; }
   };
+  const serieOf = (iso, key) => series?.countries?.[iso]?.[key] ?? null;
 
   let metric = METRICS[0];
   let hover = null;
   let ranking = new Map(); // iso -> { value, year, rank, total }
-  let colors = { bad: hex('#B3372F'), mid: hex('#E0B33A'), good: hex('#1E7F5C'), none: hex('#DDE3EC'), line: '#FFFFFF', ink: '#0E1E33' };
+  let colors = {
+    bad: hex('#B3372F'), mid: hex('#E0B33A'), good: hex('#1E7F5C'), none: hex('#DDE3EC'),
+    seqLo: hex('#DCE6F2'), seqHi: hex('#0F3A6B'), line: '#FFFFFF', ink: '#0E1E33',
+  };
 
-  /* --- DOM --- */
+  /* --- DOM del mapa --- */
   const canvas = el('canvas', { class: 'heat-canvas', role: 'img' });
   const tip = el('div', { class: 'heat-tip', hidden: true, 'aria-hidden': 'true' });
   const map = el('div', { class: 'heat-map' }, [canvas, tip]);
@@ -129,52 +147,62 @@ export function mountHeatmap(root, { shapes, world }) {
   csvBtn.addEventListener('click', downloadActive);
 
   const legendBar = el('div', { class: 'heat-bar', 'aria-hidden': 'true' });
+  const legendLo = el('span', { class: 'label' });
+  const legendHi = el('span', { class: 'label' });
   const legendWorst = el('span', { class: 'num' });
   const legendMid = el('span', { class: 'num' });
   const legendBest = el('span', { class: 'num' });
+
+  /* --- DOM del comparador --- */
+  const cmp = buildCompare();
 
   root.replaceChildren(
     el('div', { class: 'heat-head' }, [
       el('div', {}, [
         el('span', { class: 'label' }, 'Mapa macro mundial'),
         el('h1', {}, 'Cómo está cada economía'),
-        el('p', {}, 'Elegí un indicador: cada país se pinta de rojo (peor) a verde (mejor), con amarillo en el medio. Pasá el mouse por un país para ver el dato y su puesto.'),
+        el('p', {}, 'Elegí un indicador y mirá cómo se pinta cada país. Pasá el mouse por uno para ver el dato, su puesto y cómo evolucionó; abajo podés comparar dos países.'),
       ]),
       el('div', { class: 'heat-tabs', role: 'group', 'aria-label': 'Indicador' }, tabs),
     ]),
     el('div', { class: 'heat-scroll' }, [map]),
-    el('div', { class: 'heat-legend' }, [
-      el('div', { class: 'heat-scale' }, [
-        el('span', { class: 'label' }, 'Peor'), legendBar, el('span', { class: 'label' }, 'Mejor'),
+    el('div', { class: 'heat-lower' }, [
+      el('div', { class: 'heat-info' }, [
+        el('div', { class: 'heat-legend' }, [
+          el('div', { class: 'heat-scale' }, [legendLo, legendBar, legendHi]),
+          el('div', { class: 'heat-ends' }, [legendWorst, legendMid, legendBest]),
+        ]),
+        refs,
+        el('div', { class: 'heat-foot' }, [
+          how,
+          el('span', { class: 'src-line' }, [`Fuente: Banco Mundial, último dato anual de cada país (actualizado ${world.updated}). Inflación de Argentina y EE.UU. completada con series propias cuando falta el año reciente. `, csvBtn]),
+        ]),
       ]),
-      el('div', { class: 'heat-ends' }, [legendWorst, legendMid, legendBest]),
-    ]),
-    refs,
-    el('div', { class: 'heat-foot' }, [
-      how,
-      el('span', { class: 'src-line' }, [`Fuente: Banco Mundial, último dato anual de cada país (actualizado ${world.updated}). Inflación de Argentina y EE.UU. completada con series propias cuando falta el año reciente. `, csvBtn]),
+      cmp.node,
     ]),
   );
 
   /* --- cálculo de puestos --- */
-  function computeRanking() {
+  function buildRanking(m) {
     const list = [];
     for (const c of countries) {
-      const d = world.countries[c.iso]?.[metric.key];
-      if (d) list.push({ iso: c.iso, value: d[0], year: d[1], k: metric.rank(d[0]) });
+      const d = world.countries[c.iso]?.[m.key];
+      if (d) list.push({ iso: c.iso, value: d[0], year: d[1], k: m.rank(d[0]) });
     }
     list.sort((a, b) => b.k - a.k);
-    ranking = new Map(list.map((r, i) => [r.iso, { ...r, rank: i + 1, total: list.length }]));
+    return new Map(list.map((r, i) => [r.iso, { ...r, rank: i + 1, total: list.length }]));
   }
 
   /* --- colores animados --- */
   const state = new Map(countries.map((c) => [c.iso, { cur: colors.none, from: colors.none, to: colors.none, t0: 0, delay: 0 }]));
   let animating = false;
+  const colorFor = (s) => {
+    if (metric.seq) return mix(colors.seqLo, colors.seqHi, s);
+    return s < 0.5 ? mix(colors.bad, colors.mid, s * 2) : mix(colors.mid, colors.good, (s - 0.5) * 2);
+  };
   const targetColor = (iso) => {
     const r = ranking.get(iso);
-    if (!r) return colors.none;
-    const s = metric.score(r.value);
-    return s < 0.5 ? mix(colors.bad, colors.mid, s * 2) : mix(colors.mid, colors.good, (s - 0.5) * 2);
+    return r ? colorFor(metric.score(r.value)) : colors.none;
   };
 
   function retarget(spread) {
@@ -204,9 +232,9 @@ export function mountHeatmap(root, { shapes, world }) {
     }
     draw();
     if (busy && !document.hidden) requestAnimationFrame(step);
-    else { animating = false; if (busy) retargetNow(); }
+    else { animating = false; if (busy) finishNow(); }
   }
-  function retargetNow() { for (const s of state.values()) s.cur = s.to; draw(); }
+  function finishNow() { for (const s of state.values()) s.cur = s.to; draw(); }
 
   /* --- dibujo --- */
   const ctx = canvas.getContext('2d');
@@ -234,7 +262,8 @@ export function mountHeatmap(root, { shapes, world }) {
     const v = (n, d) => cs.getPropertyValue(n).trim() || d;
     colors = {
       bad: hex(v('--bad', '#B3372F')), mid: hex(v('--heat-mid', '#E0B33A')), good: hex(v('--good', '#1E7F5C')),
-      none: hex(v('--heat-none', '#DDE3EC')), line: v('--surface', '#FFFFFF'), ink: v('--ink', '#0E1E33'),
+      none: hex(v('--heat-none', '#DDE3EC')), seqLo: hex(v('--heat-seq-lo', '#DCE6F2')), seqHi: hex(v('--heat-seq-hi', '#0F3A6B')),
+      line: v('--surface', '#FFFFFF'), ink: v('--ink', '#0E1E33'),
     };
   }
 
@@ -269,6 +298,43 @@ export function mountHeatmap(root, { shapes, world }) {
     if (hover && !HIGHLIGHT[hover]) { ctx.lineWidth = 1.8; ctx.stroke(byIso.get(hover).path); }
   }
 
+  /* --- evolución en el tiempo (dentro de la tarjeta del cursor) --- */
+  function sparkline(iso) {
+    const arr = serieOf(iso, metric.key);
+    if (!arr) return null;
+    const pts = [];
+    arr.forEach((v, i) => { if (v !== null && v !== undefined) pts.push([series.from + i, v]); });
+    if (pts.length < 3) return null;
+    const W = 216;
+    const H = 58;
+    const pad = 4;
+    const [y0, y1] = [pts[0][0], pts[pts.length - 1][0]];
+    let lo = Math.min(...pts.map((p) => p[1]));
+    let hi = Math.max(...pts.map((p) => p[1]));
+    if (lo === hi) { lo -= 1; hi += 1; }
+    const sx = (yr) => pad + ((yr - y0) / Math.max(1, y1 - y0)) * (W - pad * 2);
+    const sy = (v) => H - pad - ((v - lo) / (hi - lo)) * (H - pad * 2);
+    let d = '';
+    let prev = null;
+    for (const [yr, v] of pts) {
+      d += `${prev !== null && yr - prev === 1 ? 'L' : 'M'}${sx(yr).toFixed(1)} ${sy(v).toFixed(1)}`;
+      prev = yr;
+    }
+    const svg = document.createElementNS(SVG_NS, 'svg');
+    svg.setAttribute('viewBox', `0 0 ${W} ${H}`);
+    svg.setAttribute('class', 'heat-spark');
+    svg.setAttribute('aria-hidden', 'true');
+    const add = (tag, attrs) => { const n = document.createElementNS(SVG_NS, tag); for (const [k, v] of Object.entries(attrs)) n.setAttribute(k, v); svg.append(n); return n; };
+    if (lo < 0 && hi > 0) add('line', { x1: pad, x2: W - pad, y1: sy(0).toFixed(1), y2: sy(0).toFixed(1), class: 'zero' });
+    add('path', { d, class: 'line' });
+    const [lx, lv] = [pts[pts.length - 1][0], pts[pts.length - 1][1]];
+    add('circle', { cx: sx(lx).toFixed(1), cy: sy(lv).toFixed(1), r: 3, class: 'last' });
+    return el('div', { class: 'heat-spark-wrap' }, [
+      svg,
+      el('div', { class: 'heat-spark-axis num' }, [el('span', {}, String(y0)), el('span', {}, `${metric.fmt(lo)} a ${metric.fmt(hi)}`), el('span', {}, String(y1))]),
+    ]);
+  }
+
   /* --- interacción --- */
   function hitTest(clientX, clientY) {
     const rect = canvas.getBoundingClientRect();
@@ -284,20 +350,25 @@ export function mountHeatmap(root, { shapes, world }) {
     return { iso: null, px, py, width: rect.width };
   }
 
+  let shownIso = null;
   function showTip(hit) {
-    if (!hit.iso) { tip.hidden = true; return; }
+    if (!hit.iso) { tip.hidden = true; shownIso = null; return; }
     const r = ranking.get(hit.iso);
-    tip.replaceChildren(
-      el('span', { class: 'label' }, nameOf(hit.iso)),
-      r
-        ? el('div', { class: 'heat-tip-main' }, [
-          el('span', { class: 'num heat-tip-value' }, metric.fmt(r.value)),
-          el('span', { class: 'heat-tip-dot', style: `background:${rgb(targetColor(hit.iso))}` }),
-        ])
-        : el('span', { class: 'heat-tip-none' }, 'Sin dato disponible'),
-      r ? el('span', { class: 'num heat-tip-line' }, `Puesto ${r.rank} de ${r.total} · dato ${r.year}`) : null,
-      el('span', { class: 'heat-tip-line' }, metric.title),
-    );
+    if (shownIso !== `${hit.iso}:${metric.key}`) { // el contenido solo se reconstruye al cambiar de país o indicador
+      shownIso = `${hit.iso}:${metric.key}`;
+      tip.replaceChildren(
+        el('span', { class: 'label' }, nameOf(hit.iso)),
+        r
+          ? el('div', { class: 'heat-tip-main' }, [
+            el('span', { class: 'num heat-tip-value' }, metric.fmt(r.value)),
+            el('span', { class: 'heat-tip-dot', style: `background:${rgb(targetColor(hit.iso))}` }),
+          ])
+          : el('span', { class: 'heat-tip-none' }, 'Sin dato disponible'),
+        r ? el('span', { class: 'num heat-tip-line' }, `Puesto ${r.rank} de ${r.total} · dato ${r.year}`) : null,
+        el('span', { class: 'heat-tip-line' }, `${metric.title}: evolución anual`),
+        sparkline(hit.iso),
+      );
+    }
     tip.hidden = false;
     const tw = tip.offsetWidth;
     const th = tip.offsetHeight;
@@ -319,7 +390,7 @@ export function mountHeatmap(root, { shapes, world }) {
   map.addEventListener('pointerdown', onMove);
   map.addEventListener('pointerleave', (e) => {
     if (e.pointerType === 'touch') return; // en celular la tarjeta queda hasta tocar otra vez
-    hover = null; tip.hidden = true; draw();
+    hover = null; tip.hidden = true; shownIso = null; draw();
   });
 
   /* --- indicador activo --- */
@@ -337,22 +408,24 @@ export function mountHeatmap(root, { shapes, world }) {
   }
 
   function renderLegend() {
-    const grad = `linear-gradient(90deg, ${rgb(colors.bad)}, ${rgb(colors.mid)}, ${rgb(colors.good)})`;
-    legendBar.style.background = grad;
+    const stops = metric.seq ? [colors.seqLo, colors.seqHi] : [colors.bad, colors.mid, colors.good];
+    legendBar.style.background = `linear-gradient(90deg, ${stops.map(rgb).join(', ')})`;
+    [legendLo.textContent, legendHi.textContent] = metric.ends;
     legendWorst.textContent = metric.worst;
     legendMid.textContent = metric.mid;
     legendBest.textContent = metric.best;
     how.textContent = `${metric.title} (${metric.unit}). ${metric.how}`;
-    canvas.setAttribute('aria-label', `Mapa de calor mundial: ${metric.title}. Rojo es peor, verde es mejor. Los datos están en el CSV descargable.`);
+    canvas.setAttribute('aria-label', `Mapa de calor mundial: ${metric.title}. ${metric.seq ? 'Más oscuro es más peso.' : 'Rojo es peor, verde es mejor.'} Los datos están en el CSV descargable.`);
   }
 
   function setMetric(m) {
     metric = m;
     tabs.forEach((b, i) => b.setAttribute('aria-pressed', METRICS[i] === m ? 'true' : 'false'));
-    computeRanking();
+    ranking = buildRanking(metric);
     renderLegend();
     renderRefs();
     retarget(260);
+    shownIso = null;
     if (hover && lastHit) showTip(lastHit); // la tarjeta abierta se actualiza con el nuevo indicador
   }
 
@@ -362,12 +435,102 @@ export function mountHeatmap(root, { shapes, world }) {
     downloadCsv(`mapa-${metric.key}.csv`, ['País;Código;Valor;Año;Puesto', ...rows].join('\r\n'));
   }
 
+  /* ---------- comparador de países ---------- */
+
+  function buildCompare() {
+    const cm = METRICS.filter((m) => COMPARABLE.includes(m.key));
+    let cmetric = cm[0];
+    let isoA = 'ARG';
+    let isoB = 'USA';
+    let chart = null;
+    const available = Object.keys(world.countries)
+      .filter((iso) => byIso.has(iso) && COMPARABLE.some((k) => serieOf(iso, k)))
+      .sort((a, b) => nameOf(a).localeCompare(nameOf(b), 'es'));
+    if (!available.includes(isoA)) isoA = available[0];
+    if (!available.includes(isoB)) isoB = available[1] ?? available[0];
+
+    const select = (label, value, onChange) => {
+      const s = el('select', { class: 'cmp-select', 'aria-label': label }, available.map((iso) => el('option', { value: iso }, nameOf(iso))));
+      s.value = value;
+      s.addEventListener('change', () => onChange(s.value));
+      return s;
+    };
+    const selA = select('País 1', isoA, (v) => { isoA = v; update(); });
+    const selB = select('País 2', isoB, (v) => { isoB = v; update(); });
+    const pills = cm.map((m) => {
+      const b = el('button', { class: 'pill', type: 'button', 'aria-pressed': m === cmetric ? 'true' : 'false' }, m.tab);
+      b.addEventListener('click', () => { cmetric = m; pills.forEach((p, i) => p.setAttribute('aria-pressed', cm[i] === m ? 'true' : 'false')); update(); });
+      return b;
+    });
+    const canvasC = el('canvas', { 'aria-label': 'Gráfico comparativo de dos países', role: 'img' });
+    const box = el('div', { class: 'chart-box cmp-chart' }, canvasC);
+    const empty = el('p', { class: 'cmp-empty', hidden: true });
+    const summary = el('div', { class: 'cmp-summary' });
+
+    const node = el('section', { class: 'cmp', 'aria-label': 'Comparar países' }, [
+      el('div', { class: 'cmp-head' }, [el('h2', {}, 'Comparar países'), el('span', { class: 'label' }, 'Elegí dos y un indicador')]),
+      el('div', { class: 'cmp-controls' }, [
+        el('label', {}, [el('span', { class: 'cmp-dot a' }), selA]),
+        el('label', {}, [el('span', { class: 'cmp-dot b' }), selB]),
+      ]),
+      el('div', { class: 'heat-tabs cmp-tabs', role: 'group', 'aria-label': 'Indicador a comparar' }, pills),
+      box,
+      empty,
+      summary,
+    ]);
+
+    const pointsOf = (iso) => {
+      const arr = serieOf(iso, cmetric.key);
+      if (!arr) return [];
+      const out = [];
+      arr.forEach((v, i) => { if (v !== null && v !== undefined) out.push([`${series.from + i}-01-01`, v]); });
+      return out;
+    };
+
+    function update() {
+      const rk = buildRanking(cmetric);
+      const sel = [[isoA, '--ar'], [isoB, '--us']];
+      const data = { byId: {} };
+      const datasets = [];
+      sel.forEach(([iso, color], i) => {
+        const pts = pointsOf(iso);
+        if (pts.length) {
+          data.byId[`c${i}`] = { id: `c${i}`, freq: 'A', points: pts };
+          datasets.push({ ref: { id: `c${i}` }, label: nameOf(iso), color, type: 'line', decimals: cmetric.decimals });
+        }
+      });
+      summary.replaceChildren(...sel.map(([iso], i) => {
+        const r = rk.get(iso);
+        return el('div', { class: 'cmp-card' }, [
+          el('span', { class: `cmp-dot ${i ? 'b' : 'a'}` }),
+          el('b', {}, nameOf(iso)),
+          el('span', { class: 'num' }, r ? `${cmetric.fmt(r.value)} (${r.year}) · puesto ${r.rank} de ${r.total}` : 'sin dato'),
+        ]);
+      }));
+      if (!datasets.length || !series) {
+        if (chart) { chart.destroy(); chart = null; }
+        box.hidden = true;
+        empty.hidden = false;
+        empty.textContent = `No hay datos de ${cmetric.title.toLowerCase()} para estos países.`;
+        return;
+      }
+      box.hidden = false;
+      empty.hidden = true;
+      const missing = sel.filter(([iso]) => !data.byId[`c${sel.findIndex((s) => s[0] === iso)}`]).map(([iso]) => nameOf(iso));
+      empty.hidden = !missing.length;
+      if (missing.length) empty.textContent = `Sin serie de ${cmetric.title.toLowerCase()} para ${missing.join(' y ')}.`;
+      chart = drawChart(canvasC, data, { unit: cmetric.short, datasets }, 0, chart);
+    }
+    return { node, update };
+  }
+
   /* --- arranque --- */
   readColors();
-  computeRanking();
+  ranking = buildRanking(metric);
   renderLegend();
   renderRefs();
   new ResizeObserver(() => { if (map.clientWidth !== w) resize(); }).observe(map);
   resize();
   retarget(900); // entrada: los colores aparecen de oeste a este
+  try { cmp.update(); } catch (err) { console.warn('Comparador no disponible', err); } // el mapa sigue funcionando aunque falle el gráfico
 }

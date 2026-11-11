@@ -22,8 +22,8 @@ async function getJson(url) {
 
 async function init() {
   // El mapa y el calendario son independientes: si uno falla, el otro se muestra igual
-  const mapTask = Promise.all([getJson('data/paises.json'), getJson('data/mundo.json')])
-    .then(([shapes, world]) => mountHeatmap(mapRoot, { shapes, world }))
+  const mapTask = Promise.all([getJson('data/paises.json'), getJson('data/mundo.json'), getJson('data/mundo-series.json').catch(() => null)])
+    .then(([shapes, world, series]) => mountHeatmap(mapRoot, { shapes, world, series })) // sin series, el mapa funciona igual pero sin evolución ni comparador
     .catch((err) => showError(mapRoot, err));
 
   try {
