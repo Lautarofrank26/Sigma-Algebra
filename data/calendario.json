@@ -17,9 +17,9 @@
       "href": "eeuu-tasas.html",
       "previo": {
         "suffix": "%",
+        "label": "Tasa actual",
         "id": "fedfunds",
         "t": "level",
-        "label": "Tasa actual",
         "file": "us",
         "decimals": 2
       }
@@ -34,12 +34,12 @@
       "detail": "Septiembre de 2026",
       "href": "actividad.html",
       "previo": {
-        "signed": true,
         "suffix": "%",
+        "label": "Anterior (m/m)",
         "id": "ipi",
         "t": "pct1",
-        "label": "Anterior (m/m)",
         "file": "ar",
+        "signed": true,
         "decimals": 1
       }
     },
@@ -85,9 +85,9 @@
       "href": "precios.html",
       "previo": {
         "suffix": "%",
+        "label": "Anterior (m/m)",
         "id": "ipc",
         "t": "pct1",
-        "label": "Anterior (m/m)",
         "file": "ar",
         "decimals": 1
       }
@@ -123,9 +123,9 @@
       "href": "empleo.html",
       "previo": {
         "suffix": "%",
+        "label": "Anterior (m/m)",
         "id": "wages",
         "t": "pct1",
-        "label": "Anterior (m/m)",
         "file": "ar",
         "decimals": 1
       }
@@ -170,11 +170,11 @@
       "detail": "Octubre de 2026",
       "href": "externo.html",
       "previo": {
+        "prefix": "USD ",
         "suffix": " M",
+        "label": "Saldo anterior",
         "id": "trade_balance",
         "t": "level",
-        "prefix": "USD ",
-        "label": "Saldo anterior",
         "file": "ar",
         "decimals": 0
       }
@@ -189,12 +189,12 @@
       "detail": "Septiembre de 2026",
       "href": "actividad.html",
       "previo": {
-        "signed": true,
         "suffix": "%",
+        "label": "Anterior (m/m)",
         "id": "emae",
         "t": "pct1",
-        "label": "Anterior (m/m)",
         "file": "ar",
+        "signed": true,
         "decimals": 1
       }
     },
@@ -258,9 +258,9 @@
       "href": "eeuu-tasas.html",
       "previo": {
         "suffix": "%",
+        "label": "Tasa actual",
         "id": "fedfunds",
         "t": "level",
-        "label": "Tasa actual",
         "file": "us",
         "decimals": 2
       }
@@ -275,12 +275,12 @@
       "detail": "Octubre de 2026",
       "href": "actividad.html",
       "previo": {
-        "signed": true,
         "suffix": "%",
+        "label": "Anterior (m/m)",
         "id": "ipi",
         "t": "pct1",
-        "label": "Anterior (m/m)",
         "file": "ar",
+        "signed": true,
         "decimals": 1
       }
     },
@@ -346,9 +346,9 @@
       "href": "precios.html",
       "previo": {
         "suffix": "%",
+        "label": "Anterior (m/m)",
         "id": "ipc",
         "t": "pct1",
-        "label": "Anterior (m/m)",
         "file": "ar",
         "decimals": 1
       }
@@ -363,12 +363,12 @@
       "detail": "Informe de avance del tercer trimestre de 2026",
       "href": "actividad.html",
       "previo": {
-        "signed": true,
         "suffix": "%",
+        "label": "Anterior (i.a.)",
         "id": "gdp_level",
         "t": "yoy",
-        "label": "Anterior (i.a.)",
         "file": "ar",
+        "signed": true,
         "decimals": 1
       }
     },
@@ -383,9 +383,9 @@
       "href": "empleo.html",
       "previo": {
         "suffix": "%",
+        "label": "Anterior (m/m)",
         "id": "wages",
         "t": "pct1",
-        "label": "Anterior (m/m)",
         "file": "ar",
         "decimals": 1
       }
@@ -412,9 +412,9 @@
       "href": "empleo.html",
       "previo": {
         "suffix": "%",
+        "label": "Anterior",
         "id": "unemp",
         "t": "level",
-        "label": "Anterior",
         "file": "ar",
         "decimals": 1
       }
@@ -429,11 +429,11 @@
       "detail": "Noviembre de 2026",
       "href": "externo.html",
       "previo": {
+        "prefix": "USD ",
         "suffix": " M",
+        "label": "Saldo anterior",
         "id": "trade_balance",
         "t": "level",
-        "prefix": "USD ",
-        "label": "Saldo anterior",
         "file": "ar",
         "decimals": 0
       }
@@ -448,12 +448,12 @@
       "detail": "Octubre de 2026",
       "href": "actividad.html",
       "previo": {
-        "signed": true,
         "suffix": "%",
+        "label": "Anterior (m/m)",
         "id": "emae",
         "t": "pct1",
-        "label": "Anterior (m/m)",
         "file": "ar",
+        "signed": true,
         "decimals": 1
       }
     },
@@ -528,9 +528,9 @@
       "href": "eeuu-tasas.html",
       "previo": {
         "suffix": "%",
+        "label": "Tasa actual",
         "id": "fedfunds",
         "t": "level",
-        "label": "Tasa actual",
         "file": "us",
         "decimals": 2
       }
@@ -546,9 +546,9 @@
       "href": "eeuu-tasas.html",
       "previo": {
         "suffix": "%",
+        "label": "Tasa actual",
         "id": "fedfunds",
         "t": "level",
-        "label": "Tasa actual",
         "file": "us",
         "decimals": 2
       }
@@ -564,9 +564,9 @@
       "href": "eeuu-tasas.html",
       "previo": {
         "suffix": "%",
+        "label": "Tasa actual",
         "id": "fedfunds",
         "t": "level",
-        "label": "Tasa actual",
         "file": "us",
         "decimals": 2
       }
@@ -582,9 +582,9 @@
       "href": "eeuu-tasas.html",
       "previo": {
         "suffix": "%",
+        "label": "Tasa actual",
         "id": "fedfunds",
         "t": "level",
-        "label": "Tasa actual",
         "file": "us",
         "decimals": 2
       }
@@ -600,9 +600,9 @@
       "href": "eeuu-tasas.html",
       "previo": {
         "suffix": "%",
+        "label": "Tasa actual",
         "id": "fedfunds",
         "t": "level",
-        "label": "Tasa actual",
         "file": "us",
         "decimals": 2
       }
@@ -618,9 +618,9 @@
       "href": "eeuu-tasas.html",
       "previo": {
         "suffix": "%",
+        "label": "Tasa actual",
         "id": "fedfunds",
         "t": "level",
-        "label": "Tasa actual",
         "file": "us",
         "decimals": 2
       }
@@ -636,9 +636,9 @@
       "href": "eeuu-tasas.html",
       "previo": {
         "suffix": "%",
+        "label": "Tasa actual",
         "id": "fedfunds",
         "t": "level",
-        "label": "Tasa actual",
         "file": "us",
         "decimals": 2
       }
@@ -654,9 +654,9 @@
       "href": "eeuu-tasas.html",
       "previo": {
         "suffix": "%",
+        "label": "Tasa actual",
         "id": "fedfunds",
         "t": "level",
-        "label": "Tasa actual",
         "file": "us",
         "decimals": 2
       }
