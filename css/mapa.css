@@ -1,0 +1,55 @@
+/* mapa.css — mapa mundial de la portada: selector agrupado, slider de años, leyendas y panel del país.
+   El resto del estilo del mapa (tarjeta del cursor, referencias, pie) está en components.css (.heat-*). */
+
+:root { --heat-neutral: #F3EFE6; } /* centro de las escalas divergentes (0); distinto del gris "sin datos" */
+
+.mapa-controls { display: grid; gap: 0.5rem; justify-items: start; }
+.mapa-groups .pill { font-size: var(--fs-xs); text-transform: uppercase; letter-spacing: 0.06em; padding: 0.25rem 0.75rem; }
+.mapa-vars .pill { font-size: var(--fs-sm); }
+
+/* Slider de años */
+.mapa-time { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; gap: var(--gap-2); margin-bottom: var(--gap-1); }
+.mapa-year { font-size: 2.4rem; font-weight: 600; letter-spacing: -0.03em; line-height: 1; color: var(--ink); min-width: 4.5ch; }
+.mapa-track { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; gap: 0.6rem; }
+.mapa-yr-edge { font-size: var(--fs-xs); color: var(--ink-3); }
+.mapa-slider { width: 100%; accent-color: var(--ink); cursor: pointer; }
+.mapa-play-box { display: flex; align-items: center; gap: 0.4rem; }
+.mapa-play { font: inherit; font-size: var(--fs-sm); font-weight: 600; cursor: pointer; background: var(--surface); color: var(--ink); border: 1px solid var(--line); padding: 0.35rem 0.9rem; white-space: nowrap; }
+.mapa-play[aria-pressed="true"] { background: var(--ink); color: #fff; border-color: var(--ink); }
+.mapa-speed { font-size: var(--fs-xs); }
+
+/* Mapa + panel del país (al costado en pantallas anchas, debajo en las angostas) */
+.mapa-body { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--gap-2); align-items: start; }
+.heat.mapa-open .mapa-body { grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr); }
+.mapa-panel { display: grid; gap: 0.7rem; padding: var(--gap-2); background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-lg); box-shadow: var(--shadow); min-width: 0; }
+.mapa-panel[hidden] { display: none; }
+.mapa-panel h2 { font-size: var(--fs-xl); font-weight: 700; }
+.mapa-panel .tl { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.mapa-panel .tl-group[hidden] { display: none; }
+.mapa-chart { height: 280px; }
+.mapa-cmp { display: flex; align-items: center; gap: 0.5rem; font-size: var(--fs-sm); color: var(--ink-2); }
+.mapa-cmp select { max-width: 16rem; }
+@media (max-width: 1099px) {
+  .heat.mapa-open .mapa-body { grid-template-columns: minmax(0, 1fr); }
+}
+
+/* Aviso de carga sobre el mapa */
+.mapa-loading { position: absolute; top: 0.6rem; left: 0.6rem; z-index: 3; padding: 0.3rem 0.7rem; font-size: var(--fs-xs); background: var(--surface); color: var(--ink-2); border: 1px solid var(--line); border-radius: var(--radius-pill); }
+.mapa-loading[hidden] { display: none; }
+
+/* Leyenda */
+.mapa-legend { gap: 0.4rem; }
+.mapa-legend-title { color: var(--ink-2); }
+.mapa-bins { display: flex; flex-wrap: wrap; gap: 0.3rem 0.8rem; font-size: var(--fs-xs); color: var(--ink-2); }
+.mapa-bin { display: inline-flex; align-items: center; gap: 0.3rem; }
+.mapa-bin i { width: 18px; height: 10px; border-radius: 3px; display: inline-block; }
+
+@media (max-width: 640px) {
+  .mapa-time { grid-template-columns: auto minmax(0, 1fr); }
+  .mapa-play-box { grid-column: 1 / -1; }
+  .mapa-year { font-size: 1.8rem; }
+}
+
+@media print {
+  .mapa-time, .mapa-panel, .mapa-controls { display: none !important; }
+}

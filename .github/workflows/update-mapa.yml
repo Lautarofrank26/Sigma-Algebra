@@ -1,0 +1,36 @@
+# Datos del mapa mundial de la portada (data/mapa/): FMI, Banco Mundial, BIS, Maddison y PNUD.
+# Son datos anuales (y algunas series mensuales o trimestrales para el gráfico de cada país) que cambian
+# pocas veces por mes, así que alcanza con una corrida por semana. También se puede correr a mano en Actions.
+name: Actualizar mapa mundial
+
+on:
+  schedule:
+    - cron: '40 9 * * 1'   # lunes 6:40 ARG
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+# Un solo proceso a la vez escribe en main (comparte grupo con los demás workflows de datos)
+concurrency:
+  group: data-commits
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Descargar datos del mapa (Python 3 viene instalado en el runner)
+        run: python3 tools/fetch-mapa.py
+
+      - name: Guardar cambios
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/mapa
+          git diff --staged --quiet || git commit -m "Actualizar mapa mundial $(date -u +%F)"
+          git pull --rebase
+          git push

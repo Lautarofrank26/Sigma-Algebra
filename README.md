@@ -3,7 +3,7 @@
 Sitio estático multipágina (HTML, CSS y JS sin build) con indicadores macro de Argentina y EE.UU.
 
 ## Páginas
-- `index.html`: inicio, con el mapa de calor mundial (PBI, inflación, desempleo) y el calendario de próximos datos
+- `index.html`: inicio, con el mapa mundial por variable y año, y el calendario de próximos datos
 - `argentina.html`, `dolar.html`, `eeuu.html`: una página por sección
 - EE.UU. por tema: `eeuu-precios.html`, `eeuu-empleo.html`, `eeuu-tasas.html` (configs en `js/config/us/`)
 - Argentina por tema: `actividad.html`, `precios.html`, `empleo.html`, `externo.html`, `monetario.html`, `fiscal.html` (configs en `js/config/ar/`, registro en `js/config/ar/index.js`)
@@ -26,10 +26,14 @@ La actualización diaria de EE.UU. usa la API pública de BLS, que sin clave per
 3. Correr el workflow "Actualizar datos" a mano para probarla.
 La clave nunca va en el código de la página ni en archivos del repositorio: solo la usa el workflow.
 
-## Portada: mapa del mundo
-- `js/ui/worldhero.js` dibuja un mapa de puntos (`js/data/world-mask.js`, generado con Natural Earth) con ocho plazas: Buenos Aires, Nueva York, Ciudad de México, São Paulo, Londres, Eurozona, Shanghái y Tokio. El foco rota cada 5 s o al pasar el mouse. Con "reducir movimiento" activado no hay animación.
-- Los datos (`js/data/world.js`) se renuevan cada minuto: dólares (DolarAPI), riesgo país (ArgentinaDatos), bonos y tasa de la Fed (Tesoro y NY Fed), monedas (Frankfurter, cierre del BCE, un dato por día hábil) y bitcoin (CoinGecko).
-- No hay petróleo, oro ni bolsas porque no encontré fuentes gratuitas que permitan consultas desde el navegador.
+## Portada: mapa mundial
+- `js/ui/heatmap.js` (estilos en `css/mapa.css`) pinta cada país según la variable elegida, agrupadas por categoría: **Actividad** (crecimiento real, peso en el PBI mundial, PBI per cápita PPA), **Precios y monetario** (inflación, tasa de política), **Fiscal** (deuda/PBI, resultado fiscal/PBI), **Externo** (cuenta corriente/PBI, apertura comercial) y **Social** (desempleo, población, Gini, IDH).
+- Escalas fijas para todos los años: divergente centrada en 0 para las variables con signo, secuencial de un tono para las de nivel, logarítmica o por intervalos para las muy asimétricas (población, PBI per cápita, peso en el PBI, inflación, tasa).
+- Slider de años con "Reproducir" (pausa y velocidad). Por defecto, el último año con buena cobertura. Sin proyecciones del FMI. País sin dato en ese año: gris.
+- Clic en un país: panel con el gráfico de la variable activa (frecuencia mensual o trimestral donde existe, rango 10A / 30A / Máx, línea en el año del slider y "Comparar con…" otro país o el agregado mundial de la fuente).
+- Datos en `data/mapa/` (cada variable en su archivo, que se carga recién cuando se elige), generados por `tools/fetch-mapa.py` (Python 3, sin dependencias) desde FMI (WEO, Historical Public Debt, CPI, Labor Statistics, Quarterly National Accounts), Banco Mundial, BIS, Maddison Project Database 2023 y PNUD. El workflow *Actualizar mapa mundial* lo corre los lunes. Si una fuente falla, se conserva el archivo anterior de esa variable.
+- PBI per cápita: Maddison hasta su último año; después, ese valor movido con el crecimiento del PBI per cápita PPA del Banco Mundial (indicado en la fuente de cada dato).
+- `data/mundo.json`, `data/mundo-series.json` y `tools/fetch-mundo.ps1` eran del mapa anterior: la página ya no los usa.
 
 ## Diseño
 Paleta y tipografía en `css/tokens.css`: gris frío, superficies blancas, azul marino, serif editorial (Source Serif 4) para títulos y mono tabular (IBM Plex Mono) para cifras. Acentos por país solo en filetes y series de gráficos. Tarjetas con esquinas redondeadas (`--radius-lg`), botones y etiquetas en píldora (`--radius-pill`) y sombra suave.
