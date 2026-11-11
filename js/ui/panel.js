@@ -12,6 +12,7 @@
  *     desc:   { base, agg } texto del título según sea la frecuencia original o una agregada (p. ej. 'var. % m/m' / 'var. % compuesta')
  *     byFreq: { A: { datasets: [...] } }  series oficiales alternativas para una frecuencia (en vez de agregar a mano)
  *   }
+ * Variantes (`panel.variants`, p. ej. Nominal / Real): [{ key, label, datasets, unit? }]; agregan un selector propio.
  */
 import { el } from './dom.js';
 import { drawChart } from './chart.js';
@@ -60,7 +61,9 @@ export function createPanel(data, original) {
   const lastValue = head ? `${panel.headline.prefix ?? ''}${fmtNum(head.points[head.points.length - 1][1], panel.headline.decimals)}${panel.headline.suffix ?? ''}` : null;
   const canvas = el('canvas', { role: 'img', 'aria-label': `Gráfico de ${panel.title}. ${panel.unit}.${lastValue ? ` Último dato: ${lastValue}.` : ''} Los datos completos se pueden descargar en CSV.` });
   let chart = null;
-  const state = { freq: tl?.freq, years: tl?.range ?? 0 };
+  const state = { freq: tl?.freq, years: tl?.range ?? 0, variant: panel.variants?.[0]?.key };
+  // Variantes del mismo gráfico (p. ej. Nominal / Real): cada una trae sus propios datasets y, si hace falta, su unidad
+  const active = () => (panel.variants ? { ...panel, ...panel.variants.find((v) => v.key === state.variant) } : panel);
 
   const now = head
     ? el('div', { class: 'panel-now' }, [
@@ -69,7 +72,7 @@ export function createPanel(data, original) {
       ])
     : null;
 
-  const current = () => (tl ? buildView(data, panel, state.freq) : { view: data, spec: panel });
+  const current = () => (tl ? buildView(data, active(), state.freq) : { view: data, spec: active() });
 
   // Descarga lo que muestra el gráfico (con temporalidad propia: la serie en la frecuencia elegida; si no, todo el historial)
   const csvButton = el('button', { class: 'csv-btn', type: 'button', title: 'Descargar los datos del gráfico en CSV' }, 'Descargar CSV');
@@ -93,6 +96,8 @@ export function createPanel(data, original) {
   let metaNode = null;
   let freqBtns = [];
   let rangeBtns = [];
+  let variantBtns = [];
+  const unitNode = el('div', { class: 'unit' }, panel.unit);
   if (tl) {
     const originalFreq = data.byId[panel.datasets[0].ref.id]?.freq ?? 'M';
     const ok = new Set(derivable(originalFreq));
@@ -109,7 +114,13 @@ export function createPanel(data, original) {
       b.addEventListener('click', () => { state.years = y; sync(); redraw(); });
       return b;
     });
+    variantBtns = (panel.variants ?? []).map((v) => {
+      const b = el('button', { class: 'tl-btn', type: 'button', 'aria-pressed': String(v.key === state.variant), title: v.title ?? v.label }, v.label);
+      b.addEventListener('click', () => { state.variant = v.key; sync(); redraw(); });
+      return b;
+    });
     controls = el('div', { class: 'tl' }, [
+      variantBtns.length ? el('div', { class: 'tl-group', role: 'group', 'aria-label': 'Nominal o real' }, variantBtns) : null,
       el('div', { class: 'tl-group', role: 'group', 'aria-label': 'Frecuencia' }, freqBtns),
       el('div', { class: 'tl-group', role: 'group', 'aria-label': 'Rango' }, rangeBtns),
     ]);
@@ -129,6 +140,8 @@ export function createPanel(data, original) {
     if (state.years && span < state.years * 12) state.years = [...RANGES].reverse().find(([y]) => y === 0 || span >= y * 12)?.[0] ?? 0;
     freqBtns.forEach((b, i) => b.setAttribute('aria-pressed', String(tl.freqs[i] === state.freq)));
     rangeBtns.forEach((b, i) => b.setAttribute('aria-pressed', String(RANGES[i][0] === state.years)));
+    variantBtns.forEach((b, i) => b.setAttribute('aria-pressed', String(panel.variants[i].key === state.variant)));
+    unitNode.textContent = spec.unit;
     titleNode.textContent = spec.title;
     // Fuente, frecuencia original del dato y fecha del último dato
     const baseSeries = resolve(data, spec.datasets[0].ref);
@@ -149,7 +162,7 @@ export function createPanel(data, original) {
   // El id permite llegar al gráfico desde el buscador (pagina.html#id)
   const node = el('article', { class: 'panel', id: panel.id }, [
     el('div', { class: 'panel-head' }, [
-      el('div', {}, [titleNode, el('div', { class: 'unit' }, panel.unit)]),
+      el('div', {}, [titleNode, unitNode]),
       now,
     ]),
     controls,

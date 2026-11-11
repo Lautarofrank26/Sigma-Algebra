@@ -67,8 +67,11 @@ export function aggregate(points, from, to, kind) {
   const out = [];
   for (const [k, pts] of groups) {
     // Un período entra solo si está completo; los saldos y los índices de precios solo necesitan su último mes
+    // (las fechas de una serie trimestral o semestral marcan el INICIO de cada período: el último sub-período empieza
+    //  en el mes final del período agregado menos la duración del sub-período, p. ej. octubre para un trimestre)
+    const subMonths = 12 / PER_YEAR[from];
     const complete = endBased
-      ? pts.some(([d]) => Number(d.slice(5, 7)) === lastMonthOf(k, to) || from === 'A')
+      ? pts.some(([d]) => Number(d.slice(5, 7)) === lastMonthOf(k, to) - subMonths + 1 || from === 'A')
       : pts.length === need;
     if (!complete) continue;
     let value;

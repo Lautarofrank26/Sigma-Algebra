@@ -220,6 +220,63 @@ def activity(add):
         add(iid, label, 'índice 2004=100', 'M', 'INDEC · EMAE por sector, serie original', pts(d[sid]))
 
 
+def employment(add, ipc):
+    """Empleo e ingresos. `ipc` es el IPC empalmado {YYYY-MM: nivel} para deflactar (salarios y haber mínimo)."""
+    monthly = ['152.1_TL_SIN_EST_2009_M_13', '151.1_AARIADODAD_2012_M_30',
+               '149.1_SOR_PRIADO_OCTU_0_25', '149.1_SOR_PUBICO_OCTU_0_14', '149.1_SOR_PRIADO_OCTU_0_28', '58.1_MP_0_M_24']
+    quarterly = ['45.2_ECTDT_0_T_33', '43.2_ECTAT_0_T_33', '42.3_EPH_PUNTUATAL_0_M_24', '65.1_CGI_0_0_21']
+    semester = ['60.1_PP_0_0_15', '60.1_IP_0_0_20']
+    annual = ['42.1_EPDT_0_A_30', '42.1_EPAT_0_A_27', '42.1_EPET_0_A_24']
+    d = {}
+    for group in (monthly, quarterly, semester, annual):
+        try:
+            d.update(datos(group))
+        except RuntimeError as e:
+            log(f'  aviso empleo: {e}')
+            d.update({i: {} for i in group})
+    pct = lambda s: {p: v * 100 for p, v in s.items()}  # las tasas vienen como proporción
+
+    add('unemp_long', 'Tasa de desocupación (EPH continua)', '%', 'Q', 'INDEC · EPH continua, total aglomerados', pts(pct(d['45.2_ECTDT_0_T_33']), 4))
+    add('activity_long', 'Tasa de actividad (EPH continua)', '%', 'Q', 'INDEC · EPH continua, total aglomerados', pts(pct(d['43.2_ECTAT_0_T_33']), 4))
+    add('employment_long', 'Tasa de empleo (EPH continua)', '%', 'Q', 'INDEC · EPH continua, total aglomerados', pts(pct(d['42.3_EPH_PUNTUATAL_0_M_24']), 4))
+    add('unemp_annual', 'Tasa de desocupación, anual', '%', 'A', 'INDEC · EPH puntual (1982-2002) y continua (desde 2003), promedio anual', pts(pct(d['42.1_EPDT_0_A_30']), 4))
+    add('activity_annual', 'Tasa de actividad, anual', '%', 'A', 'INDEC · EPH puntual (1982-2002) y continua (desde 2003), promedio anual', pts(pct(d['42.1_EPAT_0_A_27']), 4))
+    add('employment_annual', 'Tasa de empleo, anual', '%', 'A', 'INDEC · EPH puntual (1982-2002) y continua (desde 2003), promedio anual', pts(pct(d['42.1_EPET_0_A_24']), 4))
+    add('gini', 'Coeficiente de Gini del ingreso per cápita familiar', 'índice 0-1', 'Q', 'INDEC · EPH, distribución del ingreso', pts(d['65.1_CGI_0_0_21'], 4))
+    add('poverty_puntual', 'Pobreza, personas (EPH puntual, GBA)', '%', 'S', 'INDEC · EPH puntual, Gran Buenos Aires (mayo y octubre)', pts(pct(d['60.1_PP_0_0_15']), 4))
+    add('indigence_puntual', 'Indigencia, personas (EPH puntual, GBA)', '%', 'S', 'INDEC · EPH puntual, Gran Buenos Aires (mayo y octubre)', pts(pct(d['60.1_IP_0_0_20']), 4))
+    try:
+        wb = json.loads(urllib.request.urlopen(urllib.request.Request(
+            'https://api.worldbank.org/v2/country/ARG/indicator/SI.POV.NAHC?format=json&per_page=80', headers={'User-Agent': UA}), timeout=60).read())
+        add('poverty_wb', 'Pobreza, personas (dato anual)', '%', 'A', 'Banco Mundial (SI.POV.NAHC), a partir de la EPH del INDEC',
+            [[f"{x['date']}-01-01", x['value']] for x in sorted(wb[1], key=lambda x: x['date']) if x['value'] is not None])
+    except (urllib.error.URLError, TimeoutError, ValueError, KeyError, IndexError) as e:
+        log(f'  aviso pobreza Banco Mundial: {e}')
+        add('poverty_wb', '', '', 'A', '', [])
+
+    # SIPA: la serie privada sin estacionalidad empieza en 2009; la pública solo se publica con estacionalidad
+    # (la desestacionalizada está vacía en la API)
+    add('sipa_priv', 'Asalariados registrados, sector privado', 'miles de personas', 'M', 'SIPA, sin estacionalidad (datos.gob.ar)', pts(d['152.1_TL_SIN_EST_2009_M_13']))
+    add('sipa_pub', 'Asalariados registrados, sector público', 'miles de personas', 'M', 'SIPA, con estacionalidad (datos.gob.ar)', pts(d['151.1_AARIADODAD_2012_M_30']))
+
+    # Salarios: nominales (índice oct-2016 = 100) y reales (deflactados por el IPC empalmado, oct-2016 = 100)
+    def real_index(s, base='2016-10'):
+        if base not in s or base not in ipc:
+            return {}
+        return {p: (v / ipc[p]) / (s[base] / ipc[base]) * 100 for p, v in s.items() if p in ipc}
+    for iid, label, sid in (('w_priv', 'Salarios registrados, sector privado', '149.1_SOR_PRIADO_OCTU_0_25'),
+                            ('w_pub', 'Salarios registrados, sector público', '149.1_SOR_PUBICO_OCTU_0_14'),
+                            ('w_noreg', 'Salarios no registrados, sector privado', '149.1_SOR_PRIADO_OCTU_0_28')):
+        add(f'{iid}_nom', f'{label} (nominal)', 'índice oct-16=100', 'M', 'INDEC · Índice de salarios', pts(d[sid]))
+        add(f'{iid}_real', f'{label} (real)', 'índice oct-16=100, a precios constantes', 'M', 'Cálculo propio: INDEC índice de salarios deflactado por el IPC empalmado', pts(real_index(d[sid])))
+    # Haber mínimo jubilatorio desde 1992 (antes la serie cambia de moneda): nominal y en pesos del último mes con IPC
+    hm = {p: v for p, v in d['58.1_MP_0_M_24'].items() if p >= '1992-01'}
+    last = max(p for p in hm if p in ipc) if any(p in ipc for p in hm) else None
+    add('haber_min_nom', 'Haber mínimo jubilatorio (nominal)', 'pesos corrientes', 'M', 'ANSES / Secretaría de Seguridad Social (datos.gob.ar)', pts(hm))
+    add('haber_min_real', 'Haber mínimo jubilatorio (real)', 'pesos del último mes con IPC', 'M', 'Cálculo propio: haber mínimo deflactado por el IPC empalmado',
+        pts({p: v * ipc[last] / ipc[p] for p, v in hm.items() if p in ipc}) if last else [], base_month=last)
+
+
 def main():
     try:
         with open(OUT, encoding='utf-8') as f:
@@ -285,6 +342,10 @@ def main():
 
     # --- actividad ---
     activity(add)
+
+    # --- empleo e ingresos (deflactado con el IPC empalmado recién armado, o el anterior si falló) ---
+    ipc_ind = next((i for i in inds if i['id'] == 'ipc_long'), None)
+    employment(add, {p[0][:7]: p[1] for p in ipc_ind['points']} if ipc_ind else {})
 
     # Las series viejas que no se volvieron a generar se conservan
     ids = {i['id'] for i in inds}
