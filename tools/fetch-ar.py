@@ -277,6 +277,45 @@ def employment(add, ipc):
         pts({p: v * ipc[last] / ipc[p] for p, v in hm.items() if p in ipc}) if last else [], base_month=last)
 
 
+def external(add):
+    """Sector externo: comercio (ICA) desde 1992, rubros, balanza energética, términos de intercambio y cuenta corriente."""
+    # Rubros y combustibles: las versiones mensuales están vacías o cortadas en la API (datos.gob.ar); las trimestrales
+    # del mismo ICA cubren de 1992 en adelante, así que estos gráficos son trimestrales
+    monthly = ['74.3_IET_0_M_16', '74.3_IIT_0_M_25', '74.3_ISC_0_M_19']
+    quarterly = ['74.2_IEPP_0_T_35', '75.2_ITMOA_0_T_13', '75.2_ITM_0_T_13', '74.2_IECE_0_T_35', '74.2_IICL_0_T_42', '82.2_ITI_2004_T_27']
+    d = {}
+    for group in (monthly, quarterly):
+        try:
+            d.update(datos(group, '1990-01-01'))
+        except RuntimeError as e:
+            log(f'  aviso externo: {e}')
+            d.update({i: {} for i in group})
+    ica = 'INDEC · Intercambio comercial argentino (ICA), en millones de dólares'
+    add('expo_long', 'Exportaciones', 'USD millones', 'M', ica, pts(d['74.3_IET_0_M_16']))
+    add('impo_long', 'Importaciones', 'USD millones', 'M', ica, pts(d['74.3_IIT_0_M_25']))
+    add('saldo_long', 'Saldo comercial', 'USD millones', 'M', ica, pts(d['74.3_ISC_0_M_19']))
+    add('expo_pp', 'Productos primarios', 'USD millones', 'Q', ica, pts(d['74.2_IEPP_0_T_35']))
+    add('expo_moa', 'Manufacturas de origen agropecuario (MOA)', 'USD millones', 'Q', ica, pts(d['75.2_ITMOA_0_T_13']))
+    add('expo_moi', 'Manufacturas de origen industrial (MOI)', 'USD millones', 'Q', ica, pts(d['75.2_ITM_0_T_13']))
+    add('expo_cye', 'Combustibles y energía', 'USD millones', 'Q', ica, pts(d['74.2_IECE_0_T_35']))
+    add('impo_comb', 'Importaciones de combustibles y lubricantes', 'USD millones', 'Q', ica, pts(d['74.2_IICL_0_T_42']))
+    # Balanza energética: exportaciones de combustibles y energía menos importaciones de combustibles y lubricantes
+    ce, ic = d['74.2_IECE_0_T_35'], d['74.2_IICL_0_T_42']
+    add('energy_balance', 'Saldo energético', 'USD millones', 'Q', 'Cálculo propio sobre INDEC · ICA (exportaciones de combustibles y energía menos importaciones de combustibles y lubricantes)',
+        pts({p: ce[p] - ic[p] for p in ce if p in ic}))
+    add('tot', 'Términos del intercambio', 'índice 2004=100', 'Q', 'INDEC · Índice de términos del intercambio, base 2004', pts(d['82.2_ITI_2004_T_27']))
+    # Cuenta corriente en % del PBI: FMI, World Economic Outlook (la misma serie que el mapa mundial, sin proyecciones)
+    try:
+        with open(os.path.join(ROOT, 'data', 'mapa', 'ca.json'), encoding='utf-8') as f:
+            ca = json.load(f)
+        arr = ca['c']['ARG']
+        add('ca_gdp', 'Cuenta corriente', '% del PBI', 'A', 'FMI · World Economic Outlook (BCA_NGDPD)',
+            [[f'{ca["from"] + i}-01-01', v] for i, v in enumerate(arr) if v is not None])
+    except (OSError, KeyError, ValueError) as e:
+        log(f'  aviso cuenta corriente: {e}')
+        add('ca_gdp', '', '', 'A', '', [])
+
+
 def main():
     try:
         with open(OUT, encoding='utf-8') as f:
@@ -346,6 +385,9 @@ def main():
     # --- empleo e ingresos (deflactado con el IPC empalmado recién armado, o el anterior si falló) ---
     ipc_ind = next((i for i in inds if i['id'] == 'ipc_long'), None)
     employment(add, {p[0][:7]: p[1] for p in ipc_ind['points']} if ipc_ind else {})
+
+    # --- sector externo ---
+    external(add)
 
     # Las series viejas que no se volvieron a generar se conservan
     ids = {i['id'] for i in inds}
