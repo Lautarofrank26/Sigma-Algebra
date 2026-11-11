@@ -2,7 +2,7 @@
  * heatmap.js — portada: mapa de calor del mundo.
  *
  * - Cada país se pinta de rojo (peor) a amarillo (intermedio) y verde (mejor) según el indicador elegido:
- *   crecimiento del PBI, inflación, desempleo o cuenta corriente. Los datos salen de data/mundo.json
+ *   crecimiento del PBI, inflación o desempleo. Los datos salen de data/mundo.json
  *   (tools/fetch-mundo.ps1) y las formas de data/paises.json (tools/build-paises.ps1).
  * - Al pasar el mouse (o tocar) aparece una tarjeta con el valor, el año y el puesto entre los países con dato.
  * - Argentina y EE.UU. quedan remarcadas, con su valor y puesto debajo del mapa.
@@ -57,13 +57,6 @@ const METRICS = [
     score: (v) => interp([[3, 1], [7, 0.5], [14, 0]], v), rank: (v) => -v,
     worst: '14% o más', mid: '7%', best: '3% o menos',
     how: 'Menos desempleo, mejor.',
-  },
-  {
-    key: 'cab', tab: 'Cuenta corriente', title: 'Cuenta corriente', unit: '% del PBI',
-    fmt: (v) => `${fmtSigned(v, 1)}%`,
-    score: (v) => interp([[-8, 0], [-1, 0.5], [4, 1]], v), rank: (v) => v,
-    worst: '−8% o menos', mid: '−1%', best: '4% o más',
-    how: 'Superávit (positivo) es mejor que déficit.',
   },
 ];
 

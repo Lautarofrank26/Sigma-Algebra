@@ -3,7 +3,7 @@
 Sitio estático multipágina (HTML, CSS y JS sin build) con indicadores macro de Argentina y EE.UU.
 
 ## Páginas
-- `index.html`: inicio, con el mapa de calor mundial (PBI, inflación, desempleo, cuenta corriente) y el calendario de próximos datos
+- `index.html`: inicio, con el mapa de calor mundial (PBI, inflación, desempleo) y el calendario de próximos datos
 - `argentina.html`, `dolar.html`, `eeuu.html`: una página por sección
 - EE.UU. por tema: `eeuu-precios.html`, `eeuu-empleo.html`, `eeuu-tasas.html` (configs en `js/config/us/`)
 - Argentina por tema: `actividad.html`, `precios.html`, `empleo.html`, `externo.html`, `monetario.html`, `fiscal.html` (configs en `js/config/ar/`, registro en `js/config/ar/index.js`)

@@ -1,7 +1,7 @@
 # ---------------------------------------------------------------------------
 # fetch-mundo.ps1
 # Datos del mapa de calor de la portada: ultimo dato anual disponible de cada pais
-# (Banco Mundial) para crecimiento del PBI, inflacion, desempleo y cuenta corriente.
+# (Banco Mundial) para crecimiento del PBI, inflacion y desempleo.
 # Resultado: data/mundo.json. Si la descarga falla o llega incompleta, se conserva el archivo anterior.
 # Inflacion de Argentina y EE.UU.: si el Banco Mundial todavia no publico el ultimo anio, se calcula
 # con la misma definicion (promedio anual del indice de precios) a partir de data/argentina.json y data/usa.json.
@@ -22,8 +22,7 @@ foreach ($c in $cl[1]) { $iso2[[string]$c.id] = [string]$c.iso2Code }
 $defs = @(
   @{ k = 'gdp';   ind = 'NY.GDP.MKTP.KD.ZG'; label = 'Crecimiento del PBI';  unit = '% anual' },
   @{ k = 'infl';  ind = 'FP.CPI.TOTL.ZG';    label = 'Inflacion';             unit = '% anual (promedio)' },
-  @{ k = 'unemp'; ind = 'SL.UEM.TOTL.ZS';    label = 'Desempleo';             unit = '% de la fuerza laboral' },
-  @{ k = 'cab';   ind = 'BN.CAB.XOKA.GD.ZS'; label = 'Cuenta corriente';     unit = '% del PBI' }
+  @{ k = 'unemp'; ind = 'SL.UEM.TOTL.ZS';    label = 'Desempleo';             unit = '% de la fuerza laboral' }
 )
 $year = (Get-Date).Year
 $countries = @{}

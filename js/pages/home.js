@@ -1,5 +1,5 @@
 ﻿/**
- * Inicio: mapa de calor del mundo (PBI, inflación, desempleo, cuenta corriente) y calendario
+ * Inicio: mapa de calor del mundo (PBI, inflación, desempleo) y calendario
  * de los próximos datos. El detalle de cada país está en sus propias secciones (barra lateral).
  */
 import { argentina } from '../config/argentina.js';
