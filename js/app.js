@@ -5,6 +5,7 @@
  */
 import { el } from './ui/dom.js';
 import { createPanel } from './ui/panel.js';
+import { createHeatTable } from './ui/heattable.js';
 import { renderAnalysis } from './ui/analysis.js';
 import { renderQuotes } from './ui/quotes.js';
 import { fetchLiveQuotes, refreshData, usedIds, REFRESH_MS, DATA_REFRESH_MS } from './data/live.js';
@@ -26,7 +27,8 @@ function buildPanels(page, data, specs, events = []) {
     // Eventos marcados en este gráfico (data/eventos.json, campo `graficos`)
     const mine = events.filter((e) => e.graficos?.includes(original.id));
     if (mine.length) spec = { ...spec, events: mine };
-    const panel = createPanel(data, spec);
+    // Mapa de calor (categorías × períodos) o gráfico común
+    const panel = spec.type === 'heatmap' ? createHeatTable(data, spec) : createPanel(data, spec);
     page.panels.push(panel);
     return panel.node;
   }));

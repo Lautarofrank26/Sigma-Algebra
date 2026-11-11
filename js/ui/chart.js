@@ -5,7 +5,7 @@
 import { resolve } from '../data/loader.js';
 import { sliceRange } from '../lib/transform.js';
 import { fmtNum, fmtDate } from '../lib/format.js';
-import { eventPlugin } from './events.js';
+import { eventPlugin, bandPlugin } from './events.js';
 
 /** Mínimo de puntos visibles para series lentas, así el rango corto no deja un gráfico vacío */
 const MIN_POINTS = { M: 6, Q: 8, A: 10 };
@@ -115,7 +115,12 @@ export function drawChart(canvas, data, panel, months, previous) {
 
   return new Chart(canvas, {
     // Marcadores de eventos (rombos violetas) si el panel trae `events` (ver ui/events.js)
-    plugins: [crosshair, ...(panel.events?.length ? [eventPlugin(panel.events, months, freq, panel._onEvent)] : [])],
+    // y bandas sombreadas de períodos especiales si trae `bands`
+    plugins: [
+      crosshair,
+      ...(panel.bands?.length ? [bandPlugin(panel.bands)] : []),
+      ...(panel.events?.length ? [eventPlugin(panel.events, months, freq, panel._onEvent)] : []),
+    ],
     data: { labels: dates, datasets },
     options: {
       responsive: true,

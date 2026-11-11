@@ -142,6 +142,36 @@ export function eventPlugin(events, months, freq, onPick) {
 }
 
 /**
+ * Plugin de Chart.js que sombrea períodos (p. ej. la intervención del INDEC, 2007-2015) con un rótulo arriba.
+ * @param {Array<{from:string,to:string,label:string}>} bands fechas ISO de inicio y fin (inclusive)
+ */
+export function bandPlugin(bands) {
+  return {
+    id: 'bands',
+    beforeDatasetsDraw(chart) {
+      const labels = chart.data.labels;
+      const { ctx, chartArea, scales } = chart;
+      const font = getComputedStyle(chart.canvas).getPropertyValue('--font-body').trim() || 'sans-serif';
+      for (const b of bands) {
+        const i0 = labels.findIndex((d) => d >= b.from);
+        let i1 = -1;
+        for (let k = 0; k < labels.length && labels[k] <= b.to; k += 1) i1 = k;
+        if (i0 < 0 || i1 < i0) continue;
+        const x0 = Math.max(chartArea.left, scales.x.getPixelForValue(i0));
+        const x1 = Math.min(chartArea.right, scales.x.getPixelForValue(i1));
+        ctx.save();
+        ctx.fillStyle = 'rgba(118, 131, 154, 0.14)';
+        ctx.fillRect(x0, chartArea.top, Math.max(2, x1 - x0), chartArea.bottom - chartArea.top);
+        ctx.fillStyle = getComputedStyle(chart.canvas).getPropertyValue('--ink-3').trim() || '#76839A';
+        ctx.font = `600 10px ${font}`;
+        if (x1 - x0 > 60) ctx.fillText(b.label, x0 + 4, chartArea.bottom - 18, x1 - x0 - 8);
+        ctx.restore();
+      }
+    },
+  };
+}
+
+/**
  * Tarjeta del evento elegido y desplegable "Eventos en este gráfico" para un panel.
  * @param {string} chartId id del panel · @param {Array} events eventos del panel (ya filtrados por gráfico)
  */

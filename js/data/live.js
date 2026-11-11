@@ -230,7 +230,8 @@ export async function refreshData(data, group, wanted) {
 export function usedIds(config) {
   const ids = new Set();
   const take = (ref) => ref?.id && ids.add(ref.id);
-  config.panels?.forEach((p) => { take(p.headline?.ref); p.datasets.forEach((d) => take(d.ref)); });
+  // Los mapas de calor (type: 'heatmap') no tienen datasets sino filas (rows)
+  config.panels?.forEach((p) => { take(p.headline?.ref); [...(p.datasets ?? []), ...(p.rows ?? [])].forEach((d) => take(d.ref)); });
   // La lectura macro pide series con g({ id: '...' }): se detectan en el código de analyze()
   for (const m of String(config.analyze).matchAll(/id:\s*'([a-z0-9_]+)'/g)) ids.add(m[1]);
   return [...ids];

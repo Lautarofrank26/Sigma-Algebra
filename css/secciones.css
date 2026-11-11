@@ -32,3 +32,13 @@
 .ev-item:hover { color: var(--ink); text-decoration: underline; }
 .ev-item .num { color: var(--ink-3); font-size: var(--fs-xs); }
 .ev-tag { font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--event); border: 1px solid var(--event); border-radius: var(--radius-pill); padding: 0 0.4rem; }
+
+/* Mapa de calor de una sección (p. ej. IPC por división): ocupa el ancho completo de la grilla */
+.panel--wide { grid-column: 1 / -1; }
+.heat-table-scroll { overflow-x: auto; margin-top: 0.6rem; border: 1px solid var(--line); border-radius: var(--radius); }
+.heat-table { border-collapse: collapse; font-size: var(--fs-xs); min-width: 100%; }
+.heat-table th, .heat-table td { padding: 0.35rem 0.45rem; border-bottom: 1px solid var(--line); white-space: nowrap; }
+.heat-table thead th { position: sticky; top: 0; background: var(--surface); color: var(--ink-3); font-weight: 600; }
+.heat-table tbody th { position: sticky; left: 0; background: var(--surface); text-align: left; font-weight: 600; color: var(--ink-2); z-index: 1; max-width: 16rem; white-space: normal; }
+.heat-table td { text-align: right; min-width: 3.4rem; }
+.heat-table td.sd { color: var(--ink-3); text-align: center; }

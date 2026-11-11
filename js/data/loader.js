@@ -23,6 +23,17 @@ const PROVIDERS = {
 export async function loadCountry(config) {
   const provider = PROVIDERS[config.provider ?? 'snapshot'];
   const raw = await provider(config.dataUrl);
+  // Series adicionales (config.extraUrl, p. ej. data/ar-extra.json de tools/fetch-ar.py): se suman sin pisar ids existentes.
+  // Si el archivo extra falla, la sección se muestra igual con sus series de siempre.
+  if (config.extraUrl) {
+    try {
+      const extra = await provider(config.extraUrl);
+      const have = new Set(raw.indicators.map((i) => i.id));
+      raw.indicators.push(...(extra.indicators ?? []).filter((i) => !have.has(i.id)));
+    } catch (err) {
+      console.warn('Series adicionales no disponibles', err);
+    }
+  }
   // Normaliza fechas anuales ("2025") a ISO ("2025-01-01") para que todas las series compartan formato
   for (const ind of raw.indicators) {
     ind.points = (ind.points ?? []).map(([d, v]) => [String(d).length === 4 ? `${d}-01-01` : String(d), v]);

@@ -1,0 +1,36 @@
+# Series adicionales de Argentina para las secciones temáticas (data/ar-extra.json): IPC empalmado desde 1943,
+# IPC por división y categorías, IPIM y expectativas del REM. Las fuentes publican una vez por mes, así que alcanza
+# con una corrida por día, después de las publicaciones del INDEC (16:00). También se puede correr a mano en Actions.
+name: Actualizar series de Argentina
+
+on:
+  schedule:
+    - cron: '50 19 * * *'   # 16:50 ARG
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+# Un solo proceso a la vez escribe en main (comparte grupo con los demás workflows de datos)
+concurrency:
+  group: data-commits
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Descargar series (Python 3 viene instalado en el runner)
+        run: python3 tools/fetch-ar.py
+
+      - name: Guardar cambios
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/ar-extra.json
+          git diff --staged --quiet || git commit -m "Actualizar series de Argentina $(date -u +%F)"
+          git pull --rebase
+          git push
