@@ -1,4 +1,4 @@
-﻿/* layout.css — estructura de página: header, hero, secciones, grillas, footer */
+/* layout.css — estructura de página: header, hero, secciones, grillas, footer */
 .wrap { max-width: var(--maxw); margin: 0 auto; }
 
 /* ---------- Barra superior fija ---------- */
@@ -33,7 +33,7 @@
 .country-head .sub { color: var(--ink-2); font-size: var(--fs-sm); }
 
 .kpi-strip { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: var(--gap-2); margin-bottom: var(--gap-3); }
-.chart-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--gap-2); }
+.chart-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--gap-3); }
 .analysis-grid { display: grid; grid-template-columns: minmax(0, 1fr); margin-bottom: var(--gap-3); }
 
 /* ---------- Comparativo y footer ---------- */

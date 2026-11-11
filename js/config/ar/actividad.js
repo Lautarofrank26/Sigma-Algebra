@@ -1,6 +1,6 @@
 /**
  * actividad.js — Argentina · Actividad económica.
- * Misma estructura que js/config/argentina.js (kpis, summary, panels, analyze).
+ * Misma estructura que js/config/argentina.js (kpis, panels, analyze).
  */
 import { fmtNum, fmtDate } from '../../lib/format.js';
 
@@ -16,13 +16,6 @@ export const actividad = {
     { label: 'Industria var. mensual', ref: { id: 'ipi', t: 'pct1' }, decimals: 1, suffix: '%', polarity: 'up' },
     { label: 'Industria var. interanual', ref: { id: 'ipi', t: 'yoy' }, decimals: 1, suffix: '%', polarity: 'up' },
     { label: 'PBI var. interanual', ref: { id: 'gdp_level', t: 'yoy' }, decimals: 1, suffix: '%', polarity: 'up' },
-  ],
-
-  summary: [
-    { label: 'EMAE', note: 'INDEC · var. mensual desest.', ref: { id: 'emae', t: 'pct1' }, decimals: 1, kind: 'change', polarity: 'up' },
-    { label: 'EMAE interanual', note: 'INDEC · var. %', ref: { id: 'emae', t: 'yoy' }, decimals: 1, kind: 'change', polarity: 'up' },
-    { label: 'Industria (IPI)', note: 'INDEC · var. mensual desest.', ref: { id: 'ipi', t: 'pct1' }, decimals: 1, kind: 'change', polarity: 'up' },
-    { label: 'Industria interanual', note: 'INDEC · var. %', ref: { id: 'ipi', t: 'yoy' }, decimals: 1, kind: 'change', polarity: 'up' },
   ],
 
   panels: [

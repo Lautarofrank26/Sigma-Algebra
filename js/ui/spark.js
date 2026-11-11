@@ -1,6 +1,6 @@
 /**
- * spark.js — mini línea de tendencia (SVG) para las tarjetas de resumen.
- * Usa `currentColor`: el color lo define el CSS (.spark { color: var(--accent) }).
+ * spark.js — mini línea de tendencia (SVG). Hoy solo la usa la barra de cotizaciones del Inicio (ui/ticker.js).
+ * Usa `currentColor`: el color lo define el CSS (.tk-spark).
  */
 const NS = 'http://www.w3.org/2000/svg';
 

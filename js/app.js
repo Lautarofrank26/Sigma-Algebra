@@ -7,7 +7,6 @@ import { el } from './ui/dom.js';
 import { renderKpi } from './ui/kpi.js';
 import { createPanel } from './ui/panel.js';
 import { renderAnalysis } from './ui/analysis.js';
-import { renderSummary } from './ui/summary.js';
 import { renderQuotes } from './ui/quotes.js';
 import { fetchLiveQuotes, refreshData, usedIds, REFRESH_MS, DATA_REFRESH_MS } from './data/live.js';
 import { mountShell } from './ui/shell.js';
@@ -57,9 +56,15 @@ export function mountRange(page) {
   box.replaceChildren(el('span', { class: 'label' }, 'Período'), ...buttons);
 }
 
-/** Crea los paneles de gráfico y los registra en la página */
-function buildPanels(page, data, specs) {
-  return el('div', { class: 'chart-grid' }, specs.map((spec) => {
+/**
+ * Crea los paneles de gráfico y los registra en la página.
+ * Si una tarjeta ya muestra la misma cifra que encabeza un gráfico, el gráfico no la repite: cada dato queda en un solo lugar.
+ */
+function buildPanels(page, data, specs, kpis = []) {
+  const key = (r) => `${r.id}:${r.t ?? 'level'}`;
+  const inCards = new Set(kpis.map((k) => key(k.ref)));
+  return el('div', { class: 'chart-grid' }, specs.map((original) => {
+    const spec = original.headline && inCards.has(key(original.headline.ref)) ? { ...original, hideNow: true } : original;
     const panel = createPanel(data, spec);
     page.panels.push(panel);
     return panel.node;
@@ -67,7 +72,7 @@ function buildPanels(page, data, specs) {
 }
 
 /**
- * Sección de país: lectura macro, tarjetas, tabla resumen y gráficos.
+ * Sección de país: lectura macro, tarjetas y gráficos.
  * @param {'ar'|'us'} [group] si se indica, la página se actualiza en vivo (ver data/live.js)
  */
 export function mountCountry(page, country, data, root, group) {
@@ -78,8 +83,7 @@ export function mountCountry(page, country, data, root, group) {
     root.replaceChildren(
       el('div', { class: 'analysis-grid' }, renderAnalysis(country, data)),
       el('div', { class: 'kpi-strip' }, country.kpis.map((k) => renderKpi(data, k))),
-      renderSummary(data, country.summary ?? []),
-      buildPanels(page, data, country.panels),
+      buildPanels(page, data, country.panels, country.kpis),
     );
     revealIn(root, { animate: firstRender });
     firstRender = false;

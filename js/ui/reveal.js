@@ -1,4 +1,4 @@
-﻿/**
+/**
  * reveal.js — movimiento al aparecer: las tarjetas suben y se desvanecen al entrar en pantalla
  * y las cifras grandes cuentan desde cero hasta su valor.
  *
@@ -9,7 +9,7 @@
 import { fmtNum } from '../lib/format.js';
 
 const REDUCED = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-const SELECTORS = ['.analysis', '.kpi', '.summary', '.panel', '.calendar', '.country--block', '.compare', '.world-stage'];
+const SELECTORS = ['.analysis', '.kpi', '.panel', '.calendar', '.country--block', '.compare', '.world-stage'];
 let observer = null;
 
 /** Cuenta desde 0 hasta el valor de data-count, escribiendo en el primer texto del elemento */

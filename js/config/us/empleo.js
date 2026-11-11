@@ -15,17 +15,6 @@ export const empleo = {
     { label: 'Vacantes (JOLTS)', ref: { id: 'jolts_openings' }, decimals: 0, suffix: ' mil', polarity: 'up' },
   ],
 
-  summary: [
-    { label: 'Desempleo', note: 'BLS · nivel', ref: { id: 'unemp' }, decimals: 1, suffix: '%', kind: 'level', polarity: 'down' },
-    { label: 'Desempleo ampliado (U-6)', note: 'BLS · nivel', ref: { id: 'u6' }, decimals: 1, suffix: '%', kind: 'level', polarity: 'down' },
-    { label: 'Participación laboral', note: 'BLS · nivel', ref: { id: 'participation' }, decimals: 1, suffix: '%', kind: 'level', polarity: 'up' },
-    { label: 'Empleo / población', note: 'BLS · nivel', ref: { id: 'epop' }, decimals: 1, suffix: '%', kind: 'level', polarity: 'up' },
-    { label: 'Empleo no agrícola', note: 'BLS · cambio mensual, miles', ref: { id: 'payrolls', t: 'diff' }, decimals: 0, kind: 'level', polarity: 'up' },
-    { label: 'Salario horario i.a.', note: 'BLS · var. %', ref: { id: 'ahe', t: 'yoy' }, decimals: 1, kind: 'change', polarity: 'none' },
-    { label: 'Horas semanales', note: 'BLS · promedio', ref: { id: 'hours' }, decimals: 1, kind: 'level', polarity: 'none' },
-    { label: 'Vacantes (JOLTS)', note: 'BLS · miles', ref: { id: 'jolts_openings' }, decimals: 0, kind: 'level', polarity: 'up' },
-  ],
-
   panels: [
     {
       id: 'usemp-desempleo', title: 'Desempleo', unit: '% de la fuerza laboral', polarity: 'down',

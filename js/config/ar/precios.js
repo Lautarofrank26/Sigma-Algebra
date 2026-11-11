@@ -15,15 +15,6 @@ export const precios = {
     { label: 'Regulados interanual', ref: { id: 'regulated', t: 'yoy' }, decimals: 1, suffix: '%', polarity: 'down' },
   ],
 
-  summary: [
-    { label: 'IPC general', note: 'INDEC · var. mensual', ref: { id: 'ipc', t: 'pct1' }, decimals: 1, kind: 'change', trend: true, polarity: 'down' },
-    { label: 'IPC núcleo', note: 'INDEC · var. mensual', ref: { id: 'core', t: 'pct1' }, decimals: 1, kind: 'change', trend: true, polarity: 'down' },
-    { label: 'IPC regulados', note: 'INDEC · var. mensual', ref: { id: 'regulated', t: 'pct1' }, decimals: 1, kind: 'change', trend: true, polarity: 'down' },
-    { label: 'IPC general interanual', note: 'INDEC · var. %', ref: { id: 'ipc', t: 'yoy' }, decimals: 1, kind: 'change', trend: true, polarity: 'down' },
-    { label: 'IPC núcleo interanual', note: 'INDEC · var. %', ref: { id: 'core', t: 'yoy' }, decimals: 1, kind: 'change', trend: true, polarity: 'down' },
-    { label: 'Canasta básica total i.a.', note: 'INDEC · línea de pobreza', ref: { id: 'poverty_line', t: 'yoy' }, decimals: 1, kind: 'change', trend: true, polarity: 'down' },
-  ],
-
   panels: [
     {
       id: 'pre-mensual', title: 'Inflación mensual', unit: 'Variación % mensual', polarity: 'down',

@@ -226,12 +226,11 @@ export async function refreshData(data, group, wanted) {
   return { changed: signature(data, watch) !== before, ok, total: specs.length };
 }
 
-/** Ids de series que usa una configuración de página (paneles, tarjetas, tabla y lectura macro) */
+/** Ids de series que usa una configuración de página (paneles, tarjetas y lectura macro) */
 export function usedIds(config) {
   const ids = new Set();
   const take = (ref) => ref?.id && ids.add(ref.id);
-  config.kpis?.forEach((k) => take(k.ref));
-  config.summary?.forEach((r) => take(r.ref));
+  config.kpis?.forEach((k) => { take(k.ref); take(k.extra?.ref); });
   config.panels?.forEach((p) => { take(p.headline?.ref); p.datasets.forEach((d) => take(d.ref)); });
   // La lectura macro pide series con g({ id: '...' }): se detectan en el código de analyze()
   for (const m of String(config.analyze).matchAll(/id:\s*'([a-z0-9_]+)'/g)) ids.add(m[1]);

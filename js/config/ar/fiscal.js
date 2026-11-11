@@ -14,13 +14,6 @@ export const fiscal = {
     { label: 'Financiero, 12 meses', ref: { id: 'financial_balance', t: 'sum12k' }, decimals: 0, prefix: '$', suffix: ' mil M', polarity: 'up' },
   ],
 
-  summary: [
-    { label: 'Resultado primario', note: 'Hacienda · miles de millones de $', ref: { id: 'primary_balance', t: 'k' }, decimals: 0, suffix: '', kind: 'change', polarity: 'up' },
-    { label: 'Resultado financiero', note: 'Hacienda · miles de millones de $', ref: { id: 'financial_balance', t: 'k' }, decimals: 0, suffix: '', kind: 'change', polarity: 'up' },
-    { label: 'Primario, 12 meses', note: 'Hacienda · acumulado', ref: { id: 'primary_balance', t: 'sum12k' }, decimals: 0, suffix: '', kind: 'change', polarity: 'up' },
-    { label: 'Financiero, 12 meses', note: 'Hacienda · acumulado', ref: { id: 'financial_balance', t: 'sum12k' }, decimals: 0, suffix: '', kind: 'change', polarity: 'up' },
-  ],
-
   panels: [
     {
       id: 'fis-primario', title: 'Resultado primario', unit: 'Miles de millones de pesos por mes', polarity: 'up',

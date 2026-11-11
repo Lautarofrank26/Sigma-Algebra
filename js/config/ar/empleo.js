@@ -11,16 +11,8 @@ export const empleo = {
     { label: 'Desempleo', ref: { id: 'unemp' }, decimals: 1, suffix: '%', polarity: 'down' },
     { label: 'Tasa de actividad', ref: { id: 'activity_rate' }, decimals: 1, suffix: '%', polarity: 'up' },
     { label: 'Tasa de empleo', ref: { id: 'employment_rate' }, decimals: 1, suffix: '%', polarity: 'up' },
-    { label: 'Salarios i.a.', ref: { id: 'wages', t: 'yoy' }, decimals: 1, suffix: '%', polarity: 'none' },
+    { label: 'Salarios i.a.', ref: { id: 'wages', t: 'yoy' }, decimals: 1, suffix: '%', polarity: 'none', extra: { label: 'Mensual', ref: { id: 'wages', t: 'pct1' }, decimals: 1, suffix: '%', signed: true } },
     { label: 'Salario real i.a.', ref: { id: 'wages_real', t: 'yoy' }, decimals: 1, suffix: '%', polarity: 'up' },
-  ],
-
-  summary: [
-    { label: 'Salarios nominales i.a.', note: 'INDEC · índice de salarios', ref: { id: 'wages', t: 'yoy' }, decimals: 1, kind: 'change', polarity: 'none' },
-    { label: 'Salarios reales i.a.', note: 'Calculado · salarios / IPC', ref: { id: 'wages_real', t: 'yoy' }, decimals: 1, kind: 'change', polarity: 'up' },
-    { label: 'Sector privado real i.a.', note: 'Calculado · registrados', ref: { id: 'wages_priv_real', t: 'yoy' }, decimals: 1, kind: 'change', polarity: 'up' },
-    { label: 'Sector público real i.a.', note: 'Calculado · registrados', ref: { id: 'wages_pub_real', t: 'yoy' }, decimals: 1, kind: 'change', polarity: 'up' },
-    { label: 'Salarios, var. mensual', note: 'INDEC · var. %', ref: { id: 'wages', t: 'pct1' }, decimals: 1, kind: 'change', polarity: 'none' },
   ],
 
   panels: [

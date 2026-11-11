@@ -15,15 +15,6 @@ export const monetario = {
     { label: 'Inflación interanual', ref: { id: 'ipc', t: 'yoy' }, decimals: 1, suffix: '%', polarity: 'down' },
   ],
 
-  summary: [
-    { label: 'Tasa BADLAR', note: 'BCRA · % TNA', ref: { id: 'badlar' }, decimals: 1, suffix: '%', kind: 'level', polarity: 'none' },
-    { label: 'M2 privado i.a.', note: 'BCRA · nominal', ref: { id: 'm2', t: 'yoy' }, decimals: 1, kind: 'change', polarity: 'none' },
-    { label: 'M2 privado real i.a.', note: 'Calculado · M2 / IPC', ref: { id: 'm2_real', t: 'yoy' }, decimals: 1, kind: 'change', polarity: 'up' },
-    { label: 'Préstamos reales i.a.', note: 'Calculado · pesos / IPC', ref: { id: 'loans_real', t: 'yoy' }, decimals: 1, kind: 'change', polarity: 'up' },
-    { label: 'Préstamos, var. mensual', note: 'BCRA · nominal', ref: { id: 'loans', t: 'pct1' }, decimals: 1, kind: 'change', polarity: 'none' },
-    { label: 'Plazos fijos i.a.', note: 'BCRA · nominal', ref: { id: 'time_deposits', t: 'yoy' }, decimals: 1, kind: 'change', polarity: 'none' },
-  ],
-
   panels: [
     {
       id: 'mon-badlar', title: 'Tasa BADLAR vs. inflación', unit: '% anual', polarity: 'none',

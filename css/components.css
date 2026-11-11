@@ -22,17 +22,18 @@
   background: var(--surface);
   border: 1px solid var(--line);
   border-radius: var(--radius-lg);
-  padding: var(--gap-2);
+  padding: 1.25rem 1.4rem;
   display: grid;
-  gap: 0.35rem;
+  gap: 0.45rem;
   align-content: start;
   min-width: 0;
 }
 .kpi-value { font-family: var(--font-mono); font-variant-numeric: tabular-nums; font-size: 1.9rem; font-weight: 500; letter-spacing: -0.03em; line-height: 1.1; }
 .kpi-value small { font-size: 0.95rem; color: var(--ink-3); margin-left: 0.2rem; letter-spacing: 0; }
+.kpi-extra { font-size: var(--fs-sm); color: var(--ink-2); }
 .kpi-foot { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem; font-size: var(--fs-xs); color: var(--ink-3); }
 
-.spark { width: 100%; height: 32px; color: var(--accent); display: block; }
+.spark { display: block; width: 100%; height: 100%; }
 
 /* Chip de variación: color = semántica (bueno/malo), no el acento */
 .delta { font-family: var(--font-mono); font-variant-numeric: tabular-nums; font-weight: 600; padding: 0.1rem 0.45rem; border-radius: 2px; background: var(--surface-2); color: var(--flat); }
@@ -76,12 +77,6 @@ thead th.ar { color: var(--ar-ink); } thead th.us { color: var(--us-ink); }
 tbody tr:last-child td { border-bottom: 0; }
 td small { display: block; color: var(--ink-3); font-size: var(--fs-xs); }
 
-/* Tabla resumen: celdas coloreadas por semántica */
-.summary { margin-bottom: var(--gap-3); }
-.summary table { min-width: 680px; }
-.summary td.num { font-size: var(--fs-sm); }
-.t-good { color: var(--good); font-weight: 600; }
-.t-bad  { color: var(--bad);  font-weight: 600; }
 .t-flat { color: var(--ink); }
 .t-none { color: var(--ink-3); }
 
@@ -294,10 +289,6 @@ tbody tr:hover td { background: var(--surface-2); }
 .no-anim, .no-anim * { animation: none !important; }
 
 /* La línea de tendencia de las tarjetas se dibuja al aparecer */
-.js-reveal [data-reveal]:not(.in) .spark path:last-child { stroke-dasharray: 1; stroke-dashoffset: 1; }
-.js-reveal [data-reveal].in .spark path:last-child { stroke-dasharray: 1; animation: draw 1.2s var(--ease) 0.15s both; }
-.no-anim .spark path:last-child { stroke-dashoffset: 0; }
-@keyframes draw { from { stroke-dashoffset: 1; } to { stroke-dashoffset: 0; } }
 
 /* Transición suave entre páginas (navegadores que la soportan) */
 @view-transition { navigation: auto; }
@@ -313,7 +304,7 @@ tbody tr:hover td { background: var(--surface-2); }
   .topbar nav, .subnav { flex-wrap: nowrap; overflow-x: auto; max-width: 100%; min-width: 0; scrollbar-width: none; padding-bottom: 2px; }
   .topbar nav::-webkit-scrollbar, .subnav::-webkit-scrollbar { display: none; }
   .topbar nav .pill, .subnav .pill { flex: none; white-space: nowrap; }
-  .summary td:first-child, .summary th:first-child, .table-scroll td:first-child, .table-scroll th:first-child { position: sticky; left: 0; z-index: 1; background: var(--surface); box-shadow: 1px 0 0 var(--line); }
+  .table-scroll td:first-child, .table-scroll th:first-child { position: sticky; left: 0; z-index: 1; background: var(--surface); box-shadow: 1px 0 0 var(--line); }
   .table-scroll thead th:first-child { background: var(--surface-2); }
   .kpi:hover, .panel:hover { transform: none; }
 }

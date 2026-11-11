@@ -1,4 +1,4 @@
-﻿/**
+/**
  * usa.js — configuración de la sección Estados Unidos.
  * Misma estructura que argentina.js; ver comentarios allí.
  */
@@ -11,22 +11,11 @@ export const usa = {
   dataUrl: 'data/usa.json',
 
   kpis: [
-    { label: 'Inflación CPI i.a.', ref: { id: 'cpi', t: 'yoy' }, decimals: 1, suffix: '%', polarity: 'down' },
+    { label: 'Inflación CPI i.a.', ref: { id: 'cpi', t: 'yoy' }, decimals: 1, suffix: '%', polarity: 'down', extra: { label: 'Mensual', ref: { id: 'cpi', t: 'pct1' }, decimals: 1, suffix: '%', signed: true } },
     { label: 'Inflación subyacente i.a.', ref: { id: 'corecpi', t: 'yoy' }, decimals: 1, suffix: '%', polarity: 'down' },
     { label: 'Desempleo', ref: { id: 'unemp' }, decimals: 1, suffix: '%', polarity: 'down' },
     { label: 'Fed funds (efectiva)', ref: { id: 'fedfunds' }, decimals: 2, suffix: '%', polarity: 'none' },
     { label: 'Bono del Tesoro 10 años', ref: { id: 'y10' }, decimals: 2, suffix: '%', polarity: 'none' },
-  ],
-
-  /** Tabla resumen: indicadores mensuales, últimos 6 meses (ver ui/summary.js) */
-  summary: [
-    { label: 'Inflación mensual (CPI)', note: 'BLS · var. %', ref: { id: 'cpi', t: 'pct1' }, decimals: 1, kind: 'change', trend: true, polarity: 'down' },
-    { label: 'Inflación interanual', note: 'BLS · var. %', ref: { id: 'cpi', t: 'yoy' }, decimals: 1, kind: 'change', trend: true, polarity: 'down' },
-    { label: 'Inflación subyacente i.a.', note: 'BLS · var. %', ref: { id: 'corecpi', t: 'yoy' }, decimals: 1, kind: 'change', trend: true, polarity: 'down' },
-    { label: 'Desempleo', note: 'BLS · nivel', ref: { id: 'unemp' }, decimals: 1, suffix: '%', kind: 'level', polarity: 'down' },
-    { label: 'Empleo no agrícola', note: 'BLS · cambio mensual, miles', ref: { id: 'payrolls', t: 'diff' }, decimals: 0, kind: 'level', polarity: 'up' },
-    { label: 'Salario horario i.a.', note: 'BLS · var. %', ref: { id: 'ahe', t: 'yoy' }, decimals: 1, kind: 'change', polarity: 'none' },
-    { label: 'Bono del Tesoro 10 años', note: 'Treasury · nivel', ref: { id: 'y10' }, decimals: 2, suffix: '%', kind: 'level', polarity: 'none' },
   ],
 
   panels: [

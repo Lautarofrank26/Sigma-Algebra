@@ -36,10 +36,10 @@ Paleta y tipografía en `css/tokens.css`: gris frío, superficies blancas, azul 
 
 ### Estructura de plataforma (`css/platform.css`, `js/ui/shell.js`)
 - **Barra lateral** azul marino con toda la navegación (Inicio, Argentina y sus temas, Tipo de cambio, Estados Unidos y sus temas) y la hora de Buenos Aires y Nueva York. En pantallas de menos de 1100 px es un panel que se abre con el botón de menú. Las páginas salen de `SUBNAVS` (`js/config/navigation.js`).
-- **Barra superior** con la ubicación, la fecha, el buscador y la cinta de indicadores.
+- **Barra superior** con la ubicación, la fecha y el buscador. En el Inicio se suma la cinta de cotizaciones globales.
 - **Buscador** (`js/ui/palette.js`): se abre con Ctrl+K, con "/" o con el botón. Indexa todas las páginas y todos los gráficos a partir de las configuraciones, así un indicador nuevo aparece solo. Cada resultado lleva a `pagina.html#id-del-grafico`, que se resalta al llegar.
 - **Vista ampliada** (`js/ui/focus.js`): el botón "Ampliar" de cada gráfico abre un diálogo con el gráfico grande, su propio selector de período, las últimas 12 observaciones, la explicación y la descarga.
-- **Cifras clave**: las tarjetas de resumen forman un solo tablero dividido por filetes.
+- **Cifras clave**: las tarjetas forman un solo tablero dividido por filetes y muestran solo valor, variación y fecha (sin minigráficos ni tablas resumen: la serie completa está en los gráficos). Si una tarjeta ya muestra la cifra que encabeza un gráfico, el gráfico no la repite. Una tarjeta puede traer un dato complementario (extra en su configuración, p. ej. la variación mensual debajo de la interanual).
 
 ### Movimiento (`js/ui/reveal.js` y `css/components.css`, sección "Forma y movimiento")
 - Las tarjetas suben y aparecen al entrar en pantalla, de a una; las cifras grandes cuentan desde cero.
@@ -50,7 +50,7 @@ Paleta y tipografía en `css/tokens.css`: gris frío, superficies blancas, azul 
 ### Compartir, accesibilidad e impresión
 - Cada página trae etiquetas Open Graph y una imagen de vista previa (`og-image.png`, 1200×630). Las direcciones absolutas apuntan a `https://lautarofrank26.github.io/pulso-macro/`: si se renombra el repositorio o se usa un dominio propio, hay que actualizarlas en los `.html` y en la imagen.
 - Hay un enlace "Saltar al contenido" para teclado, un aviso `<noscript>` y descripciones de los gráficos para lectores de pantalla.
-- Al imprimir (o guardar como PDF) se ocultan menús, ticker, mapa, calendario y botones.
+- Al imprimir (o guardar como PDF) se ocultan menús, cinta de cotizaciones, mapa, calendario y botones.
 - En celular los menús se desplazan de costado y la primera columna de las tablas queda fija.
 
 ## Calendario de próximos datos

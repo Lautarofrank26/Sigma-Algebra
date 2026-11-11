@@ -8,19 +8,11 @@ export const externo = {
   dataUrl: 'data/argentina.json',
 
   kpis: [
-    { label: 'Exportaciones', ref: { id: 'exports' }, decimals: 0, prefix: 'USD ', suffix: ' M', polarity: 'up' },
-    { label: 'Importaciones', ref: { id: 'imports' }, decimals: 0, prefix: 'USD ', suffix: ' M', polarity: 'none' },
+    { label: 'Exportaciones', ref: { id: 'exports' }, decimals: 0, prefix: 'USD ', suffix: ' M', polarity: 'up', extra: { label: 'Interanual', ref: { id: 'exports', t: 'yoy' }, decimals: 1, suffix: '%', signed: true } },
+    { label: 'Importaciones', ref: { id: 'imports' }, decimals: 0, prefix: 'USD ', suffix: ' M', polarity: 'none', extra: { label: 'Interanual', ref: { id: 'imports', t: 'yoy' }, decimals: 1, suffix: '%', signed: true } },
     { label: 'Saldo comercial', ref: { id: 'trade_balance' }, decimals: 0, prefix: 'USD ', suffix: ' M', polarity: 'up' },
     { label: 'Reservas brutas', ref: { id: 'reserves' }, decimals: 0, prefix: 'USD ', suffix: ' M', polarity: 'up' },
     { label: 'Dólar mayorista', ref: { id: 'fx' }, decimals: 0, prefix: '$', polarity: 'none' },
-  ],
-
-  summary: [
-    { label: 'Exportaciones i.a.', note: 'INDEC · var. %', ref: { id: 'exports', t: 'yoy' }, decimals: 1, kind: 'change', polarity: 'up' },
-    { label: 'Importaciones i.a.', note: 'INDEC · var. %', ref: { id: 'imports', t: 'yoy' }, decimals: 1, kind: 'change', polarity: 'none' },
-    { label: 'Saldo comercial', note: 'INDEC · USD millones', ref: { id: 'trade_balance' }, decimals: 0, kind: 'level', polarity: 'up' },
-    { label: 'Reservas', note: 'BCRA · var. mensual', ref: { id: 'reserves', t: 'pct1' }, decimals: 1, kind: 'change', polarity: 'up' },
-    { label: 'Dólar mayorista', note: 'BCRA · var. mensual', ref: { id: 'fx', t: 'pct1' }, decimals: 1, kind: 'change', polarity: 'none' },
   ],
 
   panels: [

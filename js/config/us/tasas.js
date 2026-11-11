@@ -15,17 +15,6 @@ export const tasas = {
     { label: 'Pendiente 10a − 2a', ref: { id: 'curve' }, decimals: 2, suffix: ' pp', polarity: 'none' },
   ],
 
-  summary: [
-    { label: 'Fed funds (efectiva)', note: 'NY Fed · promedio mensual', ref: { id: 'fedfunds' }, decimals: 2, suffix: '%', kind: 'level', polarity: 'none' },
-    { label: 'SOFR', note: 'NY Fed · promedio mensual', ref: { id: 'sofr' }, decimals: 2, suffix: '%', kind: 'level', polarity: 'none' },
-    { label: 'Bono 3 meses', note: 'Treasury · promedio mensual', ref: { id: 'y3m' }, decimals: 2, suffix: '%', kind: 'level', polarity: 'none' },
-    { label: 'Bono 2 años', note: 'Treasury · promedio mensual', ref: { id: 'y2' }, decimals: 2, suffix: '%', kind: 'level', polarity: 'none' },
-    { label: 'Bono 10 años', note: 'Treasury · promedio mensual', ref: { id: 'y10' }, decimals: 2, suffix: '%', kind: 'level', polarity: 'none' },
-    { label: 'Bono 30 años', note: 'Treasury · promedio mensual', ref: { id: 'y30' }, decimals: 2, suffix: '%', kind: 'level', polarity: 'none' },
-    { label: 'Pendiente 10a − 2a', note: 'Calculado · pp', ref: { id: 'curve' }, decimals: 2, kind: 'level', polarity: 'none' },
-    { label: 'Deuda pública, var. mensual', note: 'Treasury · Debt to the Penny', ref: { id: 'debt', t: 'pct1' }, decimals: 1, kind: 'change', polarity: 'none' },
-  ],
-
   panels: [
     {
       id: 'ustas-fed', title: 'Tasas de corto plazo', unit: '% anual · promedio mensual', polarity: 'none',

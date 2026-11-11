@@ -1,10 +1,9 @@
 ﻿/**
- * kpi.js — tarjeta de resumen: valor actual, variación y fecha del dato.
+ * kpi.js — tarjeta de resumen: valor actual, variación y fecha del dato (sin minigráfico: la serie está en los gráficos).
  */
 import { el } from './dom.js';
 import { resolve } from '../data/loader.js';
 import { fmtNum, fmtSigned, fmtDate, fmtAge } from '../lib/format.js';
-import { renderSpark } from './spark.js';
 
 /** Determina el tono (bueno/malo/neutro) del cambio según la polaridad del indicador */
 export function toneOf(delta, polarity) {
@@ -32,6 +31,18 @@ export function changeInfo(points, isPercent, decimals) {
   return { raw: d, text: `${fmtSigned(d, 1)}%` };
 }
 
+/**
+ * Dato complementario de la tarjeta (p. ej. la variación mensual debajo de la interanual).
+ * Se usa solo cuando ese número no aparece en ningún gráfico de la página.
+ */
+function extraLine(data, extra) {
+  const s = extra ? resolve(data, extra.ref) : null;
+  if (!s) return null;
+  const v = s.points[s.points.length - 1][1];
+  const num = extra.signed ? fmtSigned(v, extra.decimals ?? 1) : fmtNum(v, extra.decimals ?? 1);
+  return el('span', { class: 'kpi-extra num' }, `${extra.label}: ${extra.prefix ?? ''}${num}${extra.suffix ?? ''}`);
+}
+
 export function renderKpi(data, spec) {
   const s = resolve(data, spec.ref);
   if (!s) return el('div', { class: 'kpi' }, [el('span', { class: 'label' }, spec.label), el('span', { class: 'state' }, 'Sin datos')]);
@@ -49,7 +60,7 @@ export function renderKpi(data, spec) {
       `${spec.prefix ?? ''}${fmtNum(last[1], spec.decimals)}`,
       spec.suffix ? el('small', {}, spec.suffix) : null,
     ]),
-    renderSpark(s.points),
+    extraLine(data, spec.extra),
     el('div', { class: 'kpi-foot' }, [
       change ? el('span', { class: 'delta', 'data-tone': tone }, verdict ? `${verdict} · ${change.text}` : change.text) : null,
       el('span', {}, `${fmtDate(last[0], s.freq)} · ${fmtAge(last[0], s.freq)}`),

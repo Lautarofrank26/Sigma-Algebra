@@ -15,17 +15,6 @@ export const precios = {
     { label: 'Vivienda i.a.', ref: { id: 'cpi_shelter', t: 'yoy' }, decimals: 1, suffix: '%', polarity: 'down' },
   ],
 
-  summary: [
-    { label: 'CPI general', note: 'BLS · var. mensual', ref: { id: 'cpi', t: 'pct1' }, decimals: 1, kind: 'change', trend: true, polarity: 'down' },
-    { label: 'CPI subyacente', note: 'BLS · var. mensual', ref: { id: 'corecpi', t: 'pct1' }, decimals: 1, kind: 'change', trend: true, polarity: 'down' },
-    { label: 'CPI general i.a.', note: 'BLS · var. %', ref: { id: 'cpi', t: 'yoy' }, decimals: 1, kind: 'change', trend: true, polarity: 'down' },
-    { label: 'Subyacente i.a.', note: 'BLS · var. %', ref: { id: 'corecpi', t: 'yoy' }, decimals: 1, kind: 'change', trend: true, polarity: 'down' },
-    { label: 'Energía i.a.', note: 'BLS · var. %', ref: { id: 'cpi_energy', t: 'yoy' }, decimals: 1, kind: 'change', trend: true, polarity: 'down' },
-    { label: 'Alimentos i.a.', note: 'BLS · var. %', ref: { id: 'cpi_food', t: 'yoy' }, decimals: 1, kind: 'change', trend: true, polarity: 'down' },
-    { label: 'Vivienda i.a.', note: 'BLS · var. %', ref: { id: 'cpi_shelter', t: 'yoy' }, decimals: 1, kind: 'change', trend: true, polarity: 'down' },
-    { label: 'Precios al productor i.a.', note: 'BLS · PPI demanda final', ref: { id: 'ppi', t: 'yoy' }, decimals: 1, kind: 'change', trend: true, polarity: 'down' },
-  ],
-
   panels: [
     {
       id: 'uspre-comp', title: 'Inflación por componente', unit: 'Variación % interanual', polarity: 'down',
