@@ -105,6 +105,18 @@ td small { display: block; color: var(--ink-3); font-size: var(--fs-xs); }
 .tk-label { text-transform: uppercase; letter-spacing: 0.06em; color: var(--ink-3); font-weight: 600; }
 .tk-value { font-weight: 600; }
 .tk-chg { color: var(--ink-2); }
+/* Cotizaciones globales: verde si sube, rojo si baja (en VIX, DXY y bono a 10 años una suba no es "buena": ver el tooltip de cada una) */
+.tk-chg[data-dir="up"] { color: var(--good); font-weight: 600; }
+.tk-chg[data-dir="down"] { color: var(--bad); font-weight: 600; }
+.tk-group { align-self: center; padding: 0.15rem 0.65rem; margin-left: 0.6rem; border-radius: var(--radius-pill); background: var(--surface-2); color: var(--ink-3); font-size: 0.625rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; white-space: nowrap; }
+.tk-item { align-items: center; }
+.tk-spark { display: inline-flex; width: 46px; height: 16px; color: var(--ink-3); }
+.tk-spark[data-dir="up"] { color: var(--good); }
+.tk-spark[data-dir="down"] { color: var(--bad); }
+.tk-spark .spark { width: 100%; height: 100%; }
+.tk-closed { font-size: 0.625rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: var(--ink-3); border: 1px solid var(--line); border-radius: var(--radius-pill); padding: 0 0.4rem; }
+.tk-time { color: var(--ink-3); font-size: 0.6875rem; }
+.tk-item.is-closed .tk-value { color: var(--ink-2); }
 @keyframes tk-scroll { to { transform: translateX(-50%); } }
 @media (prefers-reduced-motion: reduce) { .ticker { overflow-x: auto; } }
 

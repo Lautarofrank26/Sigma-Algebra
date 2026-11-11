@@ -97,9 +97,10 @@ export function mountShell() {
       el('span', { class: 'bar-date' }, today),
       searchBtn,
     ]),
-    el('div', { class: 'ticker', id: 'ticker', hidden: true, 'aria-label': 'Indicadores del día' }),
+    // La barra de cotizaciones globales solo se muestra en el Inicio; el resto de las páginas no la monta
+    ...(file === 'index.html' ? [el('div', { class: 'ticker', id: 'ticker', hidden: true, 'aria-label': 'Cotizaciones globales' })] : []),
   );
-  startTicker(document.querySelector('#ticker'));
+  if (file === 'index.html') startTicker(document.querySelector('#ticker'));
   mountPalette();
 
   document.querySelector('#site-footer').replaceChildren(
@@ -108,6 +109,7 @@ export function mountShell() {
       el('li', {}, 'Argentina: INDEC, BCRA y Secretaría de Hacienda, vía la API de series de tiempo de datos.gob.ar.'),
       el('li', {}, 'Series reales (salarios, crédito, dinero): nivel nominal dividido por el IPC nacional, calculado por Macroeconomics.'),
       el('li', {}, 'Tipos de dólar: ArgentinaDatos (historia) y DolarAPI (cotización del día).'),
+      el('li', {}, 'Cotizaciones globales del Inicio: Yahoo Finance (guardadas cada 30 minutos en horario de mercado) y Bitcoin en vivo desde CoinGecko. El emergente se muestra con el ETF EEM como referencia del MSCI Emerging Markets.'),
       el('li', {}, 'Estados Unidos: BLS (precios, empleo y vacantes), NY Fed (tasa efectiva y SOFR), U.S. Treasury (rendimientos y deuda).'),
       el('li', {}, 'Actualización: el historial se renueva cuatro veces por día, después de las publicaciones, y la página pide los datos más recientes a las fuentes mientras está abierta (el dólar cada minuto, el resto cada 5 minutos).'),
       el('li', {}, 'PBI anual de ambos países: Banco Mundial (crecimiento real).'),
