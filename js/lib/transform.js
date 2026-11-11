@@ -1,11 +1,11 @@
-﻿/**
+/**
  * transform.js — transformaciones de series temporales.
  * Una serie es un array de puntos [fechaISO, valor] ordenado ascendente.
  * Para agregar una transformación nueva, sumarla al objeto TRANSFORMS.
  */
 
-/** Períodos por año según frecuencia: mensual, trimestral, anual */
-const PER_YEAR = { M: 12, Q: 4, A: 1 };
+/** Períodos por año según frecuencia: mensual, trimestral, semestral, anual */
+const PER_YEAR = { M: 12, Q: 4, S: 2, A: 1 };
 
 /** Variación porcentual contra `lag` períodos atrás */
 function pctChange(points, lag) {

@@ -87,4 +87,8 @@ Cada gráfico tiene un botón "Descargar CSV" (`js/lib/csv.js`): baja todo el hi
 ## Probar en local
 `powershell -File tools\serve.ps1` y abrir http://localhost:8765
 
+## Noticias de alto impacto
+`js/ui/news.js` es un solo componente con dos configuraciones: Argentina (arriba del Resumen, `data/noticias-ar.json`) y global (Inicio, `data/noticias-global.json`). Pestañas de categoría, Diario / Semanal / Mensual (hasta 3, 5 y 7 notas), indicador de importancia de tres niveles y fuente con enlace. `tools/fetch-noticias.ps1` lee RSS de medios y fuentes oficiales, deduplica los hechos que cubren varios medios, puntúa por impacto y nunca rellena; guarda 35 días de archivo para armar el semanal y el mensual. Los textos (título, resumen y "por qué importa") salen de `data/noticias-textos.json`; si existe el secreto `ANTHROPIC_API_KEY` en GitHub los redacta un modelo de IA, y si no, se usa un texto genérico por tema. El workflow `Actualizar noticias` corre cada 2 horas.
 
+## Temporalidad propia de cada gráfico
+Los gráficos del Resumen de Argentina tienen sus propios selectores de frecuencia (solo se puede agregar hacia frecuencias más bajas) y de rango (`timeline` en `js/config/argentina.js`, reglas de agregación en `js/lib/aggregate.js`): flujos se suman, saldos toman el fin de período, precios y tasas el promedio, la inflación se compone, el EMAE se promedia y las tasas laborales se promedian. Las demás páginas siguen con el selector de período general.

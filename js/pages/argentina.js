@@ -1,11 +1,11 @@
-﻿/** Página Argentina (Resumen): noticias de alto impacto arriba, luego cifras clave y gráficos */
+/** Página Argentina (Resumen): noticias de alto impacto arriba, luego cifras clave y gráficos */
 import { argentina } from '../config/argentina.js';
 import { loadCountry } from '../data/loader.js';
-import { initPage, mountRange, mountCountry, showError } from '../app.js';
+import { initPage, mountCountry, showError } from '../app.js';
 import { createNews } from '../ui/news.js';
 
 const page = initPage('argentina', 'resumen');
-mountRange(page);
+// Sin selector de período general: cada gráfico tiene su propia temporalidad (ver `timeline` en config/argentina.js)
 const root = document.querySelector('#root');
 
 // Mismo componente que las noticias globales del Inicio, con otra configuración (solo Argentina)

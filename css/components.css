@@ -349,3 +349,14 @@ tbody tr:hover td { background: var(--surface-2); }
 .imp-bars i.on { background: var(--imp); }
 .imp-3 { --imp: #8C2F39; } .imp-2 { --imp: #B7791F; } .imp-1 { --imp: #6B7C93; }
 @media print { .news { display: none !important; } }
+
+/* ---------- Temporalidad propia de cada gráfico (Resumen de Argentina) ---------- */
+.tl { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 0.4rem 0.8rem; }
+.tl-group { display: inline-flex; gap: 2px; padding: 2px; background: var(--surface-2); border-radius: var(--radius-pill); }
+.tl-btn { font: inherit; font-size: 0.6875rem; font-weight: 600; color: var(--ink-2); background: transparent; border: 0; border-radius: var(--radius-pill); padding: 0.18rem 0.6rem; cursor: pointer; transition: background 0.15s, color 0.15s; }
+.tl-btn:hover:not(:disabled) { color: var(--ink); background: var(--surface); }
+.tl-btn[aria-pressed="true"] { background: var(--ink); color: #fff; }
+.tl-btn:disabled { color: var(--ink-3); opacity: 0.45; cursor: not-allowed; }
+.tl-btn:focus-visible { outline: 2px solid var(--ink); outline-offset: 1px; }
+.tl-meta { font-size: var(--fs-xs); color: var(--ink-3); }
+@media print { .tl { display: none !important; } }

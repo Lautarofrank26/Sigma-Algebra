@@ -28,7 +28,7 @@ export function fmtSigned(value, decimals = 1) {
  */
 export function fmtAge(iso, freq = 'M', now = new Date()) {
   const [y, m] = iso.split('-').map(Number);
-  const months = freq === 'A' ? 12 : freq === 'Q' ? 3 : 1;
+  const months = freq === 'A' ? 12 : freq === 'S' ? 6 : freq === 'Q' ? 3 : 1;
   const end = Date.UTC(y, m - 1 + months, 0); // último día del período
   const days = Math.max(0, Math.floor((now.getTime() - end) / 86400000));
   if (days === 0) return 'hoy';
@@ -44,5 +44,6 @@ export function fmtDate(iso, freq = 'M', style = 'long') {
   const yy = style === 'short' ? String(y).slice(2) : String(y);
   if (freq === 'A') return String(y);
   if (freq === 'Q') return `T${Math.floor((m - 1) / 3) + 1} ${yy}`;
+  if (freq === 'S') return `S${m <= 6 ? 1 : 2} ${yy}`;
   return `${MONTHS[m - 1]} ${yy}`;
 }
