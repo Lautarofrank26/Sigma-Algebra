@@ -1,5 +1,5 @@
-{
-    "nota":  "Eventos que se cargan a mano: fechas del BLS y de la Fed que el script no puede leer solo (el sitio del BLS bloquea la lectura automática). Las fechas se tomaron de Forex Factory y se verificaron contra el horario oficial del BLS (8:30 hora del Este). Campos de cada evento: date (AAAA-MM-DD), time (HH:MM), tz (huso), country (ar o us), source, title, detail, href, previo (qué dato anterior mostrar) y consenso (texto opcional, se muestra tal cual).",
+﻿{
+    "nota":  "Eventos que se cargan a mano: fechas del BLS y de la Fed que el script no puede leer solo (el sitio del BLS bloquea la lectura automática). Las fechas se tomaron de Forex Factory y se verificaron contra el horario oficial del BLS (8:30 hora del Este). Campos de cada evento: date (AAAA-MM-DD), time (HH:MM), tz (huso), country (ar o us), source, title, detail, href, previo (qué dato anterior mostrar) y consenso (texto opcional, se muestra tal cual). Las actas de la Fed ya no se cargan aqui: salen del calendario oficial de la Fed (JSON).",
     "actualizado":  "2026-11-08",
     "eventos":  [
                     {
@@ -37,24 +37,6 @@
                                        "signed":  true,
                                        "decimals":  1,
                                        "label":  "Anterior (m/m)",
-                                       "file":  "us"
-                                   }
-                    },
-                    {
-                        "date":  "2026-11-18",
-                        "time":  "14:00",
-                        "tz":  "-05:00",
-                        "country":  "us",
-                        "source":  "BLS / Fed",
-                        "title":  "Actas de la Fed",
-                        "detail":  "Minutas de la reunión de octubre del FOMC",
-                        "href":  "eeuu-tasas.html",
-                        "previo":  {
-                                       "id":  "fedfunds",
-                                       "suffix":  "%",
-                                       "t":  "level",
-                                       "decimals":  2,
-                                       "label":  "Tasa actual",
                                        "file":  "us"
                                    }
                     },
@@ -140,24 +122,6 @@
                                        "signed":  true,
                                        "decimals":  1,
                                        "label":  "Anterior (m/m)",
-                                       "file":  "us"
-                                   }
-                    },
-                    {
-                        "date":  "2026-12-30",
-                        "time":  "14:00",
-                        "tz":  "-05:00",
-                        "country":  "us",
-                        "source":  "BLS / Fed",
-                        "title":  "Actas de la Fed",
-                        "detail":  "Minutas de la reunión de diciembre del FOMC",
-                        "href":  "eeuu-tasas.html",
-                        "previo":  {
-                                       "id":  "fedfunds",
-                                       "suffix":  "%",
-                                       "t":  "level",
-                                       "decimals":  2,
-                                       "label":  "Tasa actual",
                                        "file":  "us"
                                    }
                     },

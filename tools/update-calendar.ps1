@@ -196,6 +196,138 @@ try {
   Write-Host "BCE: $nEcb reuniones"
 } catch { Write-Host "BCE: no disponible ($($_.Exception.Message))" }
 
+# ---------- Fed: discursos del presidente y actas (calendario oficial en JSON) ----------
+function Get-Text($url) {
+  $r = Invoke-WebRequest $url -UseBasicParsing -TimeoutSec 60 -UserAgent 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)'
+  return [Text.Encoding]::UTF8.GetString($r.RawContentStream.ToArray())
+}
+function Convert-AmPm($s) {
+  # "7:00 p.m." / "10:50 a.m." / "1:00 PM" -> "19:00"; vacio si no hay hora
+  if ($s -notmatch '(\d{1,2}):(\d{2})\s*([ap])\.?m') { return $null }
+  $h = [int]$Matches[1] % 12; if ($Matches[3] -eq 'p') { $h += 12 }
+  return ('{0:00}:{1}' -f $h, $Matches[2])
+}
+try {
+  $fj = (Get-Text 'https://www.federalreserve.gov/json/calendar.json').TrimStart([char]0xFEFF) | ConvertFrom-Json
+  $nFed = 0
+  foreach ($x in @($fj.events)) {
+    if ($x.month -notmatch '^(\d{4})-(\d{2})$' -or $x.days -notmatch '^(\d{1,2})') { continue }
+    $date = Get-Date -Year ([int]$x.month.Substring(0, 4)) -Month ([int]$x.month.Substring(5, 2)) -Day ([int]$Matches[1])
+    if ($date.Date -lt $today) { continue }
+    $hora = Convert-AmPm ([string]$x.time)
+    if (-not $hora) { continue }
+    $tz = if (Test-UsDst $date) { '-04:00' } else { '-05:00' }
+    if ($x.type -eq 'FOMC' -and $x.title -match 'Minutes') {
+      [void]$events.Add([ordered]@{ date = $date.ToString('yyyy-MM-dd'); time = $hora; tz = $tz; country = 'us'; source = 'Reserva Federal'; title = 'Actas de la Fed'; detail = 'Minutas de la última reunión del FOMC'; href = 'eeuu-tasas.html' }); $nFed++
+    } elseif ($x.type -in 'Speeches', 'Testimony' -and $x.title -match '^(Speech|Testimony|Discussion|Press Conference)\b.* - Chair ') {
+      $d = if ($x.description) { ([string]$x.description).Trim() } else { ([string]$x.title).Trim() }
+      [void]$events.Add([ordered]@{ date = $date.ToString('yyyy-MM-dd'); time = $hora; tz = $tz; country = 'us'; source = 'Reserva Federal'; title = 'Discurso del presidente de la Fed'; detail = $d; href = 'eeuu-tasas.html' }); $nFed++
+    }
+  }
+  Write-Host "Fed (calendario JSON): $nFed eventos"
+} catch { Write-Host "Fed JSON: no disponible ($($_.Exception.Message))" }
+
+# ---------- Tesoro de EE.UU.: subastas de notas a 10 anios y bonos a 30 anios ----------
+try {
+  $ta = Invoke-RestMethod 'https://www.treasurydirect.gov/TA_WS/securities/upcoming?format=json' -TimeoutSec 60 -UserAgent 'Mozilla/5.0'
+  $nTd = 0
+  foreach ($x in @($ta)) {
+    if ($x.originalSecurityTerm -notin '10-Year', '30-Year' -or $x.securityType -notin 'Note', 'Bond') { continue }
+    $date = [datetime]::Parse(([string]$x.competitiveAuctionCloseDate).Substring(0, 10))
+    $hora = Convert-AmPm ([string]$x.competitiveAuctionCloseTime)
+    if (-not $hora -or $date.Date -lt $today) { continue }
+    $tz = if (Test-UsDst $date) { '-04:00' } else { '-05:00' }
+    $plazo = if ($x.originalSecurityTerm -eq '10-Year') { 'nota a 10 años' } else { 'bono a 30 años' }
+    $re = if ($x.reopening -eq 'Yes') { 'reapertura' } else { 'nueva emisión' }
+    $monto = if ($x.offeringAmount) { ', US$ {0:N0} millones' -f ([double]$x.offeringAmount / 1e6) } else { '' }
+    [void]$events.Add([ordered]@{ date = $date.ToString('yyyy-MM-dd'); time = $hora; tz = $tz; country = 'us'; source = 'Tesoro de EE.UU.'; title = 'Subasta de bonos del Tesoro'; detail = "Subasta de $plazo ($re)$monto"; href = 'eeuu-tasas.html' })
+    $nTd++
+  }
+  Write-Host "Tesoro EE.UU.: $nTd subastas"
+} catch { Write-Host "Tesoro EE.UU.: no disponible ($($_.Exception.Message))" }
+
+# ---------- Census (ventas minoristas de EE.UU.) ----------
+try {
+  $ct = (Get-Text 'https://www.census.gov/retail/release_schedule.html') -replace '<script[\s\S]*?</script>', '' -replace '<style[\s\S]*?</style>', '' -replace '<[^>]+>', '|' -replace '&amp;', '&' -replace '\s+', ' ' -replace '(\|\s*)+', '|'
+  $nCs = 0
+  $a = $ct.IndexOf('Advance Monthly Retail Trade Report')
+  $b = $ct.IndexOf('|Monthly Retail Trade Report', $a + 10)
+  if ($a -ge 0 -and $b -gt $a) { $ct = $ct.Substring($a, $b - $a) } else { $ct = '' }
+  # pares "Mes de referencia | fecha de publicacion" (la publicacion es a las 8:30, hora del Este)
+  foreach ($m in [regex]::Matches($ct, '\|(January|February|March|April|May|June|July|August|September|October|November|December) (\d{4})\|(January|February|March|April|May|June|July|August|September|October|November|December) (\d{1,2}), (\d{4})')) {
+    $date = Get-Date -Year ([int]$m.Groups[5].Value) -Month $mesesEn[$m.Groups[3].Value] -Day ([int]$m.Groups[4].Value)
+    $hora = '08:30'
+    if ($date.Date -lt $today) { continue }
+    $tz = if (Test-UsDst $date) { '-04:00' } else { '-05:00' }
+    $ref = @($m.Groups[1].Value, $m.Groups[2].Value)
+    [void]$events.Add([ordered]@{ date = $date.ToString('yyyy-MM-dd'); time = $hora; tz = $tz; country = 'us'; source = 'Census'; title = 'Ventas minoristas de EE.UU.'; detail = ($mesesEs[$mesesEn[$ref[0]] - 1].Substring(0, 1).ToUpper() + $mesesEs[$mesesEn[$ref[0]] - 1].Substring(1)) + " de $($ref[1])"; href = 'eeuu.html' })
+    $nCs++
+  }
+  Write-Host "Census: $nCs eventos"
+} catch { Write-Host "Census: no disponible ($($_.Exception.Message))" }
+
+# ---------- Banco de Japon (decisiones de politica monetaria) ----------
+# El BoJ no publica la hora de sus decisiones (suele ser cerca del mediodia): se marca "aprox".
+try {
+  $bj = (Get-Text 'https://www.boj.or.jp/en/mopo/mpmsche_minu/index.htm') -replace '<script[\s\S]*?</script>', '' -replace '<[^>]+>', '|' -replace '&nbsp;', ' ' -replace '\s+', ' ' -replace '(\|\s*)+', '|'
+  $mesAbbr = @{ 'Jan' = 1; 'Feb' = 2; 'Mar' = 3; 'Apr' = 4; 'May' = 5; 'June' = 6; 'July' = 7; 'Aug' = 8; 'Sept' = 9; 'Oct' = 10; 'Nov' = 11; 'Dec' = 12 }
+  $secs = [regex]::Matches($bj, 'Table : (\d{4})\|')   # una tabla por anio
+  $nBj = 0
+  for ($k = 0; $k -lt $secs.Count; $k++) {
+    $yy = [int]$secs[$k].Groups[1].Value
+    $seg = $bj.Substring($secs[$k].Index, $(if ($k + 1 -lt $secs.Count) { $secs[$k + 1].Index - $secs[$k].Index } else { $bj.Length - $secs[$k].Index }))
+    foreach ($m in [regex]::Matches($seg, '(Jan|Feb|Mar|Apr|May|June|July|Aug|Sept|Oct|Nov|Dec)\. (\d{1,2}) \([A-Za-z]+\.\), (\d{1,2}) \([A-Za-z]+\.\)')) {
+      $date = Get-Date -Year $yy -Month $mesAbbr[$m.Groups[1].Value] -Day ([int]$m.Groups[3].Value)   # la decision es el segundo dia
+      if ($date.Date -lt $today) { continue }
+      [void]$events.Add([ordered]@{ date = $date.ToString('yyyy-MM-dd'); time = '12:00'; tz = '+09:00'; aprox = $true; country = 'jp'; source = 'Banco de Japón'; title = 'Decisión de tasas del BoJ'; detail = "Reunión de política monetaria del $($m.Groups[2].Value) y $($m.Groups[3].Value) de $($mesesEs[$date.Month - 1])"; href = 'index.html' })
+      $nBj++
+    }
+  }
+  Write-Host "BoJ: $nBj reuniones"
+} catch { Write-Host "BoJ: no disponible ($($_.Exception.Message))" }
+
+# ---------- Banco de Inglaterra: proxima decision y tasa vigente (la pagina oficial informa una sola fecha futura) ----------
+try {
+  $be = (Get-Text 'https://www.bankofengland.co.uk/monetary-policy/upcoming-mpc-dates') -replace '<script[\s\S]*?</script>', '' -replace '<[^>]+>', '|' -replace '&nbsp;', ' ' -replace '\s+', ' ' -replace '(\|\s*)+', '|'
+  $tasa = if ($be -match 'Current Bank Rate \|(\d+(?:\.\d+)?)%') { $Matches[1] } else { $null }
+  if ($be -match 'Next due: (\d{1,2}) (January|February|March|April|May|June|July|August|September|October|November|December) (\d{4})') {
+    $date = Get-Date -Year ([int]$Matches[3]) -Month $mesesEn[$Matches[2]] -Day ([int]$Matches[1])
+    if ($date.Date -ge $today) {
+      $tz = if (Test-EuDst $date) { '+01:00' } else { '+00:00' }
+      $ev = [ordered]@{ date = $date.ToString('yyyy-MM-dd'); time = '12:00'; tz = $tz; country = 'uk'; source = 'Banco de Inglaterra'; title = 'Decisión de tasas del BoE'; detail = "Reunión del Comité de Política Monetaria del $($date.Day) de $($mesesEs[$date.Month - 1])"; href = 'index.html' }
+      if ($tasa) { $ev['previoTexto'] = "Tasa actual: $($tasa.Replace('.', ','))%" }
+      [void]$events.Add($ev)
+    }
+  }
+  Write-Host 'BoE: listo'
+} catch { Write-Host "BoE: no disponible ($($_.Exception.Message))" }
+
+# ---------- China (NBS): PBI trimestral e inflacion (CPI), calendario regular del anio ----------
+try {
+  $idx = Get-Text 'https://www.stats.gov.cn/english/PressRelease/ReleaseCalendar/'
+  $nCn = 0
+  foreach ($yy in $years) {
+    $mm = [regex]::Match($idx, "href=""([^""]+)""[^>]*>\s*\d+\.Regular Press Release Calendar of NBS in $yy")
+    if (-not $mm.Success) { continue }
+    $link = [Uri]::new([Uri]'https://www.stats.gov.cn/english/PressRelease/ReleaseCalendar/', $mm.Groups[1].Value).AbsoluteUri
+    $toks = ((Get-Text $link) -replace '<script[\s\S]*?</script>', '' -replace '<[^>]+>', '|' -replace '&nbsp;', ' ' -replace '\s+', ' ' -replace '(\|\s*)+', '|') -split '\|'
+    foreach ($def in @(@{ label = 'National Economic Performance'; title = 'PBI de China'; months = @(1, 4, 7, 10); hora = '10:00' }, @{ label = 'Monthly Report on Consumer Price Index (CPI)'; title = 'Inflación de China (CPI)'; months = 1..12; hora = '09:30' })) {
+      $i = [array]::IndexOf($toks, $def.label)
+      if ($i -lt 0) { continue }
+      for ($mo = 1; $mo -le 12; $mo++) {
+        $cell = $toks[$i + $mo]
+        if ($def.months -notcontains $mo -or $cell -notmatch '^(\d{1,2})/(Mon|Tue|Wed|Thu|Fri|Sat|Sun)$') { continue }
+        $date = Get-Date -Year $yy -Month $mo -Day ([int]$Matches[1])
+        if ($date.DayOfWeek.ToString().Substring(0, 3) -ne $Matches[2]) { continue }   # control: el dia de la semana tiene que coincidir
+        if ($date.Date -lt $today) { continue }
+        [void]$events.Add([ordered]@{ date = $date.ToString('yyyy-MM-dd'); time = $def.hora; tz = '+08:00'; country = 'cn'; source = 'NBS China'; title = $def.title; detail = "Publicación del $($date.Day) de $($mesesEs[$mo - 1])"; href = 'index.html' })
+        $nCn++
+      }
+    }
+  }
+  Write-Host "China (NBS): $nCn eventos"
+} catch { Write-Host "China (NBS): no disponible ($($_.Exception.Message))" }
+
 # ---------- eventos manuales ----------
 if (Test-Path $manualFile) {
   try {
@@ -221,6 +353,8 @@ $impactByTitle = @{
   'Decisión de tasas de la Fed' = 'alto'; 'Actas de la Fed' = 'medio'
   'Inflación (CPI)' = 'alto'; 'Precios al productor (PPI)' = 'medio'; 'Informe de empleo' = 'alto'; 'Vacantes de empleo (JOLTS)' = 'medio'
   'PBI de EE.UU.' = 'alto'; 'Consumo personal (PCE)' = 'alto'; 'Decisión de tasas del BCE' = 'alto'
+  'Discurso del presidente de la Fed' = 'alto'; 'Subasta de bonos del Tesoro' = 'medio'; 'Ventas minoristas de EE.UU.' = 'alto'
+  'Decisión de tasas del BoJ' = 'alto'; 'Decisión de tasas del BoE' = 'alto'; 'PBI de China' = 'alto'; 'Inflación de China (CPI)' = 'alto'
 }
 $regionOf = @{ ar = 'ar'; us = 'us' }
 foreach ($e in $events) {
@@ -228,9 +362,13 @@ foreach ($e in $events) {
   $e['region'] = if ($regionOf.ContainsKey([string]$e.country)) { $regionOf[[string]$e.country] } else { 'global' }
 }
 $limit = $today.AddDays(-14).ToString('yyyy-MM-dd')   # no hace falta guardar eventos viejos
-$sorted = @($events | Where-Object { $_.date -ge $limit -and $_.impact } | Sort-Object { $_.date + $_.time })
+$seen = @{}
+$sorted = @($events | Where-Object { $_.date -ge $limit -and $_.impact } | Sort-Object { $_.date + $_.time } | Where-Object {
+  $k = "$($_.date)|$($_.title)|$($_.detail)"   # sin duplicados (p. ej. actas de la Fed que llegan de dos fuentes)
+  if ($seen.ContainsKey($k)) { $false } else { $seen[$k] = $true; $true }
+})
 $result = [ordered]@{
-  nota    = 'Solo datos que mueven al mercado. Fechas del calendario del INDEC, de la Reserva Federal, del BEA y del BCE, más los eventos de data/calendario-manual.json; horarios en hora de Argentina. El INDEC publica en general a las 16:00 h; su calendario oficial no indica la hora. "s/d": sin dato disponible.'
+  nota    = 'Solo datos que mueven al mercado. Fechas de los calendarios oficiales del INDEC, la Reserva Federal, el BEA, el Census, el Tesoro de EE.UU., el BCE, el BoE, el BoJ y el NBS de China, más los eventos de data/calendario-manual.json; horarios en hora de Argentina. El INDEC publica en general a las 16:00 h; su calendario oficial no indica la hora. "s/d": sin dato disponible.'
   fuentes = @('https://www.indec.gob.ar/indec/web/Calendario-Fecha-0', 'https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm', 'https://www.bea.gov/news/schedule', 'https://www.ecb.europa.eu/press/calendars/mgcgc/html/index.en.html')
   actualizado = (Get-Date).ToString('yyyy-MM-dd')
   eventos = $sorted

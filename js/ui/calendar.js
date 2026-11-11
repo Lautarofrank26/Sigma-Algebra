@@ -14,10 +14,10 @@ const fmtHour = new Intl.DateTimeFormat('es-AR', { hour: '2-digit', minute: '2-d
 
 /** Instante exacto del evento (la hora está dada en el huso del organismo); se muestra siempre en hora de Argentina */
 const timestamp = (e) => Date.parse(`${e.date}T${e.time}:00${e.tz}`);
-const when = (e) => `${fmtDay.format(timestamp(e))}, ${fmtHour.format(timestamp(e))} h (hora de Argentina)`;
+const when = (e) => `${fmtDay.format(timestamp(e))}, ${fmtHour.format(timestamp(e))} h (hora de Argentina${e.aprox ? ', horario aproximado: el organismo no lo publica' : ''})`;
 const pad = (n) => String(n).padStart(2, '0');
 
-const FLAGS = { ar: 'AR', us: 'EE.UU.', eu: 'Eurozona' };
+const FLAGS = { ar: 'AR', us: 'EE.UU.', eu: 'Eurozona', uk: 'Reino Unido', jp: 'Japón', cn: 'China' };
 const IMPACT = { alto: 'Alto', medio: 'Medio' };
 const FILTERS = [['all', 'Todos'], ['ar', 'Argentina'], ['us', 'EE.UU.'], ['global', 'Global']];
 const regionOf = (e) => e.region ?? (e.country === 'ar' || e.country === 'us' ? e.country : 'global');
@@ -51,6 +51,7 @@ export function previousTexts(e, datasets) {
 /** Anterior, consenso y real de un evento; lo que no está disponible se muestra como "s/d" (nunca se inventa) */
 function dataLine(e, datasets) {
   const prev = previousTexts(e, datasets);
+  if (!prev.length && e.previoTexto) prev.push(e.previoTexto); // dato anterior que trae el propio calendario (p. ej. tasa vigente del BoE)
   return [
     ...(prev.length ? prev : ['Anterior: s/d']),
     `Consenso: ${e.consenso ?? 's/d'}`,

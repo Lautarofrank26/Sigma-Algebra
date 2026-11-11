@@ -1,5 +1,5 @@
 ﻿{
-    "nota":  "Solo datos que mueven al mercado. Fechas del calendario del INDEC, de la Reserva Federal, del BEA y del BCE, más los eventos de data/calendario-manual.json; horarios en hora de Argentina. El INDEC publica en general a las 16:00 h; su calendario oficial no indica la hora. \"s/d\": sin dato disponible.",
+    "nota":  "Solo datos que mueven al mercado. Fechas de los calendarios oficiales del INDEC, la Reserva Federal, el BEA, el Census, el Tesoro de EE.UU., el BCE, el BoE, el BoJ y el NBS de China, más los eventos de data/calendario-manual.json; horarios en hora de Argentina. El INDEC publica en general a las 16:00 h; su calendario oficial no indica la hora. \"s/d\": sin dato disponible.",
     "fuentes":  [
                     "https://www.indec.gob.ar/indec/web/Calendario-Fecha-0",
                     "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm",
@@ -47,19 +47,6 @@
                         "tz":  "-03:00",
                         "country":  "ar",
                         "source":  "INDEC",
-                        "title":  "Construcción (ISAC)",
-                        "detail":  "Septiembre de 2026",
-                        "href":  "actividad.html",
-                        "previo":  null,
-                        "impact":  "medio",
-                        "region":  "ar"
-                    },
-                    {
-                        "date":  "2026-11-06",
-                        "time":  "16:00",
-                        "tz":  "-03:00",
-                        "country":  "ar",
-                        "source":  "INDEC",
                         "title":  "Industria (IPI manufacturero)",
                         "detail":  "Septiembre de 2026",
                         "href":  "actividad.html",
@@ -72,6 +59,19 @@
                                        "label":  "Anterior (m/m)",
                                        "file":  "ar"
                                    },
+                        "impact":  "medio",
+                        "region":  "ar"
+                    },
+                    {
+                        "date":  "2026-11-06",
+                        "time":  "16:00",
+                        "tz":  "-03:00",
+                        "country":  "ar",
+                        "source":  "INDEC",
+                        "title":  "Construcción (ISAC)",
+                        "detail":  "Septiembre de 2026",
+                        "href":  "actividad.html",
+                        "previo":  null,
                         "impact":  "medio",
                         "region":  "ar"
                     },
@@ -95,6 +95,18 @@
                                    },
                         "consenso":  null,
                         "impact":  "alto",
+                        "region":  "us"
+                    },
+                    {
+                        "date":  "2026-11-12",
+                        "time":  "13:00",
+                        "tz":  "-05:00",
+                        "country":  "us",
+                        "source":  "Tesoro de EE.UU.",
+                        "title":  "Subasta de bonos del Tesoro",
+                        "detail":  "Subasta de bono a 30 años (nueva emisión), US$ 25.000 millones",
+                        "href":  "eeuu-tasas.html",
+                        "impact":  "medio",
                         "region":  "us"
                     },
                     {
@@ -173,23 +185,26 @@
                         "region":  "ar"
                     },
                     {
+                        "date":  "2026-11-17",
+                        "time":  "08:30",
+                        "tz":  "-05:00",
+                        "country":  "us",
+                        "source":  "Census",
+                        "title":  "Ventas minoristas de EE.UU.",
+                        "detail":  "Octubre de 2026",
+                        "href":  "eeuu.html",
+                        "impact":  "alto",
+                        "region":  "us"
+                    },
+                    {
                         "date":  "2026-11-18",
                         "time":  "14:00",
                         "tz":  "-05:00",
                         "country":  "us",
-                        "source":  "BLS / Fed",
+                        "source":  "Reserva Federal",
                         "title":  "Actas de la Fed",
-                        "detail":  "Minutas de la reunión de octubre del FOMC",
+                        "detail":  "Minutas de la última reunión del FOMC",
                         "href":  "eeuu-tasas.html",
-                        "previo":  {
-                                       "id":  "fedfunds",
-                                       "suffix":  "%",
-                                       "t":  "level",
-                                       "decimals":  2,
-                                       "label":  "Tasa actual",
-                                       "file":  "us"
-                                   },
-                        "consenso":  null,
                         "impact":  "medio",
                         "region":  "us"
                     },
@@ -302,6 +317,18 @@
                     },
                     {
                         "date":  "2026-12-09",
+                        "time":  "09:30",
+                        "tz":  "+08:00",
+                        "country":  "cn",
+                        "source":  "NBS China",
+                        "title":  "Inflación de China (CPI)",
+                        "detail":  "Publicación del 9 de diciembre",
+                        "href":  "index.html",
+                        "impact":  "alto",
+                        "region":  "global"
+                    },
+                    {
+                        "date":  "2026-12-09",
                         "time":  "14:00",
                         "tz":  "-05:00",
                         "country":  "us",
@@ -326,19 +353,6 @@
                         "tz":  "-03:00",
                         "country":  "ar",
                         "source":  "INDEC",
-                        "title":  "Construcción (ISAC)",
-                        "detail":  "Octubre de 2026",
-                        "href":  "actividad.html",
-                        "previo":  null,
-                        "impact":  "medio",
-                        "region":  "ar"
-                    },
-                    {
-                        "date":  "2026-12-09",
-                        "time":  "16:00",
-                        "tz":  "-03:00",
-                        "country":  "ar",
-                        "source":  "INDEC",
                         "title":  "Industria (IPI manufacturero)",
                         "detail":  "Octubre de 2026",
                         "href":  "actividad.html",
@@ -351,6 +365,19 @@
                                        "label":  "Anterior (m/m)",
                                        "file":  "ar"
                                    },
+                        "impact":  "medio",
+                        "region":  "ar"
+                    },
+                    {
+                        "date":  "2026-12-09",
+                        "time":  "16:00",
+                        "tz":  "-03:00",
+                        "country":  "ar",
+                        "source":  "INDEC",
+                        "title":  "Construcción (ISAC)",
+                        "detail":  "Octubre de 2026",
+                        "href":  "actividad.html",
+                        "previo":  null,
                         "impact":  "medio",
                         "region":  "ar"
                     },
@@ -420,6 +447,18 @@
                     },
                     {
                         "date":  "2026-12-16",
+                        "time":  "08:30",
+                        "tz":  "-05:00",
+                        "country":  "us",
+                        "source":  "Census",
+                        "title":  "Ventas minoristas de EE.UU.",
+                        "detail":  "Noviembre de 2026",
+                        "href":  "eeuu.html",
+                        "impact":  "alto",
+                        "region":  "us"
+                    },
+                    {
+                        "date":  "2026-12-16",
                         "time":  "16:00",
                         "tz":  "-03:00",
                         "country":  "ar",
@@ -445,19 +484,6 @@
                         "tz":  "-03:00",
                         "country":  "ar",
                         "source":  "INDEC",
-                        "title":  "Capacidad instalada (UCII)",
-                        "detail":  "Octubre de 2026",
-                        "href":  "actividad.html",
-                        "previo":  null,
-                        "impact":  "medio",
-                        "region":  "ar"
-                    },
-                    {
-                        "date":  "2026-12-16",
-                        "time":  "16:00",
-                        "tz":  "-03:00",
-                        "country":  "ar",
-                        "source":  "INDEC",
                         "title":  "Índice de salarios",
                         "detail":  "Octubre de 2026",
                         "href":  "empleo.html",
@@ -473,6 +499,32 @@
                         "region":  "ar"
                     },
                     {
+                        "date":  "2026-12-16",
+                        "time":  "16:00",
+                        "tz":  "-03:00",
+                        "country":  "ar",
+                        "source":  "INDEC",
+                        "title":  "Capacidad instalada (UCII)",
+                        "detail":  "Octubre de 2026",
+                        "href":  "actividad.html",
+                        "previo":  null,
+                        "impact":  "medio",
+                        "region":  "ar"
+                    },
+                    {
+                        "date":  "2026-12-17",
+                        "time":  "12:00",
+                        "tz":  "+00:00",
+                        "country":  "uk",
+                        "source":  "Banco de Inglaterra",
+                        "title":  "Decisión de tasas del BoE",
+                        "detail":  "Reunión del Comité de Política Monetaria del 17 de diciembre",
+                        "href":  "index.html",
+                        "previoTexto":  "Tasa actual: 4%",
+                        "impact":  "alto",
+                        "region":  "global"
+                    },
+                    {
                         "date":  "2026-12-17",
                         "time":  "14:15",
                         "tz":  "+01:00",
@@ -480,6 +532,19 @@
                         "source":  "BCE",
                         "title":  "Decisión de tasas del BCE",
                         "detail":  "Reunión de política monetaria del 17 de diciembre",
+                        "href":  "index.html",
+                        "impact":  "alto",
+                        "region":  "global"
+                    },
+                    {
+                        "date":  "2026-12-18",
+                        "time":  "12:00",
+                        "tz":  "+09:00",
+                        "aprox":  true,
+                        "country":  "jp",
+                        "source":  "Banco de Japón",
+                        "title":  "Decisión de tasas del BoJ",
+                        "detail":  "Reunión de política monetaria del 17 y 18 de diciembre",
                         "href":  "index.html",
                         "impact":  "alto",
                         "region":  "global"
@@ -576,19 +641,10 @@
                         "time":  "14:00",
                         "tz":  "-05:00",
                         "country":  "us",
-                        "source":  "BLS / Fed",
+                        "source":  "Reserva Federal",
                         "title":  "Actas de la Fed",
-                        "detail":  "Minutas de la reunión de diciembre del FOMC",
+                        "detail":  "Minutas de la última reunión del FOMC",
                         "href":  "eeuu-tasas.html",
-                        "previo":  {
-                                       "id":  "fedfunds",
-                                       "suffix":  "%",
-                                       "t":  "level",
-                                       "decimals":  2,
-                                       "label":  "Tasa actual",
-                                       "file":  "us"
-                                   },
-                        "consenso":  null,
                         "impact":  "medio",
                         "region":  "us"
                     },
@@ -680,6 +736,18 @@
                     },
                     {
                         "date":  "2027-01-15",
+                        "time":  "08:30",
+                        "tz":  "-05:00",
+                        "country":  "us",
+                        "source":  "Census",
+                        "title":  "Ventas minoristas de EE.UU.",
+                        "detail":  "Diciembre de 2026",
+                        "href":  "eeuu.html",
+                        "impact":  "alto",
+                        "region":  "us"
+                    },
+                    {
+                        "date":  "2027-01-15",
                         "time":  "16:00",
                         "tz":  "-03:00",
                         "country":  "ar",
@@ -688,26 +756,6 @@
                         "detail":  "Noviembre de 2026",
                         "href":  "actividad.html",
                         "previo":  null,
-                        "impact":  "medio",
-                        "region":  "ar"
-                    },
-                    {
-                        "date":  "2027-01-20",
-                        "time":  "16:00",
-                        "tz":  "-03:00",
-                        "country":  "ar",
-                        "source":  "INDEC",
-                        "title":  "Índice de salarios",
-                        "detail":  "Noviembre de 2026",
-                        "href":  "empleo.html",
-                        "previo":  {
-                                       "id":  "wages",
-                                       "suffix":  "%",
-                                       "t":  "pct1",
-                                       "decimals":  1,
-                                       "label":  "Anterior (m/m)",
-                                       "file":  "ar"
-                                   },
                         "impact":  "medio",
                         "region":  "ar"
                     },
@@ -733,6 +781,26 @@
                         "region":  "ar"
                     },
                     {
+                        "date":  "2027-01-20",
+                        "time":  "16:00",
+                        "tz":  "-03:00",
+                        "country":  "ar",
+                        "source":  "INDEC",
+                        "title":  "Índice de salarios",
+                        "detail":  "Noviembre de 2026",
+                        "href":  "empleo.html",
+                        "previo":  {
+                                       "id":  "wages",
+                                       "suffix":  "%",
+                                       "t":  "pct1",
+                                       "decimals":  1,
+                                       "label":  "Anterior (m/m)",
+                                       "file":  "ar"
+                                   },
+                        "impact":  "medio",
+                        "region":  "ar"
+                    },
+                    {
                         "date":  "2027-01-21",
                         "time":  "16:00",
                         "tz":  "-03:00",
@@ -752,6 +820,19 @@
                                    },
                         "impact":  "alto",
                         "region":  "ar"
+                    },
+                    {
+                        "date":  "2027-01-22",
+                        "time":  "12:00",
+                        "tz":  "+09:00",
+                        "aprox":  true,
+                        "country":  "jp",
+                        "source":  "Banco de Japón",
+                        "title":  "Decisión de tasas del BoJ",
+                        "detail":  "Reunión de política monetaria del 21 y 22 de enero",
+                        "href":  "index.html",
+                        "impact":  "alto",
+                        "region":  "global"
                     },
                     {
                         "date":  "2027-01-27",
@@ -851,6 +932,18 @@
                         "previo":  null,
                         "impact":  "medio",
                         "region":  "ar"
+                    },
+                    {
+                        "date":  "2027-02-17",
+                        "time":  "08:30",
+                        "tz":  "-05:00",
+                        "country":  "us",
+                        "source":  "Census",
+                        "title":  "Ventas minoristas de EE.UU.",
+                        "detail":  "Enero de 2027",
+                        "href":  "eeuu.html",
+                        "impact":  "alto",
+                        "region":  "us"
                     },
                     {
                         "date":  "2027-02-17",
@@ -970,16 +1063,15 @@
                     },
                     {
                         "date":  "2027-03-16",
-                        "time":  "16:00",
-                        "tz":  "-03:00",
-                        "country":  "ar",
-                        "source":  "INDEC",
-                        "title":  "Capacidad instalada (UCII)",
-                        "detail":  "Enero de 2027",
-                        "href":  "actividad.html",
-                        "previo":  null,
-                        "impact":  "medio",
-                        "region":  "ar"
+                        "time":  "08:30",
+                        "tz":  "-04:00",
+                        "country":  "us",
+                        "source":  "Census",
+                        "title":  "Ventas minoristas de EE.UU.",
+                        "detail":  "Febrero de 2027",
+                        "href":  "eeuu.html",
+                        "impact":  "alto",
+                        "region":  "us"
                     },
                     {
                         "date":  "2027-03-16",
@@ -1002,6 +1094,19 @@
                         "region":  "ar"
                     },
                     {
+                        "date":  "2027-03-16",
+                        "time":  "16:00",
+                        "tz":  "-03:00",
+                        "country":  "ar",
+                        "source":  "INDEC",
+                        "title":  "Capacidad instalada (UCII)",
+                        "detail":  "Enero de 2027",
+                        "href":  "actividad.html",
+                        "previo":  null,
+                        "impact":  "medio",
+                        "region":  "ar"
+                    },
+                    {
                         "date":  "2027-03-17",
                         "time":  "14:00",
                         "tz":  "-04:00",
@@ -1020,6 +1125,19 @@
                                    },
                         "impact":  "alto",
                         "region":  "us"
+                    },
+                    {
+                        "date":  "2027-03-18",
+                        "time":  "12:00",
+                        "tz":  "+09:00",
+                        "aprox":  true,
+                        "country":  "jp",
+                        "source":  "Banco de Japón",
+                        "title":  "Decisión de tasas del BoJ",
+                        "detail":  "Reunión de política monetaria del 17 y 18 de marzo",
+                        "href":  "index.html",
+                        "impact":  "alto",
+                        "region":  "global"
                     },
                     {
                         "date":  "2027-03-18",
@@ -1135,6 +1253,19 @@
                         "tz":  "-03:00",
                         "country":  "ar",
                         "source":  "INDEC",
+                        "title":  "Construcción (ISAC)",
+                        "detail":  "Febrero de 2027",
+                        "href":  "actividad.html",
+                        "previo":  null,
+                        "impact":  "medio",
+                        "region":  "ar"
+                    },
+                    {
+                        "date":  "2027-04-09",
+                        "time":  "16:00",
+                        "tz":  "-03:00",
+                        "country":  "ar",
+                        "source":  "INDEC",
                         "title":  "Industria (IPI manufacturero)",
                         "detail":  "Febrero de 2027",
                         "href":  "actividad.html",
@@ -1147,19 +1278,6 @@
                                        "label":  "Anterior (m/m)",
                                        "file":  "ar"
                                    },
-                        "impact":  "medio",
-                        "region":  "ar"
-                    },
-                    {
-                        "date":  "2027-04-09",
-                        "time":  "16:00",
-                        "tz":  "-03:00",
-                        "country":  "ar",
-                        "source":  "INDEC",
-                        "title":  "Construcción (ISAC)",
-                        "detail":  "Febrero de 2027",
-                        "href":  "actividad.html",
-                        "previo":  null,
                         "impact":  "medio",
                         "region":  "ar"
                     },
@@ -1182,6 +1300,18 @@
                                    },
                         "impact":  "alto",
                         "region":  "ar"
+                    },
+                    {
+                        "date":  "2027-04-16",
+                        "time":  "08:30",
+                        "tz":  "-04:00",
+                        "country":  "us",
+                        "source":  "Census",
+                        "title":  "Ventas minoristas de EE.UU.",
+                        "detail":  "Marzo de 2027",
+                        "href":  "eeuu.html",
+                        "impact":  "alto",
+                        "region":  "us"
                     },
                     {
                         "date":  "2027-04-16",
@@ -1260,6 +1390,19 @@
                     },
                     {
                         "date":  "2027-04-28",
+                        "time":  "12:00",
+                        "tz":  "+09:00",
+                        "aprox":  true,
+                        "country":  "jp",
+                        "source":  "Banco de Japón",
+                        "title":  "Decisión de tasas del BoJ",
+                        "detail":  "Reunión de política monetaria del 27 y 28 de abril",
+                        "href":  "index.html",
+                        "impact":  "alto",
+                        "region":  "global"
+                    },
+                    {
+                        "date":  "2027-04-28",
                         "time":  "14:00",
                         "tz":  "-04:00",
                         "country":  "us",
@@ -1309,6 +1452,19 @@
                         "tz":  "-03:00",
                         "country":  "ar",
                         "source":  "INDEC",
+                        "title":  "Construcción (ISAC)",
+                        "detail":  "Marzo de 2027",
+                        "href":  "actividad.html",
+                        "previo":  null,
+                        "impact":  "medio",
+                        "region":  "ar"
+                    },
+                    {
+                        "date":  "2027-05-07",
+                        "time":  "16:00",
+                        "tz":  "-03:00",
+                        "country":  "ar",
+                        "source":  "INDEC",
                         "title":  "Industria (IPI manufacturero)",
                         "detail":  "Marzo de 2027",
                         "href":  "actividad.html",
@@ -1321,19 +1477,6 @@
                                        "label":  "Anterior (m/m)",
                                        "file":  "ar"
                                    },
-                        "impact":  "medio",
-                        "region":  "ar"
-                    },
-                    {
-                        "date":  "2027-05-07",
-                        "time":  "16:00",
-                        "tz":  "-03:00",
-                        "country":  "ar",
-                        "source":  "INDEC",
-                        "title":  "Construcción (ISAC)",
-                        "detail":  "Marzo de 2027",
-                        "href":  "actividad.html",
-                        "previo":  null,
                         "impact":  "medio",
                         "region":  "ar"
                     },
@@ -1356,6 +1499,18 @@
                                    },
                         "impact":  "alto",
                         "region":  "ar"
+                    },
+                    {
+                        "date":  "2027-05-14",
+                        "time":  "08:30",
+                        "tz":  "-04:00",
+                        "country":  "us",
+                        "source":  "Census",
+                        "title":  "Ventas minoristas de EE.UU.",
+                        "detail":  "Abril de 2027",
+                        "href":  "eeuu.html",
+                        "impact":  "alto",
+                        "region":  "us"
                     },
                     {
                         "date":  "2027-05-14",
@@ -1458,6 +1613,19 @@
                         "tz":  "-03:00",
                         "country":  "ar",
                         "source":  "INDEC",
+                        "title":  "Construcción (ISAC)",
+                        "detail":  "Abril de 2027",
+                        "href":  "actividad.html",
+                        "previo":  null,
+                        "impact":  "medio",
+                        "region":  "ar"
+                    },
+                    {
+                        "date":  "2027-06-09",
+                        "time":  "16:00",
+                        "tz":  "-03:00",
+                        "country":  "ar",
+                        "source":  "INDEC",
                         "title":  "Industria (IPI manufacturero)",
                         "detail":  "Abril de 2027",
                         "href":  "actividad.html",
@@ -1470,19 +1638,6 @@
                                        "label":  "Anterior (m/m)",
                                        "file":  "ar"
                                    },
-                        "impact":  "medio",
-                        "region":  "ar"
-                    },
-                    {
-                        "date":  "2027-06-09",
-                        "time":  "16:00",
-                        "tz":  "-03:00",
-                        "country":  "ar",
-                        "source":  "INDEC",
-                        "title":  "Construcción (ISAC)",
-                        "detail":  "Abril de 2027",
-                        "href":  "actividad.html",
-                        "previo":  null,
                         "impact":  "medio",
                         "region":  "ar"
                     },
@@ -1517,6 +1672,18 @@
                                    },
                         "impact":  "alto",
                         "region":  "ar"
+                    },
+                    {
+                        "date":  "2027-06-16",
+                        "time":  "08:30",
+                        "tz":  "-04:00",
+                        "country":  "us",
+                        "source":  "Census",
+                        "title":  "Ventas minoristas de EE.UU.",
+                        "detail":  "Mayo de 2027",
+                        "href":  "eeuu.html",
+                        "impact":  "alto",
+                        "region":  "us"
                     },
                     {
                         "date":  "2027-06-16",
@@ -1557,16 +1724,16 @@
                         "tz":  "-03:00",
                         "country":  "ar",
                         "source":  "INDEC",
-                        "title":  "Nivel de actividad (PBI)",
-                        "detail":  "Informe de avance del primer trimestre de 2027",
-                        "href":  "actividad.html",
+                        "title":  "Comercio exterior (ICA)",
+                        "detail":  "Mayo de 2027",
+                        "href":  "externo.html",
                         "previo":  {
-                                       "id":  "gdp_level",
-                                       "suffix":  "%",
-                                       "t":  "yoy",
-                                       "signed":  true,
-                                       "decimals":  1,
-                                       "label":  "Anterior (i.a.)",
+                                       "id":  "trade_balance",
+                                       "suffix":  " M",
+                                       "prefix":  "USD ",
+                                       "t":  "level",
+                                       "decimals":  0,
+                                       "label":  "Saldo anterior",
                                        "file":  "ar"
                                    },
                         "impact":  "alto",
@@ -1578,16 +1745,16 @@
                         "tz":  "-03:00",
                         "country":  "ar",
                         "source":  "INDEC",
-                        "title":  "Comercio exterior (ICA)",
-                        "detail":  "Mayo de 2027",
-                        "href":  "externo.html",
+                        "title":  "Nivel de actividad (PBI)",
+                        "detail":  "Informe de avance del primer trimestre de 2027",
+                        "href":  "actividad.html",
                         "previo":  {
-                                       "id":  "trade_balance",
-                                       "suffix":  " M",
-                                       "prefix":  "USD ",
-                                       "t":  "level",
-                                       "decimals":  0,
-                                       "label":  "Saldo anterior",
+                                       "id":  "gdp_level",
+                                       "suffix":  "%",
+                                       "t":  "yoy",
+                                       "signed":  true,
+                                       "decimals":  1,
+                                       "label":  "Anterior (i.a.)",
                                        "file":  "ar"
                                    },
                         "impact":  "alto",
@@ -1648,6 +1815,18 @@
                         "region":  "ar"
                     },
                     {
+                        "date":  "2027-07-16",
+                        "time":  "08:30",
+                        "tz":  "-04:00",
+                        "country":  "us",
+                        "source":  "Census",
+                        "title":  "Ventas minoristas de EE.UU.",
+                        "detail":  "Junio de 2027",
+                        "href":  "eeuu.html",
+                        "impact":  "alto",
+                        "region":  "us"
+                    },
+                    {
                         "date":  "2027-07-22",
                         "time":  "14:15",
                         "tz":  "+02:00",
@@ -1676,6 +1855,18 @@
                                        "label":  "Tasa actual",
                                        "file":  "us"
                                    },
+                        "impact":  "alto",
+                        "region":  "us"
+                    },
+                    {
+                        "date":  "2027-08-16",
+                        "time":  "08:30",
+                        "tz":  "-04:00",
+                        "country":  "us",
+                        "source":  "Census",
+                        "title":  "Ventas minoristas de EE.UU.",
+                        "detail":  "Julio de 2027",
+                        "href":  "eeuu.html",
                         "impact":  "alto",
                         "region":  "us"
                     },
@@ -1712,6 +1903,43 @@
                         "region":  "us"
                     },
                     {
+                        "date":  "2027-09-16",
+                        "time":  "08:30",
+                        "tz":  "-04:00",
+                        "country":  "us",
+                        "source":  "Census",
+                        "title":  "Ventas minoristas de EE.UU.",
+                        "detail":  "Agosto de 2027",
+                        "href":  "eeuu.html",
+                        "impact":  "alto",
+                        "region":  "us"
+                    },
+                    {
+                        "date":  "2027-09-22",
+                        "time":  "12:00",
+                        "tz":  "+09:00",
+                        "aprox":  true,
+                        "country":  "jp",
+                        "source":  "Banco de Japón",
+                        "title":  "Decisión de tasas del BoJ",
+                        "detail":  "Reunión de política monetaria del 21 y 22 de septiembre",
+                        "href":  "index.html",
+                        "impact":  "alto",
+                        "region":  "global"
+                    },
+                    {
+                        "date":  "2027-10-15",
+                        "time":  "08:30",
+                        "tz":  "-04:00",
+                        "country":  "us",
+                        "source":  "Census",
+                        "title":  "Ventas minoristas de EE.UU.",
+                        "detail":  "Septiembre de 2027",
+                        "href":  "eeuu.html",
+                        "impact":  "alto",
+                        "region":  "us"
+                    },
+                    {
                         "date":  "2027-10-27",
                         "time":  "14:00",
                         "tz":  "-04:00",
@@ -1744,6 +1972,31 @@
                         "region":  "global"
                     },
                     {
+                        "date":  "2027-10-29",
+                        "time":  "12:00",
+                        "tz":  "+09:00",
+                        "aprox":  true,
+                        "country":  "jp",
+                        "source":  "Banco de Japón",
+                        "title":  "Decisión de tasas del BoJ",
+                        "detail":  "Reunión de política monetaria del 28 y 29 de octubre",
+                        "href":  "index.html",
+                        "impact":  "alto",
+                        "region":  "global"
+                    },
+                    {
+                        "date":  "2027-11-16",
+                        "time":  "08:30",
+                        "tz":  "-05:00",
+                        "country":  "us",
+                        "source":  "Census",
+                        "title":  "Ventas minoristas de EE.UU.",
+                        "detail":  "Octubre de 2027",
+                        "href":  "eeuu.html",
+                        "impact":  "alto",
+                        "region":  "us"
+                    },
+                    {
                         "date":  "2027-12-08",
                         "time":  "14:00",
                         "tz":  "-05:00",
@@ -1764,6 +2017,18 @@
                         "region":  "us"
                     },
                     {
+                        "date":  "2027-12-15",
+                        "time":  "08:30",
+                        "tz":  "-05:00",
+                        "country":  "us",
+                        "source":  "Census",
+                        "title":  "Ventas minoristas de EE.UU.",
+                        "detail":  "Noviembre de 2027",
+                        "href":  "eeuu.html",
+                        "impact":  "alto",
+                        "region":  "us"
+                    },
+                    {
                         "date":  "2027-12-16",
                         "time":  "14:15",
                         "tz":  "+01:00",
@@ -1771,6 +2036,19 @@
                         "source":  "BCE",
                         "title":  "Decisión de tasas del BCE",
                         "detail":  "Reunión de política monetaria del 16 de diciembre",
+                        "href":  "index.html",
+                        "impact":  "alto",
+                        "region":  "global"
+                    },
+                    {
+                        "date":  "2027-12-17",
+                        "time":  "12:00",
+                        "tz":  "+09:00",
+                        "aprox":  true,
+                        "country":  "jp",
+                        "source":  "Banco de Japón",
+                        "title":  "Decisión de tasas del BoJ",
+                        "detail":  "Reunión de política monetaria del 16 y 17 de diciembre",
                         "href":  "index.html",
                         "impact":  "alto",
                         "region":  "global"
