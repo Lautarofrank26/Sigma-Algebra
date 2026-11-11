@@ -7,7 +7,8 @@
  * - Datos: data/mundo.json (último dato de cada país), data/mundo-series.json (serie anual desde 2000) y
  *   data/paises.json (formas). Se generan con tools/fetch-mundo.ps1 y tools/build-paises.ps1.
  * - Al pasar el mouse (o tocar) un país aparece una tarjeta con el valor, el puesto y cómo evolucionó el indicador.
- * - "Comparar países": dos países y un indicador (PBI, inflación o desempleo) sobre el mismo gráfico.
+ * - Clic en un país: se abre su ficha de análisis (los cuatro indicadores, puestos y series).
+ * - Botón "Comparar países": abre un diálogo para comparar dos países y un indicador (PBI, inflación o desempleo).
  * - Argentina y EE.UU. quedan remarcadas, con su valor y puesto debajo del mapa.
  * Para sumar un indicador: agregarlo en fetch-mundo.ps1 y una entrada en METRICS.
  */
@@ -153,8 +154,10 @@ export function mountHeatmap(root, { shapes, world, series }) {
   const legendMid = el('span', { class: 'num' });
   const legendBest = el('span', { class: 'num' });
 
-  /* --- DOM del comparador --- */
+  /* --- comparador y ficha de país: se abren en un diálogo, a pedido --- */
   const cmp = buildCompare();
+  const compareBtn = el('button', { class: 'heat-compare', type: 'button' }, 'Comparar países');
+  compareBtn.addEventListener('click', () => openCompare());
 
   root.replaceChildren(
     el('div', { class: 'heat-head' }, [
@@ -163,7 +166,10 @@ export function mountHeatmap(root, { shapes, world, series }) {
         el('h1', {}, 'Cómo está cada economía'),
         el('p', {}, 'Elegí un indicador y mirá cómo se pinta cada país. Pasá el mouse por uno para ver el dato, su puesto y cómo evolucionó; abajo podés comparar dos países.'),
       ]),
-      el('div', { class: 'heat-tabs', role: 'group', 'aria-label': 'Indicador' }, tabs),
+      el('div', { class: 'heat-controls' }, [
+        el('div', { class: 'heat-tabs', role: 'group', 'aria-label': 'Indicador' }, tabs),
+        compareBtn,
+      ]),
     ]),
     el('div', { class: 'heat-scroll' }, [map]),
     el('div', { class: 'heat-lower' }, [
@@ -178,7 +184,6 @@ export function mountHeatmap(root, { shapes, world, series }) {
           el('span', { class: 'src-line' }, [`Fuente: Banco Mundial, último dato anual de cada país (actualizado ${world.updated}). Inflación de Argentina y EE.UU. completada con series propias cuando falta el año reciente. `, csvBtn]),
         ]),
       ]),
-      cmp.node,
     ]),
   );
 
@@ -388,6 +393,11 @@ export function mountHeatmap(root, { shapes, world, series }) {
   }
   map.addEventListener('pointermove', onMove);
   map.addEventListener('pointerdown', onMove);
+  // Clic (o toque) en un país: se abre su ficha de análisis
+  map.addEventListener('click', (e) => {
+    const hit = hitTest(e.clientX, e.clientY);
+    if (hit.iso) openCountry(hit.iso);
+  });
   map.addEventListener('pointerleave', (e) => {
     if (e.pointerType === 'touch') return; // en celular la tarjeta queda hasta tocar otra vez
     hover = null; tip.hidden = true; shownIso = null; draw();
@@ -521,7 +531,71 @@ export function mountHeatmap(root, { shapes, world, series }) {
       if (missing.length) empty.textContent = `Sin serie de ${cmetric.title.toLowerCase()} para ${missing.join(' y ')}.`;
       chart = drawChart(canvasC, data, { unit: cmetric.short, datasets }, 0, chart);
     }
-    return { node, update };
+    /** Elige los dos países (si no se pasan, se conservan) y redibuja */
+    function set(a, b) {
+      if (a && available.includes(a)) { isoA = a; selA.value = a; }
+      if (b && available.includes(b)) { isoB = b; selB.value = b; }
+      update();
+    }
+    return { node, update, set };
+  }
+
+  /* ---------- diálogos: comparador y ficha de país ---------- */
+
+  /** Crea un diálogo modal con el mismo estilo que la vista ampliada de los gráficos */
+  function makeDialog(label, content, onClose) {
+    const close = el('button', { class: 'pill dlg-close', type: 'button' }, 'Cerrar');
+    const dialog = el('dialog', { class: 'focus heat-dialog', 'aria-label': label }, el('div', { class: 'focus-body' }, [close, content]));
+    close.addEventListener('click', () => dialog.close());
+    dialog.addEventListener('click', (e) => { if (e.target === dialog) dialog.close(); });
+    dialog.addEventListener('close', () => { onClose?.(); });
+    document.body.append(dialog);
+    return dialog;
+  }
+
+  let compareDialog = null;
+  function openCompare(a, b) {
+    if (!compareDialog) compareDialog = makeDialog('Comparar países', cmp.node);
+    if (!compareDialog.open) compareDialog.showModal();
+    // con el diálogo ya visible el gráfico toma su tamaño; si se abre desde un país, ese país queda como primero
+    const other = a === 'ARG' ? 'USA' : 'ARG';
+    cmp.set(a, a ? (b ?? other) : undefined);
+  }
+
+  function openCountry(iso) {
+    const info = world.countries[iso];
+    if (!info || !METRICS.some((m) => info[m.key])) return;
+    const charts = [];
+    const name = nameOf(iso);
+    const stats = METRICS.map((m) => {
+      const r = buildRanking(m).get(iso);
+      return el('div', { class: 'cd-row' }, [
+        el('span', { class: 'cd-name' }, m.title),
+        r ? el('b', { class: 'num cd-val' }, m.fmt(r.value)) : el('b', { class: 'cd-val' }, 's/d'),
+        el('span', { class: 'num cd-rank' }, r ? `puesto ${r.rank} de ${r.total} · dato ${r.year}` : 'sin dato'),
+      ]);
+    });
+    const boxes = METRICS.filter((m) => serieOf(iso, m.key)).map((m) => {
+      const canvasC = el('canvas', { role: 'img', 'aria-label': `${m.title} de ${name}, serie anual` });
+      return { m, canvasC, node: el('figure', { class: 'cd-fig' }, [el('figcaption', {}, [el('b', {}, m.title), el('span', {}, m.unit)]), el('div', { class: 'chart-box cd-chart' }, canvasC)]) };
+    });
+    const compare = el('button', { class: 'heat-compare', type: 'button' }, 'Comparar con otro país');
+    const content = el('div', { class: 'cd' }, [
+      el('div', { class: 'focus-head' }, [el('div', {}, [el('span', { class: 'label' }, 'Análisis por país'), el('h2', {}, name), el('p', { class: 'unit' }, `Último dato anual disponible de cada indicador y su evolución desde ${series?.from ?? 2000}. Fuente: Banco Mundial.`)])]),
+      el('div', { class: 'cd-stats' }, stats),
+      el('div', { class: 'cd-grid' }, boxes.map((b) => b.node)),
+      el('div', { class: 'cd-actions' }, [compare]),
+    ]);
+    const dialog = makeDialog(`Análisis de ${name}`, content, () => { charts.forEach((c) => c?.destroy()); dialog.remove(); });
+    compare.addEventListener('click', () => { dialog.close(); openCompare(iso); });
+    dialog.showModal();
+    boxes.forEach(({ m, canvasC }) => {
+      const pts = [];
+      serieOf(iso, m.key).forEach((v, i) => { if (v !== null && v !== undefined) pts.push([`${series.from + i}-01-01`, v]); });
+      const data = { byId: { s: { id: 's', freq: 'A', points: pts } } };
+      const spec = { unit: m.short, datasets: [{ ref: { id: 's' }, label: name, color: '--ar', type: m.key === 'gdp' ? 'bar' : 'line', fill: m.key !== 'gdp', signColors: m.key === 'gdp', decimals: m.decimals }] };
+      try { charts.push(drawChart(canvasC, data, spec, 0, null)); } catch (err) { console.warn('Gráfico no disponible', err); }
+    });
   }
 
   /* --- arranque --- */
@@ -532,5 +606,4 @@ export function mountHeatmap(root, { shapes, world, series }) {
   new ResizeObserver(() => { if (map.clientWidth !== w) resize(); }).observe(map);
   resize();
   retarget(900); // entrada: los colores aparecen de oeste a este
-  try { cmp.update(); } catch (err) { console.warn('Comparador no disponible', err); } // el mapa sigue funcionando aunque falle el gráfico
 }

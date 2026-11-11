@@ -7,14 +7,6 @@ export const tasas = {
   tagline: 'Fed, curva de rendimientos y deuda pública',
   dataUrl: 'data/usa.json',
 
-  kpis: [
-    { label: 'Fed funds (efectiva)', ref: { id: 'fedfunds' }, decimals: 2, suffix: '%', polarity: 'none' },
-    { label: 'SOFR', ref: { id: 'sofr' }, decimals: 2, suffix: '%', polarity: 'none' },
-    { label: 'Bono 2 años', ref: { id: 'y2' }, decimals: 2, suffix: '%', polarity: 'none' },
-    { label: 'Bono 10 años', ref: { id: 'y10' }, decimals: 2, suffix: '%', polarity: 'none' },
-    { label: 'Pendiente 10a − 2a', ref: { id: 'curve' }, decimals: 2, suffix: ' pp', polarity: 'none' },
-  ],
-
   panels: [
     {
       id: 'ustas-fed', title: 'Tasas de corto plazo', unit: '% anual · promedio mensual', polarity: 'none',

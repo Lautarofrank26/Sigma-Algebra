@@ -4,7 +4,6 @@
  * Cada página (js/pages/*.js) compone estas funciones.
  */
 import { el } from './ui/dom.js';
-import { renderKpi } from './ui/kpi.js';
 import { createPanel } from './ui/panel.js';
 import { renderAnalysis } from './ui/analysis.js';
 import { renderQuotes } from './ui/quotes.js';
@@ -56,15 +55,9 @@ export function mountRange(page) {
   box.replaceChildren(el('span', { class: 'label' }, 'Período'), ...buttons);
 }
 
-/**
- * Crea los paneles de gráfico y los registra en la página.
- * Si una tarjeta ya muestra la misma cifra que encabeza un gráfico, el gráfico no la repite: cada dato queda en un solo lugar.
- */
-function buildPanels(page, data, specs, kpis = []) {
-  const key = (r) => `${r.id}:${r.t ?? 'level'}`;
-  const inCards = new Set(kpis.map((k) => key(k.ref)));
-  return el('div', { class: 'chart-grid' }, specs.map((original) => {
-    const spec = original.headline && inCards.has(key(original.headline.ref)) ? { ...original, hideNow: true } : original;
+/** Crea los paneles de gráfico y los registra en la página */
+function buildPanels(page, data, specs) {
+  return el('div', { class: 'chart-grid' }, specs.map((spec) => {
     const panel = createPanel(data, spec);
     page.panels.push(panel);
     return panel.node;
@@ -72,7 +65,7 @@ function buildPanels(page, data, specs, kpis = []) {
 }
 
 /**
- * Sección de país: lectura macro, tarjetas y gráficos.
+ * Sección de país: lectura macro (o el bloque que la reemplaza) y gráficos.
  * @param {'ar'|'us'} [group] si se indica, la página se actualiza en vivo (ver data/live.js)
  */
 export function mountCountry(page, country, data, root, group, opts = {}) {
@@ -83,8 +76,7 @@ export function mountCountry(page, country, data, root, group, opts = {}) {
     root.replaceChildren(
       // opts.lead: bloque que reemplaza a la lectura macro (p. ej. las noticias del Resumen de Argentina); se crea una sola vez
       opts.lead ?? el('div', { class: 'analysis-grid' }, renderAnalysis(country, data)),
-      el('div', { class: 'kpi-strip' }, country.kpis.map((k) => renderKpi(data, k))),
-      buildPanels(page, data, country.panels, country.kpis),
+      buildPanels(page, data, country.panels),
     );
     revealIn(root, { animate: firstRender });
     firstRender = false;

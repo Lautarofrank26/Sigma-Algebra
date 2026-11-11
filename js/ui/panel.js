@@ -1,4 +1,4 @@
-﻿/**
+/**
  * panel.js — panel de un indicador: título, valor actual, gráfico y "cómo leerlo".
  * Devuelve { node, update(months), destroy() } para redibujar al cambiar el rango.
  *
@@ -55,8 +55,7 @@ export function createPanel(data, panel) {
   let chart = null;
   const state = { freq: tl?.freq, years: tl?.range ?? 0 };
 
-  // `hideNow`: la cifra actual ya está en una tarjeta de la página, así que el gráfico no la repite (ver app.js)
-  const now = head && !panel.hideNow
+  const now = head
     ? el('div', { class: 'panel-now' }, [
         el('div', { class: 'kpi-value', 'data-count': head.points[head.points.length - 1][1], 'data-dec': panel.headline.decimals, 'data-prefix': panel.headline.prefix ?? '', 'data-suffix': panel.headline.suffix ?? '' }, `${panel.headline.prefix ?? ''}${fmtNum(head.points[head.points.length - 1][1], panel.headline.decimals)}${panel.headline.suffix ?? ''}`),
         el('div', { class: 'unit' }, `${fmtDate(head.points[head.points.length - 1][0], head.freq)} · ${fmtAge(head.points[head.points.length - 1][0], head.freq)}`),

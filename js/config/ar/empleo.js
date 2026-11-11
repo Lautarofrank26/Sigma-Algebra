@@ -7,14 +7,6 @@ export const empleo = {
   tagline: 'Mercado laboral y salarios',
   dataUrl: 'data/argentina.json',
 
-  kpis: [
-    { label: 'Desempleo', ref: { id: 'unemp' }, decimals: 1, suffix: '%', polarity: 'down' },
-    { label: 'Tasa de actividad', ref: { id: 'activity_rate' }, decimals: 1, suffix: '%', polarity: 'up' },
-    { label: 'Tasa de empleo', ref: { id: 'employment_rate' }, decimals: 1, suffix: '%', polarity: 'up' },
-    { label: 'Salarios i.a.', ref: { id: 'wages', t: 'yoy' }, decimals: 1, suffix: '%', polarity: 'none', extra: { label: 'Mensual', ref: { id: 'wages', t: 'pct1' }, decimals: 1, suffix: '%', signed: true } },
-    { label: 'Salario real i.a.', ref: { id: 'wages_real', t: 'yoy' }, decimals: 1, suffix: '%', polarity: 'up' },
-  ],
-
   panels: [
     {
       id: 'emp-desempleo', title: 'Desempleo', unit: '% de la población económicamente activa · trimestral', polarity: 'down',

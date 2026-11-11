@@ -7,14 +7,6 @@ export const precios = {
   tagline: 'IPC general, núcleo, regulados y canastas',
   dataUrl: 'data/argentina.json',
 
-  kpis: [
-    { label: 'Inflación mensual', ref: { id: 'ipc', t: 'pct1' }, decimals: 1, suffix: '%', polarity: 'down' },
-    { label: 'Inflación interanual', ref: { id: 'ipc', t: 'yoy' }, decimals: 1, suffix: '%', polarity: 'down' },
-    { label: 'Núcleo mensual', ref: { id: 'core', t: 'pct1' }, decimals: 1, suffix: '%', polarity: 'down' },
-    { label: 'Núcleo interanual', ref: { id: 'core', t: 'yoy' }, decimals: 1, suffix: '%', polarity: 'down' },
-    { label: 'Regulados interanual', ref: { id: 'regulated', t: 'yoy' }, decimals: 1, suffix: '%', polarity: 'down' },
-  ],
-
   panels: [
     {
       id: 'pre-mensual', title: 'Inflación mensual', unit: 'Variación % mensual', polarity: 'down',

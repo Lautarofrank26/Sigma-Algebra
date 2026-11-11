@@ -7,14 +7,6 @@ export const empleo = {
   tagline: 'Desempleo, puestos de trabajo, vacantes y salarios',
   dataUrl: 'data/usa.json',
 
-  kpis: [
-    { label: 'Desempleo', ref: { id: 'unemp' }, decimals: 1, suffix: '%', polarity: 'down' },
-    { label: 'Desempleo ampliado (U-6)', ref: { id: 'u6' }, decimals: 1, suffix: '%', polarity: 'down' },
-    { label: 'Participación laboral', ref: { id: 'participation' }, decimals: 1, suffix: '%', polarity: 'up' },
-    { label: 'Empleo no agrícola (3m)', ref: { id: 'payrolls', t: 'diff3avg' }, decimals: 0, suffix: ' mil', polarity: 'up' },
-    { label: 'Vacantes (JOLTS)', ref: { id: 'jolts_openings' }, decimals: 0, suffix: ' mil', polarity: 'up' },
-  ],
-
   panels: [
     {
       id: 'usemp-desempleo', title: 'Desempleo', unit: '% de la fuerza laboral', polarity: 'down',

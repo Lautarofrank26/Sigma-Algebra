@@ -3,7 +3,7 @@
  *
  * Para agregar un indicador:
  *   1. sumarlo en tools/fetch-data.ps1 (genera data/argentina.json)
- *   2. agregar un objeto a `panels` (gráfico) y/o `kpis` (tarjeta de resumen)
+ *   2. agregar un objeto a `panels` (gráfico) 
  *
  * Referencias de serie: { id, t } donde `t` es una transformación de lib/transform.js
  * polarity: 'down' = que baje es bueno · 'up' = que suba es bueno · 'none' = neutro
@@ -15,16 +15,6 @@ export const argentina = {
   name: 'Argentina',
   tagline: 'Precios, actividad, empleo y sector externo',
   dataUrl: 'data/argentina.json',
-
-  /** Tarjetas de resumen (arriba de los gráficos) */
-  kpis: [
-    { label: 'Inflación interanual', ref: { id: 'ipc', t: 'yoy' }, decimals: 1, suffix: '%', polarity: 'down' },
-    { label: 'Inflación mensual', ref: { id: 'ipc', t: 'pct1' }, decimals: 1, suffix: '%', polarity: 'down' },
-    { label: 'Actividad (EMAE) i.a.', ref: { id: 'emae', t: 'yoy' }, decimals: 1, suffix: '%', polarity: 'up', extra: { label: 'Mensual desest.', ref: { id: 'emae', t: 'pct1' }, decimals: 1, suffix: '%', signed: true } },
-    { label: 'Desempleo', ref: { id: 'unemp' }, decimals: 1, suffix: '%', polarity: 'down' },
-    { label: 'Dólar mayorista', ref: { id: 'fx' }, decimals: 0, prefix: '$', polarity: 'none' },
-    { label: 'Reservas brutas', ref: { id: 'reserves' }, decimals: 0, prefix: 'USD ', suffix: ' M', polarity: 'up' },
-  ],
 
   /** Paneles de gráfico */
   panels: [

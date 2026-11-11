@@ -39,7 +39,7 @@ Paleta y tipografía en `css/tokens.css`: gris frío, superficies blancas, azul 
 - **Barra superior** con la ubicación, la fecha y el buscador. En el Inicio se suma la cinta de cotizaciones globales.
 - **Buscador** (`js/ui/palette.js`): se abre con Ctrl+K, con "/" o con el botón. Indexa todas las páginas y todos los gráficos a partir de las configuraciones, así un indicador nuevo aparece solo. Cada resultado lleva a `pagina.html#id-del-grafico`, que se resalta al llegar.
 - **Vista ampliada** (`js/ui/focus.js`): el botón "Ampliar" de cada gráfico abre un diálogo con el gráfico grande, su propio selector de período, las últimas 12 observaciones, la explicación y la descarga.
-- **Cifras clave**: las tarjetas forman un solo tablero dividido por filetes y muestran solo valor, variación y fecha (sin minigráficos ni tablas resumen: la serie completa está en los gráficos). Si una tarjeta ya muestra la cifra que encabeza un gráfico, el gráfico no la repite. Una tarjeta puede traer un dato complementario (extra en su configuración, p. ej. la variación mensual debajo de la interanual).
+- **Sin tarjetas de cifras**: las páginas muestran lectura (o noticias) y gráficos grandes; cada gráfico trae su cifra actual en el encabezado. No hay minigráficos ni tablas resumen. Solo la página de Tipo de cambio conserva las tarjetas de cotizaciones del día.
 
 ### Movimiento (`js/ui/reveal.js` y `css/components.css`, sección "Forma y movimiento")
 - Las tarjetas suben y aparecen al entrar en pantalla, de a una; las cifras grandes cuentan desde cero.

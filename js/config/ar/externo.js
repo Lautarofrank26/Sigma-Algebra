@@ -7,14 +7,6 @@ export const externo = {
   tagline: 'Comercio exterior, reservas y dólar',
   dataUrl: 'data/argentina.json',
 
-  kpis: [
-    { label: 'Exportaciones', ref: { id: 'exports' }, decimals: 0, prefix: 'USD ', suffix: ' M', polarity: 'up', extra: { label: 'Interanual', ref: { id: 'exports', t: 'yoy' }, decimals: 1, suffix: '%', signed: true } },
-    { label: 'Importaciones', ref: { id: 'imports' }, decimals: 0, prefix: 'USD ', suffix: ' M', polarity: 'none', extra: { label: 'Interanual', ref: { id: 'imports', t: 'yoy' }, decimals: 1, suffix: '%', signed: true } },
-    { label: 'Saldo comercial', ref: { id: 'trade_balance' }, decimals: 0, prefix: 'USD ', suffix: ' M', polarity: 'up' },
-    { label: 'Reservas brutas', ref: { id: 'reserves' }, decimals: 0, prefix: 'USD ', suffix: ' M', polarity: 'up' },
-    { label: 'Dólar mayorista', ref: { id: 'fx' }, decimals: 0, prefix: '$', polarity: 'none' },
-  ],
-
   panels: [
     {
       id: 'ext-comercio', title: 'Exportaciones e importaciones', unit: 'USD millones por mes', polarity: 'none',

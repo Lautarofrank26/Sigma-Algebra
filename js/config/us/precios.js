@@ -7,14 +7,6 @@ export const precios = {
   tagline: 'CPI por componente y precios al productor',
   dataUrl: 'data/usa.json',
 
-  kpis: [
-    { label: 'CPI general i.a.', ref: { id: 'cpi', t: 'yoy' }, decimals: 1, suffix: '%', polarity: 'down' },
-    { label: 'CPI subyacente i.a.', ref: { id: 'corecpi', t: 'yoy' }, decimals: 1, suffix: '%', polarity: 'down' },
-    { label: 'Energía i.a.', ref: { id: 'cpi_energy', t: 'yoy' }, decimals: 1, suffix: '%', polarity: 'down' },
-    { label: 'Alimentos i.a.', ref: { id: 'cpi_food', t: 'yoy' }, decimals: 1, suffix: '%', polarity: 'down' },
-    { label: 'Vivienda i.a.', ref: { id: 'cpi_shelter', t: 'yoy' }, decimals: 1, suffix: '%', polarity: 'down' },
-  ],
-
   panels: [
     {
       id: 'uspre-comp', title: 'Inflación por componente', unit: 'Variación % interanual', polarity: 'down',

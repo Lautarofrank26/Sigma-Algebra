@@ -1,4 +1,4 @@
-﻿/**
+/**
  * live.js — datos en vivo, directo desde el navegador.
  *
  * 1) fetchLiveQuotes: cotizaciones del día del dólar (DolarAPI).
@@ -230,7 +230,6 @@ export async function refreshData(data, group, wanted) {
 export function usedIds(config) {
   const ids = new Set();
   const take = (ref) => ref?.id && ids.add(ref.id);
-  config.kpis?.forEach((k) => { take(k.ref); take(k.extra?.ref); });
   config.panels?.forEach((p) => { take(p.headline?.ref); p.datasets.forEach((d) => take(d.ref)); });
   // La lectura macro pide series con g({ id: '...' }): se detectan en el código de analyze()
   for (const m of String(config.analyze).matchAll(/id:\s*'([a-z0-9_]+)'/g)) ids.add(m[1]);

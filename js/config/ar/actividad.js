@@ -1,6 +1,6 @@
 /**
  * actividad.js — Argentina · Actividad económica.
- * Misma estructura que js/config/argentina.js (kpis, panels, analyze).
+ * Misma estructura que js/config/argentina.js (panels, analyze).
  */
 import { fmtNum, fmtDate } from '../../lib/format.js';
 
@@ -9,14 +9,6 @@ export const actividad = {
   name: 'Actividad',
   tagline: 'EMAE, producción industrial y PBI',
   dataUrl: 'data/argentina.json',
-
-  kpis: [
-    { label: 'EMAE var. mensual', ref: { id: 'emae', t: 'pct1' }, decimals: 1, suffix: '%', polarity: 'up' },
-    { label: 'EMAE var. interanual', ref: { id: 'emae', t: 'yoy' }, decimals: 1, suffix: '%', polarity: 'up' },
-    { label: 'Industria var. mensual', ref: { id: 'ipi', t: 'pct1' }, decimals: 1, suffix: '%', polarity: 'up' },
-    { label: 'Industria var. interanual', ref: { id: 'ipi', t: 'yoy' }, decimals: 1, suffix: '%', polarity: 'up' },
-    { label: 'PBI var. interanual', ref: { id: 'gdp_level', t: 'yoy' }, decimals: 1, suffix: '%', polarity: 'up' },
-  ],
 
   panels: [
     {

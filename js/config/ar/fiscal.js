@@ -7,13 +7,6 @@ export const fiscal = {
   tagline: 'Resultado primario y financiero del sector público',
   dataUrl: 'data/argentina.json',
 
-  kpis: [
-    { label: 'Resultado primario (mes)', ref: { id: 'primary_balance', t: 'k' }, decimals: 0, prefix: '$', suffix: ' mil M', polarity: 'up' },
-    { label: 'Primario, 12 meses', ref: { id: 'primary_balance', t: 'sum12k' }, decimals: 0, prefix: '$', suffix: ' mil M', polarity: 'up' },
-    { label: 'Resultado financiero (mes)', ref: { id: 'financial_balance', t: 'k' }, decimals: 0, prefix: '$', suffix: ' mil M', polarity: 'up' },
-    { label: 'Financiero, 12 meses', ref: { id: 'financial_balance', t: 'sum12k' }, decimals: 0, prefix: '$', suffix: ' mil M', polarity: 'up' },
-  ],
-
   panels: [
     {
       id: 'fis-primario', title: 'Resultado primario', unit: 'Miles de millones de pesos por mes', polarity: 'up',

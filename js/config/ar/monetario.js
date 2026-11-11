@@ -7,14 +7,6 @@ export const monetario = {
   tagline: 'Tasa BADLAR, dinero, crédito y depósitos',
   dataUrl: 'data/argentina.json',
 
-  kpis: [
-    { label: 'Tasa BADLAR', ref: { id: 'badlar' }, decimals: 1, suffix: '% TNA', polarity: 'none' },
-    { label: 'M2 privado real i.a.', ref: { id: 'm2_real', t: 'yoy' }, decimals: 1, suffix: '%', polarity: 'up' },
-    { label: 'Préstamos reales i.a.', ref: { id: 'loans_real', t: 'yoy' }, decimals: 1, suffix: '%', polarity: 'up' },
-    { label: 'Plazos fijos i.a.', ref: { id: 'time_deposits', t: 'yoy' }, decimals: 1, suffix: '%', polarity: 'none' },
-    { label: 'Inflación interanual', ref: { id: 'ipc', t: 'yoy' }, decimals: 1, suffix: '%', polarity: 'down' },
-  ],
-
   panels: [
     {
       id: 'mon-badlar', title: 'Tasa BADLAR vs. inflación', unit: '% anual', polarity: 'none',

@@ -10,14 +10,6 @@ export const usa = {
   tagline: 'Precios, mercado laboral, tasas y crecimiento',
   dataUrl: 'data/usa.json',
 
-  kpis: [
-    { label: 'Inflación CPI i.a.', ref: { id: 'cpi', t: 'yoy' }, decimals: 1, suffix: '%', polarity: 'down', extra: { label: 'Mensual', ref: { id: 'cpi', t: 'pct1' }, decimals: 1, suffix: '%', signed: true } },
-    { label: 'Inflación subyacente i.a.', ref: { id: 'corecpi', t: 'yoy' }, decimals: 1, suffix: '%', polarity: 'down' },
-    { label: 'Desempleo', ref: { id: 'unemp' }, decimals: 1, suffix: '%', polarity: 'down' },
-    { label: 'Fed funds (efectiva)', ref: { id: 'fedfunds' }, decimals: 2, suffix: '%', polarity: 'none' },
-    { label: 'Bono del Tesoro 10 años', ref: { id: 'y10' }, decimals: 2, suffix: '%', polarity: 'none' },
-  ],
-
   panels: [
     {
       id: 'us-inflacion',
