@@ -1,0 +1,388 @@
+{
+  "updated": "2026-11-11",
+  "nota": "Eventos que se marcan en los gráficos de las secciones de Argentina. Cada fecha y dato se verificó con la fuente indicada (norma oficial, organismo o medio periodístico). Las cifras de efectos que se citan salen de las propias series de la página. Cuando la relación causal no es segura, la explicación dice 'posible causa'. tipo: cambio de régimen | shock político | shock externo | crisis | dato atípico | medida de política. prioridad: 1 = histórico, 2 = relevante.",
+  "eventos": [
+    {
+      "id": "plan-austral", "pais": "AR", "fecha": "1985-06-14", "titulo": "Plan Austral",
+      "tipo": "cambio de régimen", "prioridad": 1,
+      "secciones": ["precios"], "graficos": ["pre-mensual", "pre-interanual", "pre-nivel"],
+      "explicacion_por_grafico": {
+        "pre-mensual": "El Decreto 1096/85 reemplazó el peso argentino por el austral, congeló precios y salarios y fijó el tipo de cambio. La inflación mensual bajó con fuerza en los meses siguientes, pero el plan perdió eficacia en los años posteriores.",
+        "pre-interanual": "Plan de estabilización con nueva moneda (el austral), congelamiento de precios y tipo de cambio fijo. Su efecto se ve en la desaceleración de la inflación acumulada en doce meses durante la segunda mitad de 1985.",
+        "pre-nivel": "Cambio de unidad monetaria: 1 austral = 1.000 pesos argentinos. Las series de precios largas encadenan las distintas monedas para que el índice sea comparable."
+      },
+      "fuente_url": "https://www.bcra.gob.ar/pdfs/comytexord/A0674.pdf"
+    },
+    {
+      "id": "hiperinflacion-1989", "pais": "AR", "fecha": "1989-07-01", "titulo": "Hiperinflación (pico de julio de 1989)",
+      "tipo": "crisis", "prioridad": 1,
+      "secciones": ["precios"], "graficos": ["pre-mensual", "pre-interanual", "pre-nivel"],
+      "explicacion_por_grafico": {
+        "pre-mensual": "En julio de 1989 el IPC del INDEC subió 196,6% en un solo mes, el récord histórico. Fue el pico del primer episodio hiperinflacionario (1989), al que siguió un segundo brote a comienzos de 1990.",
+        "pre-interanual": "La inflación acumulada en 1989 superó el 3.000% anual. El fracaso del Plan Austral y el financiamiento del déficit con emisión son las causas que suele señalar la literatura.",
+        "pre-nivel": "El nivel de precios se multiplicó varias decenas de veces en pocos meses: es el tramo más empinado de toda la serie."
+      },
+      "fuente_url": "https://www.lanacion.com.ar/economia/lecciones-de-la-hiperinflacion-argentina-de-1989c-nid2509193/"
+    },
+    {
+      "id": "plan-bonex", "pais": "AR", "fecha": "1990-01-02", "titulo": "Plan Bonex",
+      "tipo": "medida de política", "prioridad": 2,
+      "secciones": ["monetario"], "graficos": ["mon-m2", "mon-depositos"],
+      "explicacion_por_grafico": {
+        "mon-m2": "El Decreto 36/90 canjeó compulsivamente los plazos fijos de más de un millón de australes por bonos en dólares a diez años (Bonex 89). La cantidad de pesos en circulación se redujo de golpe para frenar la hiperinflación.",
+        "mon-depositos": "Los depósitos a plazo por encima del límite se convirtieron en bonos externos: el stock de plazos fijos cayó abruptamente y la desconfianza en el sistema bancario se prolongó."
+      },
+      "fuente_url": "https://chequeado.com/el-explicador/que-fue-el-plan-bonex/"
+    },
+    {
+      "id": "convertibilidad", "pais": "AR", "fecha": "1991-04-01", "titulo": "Convertibilidad",
+      "tipo": "cambio de régimen", "prioridad": 1,
+      "secciones": ["precios", "externo", "monetario"], "graficos": ["pre-mensual", "pre-interanual", "ext-fx", "mon-m2"],
+      "explicacion_por_grafico": {
+        "pre-mensual": "Entra en vigencia la Ley 23.928: tipo de cambio fijo (10.000 australes por dólar, luego 1 peso = 1 dólar) y prohibición de indexar. La inflación mensual cayó a valores de un dígito en pocos meses y luego a cerca de cero.",
+        "pre-interanual": "Con el tipo de cambio fijo y la base monetaria respaldada por reservas, la inflación anual bajó de cuatro dígitos a un dígito hacia 1993-94.",
+        "ext-fx": "Desde abril de 1991 el tipo de cambio queda fijo por ley; el gráfico es una línea plana hasta enero de 2002.",
+        "mon-m2": "Bajo la convertibilidad el BCRA solo podía emitir pesos contra reservas: la cantidad de dinero pasó a depender de la entrada y salida de dólares."
+      },
+      "fuente_url": "https://www.argentina.gob.ar/normativa/nacional/ley-23928-328/texto"
+    },
+    {
+      "id": "efecto-tequila", "pais": "AR", "fecha": "1994-12-20", "titulo": "Efecto Tequila",
+      "tipo": "shock externo", "prioridad": 2,
+      "secciones": ["actividad", "monetario", "empleo"], "graficos": ["act-pbi", "act-emae-nivel", "mon-depositos", "emp-desempleo"],
+      "explicacion_por_grafico": {
+        "act-pbi": "La devaluación de México en diciembre de 1994 provocó salida de capitales de los países emergentes. En Argentina, con tipo de cambio fijo, el ajuste fue por actividad: el PBI cayó en 1995.",
+        "act-emae-nivel": "Tras el contagio de la crisis mexicana, la actividad cayó durante tres trimestres de 1995 y se recuperó desde fines de ese año.",
+        "mon-depositos": "Corrida bancaria: entre diciembre de 1994 y mayo de 1995 se retiró cerca de un sexto de los depósitos del sistema, y cerraron o se fusionaron decenas de entidades.",
+        "emp-desempleo": "Posible causa del salto del desempleo de 1995, que superó el 18% en mayo de ese año según la EPH, junto con la reestructuración productiva de esos años."
+      },
+      "fuente_url": "https://www.federalreserve.gov/econres/ifdp/the-tequila-effect-theory-and-evidence-from-argentina.htm"
+    },
+    {
+      "id": "crisis-rusa-brasil", "pais": "AR", "fecha": "1999-01-13", "titulo": "Crisis rusa y devaluación de Brasil",
+      "tipo": "shock externo", "prioridad": 2,
+      "secciones": ["actividad", "externo", "empleo"], "graficos": ["act-pbi", "act-emae-nivel", "ext-comercio", "emp-desempleo"],
+      "explicacion_por_grafico": {
+        "act-pbi": "Tras el default ruso (agosto de 1998), Brasil devaluó el real en enero de 1999. Posible causa del inicio de la recesión: el PBI argentino alcanzó su máximo a mediados de 1998 y cayó hasta fines de 2001.",
+        "act-emae-nivel": "Posible causa de la caída de la actividad desde 1998-99: encarecimiento del crédito externo para los emergentes y pérdida de competitividad frente a Brasil con el peso fijo al dólar.",
+        "ext-comercio": "Brasil era el principal destino de las exportaciones industriales: con el real devaluado, esas ventas se resintieron y las importaciones desde Brasil se abarataron.",
+        "emp-desempleo": "Posible causa del aumento sostenido del desempleo entre 1999 y 2002, junto con la recesión prolongada."
+      },
+      "fuente_url": "https://biblat.unam.mx/hevila/Nuevasociedad/2002/no179/7.pdf"
+    },
+    {
+      "id": "corralito", "pais": "AR", "fecha": "2001-12-01", "titulo": "Corralito",
+      "tipo": "medida de política", "prioridad": 1,
+      "secciones": ["monetario", "actividad"], "graficos": ["mon-depositos", "mon-prestamos", "act-emae-nivel"],
+      "explicacion_por_grafico": {
+        "mon-depositos": "El Decreto 1570/01 limitó el retiro de efectivo de los bancos y las transferencias al exterior para frenar la corrida. Los depósitos quedaron inmovilizados y luego fueron pesificados y reprogramados.",
+        "mon-prestamos": "Con los depósitos atrapados y la crisis bancaria, el crédito al sector privado se derrumbó y tardó años en recuperarse.",
+        "act-emae-nivel": "La restricción al uso del efectivo paralizó buena parte de la economía informal y del comercio: diciembre de 2001 y el primer trimestre de 2002 marcan el piso de la actividad."
+      },
+      "fuente_url": "https://www.argentina.gob.ar/normativa/nacional/decreto-1570-2001-70355/texto"
+    },
+    {
+      "id": "default-2001", "pais": "AR", "fecha": "2001-12-23", "titulo": "Default de la deuda pública",
+      "tipo": "crisis", "prioridad": 1,
+      "secciones": ["fiscal", "externo"], "graficos": ["fis-financiero", "ext-reservas"],
+      "explicacion_por_grafico": {
+        "fis-financiero": "El presidente interino Adolfo Rodríguez Saá anunció ante la Asamblea Legislativa la suspensión de los pagos de la deuda externa. El Estado dejó de pagar intereses de la deuda en default hasta la reestructuración de 2005.",
+        "ext-reservas": "El default cerró el acceso al financiamiento externo: desde entonces las reservas pasaron a depender casi solo del saldo comercial y de las compras del BCRA."
+      },
+      "fuente_url": "https://www.pagina12.com.ar/2001/01-12/01-12-23/pag03.htm"
+    },
+    {
+      "id": "fin-convertibilidad", "pais": "AR", "fecha": "2002-01-06", "titulo": "Salida de la Convertibilidad",
+      "tipo": "cambio de régimen", "prioridad": 1,
+      "secciones": ["externo", "precios", "empleo"], "graficos": ["ext-fx", "pre-mensual", "pre-interanual", "emp-salario-real", "emp-desempleo", "ext-saldo"],
+      "explicacion_por_grafico": {
+        "ext-fx": "La Ley 25.561 de emergencia pública terminó con el 1 a 1. Tras un breve esquema dual, el peso pasó a flotar y el dólar superó los 3 pesos a mediados de 2002.",
+        "pre-mensual": "La devaluación se trasladó a precios: la inflación mensual saltó en el primer semestre de 2002 y se moderó en la segunda mitad del año.",
+        "pre-interanual": "La inflación de 2002 cerró en torno al 40% anual tras una década de inflación cercana a cero, pero el traslado a precios fue menor que la devaluación.",
+        "emp-salario-real": "Con salarios nominales casi congelados y precios en alza, el salario real cayó con fuerza en 2002.",
+        "emp-desempleo": "El desempleo alcanzó su máximo en 2002, por encima del 20%, y empezó a bajar con la recuperación de 2003.",
+        "ext-saldo": "Con el dólar caro, las importaciones se desplomaron y el saldo comercial pasó a ser ampliamente superavitario."
+      },
+      "fuente_url": "https://www.argentina.gob.ar/normativa/nacional/norma-71477/texto"
+    },
+    {
+      "id": "canje-2005", "pais": "AR", "fecha": "2005-03-03", "titulo": "Canje de la deuda en default",
+      "tipo": "medida de política", "prioridad": 2,
+      "secciones": ["fiscal"], "graficos": ["fis-financiero"],
+      "explicacion_por_grafico": {
+        "fis-financiero": "El ministro Roberto Lavagna anunció una adhesión del 76% al canje de los bonos en default con una fuerte quita. El Estado volvió a pagar intereses de esa deuda, que pasaron a pesar en el resultado financiero."
+      },
+      "fuente_url": "https://www.lanacion.com.ar/economia/con-una-adhesion-al-canje-del-76-la-argentina-dejo-atras-el-default-nid684583"
+    },
+    {
+      "id": "intervencion-indec", "pais": "AR", "fecha": "2007-01-01", "titulo": "Intervención del INDEC (enero de 2007)",
+      "tipo": "medida de política", "prioridad": 1,
+      "secciones": ["precios", "empleo"], "graficos": ["pre-mensual", "pre-interanual", "pre-nivel", "pre-canastas", "emp-salario-real"],
+      "explicacion_por_grafico": {
+        "pre-mensual": "En enero de 2007 la Secretaría de Comercio Interior intervino el INDEC y desplazó a la responsable del IPC. Entre 2007 y 2015 el IPC oficial subestimó la inflación según consultoras privadas, institutos provinciales y la justicia; esos datos deben leerse con cautela.",
+        "pre-interanual": "Desde 2007 la inflación oficial se separó de las mediciones alternativas. Por eso el INDEC actual publica su serie desde diciembre de 2016 y no empalma el período 2007-2015.",
+        "pre-nivel": "El índice oficial de esos años no es comparable: para el período 2007-2015 hay que usar series alternativas reconocidas.",
+        "pre-canastas": "Las canastas de pobreza e indigencia también se calculaban con los precios del IPC intervenido, lo que subestimó la pobreza oficial de esos años.",
+        "emp-salario-real": "Un salario real deflactado con el IPC oficial de 2007-2015 sobrestima el poder de compra: la inflación medida era menor que la real."
+      },
+      "fuente_url": "https://www.mpf.gob.ar/pia/files/2024/07/Indice-del-alegato-fiscal-Causa-5197-Manipulacion-de-datos-del-Indec.pdf"
+    },
+    {
+      "id": "resolucion-125", "pais": "AR", "fecha": "2008-03-11", "titulo": "Conflicto por la Resolución 125",
+      "tipo": "shock político", "prioridad": 2,
+      "secciones": ["externo"], "graficos": ["ext-comercio", "ext-saldo"],
+      "explicacion_por_grafico": {
+        "ext-comercio": "La Resolución 125 estableció retenciones móviles a las exportaciones de granos. Siguieron meses de paro agropecuario que demoraron embarques; en julio el Senado la rechazó y el Decreto 1176/08 la dejó sin efecto.",
+        "ext-saldo": "Posible causa de la volatilidad de las exportaciones agrícolas entre marzo y julio de 2008, cuando los productores retuvieron ventas durante el conflicto."
+      },
+      "fuente_url": "https://www.argentina.gob.ar/normativa/nacional/norma-142613/texto"
+    },
+    {
+      "id": "quiebra-lehman", "pais": "AR", "fecha": "2008-09-15", "titulo": "Quiebra de Lehman Brothers",
+      "tipo": "shock externo", "prioridad": 1,
+      "secciones": ["actividad", "externo"], "graficos": ["act-emae-nivel", "act-ipi", "ext-comercio", "ext-reservas"],
+      "explicacion_por_grafico": {
+        "act-emae-nivel": "La quiebra del banco de inversión estadounidense desató la crisis financiera global. Posible causa de la caída de la actividad argentina a fines de 2008 y en 2009, junto con la sequía de ese año.",
+        "act-ipi": "La industria fue de los sectores más golpeados por la caída de la demanda mundial y de Brasil en 2009.",
+        "ext-comercio": "El comercio mundial se contrajo y bajaron los precios de las materias primas: las exportaciones y las importaciones argentinas cayeron en 2009.",
+        "ext-reservas": "La huida global hacia el dólar presionó sobre el peso y aceleró la salida de capitales en el último trimestre de 2008."
+      },
+      "fuente_url": "https://www.federalreservehistory.org/essays/support-for-specific-institutions"
+    },
+    {
+      "id": "estatizacion-afjp", "pais": "AR", "fecha": "2008-11-20", "titulo": "Estatización de las AFJP",
+      "tipo": "medida de política", "prioridad": 2,
+      "secciones": ["fiscal"], "graficos": ["fis-primario", "fis-financiero", "fis-acum"],
+      "explicacion_por_grafico": {
+        "fis-primario": "La Ley 26.425 eliminó el régimen de capitalización y traspasó aportes y fondos al sistema público (SIPA). Los aportes personales pasaron a ser ingresos del Estado, lo que mejoró el resultado primario de corto plazo.",
+        "fis-financiero": "Los fondos de las AFJP pasaron al Fondo de Garantía de Sustentabilidad de la ANSES, que tenía en su cartera bonos del propio Estado.",
+        "fis-acum": "Posible causa de la mejora de los ingresos previsionales desde 2009: los aportes que antes iban a cuentas individuales se volcaron al sistema de reparto."
+      },
+      "fuente_url": "https://argentina.gob.ar/sites/default/files/2023/06/ley_26425_-_sistema_integrado_previsional_argentino.pdf"
+    },
+    {
+      "id": "cepo-2011", "pais": "AR", "fecha": "2011-10-28", "titulo": "Cepo cambiario",
+      "tipo": "medida de política", "prioridad": 1,
+      "secciones": ["externo", "monetario", "dolar"], "graficos": ["ext-reservas", "ext-fx", "fx-tipos", "fx-brecha", "mon-depositos"],
+      "explicacion_por_grafico": {
+        "ext-reservas": "La Comunicación A 5239 del BCRA obligó a validar cada compra de dólares con la AFIP. Buscaba frenar la salida de divisas, pero las reservas siguieron cayendo en los años siguientes.",
+        "ext-fx": "Desde entonces el dólar oficial dejó de reflejar la oferta y demanda libres: el BCRA administró su ritmo de suba.",
+        "fx-tipos": "Con las compras de dólares restringidas, nació un mercado paralelo (el blue) y luego los dólares bursátiles, que cotizaron por encima del oficial.",
+        "fx-brecha": "El origen de la brecha cambiaria moderna: la diferencia entre los dólares libres y el oficial creció mientras duraron las restricciones.",
+        "mon-depositos": "Los depósitos en dólares cayeron durante 2012 por la incertidumbre que generaron las restricciones."
+      },
+      "fuente_url": "https://www.marval.com/Publicacion/comunicacion-a-5239-emitida-por-el-banco-central-de-la-republica-argentina-el-28-10-2011-8808"
+    },
+    {
+      "id": "devaluacion-2014", "pais": "AR", "fecha": "2014-01-23", "titulo": "Devaluación de enero de 2014",
+      "tipo": "medida de política", "prioridad": 2,
+      "secciones": ["externo", "precios", "actividad"], "graficos": ["ext-fx", "ext-reservas", "act-emae-nivel"],
+      "explicacion_por_grafico": {
+        "ext-fx": "El BCRA dejó de intervenir en el mercado mayorista y el dólar oficial subió de unos 7 a 8 pesos en pocos días, el mayor salto desde la salida de la Convertibilidad.",
+        "ext-reservas": "La devaluación buscó frenar la pérdida de reservas, que venían cayendo desde la imposición del cepo.",
+        "act-emae-nivel": "Posible causa de la caída de la actividad en 2014, junto con la suba de tasas que siguió a la devaluación."
+      },
+      "fuente_url": "https://www.cronista.com/finanzas-mercados/pese-al-salto-del-dolar-en-enero-en-2014-no-hubo-devaluacion-por-la-mayor-inflacion"
+    },
+    {
+      "id": "salida-cepo-2015", "pais": "AR", "fecha": "2015-12-17", "titulo": "Salida del cepo y unificación cambiaria",
+      "tipo": "cambio de régimen", "prioridad": 1,
+      "secciones": ["externo", "precios", "dolar"], "graficos": ["ext-fx", "ext-reservas", "pre-mensual"],
+      "explicacion_por_grafico": {
+        "ext-fx": "La Comunicación A 5850 eliminó la consulta previa a la AFIP y unificó el mercado de cambios. El dólar oficial pasó de 9,6 pesos (promedio de noviembre) a 13,8 (promedio de enero de 2016).",
+        "ext-reservas": "Con la libre compra de dólares para personas y empresas, el país volvió a un tipo de cambio de flotación administrada.",
+        "pre-mensual": "La devaluación implícita en la unificación se trasladó en parte a los precios durante los primeros meses de 2016."
+      },
+      "fuente_url": "https://www.bcra.gob.ar/archivos/Pdfs/PublicacionesEstadisticas/InformeIVTrimestre2015.pdf"
+    },
+    {
+      "id": "pago-holdouts", "pais": "AR", "fecha": "2016-04-22", "titulo": "Acuerdo y pago a los holdouts",
+      "tipo": "medida de política", "prioridad": 2,
+      "secciones": ["externo", "fiscal"], "graficos": ["ext-reservas", "fis-financiero"],
+      "explicacion_por_grafico": {
+        "ext-reservas": "Argentina pagó a los fondos que no habían entrado a los canjes de 2005 y 2010 con una emisión de deuda internacional. El juez Griesa levantó las cautelares y el país recuperó el acceso a los mercados.",
+        "fis-financiero": "El regreso al financiamiento externo permitió cubrir el déficit con deuda en dólares en los años siguientes, y los intereses ganaron peso en el resultado financiero."
+      },
+      "fuente_url": "https://www.pagina12.com.ar/imprimir/diario/economia/2-297753-2016-04-25.html"
+    },
+    {
+      "id": "corrida-fmi-2018", "pais": "AR", "fecha": "2018-06-20", "titulo": "Corrida cambiaria y acuerdo stand-by con el FMI",
+      "tipo": "crisis", "prioridad": 1,
+      "secciones": ["externo", "precios", "actividad", "monetario", "empleo"], "graficos": ["ext-fx", "ext-reservas", "pre-mensual", "pre-interanual", "act-emae-nivel", "mon-badlar", "emp-salario-real"],
+      "explicacion_por_grafico": {
+        "ext-fx": "Tras la corrida iniciada en abril, el FMI aprobó un stand-by de 50.000 millones de dólares. Aun así, el dólar oficial casi se duplicó entre abril y septiembre de 2018.",
+        "ext-reservas": "El primer desembolso del FMI, de 15.000 millones de dólares, elevó las reservas, que luego se usaron en parte para contener el tipo de cambio.",
+        "pre-mensual": "La devaluación se trasladó a precios: la inflación mensual se aceleró en el segundo semestre de 2018.",
+        "pre-interanual": "La inflación anual pasó de alrededor del 25% a casi el 50% hacia fines de 2018.",
+        "act-emae-nivel": "Posible causa de la recesión de 2018-2019, junto con la sequía de ese año y las tasas de interés muy altas.",
+        "mon-badlar": "El BCRA subió fuertemente las tasas para defender el peso: la BADLAR superó el 40% anual en la segunda mitad de 2018.",
+        "emp-salario-real": "Con la inflación acelerada, el salario real cayó en 2018 y 2019."
+      },
+      "fuente_url": "https://www.imf.org/en/news/articles/2018/06/20/pr18245-argentina-imf-executive-board-approves-us50-billion-stand-by-arrangement"
+    },
+    {
+      "id": "paso-2019", "pais": "AR", "fecha": "2019-08-12", "titulo": "Derrumbe tras las PASO 2019",
+      "tipo": "shock político", "prioridad": 1,
+      "secciones": ["externo", "dolar", "precios", "monetario"], "graficos": ["ext-fx", "fx-tipos", "ext-reservas", "pre-mensual", "mon-depositos"],
+      "explicacion_por_grafico": {
+        "ext-fx": "El resultado de las primarias del domingo 11 de agosto provocó un desplome de los mercados el lunes 12: la bolsa tuvo su peor caída desde el corralito y el dólar subió alrededor de 20% en un día (la cifra exacta varía según el mercado y el horario).",
+        "fx-tipos": "Todos los tipos de dólar saltaron tras las PASO; semanas después volvieron las restricciones cambiarias.",
+        "ext-reservas": "Entre julio y septiembre de 2019 las reservas cayeron cerca de 19.000 millones de dólares por la salida de depósitos en dólares y la intervención cambiaria.",
+        "pre-mensual": "La devaluación aceleró la inflación de septiembre de 2019.",
+        "mon-depositos": "Comenzó una salida de depósitos en dólares de los bancos, que se frenó con las restricciones de septiembre."
+      },
+      "fuente_url": "https://www.emol.com/noticias/Economia/2019/08/12/957804/Bolsa-de-Buenos-Aires-registra-su-peor-caida-desde-el-corralito-y-arrastra-acciones-de-empresas-chilenas.html"
+    },
+    {
+      "id": "reperfilamiento-2019", "pais": "AR", "fecha": "2019-08-28", "titulo": "Reperfilamiento de la deuda de corto plazo",
+      "tipo": "medida de política", "prioridad": 2,
+      "secciones": ["externo"], "graficos": ["ext-reservas"],
+      "explicacion_por_grafico": {
+        "ext-reservas": "El Decreto 596/19 postergó los pagos de letras del Tesoro (Letes, Lecap, Lecer y Lelink) en manos de inversores institucionales, para cuidar las reservas que se estaban perdiendo tras las PASO."
+      },
+      "fuente_url": "https://www.marval.com/Publicacion/el-gobierno-anuncia-la-reestructuracion-de-la-deuda-financiera-de-corto-plazo-del-estado-nacional-13398?lang=es"
+    },
+    {
+      "id": "cepo-2019", "pais": "AR", "fecha": "2019-09-01", "titulo": "Vuelta del cepo cambiario",
+      "tipo": "medida de política", "prioridad": 1,
+      "secciones": ["dolar", "externo"], "graficos": ["fx-brecha", "fx-tipos", "ext-reservas", "ext-saldo"],
+      "explicacion_por_grafico": {
+        "fx-brecha": "El DNU 609/19 y las normas del BCRA volvieron a limitar la compra de dólares. La brecha del contado con liquidación, cercana a cero en agosto, superó el 20% en noviembre de 2019 y siguió ampliándose en 2020.",
+        "fx-tipos": "Desde aquí los dólares libres (blue, MEP, CCL) se separan del oficial.",
+        "ext-reservas": "Las restricciones buscaron frenar la caída de reservas posterior a las PASO.",
+        "ext-saldo": "El decreto obligó a liquidar las exportaciones en el mercado oficial, y las importaciones pasaron a requerir más autorizaciones."
+      },
+      "fuente_url": "https://www.argentina.gob.ar/normativa/nacional/decreto-609-2019-327566/texto"
+    },
+    {
+      "id": "aspo-2020", "pais": "AR", "fecha": "2020-03-20", "titulo": "Pandemia: aislamiento obligatorio (ASPO)",
+      "tipo": "shock externo", "prioridad": 1,
+      "secciones": ["actividad", "empleo", "fiscal", "monetario"], "graficos": ["act-emae-nivel", "act-emae-var", "act-ipi", "act-pbi", "emp-desempleo", "emp-actividad", "fis-primario", "mon-m2"],
+      "explicacion_por_grafico": {
+        "act-emae-nivel": "El Decreto 297/20 dispuso el aislamiento social, preventivo y obligatorio. La actividad cayó cerca de 24% entre febrero y abril de 2020, la mayor caída de la serie, y se recuperó gradualmente.",
+        "act-emae-var": "Abril de 2020 muestra la mayor caída mensual registrada, y mayo, el rebote inmediato al flexibilizarse actividades.",
+        "act-ipi": "La producción industrial se paralizó en abril de 2020, salvo los rubros esenciales.",
+        "act-pbi": "El PBI del segundo trimestre de 2020 cayó con fuerza contra el mismo trimestre de 2019; la economía cerró el año con una contracción de dos dígitos.",
+        "emp-desempleo": "El desempleo subió en el segundo trimestre de 2020, aunque menos de lo esperable porque muchas personas dejaron de buscar trabajo (ver tasa de actividad).",
+        "emp-actividad": "La tasa de actividad se desplomó: la cuarentena impidió buscar empleo, y muchas personas salieron de la fuerza de trabajo.",
+        "fis-primario": "El déficit primario se amplió por la caída de la recaudación y los programas de emergencia (IFE y ATP).",
+        "mon-m2": "El déficit se financió en gran parte con emisión del BCRA: el dinero creció con fuerza en 2020."
+      },
+      "fuente_url": "https://www.boletinoficial.gob.ar/detalleAviso/primera/227042/20200320"
+    },
+    {
+      "id": "reestructuracion-2020", "pais": "AR", "fecha": "2020-08-31", "titulo": "Reestructuración de la deuda en moneda extranjera",
+      "tipo": "medida de política", "prioridad": 2,
+      "secciones": ["fiscal"], "graficos": ["fis-financiero"],
+      "explicacion_por_grafico": {
+        "fis-financiero": "El Ministerio de Economía anunció que se reestructuró el 99% de los bonos en dólares bajo ley extranjera (y días después el 98,8% de los de ley local), con menores tasas de interés y vencimientos postergados."
+      },
+      "fuente_url": "https://www.marval.com/Publicacion/cierre-del-canje-de-deuda-soberana-bajo-ley-extranjera-se-reestructuro-el-99-de-los-bonos-13770?lang=es"
+    },
+    {
+      "id": "eff-fmi-2022", "pais": "AR", "fecha": "2022-03-25", "titulo": "Acuerdo de facilidades extendidas con el FMI",
+      "tipo": "medida de política", "prioridad": 2,
+      "secciones": ["externo"], "graficos": ["ext-reservas"],
+      "explicacion_por_grafico": {
+        "ext-reservas": "El FMI aprobó un programa de 44.000 millones de dólares para refinanciar el stand-by de 2018. El desembolso inicial se usó en buena parte para pagar vencimientos con el propio Fondo."
+      },
+      "fuente_url": "https://www.imf.org/en/news/articles/2022/03/25/pr2289-argentina-imf-exec-board-approves-extended-arrangement-concludes-2022-article-iv-consultation"
+    },
+    {
+      "id": "renuncia-guzman", "pais": "AR", "fecha": "2022-07-02", "titulo": "Renuncia del ministro de Economía",
+      "tipo": "shock político", "prioridad": 2,
+      "secciones": ["dolar", "precios"], "graficos": ["fx-brecha", "fx-tipos", "pre-mensual"],
+      "explicacion_por_grafico": {
+        "fx-brecha": "Martín Guzmán renunció en medio de tensiones dentro de la coalición de gobierno. La brecha del dólar blue superó el 110% en julio de 2022.",
+        "fx-tipos": "Los dólares libres saltaron en las semanas siguientes a la renuncia.",
+        "pre-mensual": "Posible causa de la aceleración de la inflación de julio de 2022, la más alta en dos décadas hasta ese momento."
+      },
+      "fuente_url": "https://www.lanacion.com.ar/agencias/ministro-argentino-de-economia-renuncia-y-ahonda-incertidumbre-financiera-nid02072022"
+    },
+    {
+      "id": "sequia-2023", "pais": "AR", "fecha": "2023-03-09", "titulo": "Sequía 2022/23",
+      "tipo": "shock externo", "prioridad": 1,
+      "secciones": ["externo", "actividad"], "graficos": ["ext-comercio", "ext-saldo", "ext-saldo-12m", "ext-reservas", "act-emae-nivel"],
+      "explicacion_por_grafico": {
+        "ext-comercio": "La peor sequía en décadas redujo fuertemente la cosecha de soja, maíz y trigo. Las exportaciones agrícolas cayeron en miles de millones de dólares en 2023.",
+        "ext-saldo": "Sin las exportaciones del agro, el saldo comercial pasó a ser deficitario en varios meses de 2023, como marzo y mayo.",
+        "ext-saldo-12m": "El superávit comercial acumulado en doce meses se evaporó durante 2023 por la caída de las exportaciones agrícolas.",
+        "ext-reservas": "Con menos dólares del agro, el BCRA perdió reservas durante 2023.",
+        "act-emae-nivel": "El agro se contrajo con fuerza y restó crecimiento a la economía en 2023."
+      },
+      "fuente_url": "https://www.bloomberglinea.com/2023/03/09/cifras-de-la-sequia-historica-en-argentina-dolares-que-no-ingresaran-y-perdidas-en-el-sector/"
+    },
+    {
+      "id": "devaluacion-paso-2023", "pais": "AR", "fecha": "2023-08-14", "titulo": "Devaluación tras las PASO 2023",
+      "tipo": "medida de política", "prioridad": 2,
+      "secciones": ["precios", "externo", "dolar", "monetario"], "graficos": ["pre-mensual", "ext-fx", "fx-tipos", "mon-badlar"],
+      "explicacion_por_grafico": {
+        "pre-mensual": "El día después de las PASO el BCRA llevó el dólar oficial a 350 pesos (cerca de 22% de suba). La inflación mensual pasó a 12,4% en agosto y 12,7% en septiembre.",
+        "ext-fx": "Salto discreto del tipo de cambio oficial, que quedó fijo en 350 pesos hasta después de las elecciones generales.",
+        "fx-tipos": "El oficial saltó a 350 pesos, pero los dólares libres también subieron y la brecha volvió a ampliarse en las semanas siguientes.",
+        "mon-badlar": "El BCRA subió la tasa de política a 118% anual; la BADLAR pasó de 93% en julio a 114% en septiembre."
+      },
+      "fuente_url": "https://www.bloomberglinea.com/2023/08/14/devaluacion-en-argentina-tras-las-paso-el-dolar-oficial-salta-22/"
+    },
+    {
+      "id": "devaluacion-dic-2023", "pais": "AR", "fecha": "2023-12-12", "titulo": "Devaluación y programa de estabilización",
+      "tipo": "cambio de régimen", "prioridad": 1,
+      "secciones": ["precios", "externo", "dolar", "actividad", "empleo", "fiscal", "monetario"],
+      "graficos": ["pre-mensual", "pre-interanual", "ext-fx", "fx-tipos", "fx-brecha", "act-emae-nivel", "emp-salario-real", "fis-primario", "mon-m2"],
+      "explicacion_por_grafico": {
+        "pre-mensual": "El ministro Luis Caputo llevó el dólar oficial de unos 366 a 800 pesos (devaluación de 54%). La inflación mensual saltó a 25,5% en diciembre y luego bajó: 20,6% en enero y 13,2% en febrero de 2024.",
+        "pre-interanual": "La inflación interanual superó el 200% a comienzos de 2024 y bajó a lo largo del año con la desaceleración de la mensual.",
+        "ext-fx": "Salto del tipo de cambio oficial a 800 pesos; desde allí, ajuste programado de 2% mensual (crawling peg) hasta abril de 2025.",
+        "fx-tipos": "El oficial se acercó a los dólares libres: el salto del mayorista fue mucho mayor que el de los paralelos.",
+        "fx-brecha": "La brecha del contado con liquidación pasó de 140% en noviembre a 47% en diciembre de 2023.",
+        "act-emae-nivel": "Posible causa de la caída de la actividad en el primer semestre de 2024, junto con el ajuste fiscal y la caída del salario real; la recuperación empezó a mitad de año.",
+        "emp-salario-real": "Con la inflación de diciembre y enero, el salario real cayó con fuerza y se recuperó gradualmente durante 2024.",
+        "fis-primario": "El programa incluyó un ajuste del gasto (obra pública, transferencias a provincias, subsidios) que llevó a superávit primario desde enero de 2024.",
+        "mon-m2": "El dinero en términos reales cayó con fuerza: los precios subieron mucho más rápido que la cantidad de pesos."
+      },
+      "fuente_url": "https://batimes.com.ar/news/economy/argentinas-milei-devalues-peso-by-54-in-first-batch-of-shock-measures.phtml"
+    },
+    {
+      "id": "bandas-fmi-2025", "pais": "AR", "fecha": "2025-04-11", "titulo": "Bandas cambiarias, salida parcial del cepo y nuevo acuerdo con el FMI",
+      "tipo": "cambio de régimen", "prioridad": 1,
+      "secciones": ["dolar", "externo"], "graficos": ["fx-tipos", "fx-brecha", "ext-fx", "ext-reservas"],
+      "explicacion_por_grafico": {
+        "fx-tipos": "El BCRA reemplazó el crawling peg por una flotación entre bandas (piso de 1.000 y techo de 1.400 pesos, que se ampliaban 1% por mes) y liberó la compra de dólares a las personas.",
+        "fx-brecha": "Con la salida del cepo para personas humanas, la brecha del contado con liquidación prácticamente desapareció: de 16% en marzo a menos de 1% en mayo de 2025.",
+        "ext-fx": "Desde el 14 de abril de 2025 el dólar mayorista flota dentro de la banda; el salto inicial fue moderado.",
+        "ext-reservas": "El FMI aprobó un programa de 20.000 millones de dólares con un desembolso inicial de unos 12.000 millones: las reservas subieron de unos 25.000 a 39.000 millones de dólares entre marzo y abril."
+      },
+      "fuente_url": "https://www.bcra.gob.ar/noticias/inicio-de-la-fase-3-del-programa-economico/"
+    },
+    {
+      "id": "swap-eeuu-2025", "pais": "AR", "fecha": "2025-10-09", "titulo": "Swap de 20.000 millones de dólares con el Tesoro de EE.UU.",
+      "tipo": "medida de política", "prioridad": 2,
+      "secciones": ["dolar", "externo"], "graficos": ["fx-tipos", "ext-reservas"],
+      "explicacion_por_grafico": {
+        "fx-tipos": "En la antesala de las elecciones, el Tesoro de EE.UU. anunció un acuerdo de swap de monedas por hasta 20.000 millones de dólares con el BCRA y compró pesos en el mercado, lo que contuvo la suba del dólar.",
+        "ext-reservas": "El acuerdo de estabilización cambiaria se firmó el 20 de octubre; el BCRA usó una parte y la devolvió en diciembre de 2025."
+      },
+      "fuente_url": "https://www.infobae.com/economia/2025/10/09/el-tesoro-de-eeuu-comenzo-a-inyectar-dolares-en-el-mercado-cambiario-y-bessent-confirmo-el-swap-por-usd-20000-millones/"
+    },
+    {
+      "id": "legislativas-2025", "pais": "AR", "fecha": "2025-10-26", "titulo": "Elecciones legislativas 2025",
+      "tipo": "shock político", "prioridad": 2,
+      "secciones": ["dolar"], "graficos": ["fx-tipos", "fx-brecha"],
+      "explicacion_por_grafico": {
+        "fx-tipos": "El oficialismo obtuvo cerca del 41% de los votos a nivel nacional. Posible causa de la baja de los dólares y del riesgo país en los días siguientes, tras semanas de presión cambiaria previa a la elección.",
+        "fx-brecha": "La incertidumbre preelectoral había ampliado la diferencia entre los dólares financieros y el oficial; tras el resultado, la tensión cambiaria se moderó."
+      },
+      "fuente_url": "https://www.forbesargentina.com/today/gano-milei-todo-pais-4084-escaso-margen-provincia-buenos-aires-avanza-congreso-mas-reformista-n80477"
+    },
+    {
+      "id": "bandas-inflacion-2026", "pais": "AR", "fecha": "2026-01-01", "titulo": "Las bandas cambiarias pasan a ajustarse por inflación",
+      "tipo": "cambio de régimen", "prioridad": 2,
+      "secciones": ["dolar", "externo"], "graficos": ["fx-tipos", "ext-fx"],
+      "explicacion_por_grafico": {
+        "fx-tipos": "Desde el 1 de enero de 2026 el piso y el techo de la banda dejaron de subir 1% por mes y pasaron a moverse según la inflación informada por el INDEC, con un programa de compra de reservas del BCRA.",
+        "ext-fx": "Cambio en la regla de la banda cambiaria: los límites se ajustan por la inflación de dos meses antes en lugar de un ritmo fijo."
+      },
+      "fuente_url": "https://www.lanacion.com.ar/economia/arranca-el-nuevo-esquema-cambiario-con-la-mira-puesta-en-el-dolar-y-las-reservas-nid01012026/"
+    }
+  ]
+}

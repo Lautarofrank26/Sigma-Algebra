@@ -20,6 +20,7 @@ import { fmtNum, fmtDate, fmtAge } from '../lib/format.js';
 import { seriesToCsv, downloadCsv } from '../lib/csv.js';
 import { aggregate, derivable, spanMonths, FREQ_LABEL } from '../lib/aggregate.js';
 import { openFocus } from './focus.js';
+import { eventBlocks } from './events.js';
 
 const RANGES = [[1, '1A'], [3, '3A'], [5, '5A'], [10, '10A'], [0, 'Máx']];
 const KIND_NOTE = { flow: 'suma del período', stock: 'valor de fin de período', price: 'promedio del período', index: 'promedio del período', rate: 'promedio del período', inflation: 'compuesta del período' };
@@ -48,7 +49,12 @@ function buildView(data, panel, freq) {
   return { view: { ...data, byId }, spec: { ...panel, title, datasets }, original, note };
 }
 
-export function createPanel(data, panel) {
+export function createPanel(data, original) {
+  // Eventos del gráfico (rombos, tarjeta y lista): solo los que caen dentro de la historia de la serie
+  const firstDate = resolve(data, original.datasets[0].ref)?.points?.[0]?.[0] ?? '0000';
+  const evs = (original.events ?? []).filter((e) => e.fecha >= firstDate);
+  const ev = evs.length ? eventBlocks(original.id, evs) : null;
+  const panel = ev ? { ...original, events: evs, _onEvent: ev.show } : original;
   const tl = panel.timeline ?? null;
   const head = resolve(data, panel.headline.ref);
   const lastValue = head ? `${panel.headline.prefix ?? ''}${fmtNum(head.points[head.points.length - 1][1], panel.headline.decimals)}${panel.headline.suffix ?? ''}` : null;
@@ -148,6 +154,8 @@ export function createPanel(data, panel) {
     ]),
     controls,
     el('div', { class: 'chart-box' }, canvas),
+    ev?.card ?? null,
+    ev?.list ?? null,
     el('details', {}, [el('summary', {}, 'Cómo leerlo'), el('p', {}, panel.read)]),
     metaNode,
     el('div', { class: 'src' }, [el('span', {}, tl ? '' : `Fuente: ${panel.source}`), el('span', { class: 'panel-actions' }, [focusButton, csvButton])]),

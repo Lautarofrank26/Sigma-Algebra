@@ -13,3 +13,22 @@
 .sources-foot ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.15rem; }
 .sources-foot li::before { content: "· "; }
 .sources-foot p { max-width: 80ch; }
+
+/* Eventos en los gráficos (rombos violetas): tarjeta del evento elegido y lista desplegable */
+:root { --event: #7B4FC9; }
+.ev-card { position: relative; margin-top: 0.5rem; padding: 0.7rem 0.9rem; border: 1px solid var(--line); border-left: 3px solid var(--event); border-radius: var(--radius); background: var(--surface-2, #F5F7FA); display: grid; gap: 0.3rem; font-size: var(--fs-sm); }
+.ev-card[hidden] { display: none; }
+.ev-card-head { display: flex; align-items: center; gap: 0.45rem; }
+.ev-card h4 { font-size: var(--fs-md, 1rem); font-weight: 700; color: var(--ink); }
+.ev-card p { color: var(--ink-2); max-width: 70ch; }
+.ev-card .ev-src { font-size: var(--fs-xs); color: var(--ink-3); }
+.ev-close { margin-left: auto; font: inherit; font-size: 1.1rem; line-height: 1; border: 0; background: none; color: var(--ink-3); cursor: pointer; padding: 0 0.2rem; }
+.ev-close:hover { color: var(--ink); }
+.ev-diamond { width: 8px; height: 8px; background: var(--event); transform: rotate(45deg); display: inline-block; flex: none; }
+.ev-list { margin-top: 0.4rem; font-size: var(--fs-sm); }
+.ev-list summary { cursor: pointer; color: var(--ink-2); font-weight: 600; }
+.ev-list ul { list-style: none; margin: 0.4rem 0 0; padding: 0; display: grid; gap: 0.15rem; }
+.ev-item { font: inherit; text-align: left; display: inline-flex; align-items: center; gap: 0.45rem; background: none; border: 0; padding: 0.15rem 0; color: var(--ink-2); cursor: pointer; }
+.ev-item:hover { color: var(--ink); text-decoration: underline; }
+.ev-item .num { color: var(--ink-3); font-size: var(--fs-xs); }
+.ev-tag { font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--event); border: 1px solid var(--event); border-radius: var(--radius-pill); padding: 0 0.4rem; }

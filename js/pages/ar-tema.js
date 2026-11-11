@@ -3,6 +3,7 @@ import { TEMAS, NEWS_MATCH } from '../config/ar/index.js';
 import { loadCountry } from '../data/loader.js';
 import { initPage, mountCountry, showError } from '../app.js';
 import { createMiniNews } from '../ui/news.js';
+import { loadEvents } from '../ui/events.js';
 
 const tema = document.body.dataset.tema;
 const config = TEMAS[tema];
@@ -14,7 +15,8 @@ if (!config) {
 } else {
   // Al final de la sección: hasta 3 noticias de alto impacto de este rubro (si no hay, no se muestra) y las fuentes
   const tail = NEWS_MATCH[tema] ? createMiniNews({ url: 'data/noticias-ar.json', match: NEWS_MATCH[tema] }).node : null;
-  loadCountry(config)
-    .then((data) => mountCountry(page, config, data, root, 'ar', { tail, sourcesFoot: true }))
+  // Eventos marcados en los gráficos (data/eventos.json); si no cargan, los gráficos se muestran igual
+  Promise.all([loadCountry(config), loadEvents()])
+    .then(([data, events]) => mountCountry(page, config, data, root, 'ar', { tail, sourcesFoot: true, events }))
     .catch((err) => showError(root, err));
 }

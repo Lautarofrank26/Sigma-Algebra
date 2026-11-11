@@ -19,10 +19,13 @@ export function initPage(activeId, subId) {
   return { months: 36, panels: [] };
 }
 /** Crea los paneles de gráfico y los registra en la página */
-function buildPanels(page, data, specs) {
+function buildPanels(page, data, specs, events = []) {
   return el('div', { class: 'chart-grid' }, specs.map((original) => {
     // Temporalidad propia: la del propio panel o la de config/timelines.js
-    const spec = original.timeline || !TIMELINES[original.id] ? original : { ...original, timeline: TIMELINES[original.id] };
+    let spec = original.timeline || !TIMELINES[original.id] ? original : { ...original, timeline: TIMELINES[original.id] };
+    // Eventos marcados en este gráfico (data/eventos.json, campo `graficos`)
+    const mine = events.filter((e) => e.graficos?.includes(original.id));
+    if (mine.length) spec = { ...spec, events: mine };
     const panel = createPanel(data, spec);
     page.panels.push(panel);
     return panel.node;
@@ -41,7 +44,7 @@ export function mountCountry(page, country, data, root, group, opts = {}) {
     root.replaceChildren(...[
       // opts.lead: bloque que reemplaza a la lectura macro (p. ej. las noticias del Resumen de Argentina); se crea una sola vez
       opts.lead ?? el('div', { class: 'analysis-grid' }, renderAnalysis(country, data)),
-      buildPanels(page, data, country.panels),
+      buildPanels(page, data, country.panels, opts.events),
       // opts.tail: bloque al final (p. ej. "Últimas de este rubro"); opts.sourcesFoot: pie con fuentes y fecha
       opts.tail ?? null,
       opts.sourcesFoot ? sourcesFoot(country, data) : null,
@@ -92,7 +95,7 @@ export function mountFx(page, dolar, data, root, opts = {}) {
   root.replaceChildren(...[
     el('div', { class: 'analysis-grid' }, renderAnalysis(dolar, data)),
     quotesBox,
-    buildPanels(page, data, dolar.panels),
+    buildPanels(page, data, dolar.panels, opts.events),
     opts.tail ?? null,
     opts.sourcesFoot ? sourcesFoot(dolar, data) : null,
   ].filter(Boolean));
