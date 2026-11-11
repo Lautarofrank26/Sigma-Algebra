@@ -42,3 +42,4 @@
 .heat-table tbody th { position: sticky; left: 0; background: var(--surface); text-align: left; font-weight: 600; color: var(--ink-2); z-index: 1; max-width: 16rem; white-space: normal; }
 .heat-table td { text-align: right; min-width: 3.4rem; }
 .heat-table td.sd { color: var(--ink-3); text-align: center; }
+.heat-table thead th:first-child { left: 0; z-index: 2; text-align: left; }

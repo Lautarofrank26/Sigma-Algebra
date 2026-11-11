@@ -146,6 +146,80 @@ def yoy(level):
     return {p: (v / level[shift(p, -12)] - 1) * 100 for p, v in level.items() if shift(p, -12) in level}
 
 
+EMAE_SECTORS = [
+    ('emae_s_agro', 'Agro (agricultura, ganadería, caza y silvicultura)', '11.3_ISOM_2004_M_39'),
+    ('emae_s_pesca', 'Pesca', '11.3_VIPAA_2004_M_5'),
+    ('emae_s_minas', 'Minas y canteras', '11.3_ISD_2004_M_26'),
+    ('emae_s_industria', 'Industria manufacturera', '11.3_VMASD_2004_M_23'),
+    ('emae_s_electricidad', 'Electricidad, gas y agua', '11.3_ITC_2004_M_21'),
+    ('emae_s_construccion', 'Construcción', '11.3_VMATC_2004_M_12'),
+    ('emae_s_comercio', 'Comercio', '11.3_AGCS_2004_M_41'),
+    ('emae_s_hoteles', 'Hoteles y restaurantes', '11.3_P_2004_M_20'),
+    ('emae_s_transporte', 'Transporte y comunicaciones', '11.3_EMC_2004_M_25'),
+    ('emae_s_financiero', 'Intermediación financiera', '11.3_IM_2004_M_25'),
+    ('emae_s_inmobiliario', 'Inmobiliarias, empresariales y alquiler', '11.3_SEGA_2004_M_48'),
+    ('emae_s_admin', 'Administración pública', '11.3_C_2004_M_60'),
+    ('emae_s_ensenanza', 'Enseñanza', '11.3_CMMR_2004_M_10'),
+    ('emae_s_salud', 'Salud', '11.3_HR_2004_M_24'),
+]
+
+
+def splice(old, new, at):
+    """Empalme hacia atrás: antes de `at`, la serie vieja reescalada para coincidir con la nueva en `at` (mismo crecimiento)"""
+    if at not in old or at not in new or not old[at]:
+        raise RuntimeError(f'No hay mes en común ({at}) para empalmar')
+    k = new[at] / old[at]
+    out = {p: v * k for p, v in old.items() if p < at}
+    out.update(new)
+    return out
+
+
+def activity(add):
+    # La API devuelve todas las series de una consulta en la frecuencia más baja: mensuales y trimestrales van por separado
+    monthly = ['143.3_NO_PR_2004_A_31', '143.3_NO_PR_2004_A_21', '10.3_ISD_1993_M_31', '10.3_ISOM_1993_M_29',
+               '33.2_ISAC_SIN_EDAD_0_M_23_56', '32.3_ISE_2004_M_23', '31.3_UNG_2004_M_18', '29.3_UNG_2006_M_18'] + [s[2] for s in EMAE_SECTORS]
+    quarterly = ['4.2_OGP_2004_T_17', '2.2_OGP_1993_T_17', '3.2_OGP_D_2004_T_17']
+    d = {}
+    for group in (monthly, quarterly):
+        try:
+            d.update(datos(group))
+        except RuntimeError as e:
+            log(f'  aviso actividad: {e}')
+            d.update({i: {} for i in group})
+
+    def safe(iid, label, unit, freq, source, fn, **extra):
+        try:
+            add(iid, label, unit, freq, source, pts(fn()), **extra)
+        except (RuntimeError, KeyError) as e:
+            log(f'  ERROR {iid}: {e}')
+            add(iid, '', '', freq, '', [])
+
+    # EMAE empalmado: base 1993 hasta dic-2003, base 2004 desde ene-2004 (antes de la intervención del INDEC)
+    safe('emae_long', 'EMAE desestacionalizado, empalmado', 'índice 2004=100', 'M',
+         'INDEC · EMAE base 1993 (hasta 2003) empalmado con base 2004',
+         lambda: splice(d['10.3_ISD_1993_M_31'], d['143.3_NO_PR_2004_A_31'], '2004-01'))
+    safe('emae_orig_long', 'EMAE serie original, empalmado', 'índice 2004=100', 'M',
+         'INDEC · EMAE base 1993 (hasta 2003) empalmado con base 2004, serie original',
+         lambda: splice(d['10.3_ISOM_1993_M_29'], d['143.3_NO_PR_2004_A_21'], '2004-01'))
+    # PBI trimestral a precios constantes: base 1993 hasta 2003, base 2004 desde 2004
+    safe('gdp_long', 'PBI a precios constantes, empalmado', 'millones de $ de 2004', 'Q',
+         'INDEC · PBI base 1993 (hasta 2003) empalmado con base 2004',
+         lambda: splice(d['2.2_OGP_1993_T_17'], d['4.2_OGP_2004_T_17'], '2004-01'))
+    safe('gdp_sa', 'PBI desestacionalizado', 'millones de $ de 2004', 'Q',
+         'INDEC · Oferta y demanda globales, PBI desestacionalizado base 2004', lambda: d['3.2_OGP_D_2004_T_17'])
+    # ISAC sin estacionalidad: serie anterior (1993-2015) empalmada con la actual en ene-2012
+    safe('isac_long', 'ISAC sin estacionalidad, empalmado', 'índice', 'M',
+         'INDEC · ISAC serie anterior (hasta 2011) empalmada con la serie actual (desde 2012)',
+         lambda: splice(d['32.3_ISE_2004_M_23'], d['33.2_ISAC_SIN_EDAD_0_M_23_56'], '2012-01'))
+    # Capacidad instalada: dos metodologías sin mes en común, se muestran como series separadas
+    safe('ucii', 'Utilización de la capacidad instalada (desde 2016)', '% de la capacidad', 'M',
+         'INDEC · UCII, metodología actual', lambda: d['31.3_UNG_2004_M_18'])
+    safe('ucii_old', 'Utilización de la capacidad instalada (2002-2015)', '% de la capacidad', 'M',
+         'INDEC · UCII, metodología anterior', lambda: d['29.3_UNG_2006_M_18'])
+    for iid, label, sid in EMAE_SECTORS:
+        add(iid, label, 'índice 2004=100', 'M', 'INDEC · EMAE por sector, serie original', pts(d[sid]))
+
+
 def main():
     try:
         with open(OUT, encoding='utf-8') as f:
@@ -155,7 +229,11 @@ def main():
     inds = []
 
     def add(iid, label, unit, freq, source, points, **extra):
-        if not points and iid in old:
+        # Control: una serie mensual que llega solo con meses de inicio de trimestre vino colapsada por la API
+        if freq == 'M' and len(points) > 24 and all(int(p[0][5:7]) in (1, 4, 7, 10) for p in points):
+            log(f'  {iid}: llegó con frecuencia trimestral, se descarta')
+            points = []
+        if not points and iid in old and not (freq == 'M' and len(old[iid]['points']) > 24 and all(int(p[0][5:7]) in (1, 4, 7, 10) for p in old[iid]['points'])):
             log(f'  {iid}: sin datos nuevos, se conserva la serie anterior')
             inds.append(old[iid])
             return
@@ -204,6 +282,9 @@ def main():
         log(f'  aviso REM: {e}')
         add('rem_12m', '', '', 'M', '', [])
         add('rem_12m_target', '', '', 'M', '', [])
+
+    # --- actividad ---
+    activity(add)
 
     # Las series viejas que no se volvieron a generar se conservan
     ids = {i['id'] for i in inds}
