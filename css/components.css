@@ -136,6 +136,22 @@ td small { display: block; color: var(--ink-3); font-size: var(--fs-xs); }
 .cal-ar { background: var(--ar-soft); color: var(--ar-ink); }
 .cal-us { background: var(--us-soft); color: var(--us-ink); }
 .cal-note { font-size: var(--fs-xs); color: var(--ink-3); margin-top: var(--gap-1); }
+.cal-eu { background: var(--surface-2); color: var(--ink-2); }
+
+/* Impacto (alto = rojo, medio = amarillo) y filtro por región */
+.cal-tags { display: flex; flex-wrap: wrap; align-items: center; gap: 0.3rem; }
+.cal-list .cal-tags { flex-direction: column; align-items: flex-end; }
+.cal-impact { display: inline-flex; align-items: center; gap: 0.35rem; font-size: 0.6875rem; font-weight: 600; padding: 0.1rem 0.55rem; border-radius: var(--radius-pill); white-space: nowrap; }
+.cal-impact::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: currentColor; }
+.cal-impact.alto { background: rgba(179, 55, 47, 0.1); color: var(--bad); }
+.cal-impact.medio { background: rgba(224, 179, 58, 0.22); color: #7A5A00; }
+.cal-impact.medio::before { background: var(--heat-mid); }
+.cal-list-head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0.5rem; }
+.cal-filters { display: flex; flex-wrap: wrap; gap: 0.3rem; }
+.cal-filters .pill { font: inherit; font-size: var(--fs-xs); font-weight: 600; cursor: pointer; background: var(--surface); color: var(--ink-2); border: 1px solid var(--line); padding: 0.2rem 0.7rem; }
+.cal-filters .pill:hover { color: var(--ink); border-color: var(--ink-3); }
+.cal-filters .pill[aria-pressed="true"] { background: var(--ink); border-color: var(--ink); color: #fff; }
+.cal-filters .pill:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
 @media (max-width: 760px) {
   .calendar { grid-template-columns: minmax(0, 1fr); }
   .cal-list li a { grid-template-columns: 6rem minmax(0, 1fr) auto; }
