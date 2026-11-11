@@ -28,11 +28,11 @@ export const TRANSFORMS = {
   /** Valor dividido 1000 (p. ej. millones -> miles de millones) */
   k: (points) => points.map(([d, v]) => [d, v / 1000]),
 
-  /** Suma móvil de 12 períodos (acumulado de 12 meses) */
-  sum12: (points) => points.slice(11).map(([d], i) => [d, points.slice(i, i + 12).reduce((a, p) => a + p[1], 0)]),
+  /** Suma móvil de un año de períodos (12 meses, 4 trimestres, 2 semestres) */
+  sum12: (points, freq) => { const n = PER_YEAR[freq] ?? 12; return points.slice(n - 1).map(([d], i) => [d, points.slice(i, i + n).reduce((a, p) => a + p[1], 0)]); },
 
-  /** Acumulado de 12 meses, en miles (millones -> miles de millones) */
-  sum12k: (points) => points.slice(11).map(([d], i) => [d, points.slice(i, i + 12).reduce((a, p) => a + p[1], 0) / 1000]),
+  /** Acumulado de un año de períodos, en miles (millones -> miles de millones) */
+  sum12k: (points, freq) => { const n = PER_YEAR[freq] ?? 12; return points.slice(n - 1).map(([d], i) => [d, points.slice(i, i + n).reduce((a, p) => a + p[1], 0) / 1000]); },
 
   /** Promedio móvil de 3 períodos de la diferencia absoluta */
   diff3avg: (points) => {

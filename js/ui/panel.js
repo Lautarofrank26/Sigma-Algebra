@@ -6,6 +6,7 @@
  * frecuencia y de rango, independientes de los demás gráficos, y no usa el período general de la página.
  *   timeline: {
  *     kind:   'flow' | 'stock' | 'price' | 'index' | 'rate' | 'inflation'   (regla de agregación, ver lib/aggregate.js)
+ *     kinds:  { idDeSerie: kind } si el gráfico mezcla series de distinto tipo;  note: aclaración de la agregación en la leyenda
  *     freq:   frecuencia inicial ('M', 'Q', 'S', 'A'),   range: rango inicial en años (1, 3, 5, 10; 0 = máximo)
  *     freqs:  frecuencias que se ofrecen (las que no se pueden derivar de la original quedan deshabilitadas, no ocultas)
  *     desc:   { base, agg } texto del título según sea la frecuencia original o una agregada (p. ej. 'var. % m/m' / 'var. % compuesta')
@@ -34,14 +35,14 @@ function buildView(data, panel, freq) {
     for (const id of new Set(datasets.map((d) => d.ref.id))) {
       const ind = data.byId[id];
       if (!ind || ind.freq === freq) continue;
-      byId[id] = { ...ind, points: aggregate(ind.points, ind.freq, freq, tl.kind), freq };
+      byId[id] = { ...ind, points: aggregate(ind.points, ind.freq, freq, tl.kinds?.[id] ?? tl.kind), freq };
       aggregated = true;
     }
   }
   const original = data.byId[datasets[0].ref.id]?.freq;
-  const note = aggregated ? KIND_NOTE[tl.kind] : null;
-  // La variación interanual de la inflación no es "compuesta del período": la nota va solo en las series que sí se agregan
-  if (note) datasets.forEach((d) => { if (!(tl.kind === 'inflation' && d.ref.t === 'yoy')) d.label = `${d.label} · ${note}`; });
+  const note = aggregated ? (tl.note ?? KIND_NOTE[tl.kind]) : null;
+  // La variación interanual no es "compuesta" ni "promedio" del período: la nota va solo en las series que sí se agregan
+  if (note) datasets.forEach((d) => { if (d.ref.t !== 'yoy') d.label = `${d.label} · ${note}`; });
   const desc = tl.desc ? (aggregated ? tl.desc.agg : tl.desc.base) : null;
   const title = `${panel.title} – ${FREQ_LABEL[freq].toLowerCase()}${desc ? `, ${desc}` : ''}`;
   return { view: { ...data, byId }, spec: { ...panel, title, datasets }, original, note };

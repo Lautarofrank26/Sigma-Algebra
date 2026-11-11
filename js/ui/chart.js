@@ -15,7 +15,10 @@ const css = (node, name) => getComputedStyle(node).getPropertyValue(name).trim()
 function palette(node) {
   return {
     accent: css(node, '--accent'),
-    series2: css(node, '--series-2'),
+    // Segunda serie: naranja; en las páginas de EE.UU. (acento bronce) pasa a ser el azul, para no parecerse al acento
+    series2: css(node, '--accent').toLowerCase() === css(node, '--us').toLowerCase() ? css(node, '--ar') : css(node, '--series-2'),
+    series3: css(node, '--series-3'),
+    series4: css(node, '--series-4'),
     bad: css(node, '--bad'),
     ink3: css(node, '--ink-3'),
     ink: css(node, '--ink'),
@@ -67,12 +70,23 @@ export function drawChart(canvas, data, panel, months, previous) {
 
   const percentUnit = panel.unit.includes('%');
 
+  // Colores de las series: con 2 o más líneas, cada una toma un color bien distinto (acento, naranja/azul, verde, violeta)
+  // por posición, en lugar del gris azulado que se confundía con el acento. Los gráficos de dólares (fx-*) conservan
+  // los colores propios de cada cotización.
+  const autoColors = !String(panel.id ?? '').startsWith('fx-');
+  const sequence = [c.series2, c.series3, c.series4];
+  let lineIndex = 0;
+
   const datasets = sliced.map(({ spec, pts }) => {
     const map = new Map(pts);
     const values = dates.map((d) => (map.has(d) ? map.get(d) : null));
-    // color: nombre de la paleta base, o una variable CSS directa ("--fx-blue")
-    const color = (spec.color?.startsWith('--') ? css(canvas, spec.color) : c[spec.color]) || c.accent;
     const isBar = spec.type === 'bar';
+    // color: nombre de la paleta base, o una variable CSS directa ("--fx-blue")
+    let color = (spec.color?.startsWith('--') ? css(canvas, spec.color) : c[spec.color]) || c.accent;
+    const position = isBar ? -1 : lineIndex++;
+    const reassignable = spec.color === 'series2' || spec.color?.startsWith('--fx-');
+    if (autoColors && reassignable) color = position > 0 ? sequence[Math.min(position - 1, sequence.length - 1)] : c.series2;
+    const dash = !isBar && position >= 2 ? [6, 4] : undefined; // desde la tercera línea, también se diferencia por el trazo
     return {
       type: spec.type,
       yAxisID: spec.axis === 'right' ? 'y1' : 'y', // eje derecho para series de otra escala
@@ -86,6 +100,7 @@ export function drawChart(canvas, data, panel, months, previous) {
           ? `${color}22`
           : color,
       borderWidth: isBar ? 0 : 2.25,
+      borderDash: dash,
       borderRadius: isBar ? 2 : 0,
       pointRadius: 0,
       pointHoverRadius: 4,

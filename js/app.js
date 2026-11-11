@@ -1,5 +1,5 @@
 /**
- * app.js — piezas compartidas por las páginas: selector de período, montaje de
+ * app.js — piezas compartidas por las páginas: montaje de
  * secciones de país / dólar y manejo de errores de carga.
  * Cada página (js/pages/*.js) compone estas funciones.
  */
@@ -11,53 +11,18 @@ import { fetchLiveQuotes, refreshData, usedIds, REFRESH_MS, DATA_REFRESH_MS } fr
 import { mountShell } from './ui/shell.js';
 import { revealIn } from './ui/reveal.js';
 import { fmtDate } from './lib/format.js';
+import { TIMELINES } from './config/timelines.js';
 
-const RANGES = [
-  { label: '1 año', months: 12 },
-  { label: '3 años', months: 36 },
-  { label: '5 años', months: 60 },
-  { label: 'Todo', months: 0 },
-];
-const STORAGE_KEY = 'macroeconomics:range';
-
-/** El período elegido se recuerda entre páginas (comodidad; si falla el storage, se usa el default) */
-function readRange() {
-  try {
-    const v = Number(localStorage.getItem(STORAGE_KEY));
-    if (RANGES.some((r) => r.months === v) && localStorage.getItem(STORAGE_KEY) !== null) return v;
-  } catch { /* storage bloqueado */ }
-  return 36;
-}
-function saveRange(months) {
-  try { localStorage.setItem(STORAGE_KEY, String(months)); } catch { /* storage bloqueado */ }
-}
-
-/** Arranque común: menú y pie. Devuelve el estado de la página. */
+/** Arranque común: menú y pie. Devuelve el estado de la página (cada gráfico lleva su propia temporalidad). */
 export function initPage(activeId, subId) {
   mountShell(activeId, subId);
-  return { months: readRange(), panels: [] };
+  return { months: 36, panels: [] };
 }
-
-/** Dibuja el selector de período en #range y redibuja los paneles al cambiar */
-export function mountRange(page) {
-  const box = document.querySelector('#range');
-  if (!box) return;
-  const buttons = RANGES.map((r) => {
-    const b = el('button', { class: 'pill', type: 'button', 'aria-pressed': String(r.months === page.months) }, r.label);
-    b.addEventListener('click', () => {
-      page.months = r.months;
-      saveRange(r.months);
-      buttons.forEach((x, i) => x.setAttribute('aria-pressed', String(RANGES[i].months === r.months)));
-      page.panels.forEach((p) => p.update(page.months));
-    });
-    return b;
-  });
-  box.replaceChildren(el('span', { class: 'label' }, 'Período'), ...buttons);
-}
-
 /** Crea los paneles de gráfico y los registra en la página */
 function buildPanels(page, data, specs) {
-  return el('div', { class: 'chart-grid' }, specs.map((spec) => {
+  return el('div', { class: 'chart-grid' }, specs.map((original) => {
+    // Temporalidad propia: la del propio panel o la de config/timelines.js
+    const spec = original.timeline || !TIMELINES[original.id] ? original : { ...original, timeline: TIMELINES[original.id] };
     const panel = createPanel(data, spec);
     page.panels.push(panel);
     return panel.node;
@@ -162,6 +127,5 @@ export function showError(root, err) {
   console.error(err);
   root.replaceChildren(el('div', { class: 'state' }, 'No se pudieron cargar los datos. Volvé a abrir la página en unos minutos.'));
 }
-
 
 

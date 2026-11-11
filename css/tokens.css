@@ -25,7 +25,9 @@
   --us:        #A06A12;
   --us-soft:   #F4ECDA;
   --us-ink:    #75500D;
-  --series-2:  #5B6B86;   /* segunda serie de un gráfico */
+  --series-2:  #C2571A;   /* segunda serie de un gráfico (naranja; en EE.UU. se usa el azul) */
+  --series-3:  #1E7F5C;   /* tercera */
+  --series-4:  #6B4FA0;   /* cuarta */
 
   /* Tipos de dólar (sección Tipo de cambio) */
   --fx-oficial: #1F5FA6;
