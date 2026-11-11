@@ -38,11 +38,14 @@ export function mountCountry(page, country, data, root, group, opts = {}) {
   const render = () => {
     page.panels.forEach((p) => p.destroy());
     page.panels.length = 0;
-    root.replaceChildren(
+    root.replaceChildren(...[
       // opts.lead: bloque que reemplaza a la lectura macro (p. ej. las noticias del Resumen de Argentina); se crea una sola vez
       opts.lead ?? el('div', { class: 'analysis-grid' }, renderAnalysis(country, data)),
       buildPanels(page, data, country.panels),
-    );
+      // opts.tail: bloque al final (p. ej. "Últimas de este rubro"); opts.sourcesFoot: pie con fuentes y fecha
+      opts.tail ?? null,
+      opts.sourcesFoot ? sourcesFoot(country, data) : null,
+    ].filter(Boolean));
     revealIn(root, { animate: firstRender });
     firstRender = false;
     finish(page, data);
@@ -65,14 +68,34 @@ function startLiveData(country, data, group, render) {
   setTimeout(run, 800);
   setInterval(run, DATA_REFRESH_MS);
 }
+/**
+ * Pie de una sección: todas las fuentes de sus gráficos (sin repetir) y la fecha de la última actualización.
+ */
+function sourcesFoot(country, data) {
+  const list = [];
+  for (const p of country.panels) {
+    const s = String(p.source ?? '').trim();
+    if (s && !list.includes(s)) list.push(s);
+  }
+  const iso = String(data.updated ?? '');
+  const day = iso ? iso.slice(0, 10).split('-').reverse().join('/') : 's/d';
+  return el('footer', { class: 'sources-foot' }, [
+    el('h2', { class: 'label' }, 'Fuentes'),
+    el('ul', {}, list.map((s) => el('li', {}, s))),
+    el('p', {}, `Última actualización de los datos: ${day}. Los datos se actualizan automáticamente varias veces por día; cada gráfico indica la fecha de su último dato.`),
+  ]);
+}
+
 /** Sección Tipo de cambio: lectura + cotizaciones (en vivo si se puede) + gráficos */
-export function mountFx(page, dolar, data, root) {
+export function mountFx(page, dolar, data, root, opts = {}) {
   const quotesBox = el('div', {}, renderQuotes(data));
-  root.replaceChildren(
+  root.replaceChildren(...[
     el('div', { class: 'analysis-grid' }, renderAnalysis(dolar, data)),
     quotesBox,
     buildPanels(page, data, dolar.panels),
-  );
+    opts.tail ?? null,
+    opts.sourcesFoot ? sourcesFoot(dolar, data) : null,
+  ].filter(Boolean));
   revealIn(root);
   startLiveQuotes(data, quotesBox);
   finish(page, data);

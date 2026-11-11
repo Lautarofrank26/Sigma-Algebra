@@ -1,0 +1,15 @@
+/* secciones.css — piezas comunes de las secciones de Argentina y Tipo de cambio:
+   explicación del encabezado, "Últimas de este rubro" y pie de fuentes. */
+
+.hero .hero-lead { max-width: 76ch; font-size: var(--fs-sm, 0.95rem); }
+
+/* Últimas de este rubro: mismo módulo de noticias, más compacto */
+.news--mini { margin-top: var(--gap-3); }
+.news--mini[hidden] { display: none; }
+.news--mini .news-head h2 { font-size: var(--fs-lg, 1.25rem); }
+
+/* Pie de fuentes */
+.sources-foot { margin-top: var(--gap-3); padding-top: var(--gap-2); border-top: 1px solid var(--line); display: grid; gap: 0.4rem; font-size: var(--fs-xs); color: var(--ink-3); }
+.sources-foot ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.15rem; }
+.sources-foot li::before { content: "· "; }
+.sources-foot p { max-width: 80ch; }

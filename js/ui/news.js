@@ -99,3 +99,44 @@ export function createNews(cfg) {
   setInterval(() => { if (!document.hidden) load(); }, REFRESH_MS);
   return { node };
 }
+
+/**
+ * "Últimas de este rubro": hasta 3 noticias del mismo archivo, filtradas por la temática de una sección
+ * (palabras clave en el título), de la más reciente a la más vieja.
+ * Mismo formato de nota e indicador de importancia que el módulo completo. Si no hay ninguna, el bloque no se muestra.
+ * @param {{ url:string, match:RegExp, max?:number }} cfg
+ */
+export function createMiniNews(cfg) {
+  const list = el('ol', { class: 'news-list' });
+  const node = el('section', { class: 'news news--mini', 'aria-label': 'Últimas de este rubro', hidden: true }, [
+    el('div', { class: 'news-head' }, [el('div', {}, [el('span', { class: 'label' }, 'Noticias de alto impacto'), el('h2', {}, 'Últimas de este rubro')])]),
+    list,
+  ]);
+  async function load() {
+    try {
+      const res = await fetch(cfg.url, { cache: 'no-cache' });
+      if (!res.ok) return;
+      const data = await res.json();
+      const seen = new Set();
+      const items = [];
+      for (const cat of Object.values(data.categories ?? {})) {
+        for (const period of ['daily', 'weekly', 'monthly']) {
+          for (const n of cat[period] ?? []) {
+            if (seen.has(n.url)) continue;
+            seen.add(n.url);
+            if (cfg.match.test(n.title)) items.push(n); // solo el título: el resumen suele mencionar otros temas
+          }
+        }
+      }
+      items.sort((a, b) => (a.time < b.time ? 1 : -1));
+      const top = items.slice(0, cfg.max ?? 3);
+      list.replaceChildren(...top.map(article));
+      node.hidden = !top.length;
+    } catch {
+      // sin noticias el bloque queda oculto
+    }
+  }
+  load();
+  setInterval(() => { if (!document.hidden) load(); }, REFRESH_MS);
+  return { node };
+}
