@@ -8,6 +8,7 @@ import { loadCountry } from '../data/loader.js';
 import { initPage, setUpdated, showError } from '../app.js';
 import { loadCalendar, renderCalendar } from '../ui/calendar.js';
 import { mountHeatmap } from '../ui/heatmap.js';
+import { createNews } from '../ui/news.js';
 import { revealIn } from '../ui/reveal.js';
 
 initPage('inicio');
@@ -29,7 +30,14 @@ async function init() {
   try {
     const [ar, us] = await Promise.all([loadCountry(argentina), loadCountry(usa)]); // el calendario muestra el dato anterior de cada serie
     const calendar = await loadCalendar().then((cal) => renderCalendar(cal, { ar, us })).catch(() => null);
-    if (calendar) root.replaceChildren(calendar); else root.replaceChildren();
+    // Noticias globales: el mismo componente que usa el Resumen de Argentina, con otra configuración
+    const news = createNews({
+      url: 'data/noticias-global.json',
+      title: 'Lo que mueve a los mercados del mundo',
+      sub: 'Lo más importante de cada período en bancos centrales, datos, geopolítica y comercio, con su fuente.',
+      tabs: [['eco', 'Mercados y Economía'], ['geo', 'Geopolítica y Política']],
+    });
+    root.replaceChildren(...[calendar, news.node].filter(Boolean));
     revealIn(root);
     setUpdated(ar.updated < us.updated ? ar.updated : us.updated);
   } catch (err) {

@@ -64,8 +64,8 @@ Paleta y tipografía en `css/tokens.css`: gris frío, superficies blancas, azul 
 
 ## Descarga de datos
 Cada gráfico tiene un botón "Descargar CSV" (`js/lib/csv.js`): baja todo el historial disponible de las series del gráfico, con separador `;`, coma decimal y UTF-8 con BOM, listo para abrir en Excel en español.
-## Barra superior
-`js/ui/ticker.js`: dólares con variación del día, brecha CCL y tasas de EE.UU. Se actualiza cada 60 s. La variación del día y de 30 días sale de los últimos 70 días de `data/dolar.json` (campo `daily`).
+## Cinta de cotizaciones del Inicio
+`js/ui/ticker.js`: diez variables globales (S&P 500, Nasdaq, EEM como referencia de emergentes, bono a 10 años, VIX, DXY, USD/CNY, oro, Brent y Bitcoin) con variación del día, minigráfico de 5 días, hora de Argentina y aviso de mercado cerrado. Solo se monta en `index.html`. Los datos salen de `data/mercados.json` (`tools/fetch-mercados.ps1`, Yahoo Finance; el workflow *Actualizar mercados* corre cada 30 minutos en horario de mercado) y Bitcoin se renueva cada minuto desde CoinGecko. La cinta anterior, con los dólares de Argentina, se conserva en `js/ui/ticker-ar.js` para la sección Argentina.
 
 ## Agregar un indicador
 1. Sumar la serie a `tools/fetch-data.ps1` (lista `$extra` para Argentina) y correr el script.

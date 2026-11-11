@@ -1,0 +1,38 @@
+# Noticias de alto impacto (Resumen de Argentina e Inicio). Lee RSS de medios y fuentes oficiales, deduplica,
+# puntúa por impacto y deja data/noticias-*.json. Corre cada 2 horas.
+# Opcional: si existe el secreto ANTHROPIC_API_KEY, un modelo de IA redacta título, resumen y "por qué importa"
+# en palabras propias; si no, se usan los textos ya redactados (data/noticias-textos.json) o un texto genérico por tema.
+name: Actualizar noticias
+
+on:
+  schedule:
+    - cron: '10 */2 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: data-commits
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Leer y seleccionar noticias
+        shell: pwsh
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: ./tools/fetch-noticias.ps1
+
+      - name: Guardar cambios
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/noticias-*.json
+          git diff --staged --quiet || git commit -m "Actualizar noticias $(date -u +%FT%H:%MZ)"
+          git pull --rebase
+          git push

@@ -109,6 +109,7 @@ export function mountShell() {
       el('li', {}, 'Argentina: INDEC, BCRA y Secretaría de Hacienda, vía la API de series de tiempo de datos.gob.ar.'),
       el('li', {}, 'Series reales (salarios, crédito, dinero): nivel nominal dividido por el IPC nacional, calculado por Macroeconomics.'),
       el('li', {}, 'Tipos de dólar: ArgentinaDatos (historia) y DolarAPI (cotización del día).'),
+      el('li', {}, 'Noticias: titulares y enlaces de medios (Ámbito, El Cronista, Infobae, La Nación, Clarín, iProfesional, CNBC, Financial Times y agencias vía Google Noticias) y de la Reserva Federal y el BCE. Selección automática por reglas de impacto, con texto propio y el enlace al original.'),
       el('li', {}, 'Cotizaciones globales del Inicio: Yahoo Finance (guardadas cada 30 minutos en horario de mercado) y Bitcoin en vivo desde CoinGecko. El emergente se muestra con el ETF EEM como referencia del MSCI Emerging Markets.'),
       el('li', {}, 'Estados Unidos: BLS (precios, empleo y vacantes), NY Fed (tasa efectiva y SOFR), U.S. Treasury (rendimientos y deuda).'),
       el('li', {}, 'Actualización: el historial se renueva cuatro veces por día, después de las publicaciones, y la página pide los datos más recientes a las fuentes mientras está abierta (el dólar cada minuto, el resto cada 5 minutos).'),

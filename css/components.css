@@ -319,3 +319,33 @@ tbody tr:hover td { background: var(--surface-2); }
   .chart-grid { grid-template-columns: 1fr 1fr; }
   a { text-decoration: none; }
 }
+
+/* ---------- Noticias de alto impacto (Resumen de Argentina e Inicio) ---------- */
+.news { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-lg); box-shadow: var(--shadow); padding: var(--gap-3); margin-block: var(--gap-3); display: grid; gap: var(--gap-2); min-width: 0; }
+.news-head h2 { font-size: var(--fs-xl); font-weight: 700; margin: 0.25rem 0 0.35rem; }
+.news-sub { color: var(--ink-2); max-width: 62ch; }
+.news-bar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0.6rem; }
+.news-tabs, .news-periods { display: flex; flex-wrap: wrap; gap: 0.35rem; }
+.news .pill { font: inherit; font-size: var(--fs-sm); font-weight: 600; cursor: pointer; background: var(--surface); color: var(--ink-2); border: 1px solid var(--line); padding: 0.3rem 0.85rem; }
+.news .pill:hover { color: var(--ink); border-color: var(--ink-3); }
+.news .pill[aria-pressed="true"], .news .pill[aria-selected="true"] { background: var(--ink); border-color: var(--ink); color: #fff; }
+.news .pill:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+.news-periods .pill { font-size: var(--fs-xs); padding: 0.2rem 0.7rem; }
+.news-list { list-style: none; margin: 0; padding: 0; display: grid; }
+.news-item { display: grid; gap: 0.4rem; padding: 1.1rem 0; border-top: 1px solid var(--line); }
+.news-item:first-child { border-top: 0; padding-top: 0.4rem; }
+.news-item h3 { font-family: var(--font-display); font-size: var(--fs-lg); line-height: 1.3; font-weight: 600; margin: 0; max-width: 60ch; text-wrap: balance; }
+.news-sum { color: var(--ink-2); font-size: var(--fs-sm); max-width: 70ch; }
+.news-why { font-size: var(--fs-sm); max-width: 70ch; }
+.news-why b { font-weight: 600; }
+.news-src { font-size: var(--fs-xs); color: var(--ink-3); }
+.news-src a { color: var(--ink-2); text-underline-offset: 3px; }
+.news-empty { padding: 1rem 0 0.4rem; color: var(--ink-2); }
+.news-note { font-size: var(--fs-xs); color: var(--ink-3); }
+.imp { --imp: var(--ink-3); display: inline-flex; align-items: center; gap: 0.5rem; font-size: 0.6875rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--imp); }
+.imp-bars { display: inline-flex; align-items: flex-end; gap: 2px; }
+.imp-bars i { display: block; width: 4px; border-radius: 1px; background: var(--line); }
+.imp-bars i:nth-child(1) { height: 7px; } .imp-bars i:nth-child(2) { height: 10px; } .imp-bars i:nth-child(3) { height: 13px; }
+.imp-bars i.on { background: var(--imp); }
+.imp-3 { --imp: #8C2F39; } .imp-2 { --imp: #B7791F; } .imp-1 { --imp: #6B7C93; }
+@media print { .news { display: none !important; } }

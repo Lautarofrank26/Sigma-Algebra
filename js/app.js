@@ -1,4 +1,4 @@
-﻿/**
+/**
  * app.js — piezas compartidas por las páginas: selector de período, montaje de
  * secciones de país / dólar y manejo de errores de carga.
  * Cada página (js/pages/*.js) compone estas funciones.
@@ -75,13 +75,14 @@ function buildPanels(page, data, specs, kpis = []) {
  * Sección de país: lectura macro, tarjetas y gráficos.
  * @param {'ar'|'us'} [group] si se indica, la página se actualiza en vivo (ver data/live.js)
  */
-export function mountCountry(page, country, data, root, group) {
+export function mountCountry(page, country, data, root, group, opts = {}) {
   let firstRender = true; // la animación de entrada solo se hace una vez; los redibujos en vivo no animan
   const render = () => {
     page.panels.forEach((p) => p.destroy());
     page.panels.length = 0;
     root.replaceChildren(
-      el('div', { class: 'analysis-grid' }, renderAnalysis(country, data)),
+      // opts.lead: bloque que reemplaza a la lectura macro (p. ej. las noticias del Resumen de Argentina); se crea una sola vez
+      opts.lead ?? el('div', { class: 'analysis-grid' }, renderAnalysis(country, data)),
       el('div', { class: 'kpi-strip' }, country.kpis.map((k) => renderKpi(data, k))),
       buildPanels(page, data, country.panels, country.kpis),
     );
