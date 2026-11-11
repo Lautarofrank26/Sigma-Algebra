@@ -34,6 +34,12 @@ jobs:
         continue-on-error: true
         run: ./tools/update-calendar.ps1
 
+      # Datos por país del mapa de calor de la portada (Banco Mundial); si falla, conserva el anterior
+      - name: Actualizar mapa de calor mundial
+        shell: pwsh
+        continue-on-error: true
+        run: ./tools/fetch-mundo.ps1
+
       - name: Validar que no haya series vacías
         shell: pwsh
         run: |

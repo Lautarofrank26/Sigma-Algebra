@@ -24,7 +24,7 @@ const PAGES = [
 /** Entradas del buscador: primero las páginas, después cada gráfico */
 function buildIndex() {
   const entry = (kind, title, sub, href) => ({ kind, title, sub, href, text: norm(`${title} ${sub}`) });
-  const pages = [entry('Página', 'Panorama', 'Mercados del día, calendario y resumen', 'index.html')];
+  const pages = [entry('Página', 'Inicio', 'Mapa de calor mundial y calendario de próximos datos', 'index.html')];
   const charts = [];
   for (const p of PAGES) {
     pages.push(entry('Página', `${p.section} · ${p.page}`, p.cfg.tagline ?? '', p.href));

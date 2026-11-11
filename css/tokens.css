@@ -1,4 +1,4 @@
-﻿/* ==========================================================================
+/* ==========================================================================
    tokens.css — Sistema de diseño (única fuente de colores, tipografía, espacio)
    Concepto: tablero de análisis. Fondo gris frío, superficies blancas con filete,
    tinta azul marino, serif editorial para títulos y mono tabular para las cifras.
@@ -33,9 +33,9 @@
   --fx-mep:     #1E7F5C;
   --fx-ccl:     #6B4FA0;
 
-  /* Portada: mapa */
-  --map-dot:    #B5C1D3;
-  --map-dot-hi: #1F5FA6;
+  /* Inicio: mapa de calor (rojo = peor, verde = mejor; --bad y --good vienen de arriba) */
+  --heat-mid:   #E0B33A;
+  --heat-none:  #DDE3EC;
 
   /* Semántica (separada del acento) */
   --good:      #1E7F5C;

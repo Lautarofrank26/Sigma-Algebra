@@ -1,4 +1,4 @@
-﻿/**
+/**
  * shell.js — estructura común de la plataforma:
  *   - barra lateral con toda la navegación (en celular es un panel que se abre con el botón de menú)
  *   - barra superior con la ubicación, la fecha, el buscador y la cinta de indicadores
@@ -12,7 +12,7 @@ import { mountPalette, openPalette } from './palette.js';
 
 /** Grupos de la barra lateral */
 const GROUPS = [
-  { key: 'home', label: null, items: [{ href: 'index.html', label: 'Panorama' }] },
+  { key: 'home', label: null, items: [{ href: 'index.html', label: 'Inicio' }] },
   { key: 'ar', label: 'Argentina', items: [...SUBNAVS.argentina, { href: 'dolar.html', label: 'Tipo de cambio' }] },
   { key: 'us', label: 'Estados Unidos', items: SUBNAVS.eeuu },
 ];
@@ -31,7 +31,7 @@ function icon(name) {
 const currentFile = () => location.pathname.split('/').pop() || 'index.html';
 const clock = (timeZone) => new Intl.DateTimeFormat('es-AR', { hour: '2-digit', minute: '2-digit', hour12: false, timeZone }).format(new Date());
 
-/** Pills de subsecciones de un grupo ("argentina" o "eeuu"); se usan como accesos en el Panorama */
+/** Pills de subsecciones de un grupo ("argentina" o "eeuu"); se usan como accesos desde el inicio */
 export function renderSubnav(group, active = null) {
   return el('nav', { class: 'subnav', 'aria-label': 'Indicadores' }, (SUBNAVS[group] ?? []).map((n) =>
     el('a', { class: 'pill', href: n.href, 'aria-current': n.id === active ? 'page' : false }, n.label)));
@@ -93,7 +93,7 @@ export function mountShell() {
     el('div', { class: 'bar' }, [
       menuBtn,
       el('a', { class: 'brand brand-mini', href: 'index.html' }, 'Macroeconomics'),
-      el('p', { class: 'crumbs' }, [group?.label ? el('span', {}, `${group.label} /`) : null, el('b', {}, item?.label ?? 'Panorama')]),
+      el('p', { class: 'crumbs' }, [group?.label ? el('span', {}, `${group.label} /`) : null, el('b', {}, item?.label ?? 'Inicio')]),
       el('span', { class: 'bar-date' }, today),
       searchBtn,
     ]),

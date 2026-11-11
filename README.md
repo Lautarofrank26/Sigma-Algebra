@@ -1,9 +1,9 @@
-﻿# Macroeconomics
+# Macroeconomics
 
 Sitio estático multipágina (HTML, CSS y JS sin build) con indicadores macro de Argentina y EE.UU.
 
 ## Páginas
-- `index.html`: panorama de las tres secciones y comparativo
+- `index.html`: inicio, con el mapa de calor mundial (PBI, inflación, desempleo, cuenta corriente) y el calendario de próximos datos
 - `argentina.html`, `dolar.html`, `eeuu.html`: una página por sección
 - EE.UU. por tema: `eeuu-precios.html`, `eeuu-empleo.html`, `eeuu-tasas.html` (configs en `js/config/us/`)
 - Argentina por tema: `actividad.html`, `precios.html`, `empleo.html`, `externo.html`, `monetario.html`, `fiscal.html` (configs en `js/config/ar/`, registro en `js/config/ar/index.js`)
@@ -35,7 +35,7 @@ La clave nunca va en el código de la página ni en archivos del repositorio: so
 Paleta y tipografía en `css/tokens.css`: gris frío, superficies blancas, azul marino, serif editorial (Source Serif 4) para títulos y mono tabular (IBM Plex Mono) para cifras. Acentos por país solo en filetes y series de gráficos. Tarjetas con esquinas redondeadas (`--radius-lg`), botones y etiquetas en píldora (`--radius-pill`) y sombra suave.
 
 ### Estructura de plataforma (`css/platform.css`, `js/ui/shell.js`)
-- **Barra lateral** azul marino con toda la navegación (Panorama, Argentina y sus temas, Tipo de cambio, Estados Unidos y sus temas) y la hora de Buenos Aires y Nueva York. En pantallas de menos de 1100 px es un panel que se abre con el botón de menú. Las páginas salen de `SUBNAVS` (`js/config/navigation.js`).
+- **Barra lateral** azul marino con toda la navegación (Inicio, Argentina y sus temas, Tipo de cambio, Estados Unidos y sus temas) y la hora de Buenos Aires y Nueva York. En pantallas de menos de 1100 px es un panel que se abre con el botón de menú. Las páginas salen de `SUBNAVS` (`js/config/navigation.js`).
 - **Barra superior** con la ubicación, la fecha, el buscador y la cinta de indicadores.
 - **Buscador** (`js/ui/palette.js`): se abre con Ctrl+K, con "/" o con el botón. Indexa todas las páginas y todos los gráficos a partir de las configuraciones, así un indicador nuevo aparece solo. Cada resultado lleva a `pagina.html#id-del-grafico`, que se resalta al llegar.
 - **Vista ampliada** (`js/ui/focus.js`): el botón "Ampliar" de cada gráfico abre un diálogo con el gráfico grande, su propio selector de período, las últimas 12 observaciones, la explicación y la descarga.
