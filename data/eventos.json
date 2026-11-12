@@ -81,14 +81,14 @@
       "graficos": [
         "pre-mensual",
         "pre-interanual",
-        "ext-fx",
+        "fx-mayorista-largo",
         "mon-m2",
         "mon-tasas"
       ],
       "explicacion_por_grafico": {
         "pre-mensual": "Entra en vigencia la Ley 23.928: tipo de cambio fijo (10.000 australes por dólar, luego 1 peso = 1 dólar) y prohibición de indexar. La inflación mensual cayó a valores de un dígito en pocos meses y luego a cerca de cero.",
         "pre-interanual": "Con el tipo de cambio fijo y la base monetaria respaldada por reservas, la inflación anual bajó de cuatro dígitos a un dígito hacia 1993-94.",
-        "ext-fx": "Desde abril de 1991 el tipo de cambio queda fijo por ley; el gráfico es una línea plana hasta enero de 2002.",
+        "fx-mayorista-largo": "Desde abril de 1991 el tipo de cambio queda fijo por ley; el gráfico es una línea plana hasta enero de 2002.",
         "mon-m2": "Bajo la convertibilidad el BCRA solo podía emitir pesos contra reservas: la cantidad de dinero pasó a depender de la entrada y salida de dólares.",
         "mon-tasas": "La serie de tasa de plazo fijo a 30 días se muestra desde abril de 1991, cuando empieza la convertibilidad; antes, durante la hiperinflación, los valores no son comparables con los posteriores."
       },
@@ -186,11 +186,11 @@
       ],
       "graficos": [
         "fis-financiero",
-        "ext-reservas"
+        "fx-reservas"
       ],
       "explicacion_por_grafico": {
         "fis-financiero": "El presidente interino Adolfo Rodríguez Saá anunció ante la Asamblea Legislativa la suspensión de los pagos de la deuda externa. El Estado dejó de pagar intereses de la deuda en default hasta la reestructuración de 2005.",
-        "ext-reservas": "El default cerró el acceso al financiamiento externo: desde entonces las reservas pasaron a depender casi solo del saldo comercial y de las compras del BCRA."
+        "fx-reservas": "El default cerró el acceso al financiamiento externo: desde entonces las reservas pasaron a depender casi solo del saldo comercial y de las compras del BCRA."
       },
       "fuente_url": "https://www.pagina12.com.ar/2001/01-12/01-12-23/pag03.htm"
     },
@@ -208,7 +208,7 @@
         "actividad"
       ],
       "graficos": [
-        "ext-fx",
+        "fx-mayorista-largo",
         "pre-mensual",
         "pre-interanual",
         "emp-salario-real",
@@ -217,7 +217,7 @@
         "act-emae-ia"
       ],
       "explicacion_por_grafico": {
-        "ext-fx": "La Ley 25.561 de emergencia pública terminó con el 1 a 1. Tras un breve esquema dual, el peso pasó a flotar y el dólar superó los 3 pesos a mediados de 2002.",
+        "fx-mayorista-largo": "La Ley 25.561 de emergencia pública terminó con el 1 a 1. Tras un breve esquema dual, el peso pasó a flotar y el dólar superó los 3 pesos a mediados de 2002.",
         "pre-mensual": "La devaluación se trasladó a precios: la inflación mensual saltó en el primer semestre de 2002 y se moderó en la segunda mitad del año.",
         "pre-interanual": "La inflación de 2002 cerró en torno al 40% anual tras una década de inflación cercana a cero, pero el traslado a precios fue menor que la devaluación.",
         "emp-salario-real": "Con salarios nominales casi congelados y precios en alza, el salario real cayó con fuerza en 2002.",
@@ -307,7 +307,7 @@
         "act-emae-nivel",
         "act-ipi",
         "ext-comercio",
-        "ext-reservas",
+        "fx-reservas",
         "act-pbi-sa",
         "act-emae-ia"
       ],
@@ -315,7 +315,7 @@
         "act-emae-nivel": "La quiebra del banco de inversión estadounidense desató la crisis financiera global. Posible causa de la caída de la actividad argentina a fines de 2008 y en 2009, junto con la sequía de ese año.",
         "act-ipi": "La industria fue de los sectores más golpeados por la caída de la demanda mundial y de Brasil en 2009.",
         "ext-comercio": "El comercio mundial se contrajo y bajaron los precios de las materias primas: las exportaciones y las importaciones argentinas cayeron en 2009.",
-        "ext-reservas": "La huida global hacia el dólar presionó sobre el peso y aceleró la salida de capitales en el último trimestre de 2008.",
+        "fx-reservas": "La huida global hacia el dólar presionó sobre el peso y aceleró la salida de capitales en el último trimestre de 2008.",
         "act-pbi-sa": "Posible causa de las caídas del PBI desestacionalizado entre fines de 2008 y 2009, junto con la sequía de ese año.",
         "act-emae-ia": "La actividad pasó de crecer a caer en términos interanuales durante 2009."
       },
@@ -356,15 +356,15 @@
         "dolar"
       ],
       "graficos": [
-        "ext-reservas",
-        "ext-fx",
+        "fx-reservas",
+        "fx-mayorista-largo",
         "fx-tipos",
         "fx-brecha",
         "mon-depositos"
       ],
       "explicacion_por_grafico": {
-        "ext-reservas": "La Comunicación A 5239 del BCRA obligó a validar cada compra de dólares con la AFIP. Buscaba frenar la salida de divisas, pero las reservas siguieron cayendo en los años siguientes.",
-        "ext-fx": "Desde entonces el dólar oficial dejó de reflejar la oferta y demanda libres: el BCRA administró su ritmo de suba.",
+        "fx-reservas": "La Comunicación A 5239 del BCRA obligó a validar cada compra de dólares con la AFIP. Buscaba frenar la salida de divisas, pero las reservas siguieron cayendo en los años siguientes.",
+        "fx-mayorista-largo": "Desde entonces el dólar oficial dejó de reflejar la oferta y demanda libres: el BCRA administró su ritmo de suba.",
         "fx-tipos": "Con las compras de dólares restringidas, nació un mercado paralelo (el blue) y luego los dólares bursátiles, que cotizaron por encima del oficial.",
         "fx-brecha": "El origen de la brecha cambiaria moderna: la diferencia entre los dólares libres y el oficial creció mientras duraron las restricciones.",
         "mon-depositos": "Los depósitos en dólares cayeron durante 2012 por la incertidumbre que generaron las restricciones."
@@ -384,13 +384,13 @@
         "actividad"
       ],
       "graficos": [
-        "ext-fx",
-        "ext-reservas",
+        "fx-mayorista-largo",
+        "fx-reservas",
         "act-emae-nivel"
       ],
       "explicacion_por_grafico": {
-        "ext-fx": "El BCRA dejó de intervenir en el mercado mayorista y el dólar oficial subió de unos 7 a 8 pesos en pocos días, el mayor salto desde la salida de la Convertibilidad.",
-        "ext-reservas": "La devaluación buscó frenar la pérdida de reservas, que venían cayendo desde la imposición del cepo.",
+        "fx-mayorista-largo": "El BCRA dejó de intervenir en el mercado mayorista y el dólar oficial subió de unos 7 a 8 pesos en pocos días, el mayor salto desde la salida de la Convertibilidad.",
+        "fx-reservas": "La devaluación buscó frenar la pérdida de reservas, que venían cayendo desde la imposición del cepo.",
         "act-emae-nivel": "Posible causa de la caída de la actividad en 2014, junto con la suba de tasas que siguió a la devaluación."
       },
       "fuente_url": "https://www.cronista.com/finanzas-mercados/pese-al-salto-del-dolar-en-enero-en-2014-no-hubo-devaluacion-por-la-mayor-inflacion"
@@ -408,13 +408,13 @@
         "dolar"
       ],
       "graficos": [
-        "ext-fx",
-        "ext-reservas",
+        "fx-mayorista-largo",
+        "fx-reservas",
         "pre-mensual"
       ],
       "explicacion_por_grafico": {
-        "ext-fx": "La Comunicación A 5850 eliminó la consulta previa a la AFIP y unificó el mercado de cambios. El dólar oficial pasó de 9,6 pesos (promedio de noviembre) a 13,8 (promedio de enero de 2016).",
-        "ext-reservas": "Con la libre compra de dólares para personas y empresas, el país volvió a un tipo de cambio de flotación administrada.",
+        "fx-mayorista-largo": "La Comunicación A 5850 eliminó la consulta previa a la AFIP y unificó el mercado de cambios. El dólar oficial pasó de 9,6 pesos (promedio de noviembre) a 13,8 (promedio de enero de 2016).",
+        "fx-reservas": "Con la libre compra de dólares para personas y empresas, el país volvió a un tipo de cambio de flotación administrada.",
         "pre-mensual": "La devaluación implícita en la unificación se trasladó en parte a los precios durante los primeros meses de 2016."
       },
       "fuente_url": "https://www.bcra.gob.ar/archivos/Pdfs/PublicacionesEstadisticas/InformeIVTrimestre2015.pdf"
@@ -431,11 +431,11 @@
         "fiscal"
       ],
       "graficos": [
-        "ext-reservas",
+        "fx-reservas",
         "fis-financiero"
       ],
       "explicacion_por_grafico": {
-        "ext-reservas": "Argentina pagó a los fondos que no habían entrado a los canjes de 2005 y 2010 con una emisión de deuda internacional. El juez Griesa levantó las cautelares y el país recuperó el acceso a los mercados.",
+        "fx-reservas": "Argentina pagó a los fondos que no habían entrado a los canjes de 2005 y 2010 con una emisión de deuda internacional. El juez Griesa levantó las cautelares y el país recuperó el acceso a los mercados.",
         "fis-financiero": "El regreso al financiamiento externo permitió cubrir el déficit con deuda en dólares en los años siguientes, y los intereses ganaron peso en el resultado financiero."
       },
       "fuente_url": "https://www.pagina12.com.ar/imprimir/diario/economia/2-297753-2016-04-25.html"
@@ -457,8 +457,8 @@
         "fiscal"
       ],
       "graficos": [
-        "ext-fx",
-        "ext-reservas",
+        "fx-mayorista-largo",
+        "fx-reservas",
         "pre-mensual",
         "pre-interanual",
         "act-emae-nivel",
@@ -472,8 +472,8 @@
         "fis-riesgo"
       ],
       "explicacion_por_grafico": {
-        "ext-fx": "Tras la corrida iniciada en abril, el FMI aprobó un stand-by de 50.000 millones de dólares. Aun así, el dólar oficial casi se duplicó entre abril y septiembre de 2018.",
-        "ext-reservas": "El primer desembolso del FMI, de 15.000 millones de dólares, elevó las reservas, que luego se usaron en parte para contener el tipo de cambio.",
+        "fx-mayorista-largo": "Tras la corrida iniciada en abril, el FMI aprobó un stand-by de 50.000 millones de dólares. Aun así, el dólar oficial casi se duplicó entre abril y septiembre de 2018.",
+        "fx-reservas": "El primer desembolso del FMI, de 15.000 millones de dólares, elevó las reservas, que luego se usaron en parte para contener el tipo de cambio.",
         "pre-mensual": "La devaluación se trasladó a precios: la inflación mensual se aceleró en el segundo semestre de 2018.",
         "pre-interanual": "La inflación anual pasó de alrededor del 25% a casi el 50% hacia fines de 2018.",
         "act-emae-nivel": "Posible causa de la recesión de 2018-2019, junto con la sequía de ese año y las tasas de interés muy altas.",
@@ -503,9 +503,9 @@
         "fiscal"
       ],
       "graficos": [
-        "ext-fx",
+        "fx-mayorista-largo",
         "fx-tipos",
-        "ext-reservas",
+        "fx-reservas",
         "pre-mensual",
         "mon-depositos",
         "mon-tasas",
@@ -515,9 +515,9 @@
         "fis-riesgo"
       ],
       "explicacion_por_grafico": {
-        "ext-fx": "El resultado de las primarias del domingo 11 de agosto provocó un desplome de los mercados el lunes 12: la bolsa tuvo su peor caída desde el corralito y el dólar subió alrededor de 20% en un día (la cifra exacta varía según el mercado y el horario).",
+        "fx-mayorista-largo": "El resultado de las primarias del domingo 11 de agosto provocó un desplome de los mercados el lunes 12: la bolsa tuvo su peor caída desde el corralito y el dólar subió alrededor de 20% en un día (la cifra exacta varía según el mercado y el horario).",
         "fx-tipos": "Todos los tipos de dólar saltaron tras las PASO; semanas después volvieron las restricciones cambiarias.",
-        "ext-reservas": "Entre julio y septiembre de 2019 las reservas cayeron cerca de 19.000 millones de dólares por la salida de depósitos en dólares y la intervención cambiaria.",
+        "fx-reservas": "Entre julio y septiembre de 2019 las reservas cayeron cerca de 19.000 millones de dólares por la salida de depósitos en dólares y la intervención cambiaria.",
         "pre-mensual": "La devaluación aceleró la inflación de septiembre de 2019.",
         "mon-depositos": "Comenzó una salida de depósitos en dólares de los bancos, que se frenó con las restricciones de septiembre.",
         "mon-tasas": "Después de las PASO, la tasa de política monetaria pasó de un promedio de 59,6% anual en julio de 2019 a 71,3% en agosto y 83,5% en septiembre.",
@@ -539,10 +539,10 @@
         "externo"
       ],
       "graficos": [
-        "ext-reservas"
+        "fx-reservas"
       ],
       "explicacion_por_grafico": {
-        "ext-reservas": "El Decreto 596/19 postergó los pagos de letras del Tesoro (Letes, Lecap, Lecer y Lelink) en manos de inversores institucionales, para cuidar las reservas que se estaban perdiendo tras las PASO."
+        "fx-reservas": "El Decreto 596/19 postergó los pagos de letras del Tesoro (Letes, Lecap, Lecer y Lelink) en manos de inversores institucionales, para cuidar las reservas que se estaban perdiendo tras las PASO."
       },
       "fuente_url": "https://www.marval.com/Publicacion/el-gobierno-anuncia-la-reestructuracion-de-la-deuda-financiera-de-corto-plazo-del-estado-nacional-13398?lang=es"
     },
@@ -560,13 +560,13 @@
       "graficos": [
         "fx-brecha",
         "fx-tipos",
-        "ext-reservas",
+        "fx-reservas",
         "ext-saldo"
       ],
       "explicacion_por_grafico": {
         "fx-brecha": "El DNU 609/19 y las normas del BCRA volvieron a limitar la compra de dólares. La brecha del contado con liquidación, cercana a cero en agosto, superó el 20% en noviembre de 2019 y siguió ampliándose en 2020.",
         "fx-tipos": "Desde aquí los dólares libres (blue, MEP, CCL) se separan del oficial.",
-        "ext-reservas": "Las restricciones buscaron frenar la caída de reservas posterior a las PASO.",
+        "fx-reservas": "Las restricciones buscaron frenar la caída de reservas posterior a las PASO.",
         "ext-saldo": "El decreto obligó a liquidar las exportaciones en el mercado oficial, y las importaciones pasaron a requerir más autorizaciones."
       },
       "fuente_url": "https://www.argentina.gob.ar/normativa/nacional/decreto-609-2019-327566/texto"
@@ -649,10 +649,10 @@
         "externo"
       ],
       "graficos": [
-        "ext-reservas"
+        "fx-reservas"
       ],
       "explicacion_por_grafico": {
-        "ext-reservas": "El FMI aprobó un programa de 44.000 millones de dólares para refinanciar el stand-by de 2018. El desembolso inicial se usó en buena parte para pagar vencimientos con el propio Fondo."
+        "fx-reservas": "El FMI aprobó un programa de 44.000 millones de dólares para refinanciar el stand-by de 2018. El desembolso inicial se usó en buena parte para pagar vencimientos con el propio Fondo."
       },
       "fuente_url": "https://www.imf.org/en/news/articles/2022/03/25/pr2289-argentina-imf-exec-board-approves-extended-arrangement-concludes-2022-article-iv-consultation"
     },
@@ -694,14 +694,14 @@
         "ext-comercio",
         "ext-saldo",
         "ext-saldo-12m",
-        "ext-reservas",
+        "fx-reservas",
         "act-emae-nivel"
       ],
       "explicacion_por_grafico": {
         "ext-comercio": "La peor sequía en décadas redujo fuertemente la cosecha de soja, maíz y trigo. Las exportaciones agrícolas cayeron en miles de millones de dólares en 2023.",
         "ext-saldo": "Sin las exportaciones del agro, el saldo comercial pasó a ser deficitario en varios meses de 2023, como marzo y mayo.",
         "ext-saldo-12m": "El superávit comercial acumulado en doce meses se evaporó durante 2023 por la caída de las exportaciones agrícolas.",
-        "ext-reservas": "Con menos dólares del agro, el BCRA perdió reservas durante 2023.",
+        "fx-reservas": "Con menos dólares del agro, el BCRA perdió reservas durante 2023.",
         "act-emae-nivel": "El agro se contrajo con fuerza y restó crecimiento a la economía en 2023."
       },
       "fuente_url": "https://www.bloomberglinea.com/2023/03/09/cifras-de-la-sequia-historica-en-argentina-dolares-que-no-ingresaran-y-perdidas-en-el-sector/"
@@ -721,7 +721,7 @@
       ],
       "graficos": [
         "pre-mensual",
-        "ext-fx",
+        "fx-mayorista-largo",
         "fx-tipos",
         "mon-badlar",
         "mon-tasas",
@@ -731,7 +731,7 @@
       ],
       "explicacion_por_grafico": {
         "pre-mensual": "El día después de las PASO el BCRA llevó el dólar oficial a 350 pesos (cerca de 22% de suba). La inflación mensual pasó a 12,4% en agosto y 12,7% en septiembre.",
-        "ext-fx": "Salto discreto del tipo de cambio oficial, que quedó fijo en 350 pesos hasta después de las elecciones generales.",
+        "fx-mayorista-largo": "Salto discreto del tipo de cambio oficial, que quedó fijo en 350 pesos hasta después de las elecciones generales.",
         "fx-tipos": "El oficial saltó a 350 pesos, pero los dólares libres también subieron y la brecha volvió a ampliarse en las semanas siguientes.",
         "mon-badlar": "El BCRA subió la tasa de política a 118% anual; la BADLAR pasó de 93% en julio a 114% en septiembre.",
         "mon-tasas": "La tasa de política monetaria pasó de un promedio de 97,0% anual en julio de 2023 a 109,4% en agosto y 118,0% en septiembre.",
@@ -760,7 +760,7 @@
       "graficos": [
         "pre-mensual",
         "pre-interanual",
-        "ext-fx",
+        "fx-mayorista-largo",
         "fx-tipos",
         "fx-brecha",
         "act-emae-nivel",
@@ -782,7 +782,7 @@
       "explicacion_por_grafico": {
         "pre-mensual": "El ministro Luis Caputo llevó el dólar oficial de unos 366 a 800 pesos (devaluación de 54%). La inflación mensual saltó a 25,5% en diciembre y luego bajó: 20,6% en enero y 13,2% en febrero de 2024.",
         "pre-interanual": "La inflación interanual superó el 200% a comienzos de 2024 y bajó a lo largo del año con la desaceleración de la mensual.",
-        "ext-fx": "Salto del tipo de cambio oficial a 800 pesos; desde allí, ajuste programado de 2% mensual (crawling peg) hasta abril de 2025.",
+        "fx-mayorista-largo": "Salto del tipo de cambio oficial a 800 pesos; desde allí, ajuste programado de 2% mensual (crawling peg) hasta abril de 2025.",
         "fx-tipos": "El oficial se acercó a los dólares libres: el salto del mayorista fue mucho mayor que el de los paralelos.",
         "fx-brecha": "La brecha del contado con liquidación pasó de 140% en noviembre a 47% en diciembre de 2023.",
         "act-emae-nivel": "Posible causa de la caída de la actividad en el primer semestre de 2024, junto con el ajuste fiscal y la caída del salario real; la recuperación empezó a mitad de año.",
@@ -817,15 +817,15 @@
       "graficos": [
         "fx-tipos",
         "fx-brecha",
-        "ext-fx",
-        "ext-reservas",
+        "fx-mayorista-largo",
+        "fx-reservas",
         "fx-bandas"
       ],
       "explicacion_por_grafico": {
         "fx-tipos": "El BCRA reemplazó el crawling peg por una flotación entre bandas (piso de 1.000 y techo de 1.400 pesos, que se ampliaban 1% por mes) y liberó la compra de dólares a las personas.",
         "fx-brecha": "Con la salida del cepo para personas humanas, la brecha del contado con liquidación prácticamente desapareció: de 16% en marzo a menos de 1% en mayo de 2025.",
-        "ext-fx": "Desde el 14 de abril de 2025 el dólar mayorista flota dentro de la banda; el salto inicial fue moderado.",
-        "ext-reservas": "El FMI aprobó un programa de 20.000 millones de dólares con un desembolso inicial de unos 12.000 millones: las reservas subieron de unos 25.000 a 39.000 millones de dólares entre marzo y abril.",
+        "fx-mayorista-largo": "Desde el 14 de abril de 2025 el dólar mayorista flota dentro de la banda; el salto inicial fue moderado.",
+        "fx-reservas": "El FMI aprobó un programa de 20.000 millones de dólares con un desembolso inicial de unos 12.000 millones: las reservas subieron de unos 25.000 a 39.000 millones de dólares entre marzo y abril.",
         "fx-bandas": "El 14 de abril de 2025 las bandas arrancaron en $1.000 (piso) y $1.400 (techo) por dólar."
       },
       "fuente_url": "https://www.bcra.gob.ar/noticias/inicio-de-la-fase-3-del-programa-economico/"
@@ -843,11 +843,11 @@
       ],
       "graficos": [
         "fx-tipos",
-        "ext-reservas"
+        "fx-reservas"
       ],
       "explicacion_por_grafico": {
         "fx-tipos": "En la antesala de las elecciones, el Tesoro de EE.UU. anunció un acuerdo de swap de monedas por hasta 20.000 millones de dólares con el BCRA y compró pesos en el mercado, lo que contuvo la suba del dólar.",
-        "ext-reservas": "El acuerdo de estabilización cambiaria se firmó el 20 de octubre; el BCRA usó una parte y la devolvió en diciembre de 2025."
+        "fx-reservas": "El acuerdo de estabilización cambiaria se firmó el 20 de octubre; el BCRA usó una parte y la devolvió en diciembre de 2025."
       },
       "fuente_url": "https://www.infobae.com/economia/2025/10/09/el-tesoro-de-eeuu-comenzo-a-inyectar-dolares-en-el-mercado-cambiario-y-bessent-confirmo-el-swap-por-usd-20000-millones/"
     },
@@ -884,12 +884,12 @@
       ],
       "graficos": [
         "fx-tipos",
-        "ext-fx",
+        "fx-mayorista-largo",
         "fx-bandas"
       ],
       "explicacion_por_grafico": {
         "fx-tipos": "Desde el 1 de enero de 2026 el piso y el techo de la banda dejaron de subir 1% por mes y pasaron a moverse según la inflación informada por el INDEC, con un programa de compra de reservas del BCRA.",
-        "ext-fx": "Cambio en la regla de la banda cambiaria: los límites se ajustan por la inflación de dos meses antes en lugar de un ritmo fijo.",
+        "fx-mayorista-largo": "Cambio en la regla de la banda cambiaria: los límites se ajustan por la inflación de dos meses antes en lugar de un ritmo fijo.",
         "fx-bandas": "Desde el 1 de enero de 2026 el piso y el techo se actualizan con la inflación mensual del INDEC. El techo promedió $1.518 en diciembre de 2025 y $1.936 en octubre de 2026; el piso, $921 y $718."
       },
       "fuente_url": "https://www.lanacion.com.ar/economia/arranca-el-nuevo-esquema-cambiario-con-la-mira-puesta-en-el-dolar-y-las-reservas-nid01012026/"

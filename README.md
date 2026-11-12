@@ -33,7 +33,6 @@ La clave nunca va en el código de la página ni en archivos del repositorio: so
 - Clic en un país: panel con el gráfico de la variable activa (frecuencia mensual o trimestral donde existe, rango 10A / 30A / Máx, línea en el año del slider y "Comparar con…" otro país o el agregado mundial de la fuente).
 - Datos en `data/mapa/` (cada variable en su archivo, que se carga recién cuando se elige), generados por `tools/fetch-mapa.py` (Python 3, sin dependencias) desde FMI (WEO, Historical Public Debt, CPI, Labor Statistics, Quarterly National Accounts), Banco Mundial, BIS, Maddison Project Database 2023 y PNUD. El workflow *Actualizar mapa mundial* lo corre los lunes. Si una fuente falla, se conserva el archivo anterior de esa variable.
 - PBI per cápita: Maddison hasta su último año; después, ese valor movido con el crecimiento del PBI per cápita PPA del Banco Mundial (indicado en la fuente de cada dato).
-- `data/mundo.json`, `data/mundo-series.json` y `tools/fetch-mundo.ps1` eran del mapa anterior: la página ya no los usa.
 
 ## Diseño
 Paleta y tipografía en `css/tokens.css`: gris frío, superficies blancas, azul marino, serif editorial (Source Serif 4) para títulos y mono tabular (IBM Plex Mono) para cifras. Acentos por país solo en filetes y series de gráficos. Tarjetas con esquinas redondeadas (`--radius-lg`), botones y etiquetas en píldora (`--radius-pill`) y sombra suave.

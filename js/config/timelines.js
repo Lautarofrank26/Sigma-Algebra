@@ -51,8 +51,6 @@ export const TIMELINES = {
   'ext-comercio': flow(),
   'ext-saldo': flow(),
   'ext-saldo-12m': flow('acumulado de 12 meses'),
-  'ext-reservas': stock('USD millones'),
-  'ext-fx': level('price', 'pesos por dólar', 'promedio del período'),
 
   'mon-badlar': { kind: 'price', kinds: { ipc: 'inflation' }, freq: 'M', range: 3, freqs: MQSA, desc: { base: '% anual / i.a.', agg: 'promedio y fin de período' } },
   'mon-m2': { kind: 'stock', freq: 'M', range: 3, freqs: MQSA, desc: { base: 'var. % i.a.', agg: 'var. % i.a. a fin de período' } },

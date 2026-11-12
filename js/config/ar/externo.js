@@ -74,20 +74,6 @@ export const externo = {
       read: 'Relación entre los precios de lo que el país exporta y los de lo que importa. Si sube, con la misma cantidad de exportaciones se pueden comprar más importaciones: mejora el ingreso del país sin producir más. Depende sobre todo del precio de la soja y de la energía.',
       source: 'INDEC · Índice de términos del intercambio, base 2004 (datos.gob.ar)',
     },
-    {
-      id: 'ext-reservas', title: 'Reservas internacionales', unit: 'USD millones · fin de mes', polarity: 'up',
-      headline: { ref: { id: 'reserves' }, decimals: 0, prefix: 'USD ', suffix: ' M' },
-      datasets: [{ ref: { id: 'reserves' }, label: 'Reservas brutas', type: 'line', color: 'accent', fill: true, decimals: 0 }],
-      read: 'Dólares del Banco Central. Respaldan el pago de deuda y la intervención en el mercado cambiario. Son reservas brutas: incluyen encajes y swaps.',
-      source: 'BCRA · Reservas internacionales (datos.gob.ar)',
-    },
-    {
-      id: 'ext-fx', title: 'Dólar mayorista', unit: 'Pesos por dólar · promedio mensual', polarity: 'none',
-      headline: { ref: { id: 'fx' }, decimals: 0, prefix: '$' },
-      datasets: [{ ref: { id: 'fx' }, label: 'Mayorista (A3500)', type: 'line', color: 'accent', fill: true, decimals: 0 }],
-      read: 'Referencia del tipo de cambio para el comercio exterior. En la sección Dólar están el oficial, el blue, el MEP y el contado con liqui.',
-      source: 'BCRA · Com. A 3500 (datos.gob.ar)',
-    },
   ],
 
   analyze(g) {
