@@ -47,7 +47,7 @@ import urllib.request
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 OUT = os.path.join(ROOT, 'data', 'ar-extra.json')
-UA = 'pulso-macro-data/1.0 (+https://github.com/Lautarofrank26/pulso-macro)'
+UA = 'pulso-macro-data/1.0 (+https://github.com/Lautarofrank26/Sigma-Algebra)'
 DATOS = 'https://apis.datos.gob.ar/series/api/series/'
 BCRA = 'https://api.bcra.gob.ar/estadisticas/v4.0/monetarias'
 

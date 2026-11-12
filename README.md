@@ -52,7 +52,7 @@ Paleta y tipografía en `css/tokens.css`: gris frío, superficies blancas, azul 
 - Con "reducir movimiento" activado en el sistema no hay animaciones, y sin JavaScript todo se ve de una vez.
 
 ### Compartir, accesibilidad e impresión
-- Cada página trae etiquetas Open Graph y una imagen de vista previa (`og-image.png`, 1200×630). Las direcciones absolutas apuntan a `https://lautarofrank26.github.io/pulso-macro/`: si se renombra el repositorio o se usa un dominio propio, hay que actualizarlas en los `.html` y en la imagen.
+- Cada página trae etiquetas Open Graph y una imagen de vista previa (`og-image.png`, 1200×630). Las direcciones absolutas apuntan a `https://lautarofrank26.github.io/Sigma-Algebra/`: si se renombra el repositorio o se usa un dominio propio, hay que actualizarlas en los `.html` y en la imagen.
 - Hay un enlace "Saltar al contenido" para teclado, un aviso `<noscript>` y descripciones de los gráficos para lectores de pantalla.
 - Al imprimir (o guardar como PDF) se ocultan menús, cinta de cotizaciones, mapa, calendario y botones.
 - En celular los menús se desplazan de costado y la primera columna de las tablas queda fija.

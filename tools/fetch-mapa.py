@@ -43,7 +43,7 @@ OUT = os.path.join(ROOT, 'data', 'mapa')
 PAIS = os.path.join(OUT, 'pais')
 TODAY = dt.date.today()
 THIS_YEAR = TODAY.year
-UA = 'pulso-macro-data/1.0 (+https://github.com/Lautarofrank26/pulso-macro)'
+UA = 'pulso-macro-data/1.0 (+https://github.com/Lautarofrank26/Sigma-Algebra)'
 
 IMF = 'https://api.imf.org/external/sdmx/3.0/data/dataflow'
 WB = 'https://api.worldbank.org/v2'
