@@ -50,6 +50,16 @@ export const empleo = {
       source: 'SIPA · Trabajadores registrados (datos.gob.ar)',
     },
     {
+      id: 'emp-salarios', title: 'Salarios vs. inflación', unit: 'Variación % interanual', polarity: 'none',
+      headline: { ref: { id: 'wages', t: 'yoy' }, decimals: 1, suffix: '%' },
+      datasets: [
+        { ref: { id: 'wages', t: 'yoy' }, label: 'Salarios', type: 'line', color: 'accent', fill: true, decimals: 1 },
+        { ref: { id: 'ipc', t: 'yoy' }, label: 'Inflación', type: 'line', color: 'series2', decimals: 1 },
+      ],
+      read: 'Si la línea de salarios está por encima de la inflación, el poder de compra mejora; si está por debajo, se deteriora.',
+      source: 'INDEC · Índice de salarios e IPC (datos.gob.ar)',
+    },
+    {
       id: 'emp-salario-real', title: 'Salarios por sector', unit: 'Índice oct 2016 = 100 · deflactado por el IPC empalmado', polarity: 'up',
       headline: { ref: { id: 'w_priv_real', t: 'yoy' }, decimals: 1, suffix: '% real privado' },
       datasets: [

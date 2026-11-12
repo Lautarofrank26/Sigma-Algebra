@@ -20,6 +20,14 @@ Series (todas oficiales; nada se interpola ni se inventa):
   rem_12m_target  la misma expectativa ubicada en el mes en que termina el período esperado (12 meses después),
              para compararla con la inflación que efectivamente ocurrió
 
+Dinero y tasas (BCRA, API de estadísticas monetarias; las series diarias se promedian por mes, solo meses completos):
+  rate_policy / rate_badlar / rate_tamar / rate_pf30 / rate_caucion   tasas nominales anuales (política monetaria: la serie
+             oficial termina el 10-jul-2025; plazo fijo a 30 días desde abr-1991; caución = pases entre terceros a 1 día)
+  rate_real_exante  BADLAR efectiva anual (capitalización a 30 días) deflactada por el REM a 12 meses (mediana)
+  base_*, m2p_*, loans_total_*, loans_<tipo>_*, dep_pesos_*   nivel en miles de millones de pesos, `_nom` (corrientes) y
+             `_real` (pesos del último mes con IPC, con el IPC empalmado). M2 privado: serie `m2` de data/argentina.json
+  dep_usd_nom  depósitos en dólares del sector privado, millones de USD
+
 Uso: python3 tools/fetch-ar.py
 Si una fuente falla, se conserva la serie anterior de ese id (nunca se escribe una serie vacía).
 """
@@ -316,6 +324,130 @@ def external(add):
         add('ca_gdp', '', '', 'A', '', [])
 
 
+def bcra_daily(var, start='1990-01-01'):
+    """[(YYYY-MM-DD, valor)] ordenado, de una variable diaria de la API de estadísticas del BCRA"""
+    d = get_json(f'{BCRA}/{var}?desde={start}&hasta={dt.date.today().isoformat()}&limit=3000')
+    det = d['results'][0]['detalle']
+    out = sorted((x['fecha'], float(x['valor'])) for x in det if x.get('valor') is not None)
+    if len(det) >= 3000:  # la API pagina: se sigue hasta traer todo el historial
+        got = {f for f, _ in out}
+        first = out[0][0]
+        while True:
+            d = get_json(f'{BCRA}/{var}?desde={start}&hasta={shift_day(first, -1)}&limit=3000')
+            more = [(x['fecha'], float(x['valor'])) for x in d['results'][0]['detalle'] if x.get('valor') is not None and x['fecha'] not in got]
+            if not more:
+                break
+            out = sorted(more + out)
+            got |= {f for f, _ in more}
+            first = out[0][0]
+            if len(d['results'][0]['detalle']) < 3000:
+                break
+    return out
+
+
+def shift_day(day, n):
+    return (dt.date.fromisoformat(day) + dt.timedelta(days=n)).isoformat()
+
+
+def monthly_avg(daily):
+    """Promedio mensual de una serie diaria. Solo meses completos: nunca el mes en curso y, si la serie dejó de publicarse,
+    tampoco el último mes si cortó antes del día 25 (un promedio de pocos días no representa al mes)."""
+    if not daily:
+        return {}
+    cur = dt.date.today().isoformat()[:7]
+    last_day = daily[-1][0]
+    acc = {}
+    for day, v in daily:
+        acc.setdefault(day[:7], []).append(v)
+    out = {p: sum(vs) / len(vs) for p, vs in acc.items() if p < cur}
+    if int(last_day[8:10]) < 25:
+        out.pop(last_day[:7], None)
+    return out
+
+
+def monetary(add, ipc):
+    """Dinero y tasas: tasas (BCRA), base monetaria, M2, préstamos por tipo y depósitos, en pesos corrientes y en términos reales.
+    Las series del BCRA son diarias: se promedian por mes (solo meses completos). `ipc` es el IPC empalmado {YYYY-MM: nivel}."""
+    src = 'BCRA · Estadísticas monetarias'
+    cache = {}
+
+    def mm(var, start='1990-01-01'):
+        if var not in cache:
+            cache[var] = monthly_avg(bcra_daily(var, start))
+        return cache[var]
+
+    def real(s):
+        """Pesos del último mes con IPC; devuelve (serie, mes base)"""
+        have = [p for p in s if p in ipc]
+        if not have:
+            return {}, None
+        last = max(have)
+        return {p: v * ipc[last] / ipc[p] for p, v in s.items() if p in ipc}, last
+
+    def level(iid, label, unit, var, start='1990-01-01', scale=1e-3, with_real=True):
+        try:
+            s = {p: v * scale for p, v in mm(var, start).items()}
+        except RuntimeError as e:
+            log(f'  aviso {iid}: {e}')
+            s = {}
+        add(iid + '_nom', f'{label} (nominal)', unit, 'M', f'{src} · promedio mensual de datos diarios', pts(s))
+        if with_real:
+            r, base = real(s)
+            add(iid + '_real', f'{label} (real)', 'miles de millones de pesos del último mes con IPC', 'M',
+                f'Cálculo propio: {src} (promedio mensual) deflactado por el IPC empalmado', pts(r), base_month=base)
+
+    # Tasas nominales anuales, % (promedio mensual de datos diarios)
+    for iid, label, var, start, note in (
+        ('rate_policy', 'Tasa de política monetaria', 160, '2015-12-01', 'BCRA · Tasa de política monetaria (serie discontinuada el 10-jul-2025)'),
+        ('rate_badlar', 'BADLAR bancos privados', 7, '1999-01-01', 'BCRA · BADLAR bancos privados, TNA'),
+        ('rate_tamar', 'TAMAR bancos privados', 44, '2024-10-01', 'BCRA · TAMAR bancos privados, TNA'),
+        # desde abril de 1991 (Convertibilidad): antes, en la hiperinflación, la serie no es comparable con el resto
+        ('rate_pf30', 'Plazo fijo a 30 días', 12, '1991-04-01', 'BCRA · Depósitos a 30 días de plazo, TNA (desde abr-1991)'),
+        ('rate_caucion', 'Caución (pases entre terceros a 1 día)', 150, '2008-01-01', 'BCRA · Pases entre terceros a 1 día, TNA'),
+    ):
+        try:
+            add(iid, label, '% anual (TNA)', 'M', f'{note} · promedio mensual', pts(mm(var, start), 4))
+        except RuntimeError as e:
+            log(f'  aviso {iid}: {e}')
+            add(iid, '', '', 'M', '', [])
+
+    # Tasa real ex ante: BADLAR efectiva anual (capitalización a 30 días) frente a la inflación esperada a 12 meses (REM, mediana)
+    try:
+        rem = bcra(29)
+        bad = mm(7, '1999-01-01')
+        ex = {p: ((1 + bad[p] / 100 * 30 / 365) ** (365 / 30) / (1 + rem[p] / 100) - 1) * 100 for p in bad if p in rem}
+        add('rate_real_exante', 'Tasa real ex ante (BADLAR efectiva vs. REM 12 meses)', '%', 'M',
+            'Cálculo propio: BADLAR bancos privados (BCRA) convertida a tasa efectiva anual y deflactada por la inflación esperada a 12 meses (REM, BCRA)', pts(ex, 4))
+    except (RuntimeError, KeyError) as e:
+        log(f'  aviso tasa real ex ante: {e}')
+        add('rate_real_exante', '', '', 'M', '', [])
+
+    # Agregados monetarios y crédito, millones de pesos
+    level('base', 'Base monetaria', 'miles de millones de pesos', 15)
+    # M2 privado: el BCRA publica por variable solo la variación interanual (var. 25) y el nivel de M2 total (var. 109, incluye el sector
+    # público). El nivel de M2 privado es la serie `m2` de data/argentina.json (promedio mensual, desde 2010), cuya variación interanual
+    # coincide con la variable 25 del BCRA (dif. de 1 a 2 puntos por usar promedio mensual en vez de móvil de 30 días).
+    try:
+        with open(os.path.join(ROOT, 'data', 'argentina.json'), encoding='utf-8') as f:
+            m2p = {p[0][:7]: p[1] for i in json.load(f)['indicators'] if i['id'] == 'm2' for p in i['points']}
+    except (OSError, ValueError, KeyError) as e:
+        log(f'  aviso M2 privado: {e}')
+        m2p = {}
+    m2p = {p: v * 1e-3 for p, v in m2p.items()}
+    add('m2p_nom', 'M2 privado (nominal)', 'miles de millones de pesos', 'M', f'{src} · M2 privado, promedio mensual (datos.gob.ar)', pts(m2p))
+    m2r, m2base = real(m2p)
+    add('m2p_real', 'M2 privado (real)', 'miles de millones de pesos del último mes con IPC', 'M',
+        f'Cálculo propio: {src} · M2 privado deflactado por el IPC empalmado', pts(m2r), base_month=m2base)
+    level('loans_total', 'Préstamos al sector privado', 'miles de millones de pesos', 117, '2002-01-01')
+    for key, label, var in (('personal', 'Personales', 114), ('tarjeta', 'Tarjetas de crédito', 115), ('hipot', 'Hipotecarios', 112),
+                            ('prend', 'Prendarios', 113), ('doc', 'Documentos', 111), ('adel', 'Adelantos en cuenta corriente', 110), ('otros', 'Otros', 116)):
+        level(f'loans_{key}', f'Préstamos {label.lower()}', 'miles de millones de pesos', var, '2002-01-01')
+
+    # Depósitos del sector privado no financiero
+    level('dep_pesos', 'Depósitos en pesos del sector privado', 'miles de millones de pesos', 100, '2002-01-01')
+    level('dep_usd', 'Depósitos en dólares del sector privado', 'millones de USD', 108, '2002-01-01', scale=1.0, with_real=False)
+
+
 def main():
     try:
         with open(OUT, encoding='utf-8') as f:
@@ -388,6 +520,10 @@ def main():
 
     # --- sector externo ---
     external(add)
+
+    # --- dinero y tasas (deflactado con el IPC empalmado) ---
+    ipc_ind = next((i for i in inds if i['id'] == 'ipc_long'), None)
+    monetary(add, {p[0][:7]: p[1] for p in ipc_ind['points']} if ipc_ind else {})
 
     # Las series viejas que no se volvieron a generar se conservan
     ids = {i['id'] for i in inds}
