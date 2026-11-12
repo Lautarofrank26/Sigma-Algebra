@@ -28,6 +28,13 @@ Dinero y tasas (BCRA, API de estadísticas monetarias; las series diarias se pro
              `_real` (pesos del último mes con IPC, con el IPC empalmado). M2 privado: serie `m2` de data/argentina.json
   dep_usd_nom  depósitos en dólares del sector privado, millones de USD
 
+Frente fiscal (Secretaría de Hacienda, esquema ahorro-inversión-financiamiento, trimestral; ArgentinaDatos; FMI):
+  fis_ing_*, fis_gas_*, fis_g_<rubro>_*  ingresos totales, gastos primarios (= ingresos - resultado primario) y rubros, `_nom` y `_real`
+  fis_primario_pbi / fis_financiero_pbi  % del PBI, 4 trimestres (el PIB corriente trimestral del INDEC viene anualizado: se promedia)
+  rec_total_* / rec_dgi_* / rec_dga_*  recaudación mensual desde 1997;  riesgo_pais  EMBI mensual;  debt_gdp  deuda bruta, FMI
+Tipo de cambio (BCRA): fx_mayorista, itcrm (planilla ITCRMSerie.xlsx), reserves_bcra, bcra_compras, band_floor / band_ceiling /
+  band_mayorista (bandas desde abr-2025, variables 1187 y 1188)
+
 Uso: python3 tools/fetch-ar.py
 Si una fuente falla, se conserva la serie anterior de ese id (nunca se escribe una serie vacía).
 """
@@ -349,9 +356,10 @@ def shift_day(day, n):
     return (dt.date.fromisoformat(day) + dt.timedelta(days=n)).isoformat()
 
 
-def monthly_avg(daily):
-    """Promedio mensual de una serie diaria. Solo meses completos: nunca el mes en curso y, si la serie dejó de publicarse,
-    tampoco el último mes si cortó antes del día 25 (un promedio de pocos días no representa al mes)."""
+def monthly(daily, how='avg'):
+    """Serie diaria -> mensual: 'avg' promedio, 'last' valor del último día del mes, 'sum' suma. Solo meses completos: nunca el mes
+    en curso y, si la serie dejó de publicarse, tampoco el último mes si cortó antes del día 25 (un dato de pocos días no
+    representa al mes)."""
     if not daily:
         return {}
     cur = dt.date.today().isoformat()[:7]
@@ -359,10 +367,47 @@ def monthly_avg(daily):
     acc = {}
     for day, v in daily:
         acc.setdefault(day[:7], []).append(v)
-    out = {p: sum(vs) / len(vs) for p, vs in acc.items() if p < cur}
+    fn = {'avg': lambda vs: sum(vs) / len(vs), 'last': lambda vs: vs[-1], 'sum': sum}[how]
+    out = {p: fn(vs) for p, vs in acc.items() if p < cur}
     if int(last_day[8:10]) < 25:
         out.pop(last_day[:7], None)
     return out
+
+
+def monthly_avg(daily):
+    return monthly(daily, 'avg')
+
+
+NS_X = '{http://schemas.openxmlformats.org/spreadsheetml/2006/main}'
+
+
+def read_xlsx(url):
+    """{hoja: [{columna: valor}]} de un .xlsx publicado (solo biblioteca estándar; los números quedan como texto)"""
+    import io
+    import re
+    import zipfile
+    import xml.etree.ElementTree as ET
+    req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0'})
+    with urllib.request.urlopen(req, timeout=120) as r:
+        z = zipfile.ZipFile(io.BytesIO(r.read()))
+    ss = [''.join(t.text or '' for t in si.iter(NS_X + 't')) for si in ET.fromstring(z.read('xl/sharedStrings.xml')).findall(NS_X + 'si')]
+    names = [s.get('name') for s in ET.fromstring(z.read('xl/workbook.xml')).find(NS_X + 'sheets')]
+    out = {}
+    for k, name in enumerate(names, 1):
+        rows = []
+        for row in ET.fromstring(z.read(f'xl/worksheets/sheet{k}.xml')).find(NS_X + 'sheetData').findall(NS_X + 'row'):
+            d = {}
+            for c in row.findall(NS_X + 'c'):
+                v = c.find(NS_X + 'v')
+                if v is not None:
+                    d[re.match(r'[A-Z]+', c.get('r')).group()] = ss[int(v.text)] if c.get('t') == 's' else v.text
+            rows.append(d)
+        out[name] = rows
+    return out
+
+
+def excel_day(serial):
+    return (dt.date(1899, 12, 30) + dt.timedelta(days=int(float(serial)))).isoformat()
 
 
 def monetary(add, ipc):
@@ -448,6 +493,164 @@ def monetary(add, ipc):
     level('dep_usd', 'Depósitos en dólares del sector privado', 'millones de USD', 108, '2002-01-01', scale=1.0, with_real=False)
 
 
+# Esquema ahorro-inversión-financiamiento (IMIG, Secretaría de Hacienda): versión trimestral de cada rubro. Las versiones
+# mensuales de varios rubros (combustibles, derechos de importación, subsidios a la energía, FGS...) vienen vacías en la API.
+IMIG_ING = ['452.1_BIENES_PERLES_0_A_17_92', '452.1_COMBUSTIBLLES_0_A_12_22', '452.1_INGRESOS_CTAL_0_A_16_68', '452.1_GANANCIASIAS_0_A_9_40',
+            '452.1_IMPUESTOS_NOS_0_A_18_32', '452.1_DEBITOS_CRTOS_0_A_16_94', '452.1_DERECHOS_IION_0_A_20_41', '452.1_RESTO_INGRTES_0_A_25_63',
+            '452.1_TRANSFERENTES_0_A_25_23', '452.1_INGRESOS_NIOS_0_A_23_61', '452.1_DERECHOS_EION_0_A_20_86', '452.1_IVA_NETO_RROS_0_A_19_89',
+            '452.1_RESTO_TRIBIOS_0_A_17_88', '452.1_FGS_COBRADERO_0_A_53_62', '452.1_APORTES_COIAL_0_A_39_80', '452.1_RESTO_RENTDAD_0_A_22_48']
+IMIG_G = {
+    'jub': ['452.1_JUBILACIONVAS_0_A_36_30'],
+    'prest': ['452.2_OTROS_PROGMAS_0_T_15_7', '452.2_ASIGNACIONIJO_0_T_26_195', '452.2_PRESTACIONSJP_0_T_19_19', '452.2_PENSIONES_VAS_0_T_26_93'],
+    'subs': ['452.2_ENERGIAGIA_0_T_7_79', '452.2_TRANSPORTERTE_0_T_10_81', '452.2_OTRAS_FUNCNES_0_T_15_27'],
+    'prov': ['452.2_TRANSFERENRAS_0_T_42_54', '452.2_TRANSFERENION_0_T_46_39', '452.2_TRANSFERENLUD_0_T_42_99', '452.2_TRANSFERENIAL_0_T_54_18', '452.2_TRANSFERENIAL_0_T_53_76'],
+    'func': ['452.2_SALARIOSIOS_0_T_8_28', '452.2_OTROS_GASTNTO_0_T_27_58'],
+    'cap': ['452.2_CAPITAL_ENION_0_T_22_25', '452.2_CAPITAL_VIION_0_T_23_91', '452.2_CAPITAL_EDION_0_T_24_98', '452.2_CAPITAL_OTION_0_T_20_97',
+            '452.2_FONDO_FEDERIO_0_T_23_1', '452.2_CAPITAL_TRION_0_T_25_18', '452.2_CAPITAL_AGION_0_T_41_79', '452.2_CAPITAL_OTIAS_0_T_38_17',
+            '452.2_CAPITAL_EDIAS_0_T_42_72', '452.2_CAPITAL_ENIAS_0_T_40_14', '452.2_CAPITAL_VIIAS_0_T_41_33', '452.2_CAPITAL_TRIAS_0_T_43_2',
+            '452.2_CAPITAL_AGIAS_0_T_59_85'],
+}
+IMIG_PR, IMIG_FI = '452.2_RESULTADO_RIO_0_T_18_21', '452.2_RESULTADO_ERO_0_T_20_32'
+PBI_CORRIENTE = '9.2_PPC_2004_T_22'  # PIB a precios corrientes, millones de pesos, trimestral (INDEC)
+RECAUDACION = [('rec_total', 'Recaudación tributaria total', '172.3_TL_RECAION_M_0_0_17'), ('rec_dgi', 'Recaudación DGI (impuestos nacionales)', '172.3_SOTAL_DDGI_M_0_0_12'),
+               ('rec_dga', 'Recaudación DGA (comercio exterior)', '172.3_SOTAL_DDGA_M_0_0_12'), ('rec_ss', 'Recaudación de la seguridad social', '172.3_SRIDAD_IAL_M_0_0_16')]
+
+
+def fiscal(add, ipc):
+    """Frente fiscal: ingresos, gastos primarios y su composición (trimestral, IMIG), resultados en % del PBI, recaudación (mensual),
+    riesgo país y deuda. `ipc` es el IPC empalmado {YYYY-MM: nivel}."""
+    src = 'Secretaría de Hacienda · Esquema ahorro-inversión-financiamiento, base caja (datos.gob.ar)'
+    ids = IMIG_ING + [i for v in IMIG_G.values() for i in v] + [IMIG_PR, IMIG_FI]
+    try:
+        d = datos(ids, '2016-01-01')
+        pbi = datos([PBI_CORRIENTE], '2004-01-01')[PBI_CORRIENTE]
+    except RuntimeError as e:
+        log(f'  aviso fiscal IMIG: {e}')
+        d, pbi = {}, {}
+
+    def qipc(p):
+        v = [ipc.get(m) for m in (p, shift(p, 1), shift(p, 2))]
+        return sum(v) / 3 if all(x is not None for x in v) else None
+
+    def put(iid, label, nom, base_note='trimestral'):
+        """Serie trimestral en pesos corrientes y en pesos del último trimestre con IPC, en miles de millones"""
+        nom = {p: v * 1e-3 for p, v in nom.items()}
+        add(iid + '_nom', f'{label} (nominal)', 'miles de millones de pesos', 'Q', src, pts(nom))
+        have = [p for p in nom if qipc(p)]
+        if have:
+            base = max(have)
+            add(iid + '_real', f'{label} (real)', 'miles de millones de pesos del último trimestre con IPC', 'Q',
+                f'Cálculo propio: {src}, deflactado por el IPC empalmado', pts({p: v * qipc(base) / qipc(p) for p, v in nom.items() if qipc(p)}), base_month=base)
+
+    prim = d.get(IMIG_PR, {})
+    if prim:
+        quarters = [p for p in sorted(prim) if all(p in d[i] for i in IMIG_ING)]
+        ing = {p: sum(d[i][p] for i in IMIG_ING) for p in quarters}
+        gas = {p: ing[p] - prim[p] for p in quarters}  # gastos primarios = ingresos totales - resultado primario (identidad del esquema)
+        cats = {k: {p: sum(d[i].get(p, 0) for i in v) for p in quarters} for k, v in IMIG_G.items()}
+        cats['otros'] = {p: gas[p] - sum(c[p] for c in cats.values()) for p in quarters}
+        share = [cats['otros'][p] / gas[p] for p in quarters[-8:]]
+        log(f'  fiscal: "otros gastos" (resto sin apertura) = {min(share) * 100:.1f}% a {max(share) * 100:.1f}% del gasto primario en los últimos 8 trimestres')
+        put('fis_ing', 'Ingresos totales', ing)
+        put('fis_gas', 'Gastos primarios', gas)
+        for k, label in (('jub', 'Jubilaciones y pensiones contributivas'), ('prest', 'Otras prestaciones sociales'), ('subs', 'Subsidios económicos'),
+                         ('prov', 'Transferencias corrientes a provincias'), ('func', 'Salarios y gastos de funcionamiento'),
+                         ('cap', 'Gastos de capital'), ('otros', 'Otros gastos primarios')):
+            put(f'fis_g_{k}', label, cats[k])
+        # Resultado primario y financiero en % del PBI: suma de cuatro trimestres sobre el PIB corriente anual. El INDEC publica el PIB
+        # trimestral en valores anualizados, así que el PIB de un año es el promedio de sus cuatro trimestres (no la suma).
+        # Control: 2024 da superávit primario de 1,8% del PBI y financiero de 0,3%, los valores oficiales.
+        fin = d.get(IMIG_FI, {})
+        for iid, label, s in (('fis_primario_pbi', 'Resultado primario', prim), ('fis_financiero_pbi', 'Resultado financiero', fin)):
+            out = {}
+            for p in sorted(s):
+                qs = [shift(p, -3 * k) for k in range(4)]
+                if all(q in s and q in pbi for q in qs):
+                    out[p] = sum(s[q] for q in qs) / (sum(pbi[q] for q in qs) / 4) * 100
+            add(iid, f'{label} (acumulado de 4 trimestres)', '% del PBI', 'Q',
+                f'Cálculo propio: {src} sobre PIB a precios corrientes (INDEC)', pts(out, 4))
+    else:
+        for iid in ('fis_ing', 'fis_gas'):
+            add(iid + '_nom', '', '', 'Q', '', [])
+
+    # Recaudación tributaria nacional mensual (Secretaría de Hacienda / ARCA), desde 1997
+    try:
+        rd = datos([r[2] for r in RECAUDACION], '1997-01-01')
+    except RuntimeError as e:
+        log(f'  aviso recaudación: {e}')
+        rd = {r[2]: {} for r in RECAUDACION}
+    for iid, label, sid in RECAUDACION:
+        s = {p: v * 1e-3 for p, v in rd[sid].items()}
+        have = [p for p in s if p in ipc]
+        add(iid + '_nom', f'{label} (nominal)', 'miles de millones de pesos', 'M', 'Secretaría de Hacienda / ARCA · Recaudación tributaria (datos.gob.ar)', pts(s))
+        if have:
+            base = max(have)
+            add(iid + '_real', f'{label} (real)', 'miles de millones de pesos del último mes con IPC', 'M',
+                'Cálculo propio: recaudación (Secretaría de Hacienda / ARCA) deflactada por el IPC empalmado',
+                pts({p: v * ipc[base] / ipc[p] for p, v in s.items() if p in ipc}), base_month=base)
+
+    # Riesgo país (EMBI de JP Morgan, vía ArgentinaDatos): promedio mensual de los datos diarios
+    try:
+        rp = get_json('https://api.argentinadatos.com/v1/finanzas/indices/riesgo-pais')
+        add('riesgo_pais', 'Riesgo país (EMBI)', 'puntos básicos', 'M', 'JP Morgan (EMBI Argentina), vía ArgentinaDatos · promedio mensual de datos diarios',
+            pts(monthly(sorted((x['fecha'], float(x['valor'])) for x in rp), 'avg'), 5))
+    except (RuntimeError, KeyError, ValueError) as e:
+        log(f'  aviso riesgo país: {e}')
+        add('riesgo_pais', '', '', 'M', '', [])
+
+    # Deuda del gobierno general, bruta, % del PBI: FMI, World Economic Outlook (la misma serie que el mapa mundial)
+    try:
+        with open(os.path.join(ROOT, 'data', 'mapa', 'debt.json'), encoding='utf-8') as f:
+            debt = json.load(f)
+        add('debt_gdp', 'Deuda bruta del gobierno general', '% del PBI', 'A', 'FMI · World Economic Outlook (GGXWDG_NGDP)',
+            [[f'{debt["from"] + i}-01-01', v] for i, v in enumerate(debt['c']['ARG']) if v is not None and debt['from'] + i <= debt['last']])
+    except (OSError, KeyError, ValueError) as e:
+        log(f'  aviso deuda: {e}')
+        add('debt_gdp', '', '', 'A', '', [])
+
+
+def fx(add):
+    """Tipo de cambio: mayorista (BCRA), tipo de cambio real multilateral, reservas brutas, compras de divisas y bandas cambiarias."""
+    src = 'BCRA · Estadísticas monetarias'
+    maya = bcra_daily(5, '2002-01-01')  # mayorista de referencia
+    add('fx_mayorista', 'Dólar mayorista de referencia', 'pesos por dólar', 'M', f'{src} · Comunicación A 3500, promedio mensual de datos diarios', pts(monthly(maya, 'avg'), 6))
+    try:
+        add('reserves_bcra', 'Reservas internacionales brutas', 'USD millones', 'M', f'{src} · fin de mes', pts(monthly(bcra_daily(1, '1996-01-01'), 'last'), 6))
+    except RuntimeError as e:
+        log(f'  aviso reservas: {e}')
+        add('reserves_bcra', '', '', 'M', '', [])
+    try:
+        add('bcra_compras', 'Compras de divisas del BCRA', 'USD millones', 'M', f'{src} · variación de reservas por compra de divisas, suma mensual',
+            pts(monthly(bcra_daily(78, '2003-01-01'), 'sum'), 6))
+    except RuntimeError as e:
+        log(f'  aviso compras: {e}')
+        add('bcra_compras', '', '', 'M', '', [])
+    # ITCRM (base 17-12-15 = 100): planilla del BCRA, promedio mensual. Los últimos meses son provisorios (usan expectativas del REM).
+    try:
+        sheet = read_xlsx('https://www.bcra.gob.ar/Pdfs/PublicacionesEstadisticas/ITCRMSerie.xlsx')['ITCRM y bilaterales prom. mens.']
+        s = {}
+        for row in sheet:
+            a, b = row.get('A', ''), row.get('B', '')
+            if a.replace('.', '', 1).isdigit() and b.replace('.', '', 1).isdigit():
+                s[excel_day(a)[:7]] = float(b)
+        add('itcrm', 'Tipo de cambio real multilateral (ITCRM)', 'índice 17-dic-2015 = 100', 'M',
+            'BCRA · Índice de tipo de cambio real multilateral (los últimos meses son provisorios)', pts(s, 6))
+    except (OSError, RuntimeError, KeyError, ValueError, urllib.error.URLError) as e:
+        log(f'  aviso ITCRM: {e}')
+        add('itcrm', '', '', 'M', '', [])
+    # Bandas de flotación (desde el 14-abr-2025): variables del BCRA (límite inferior y superior, diarias)
+    try:
+        bsrc = 'BCRA · Régimen de bandas cambiarias, promedio mensual de datos diarios'
+        add('band_floor', 'Piso de la banda cambiaria', 'pesos por dólar', 'M', bsrc, pts(monthly(bcra_daily(1187, '2025-04-01'), 'avg'), 6))
+        add('band_ceiling', 'Techo de la banda cambiaria', 'pesos por dólar', 'M', bsrc, pts(monthly(bcra_daily(1188, '2025-04-01'), 'avg'), 6))
+        # El mayorista desde que rigen las bandas, para dibujarlo junto al piso y al techo en la misma ventana
+        add('band_mayorista', 'Dólar mayorista de referencia', 'pesos por dólar', 'M', f'{src} · promedio mensual de datos diarios',
+            pts({p: v for p, v in monthly(maya, 'avg').items() if p >= '2025-04'}, 6))
+    except RuntimeError as e:
+        log(f'  aviso bandas: {e}')
+        add('band_floor', '', '', 'M', '', [])
+        add('band_ceiling', '', '', 'M', '', [])
+
 def main():
     try:
         with open(OUT, encoding='utf-8') as f:
@@ -523,7 +726,12 @@ def main():
 
     # --- dinero y tasas (deflactado con el IPC empalmado) ---
     ipc_ind = next((i for i in inds if i['id'] == 'ipc_long'), None)
-    monetary(add, {p[0][:7]: p[1] for p in ipc_ind['points']} if ipc_ind else {})
+    ipc_d = {p[0][:7]: p[1] for p in ipc_ind['points']} if ipc_ind else {}
+    monetary(add, ipc_d)
+
+    # --- frente fiscal y tipo de cambio ---
+    fiscal(add, ipc_d)
+    fx(add)
 
     # Las series viejas que no se volvieron a generar se conservan
     ids = {i['id'] for i in inds}

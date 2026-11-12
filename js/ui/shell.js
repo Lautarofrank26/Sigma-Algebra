@@ -46,7 +46,7 @@ function buildSidebar(file) {
   }, 20_000);
 
   return el('aside', { class: 'side', id: 'side', 'aria-label': 'Navegación principal' }, [
-    el('a', { class: 'side-brand', href: 'index.html' }, [el('strong', {}, 'Macroeconomics'), el('span', {}, 'Argentina · Estados Unidos')]),
+    el('a', { class: 'side-brand', href: 'index.html' }, [el('strong', {}, 'Sigma Algebra'), el('span', {}, 'Argentina · Estados Unidos')]),
     el('nav', { class: 'side-nav' }, GROUPS.map((g) =>
       el('div', { class: 'side-group', 'data-g': g.key }, [
         g.label ? el('span', { class: 'side-label' }, g.label) : null,
@@ -92,7 +92,7 @@ export function mountShell() {
   document.querySelector('#site-header').replaceChildren(
     el('div', { class: 'bar' }, [
       menuBtn,
-      el('a', { class: 'brand brand-mini', href: 'index.html' }, 'Macroeconomics'),
+      el('a', { class: 'brand brand-mini', href: 'index.html' }, 'Sigma Algebra'),
       el('p', { class: 'crumbs' }, [group?.label ? el('span', {}, `${group.label} /`) : null, el('b', {}, item?.label ?? 'Inicio')]),
       el('span', { class: 'bar-date' }, today),
       searchBtn,
@@ -107,7 +107,7 @@ export function mountShell() {
     el('strong', {}, 'Fuentes y método'),
     el('ul', {}, [
       el('li', {}, 'Argentina: INDEC, BCRA y Secretaría de Hacienda, vía la API de series de tiempo de datos.gob.ar.'),
-      el('li', {}, 'Series reales (salarios, crédito, dinero): nivel nominal dividido por el IPC nacional, calculado por Macroeconomics.'),
+      el('li', {}, 'Series reales (salarios, crédito, dinero): nivel nominal dividido por el IPC nacional, calculado por Sigma Algebra.'),
       el('li', {}, 'Tipos de dólar: ArgentinaDatos (historia) y DolarAPI (cotización del día).'),
       el('li', {}, 'Noticias: titulares y enlaces de medios (Ámbito, El Cronista, Infobae, La Nación, Clarín, iProfesional, CNBC, Financial Times y agencias vía Google Noticias) y de la Reserva Federal y el BCE. Selección automática por reglas de impacto, con texto propio y el enlace al original.'),
       el('li', {}, 'Cotizaciones globales del Inicio: Yahoo Finance (guardadas cada 30 minutos en horario de mercado) y Bitcoin en vivo desde CoinGecko. El emergente se muestra con el ETF EEM como referencia del MSCI Emerging Markets.'),
@@ -116,5 +116,6 @@ export function mountShell() {
       el('li', {}, 'PBI anual de ambos países: Banco Mundial (crecimiento real).'),
       el('li', {}, 'Las variaciones interanuales y mensuales se calculan a partir de los niveles originales de cada serie.'),
     ]),
+    el('p', { class: 'credits' }, 'Lautaro Frank ; Santino Hurvitz'),
   );
 }

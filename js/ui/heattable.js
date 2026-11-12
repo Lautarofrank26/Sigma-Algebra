@@ -110,7 +110,7 @@ export function createHeatTable(data, spec) {
 
   csv.addEventListener('click', () => {
     const cols = series().filter((r) => r.pts).map((r) => ({ label: r.label, points: r.pts }));
-    downloadCsv(`macroeconomics-${spec.id}-${st.freq}-${new Date().toISOString().slice(0, 10)}.csv`, seriesToCsv(cols));
+    downloadCsv(`sigma-algebra-${spec.id}-${st.freq}-${new Date().toISOString().slice(0, 10)}.csv`, seriesToCsv(cols));
   });
 
   const node = el('article', { class: 'panel panel--wide', id: spec.id }, [

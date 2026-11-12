@@ -79,7 +79,7 @@ export function createPanel(data, original) {
   csvButton.addEventListener('click', () => {
     const { view, spec } = current();
     const columns = spec.datasets.map((d) => ({ label: d.label, points: resolve(view, d.ref)?.points ?? [] })).filter((c) => c.points.length);
-    if (columns.length) downloadCsv(`macroeconomics-${panel.id}${tl ? `-${state.freq}` : ''}-${new Date().toISOString().slice(0, 10)}.csv`, seriesToCsv(columns));
+    if (columns.length) downloadCsv(`sigma-algebra-${panel.id}${tl ? `-${state.freq}` : ''}-${new Date().toISOString().slice(0, 10)}.csv`, seriesToCsv(columns));
   });
 
   const exportCsv = () => csvButton.click();

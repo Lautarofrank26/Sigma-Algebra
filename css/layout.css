@@ -61,3 +61,4 @@
 .subnav { display: flex; flex-wrap: wrap; gap: var(--gap-1); padding-top: var(--gap-2); }
 .country--block .subnav { padding-top: var(--gap-2); }
 
+.site-footer .credits { margin: var(--gap-1) 0 0; font-size: var(--fs-xs); color: var(--ink-3); letter-spacing: 0.02em; }
