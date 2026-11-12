@@ -48,7 +48,8 @@
 .side-link[aria-current="page"] { background: rgba(255, 255, 255, 0.1); color: #fff; font-weight: 600; }
 .side-link[aria-current="page"]::before { opacity: 1; background: var(--dot); transform: scale(1.25); }
 .side-link:focus-visible { outline: 2px solid #fff; outline-offset: -2px; }
-.side-foot { margin-top: auto; display: grid; gap: 0.35rem; padding: 1rem 1.25rem 1.15rem; border-top: 1px solid var(--side-line); font-size: var(--fs-xs); color: var(--side-ink-2); }
+.side-credits { margin: auto 0 0; padding: 0.75rem 1.25rem; font-size: var(--fs-xs); color: var(--side-ink-2); letter-spacing: 0.04em; }
+.side-foot { display: grid; gap: 0.35rem; padding: 1rem 1.25rem 1.15rem; border-top: 1px solid var(--side-line); font-size: var(--fs-xs); color: var(--side-ink-2); }
 .side-clock { display: flex; justify-content: space-between; }
 .side-clock b { font-family: var(--font-mono); font-weight: 500; color: #fff; }
 .side-backdrop { position: fixed; inset: 0; z-index: 39; background: rgba(11, 26, 46, 0.5); opacity: 0; pointer-events: none; transition: opacity 0.25s; }

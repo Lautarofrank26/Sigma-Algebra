@@ -46,12 +46,13 @@ function buildSidebar(file) {
   }, 20_000);
 
   return el('aside', { class: 'side', id: 'side', 'aria-label': 'Navegación principal' }, [
-    el('a', { class: 'side-brand', href: 'index.html' }, [el('strong', {}, 'Sigma Algebra'), el('span', {}, 'Lautaro Frank ; Santino Hurvitz')]),
+    el('a', { class: 'side-brand', href: 'index.html' }, [el('strong', {}, 'Sigma Algebra')]),
     el('nav', { class: 'side-nav' }, GROUPS.map((g) =>
       el('div', { class: 'side-group', 'data-g': g.key }, [
         g.label ? el('span', { class: 'side-label' }, g.label) : null,
         ...g.items.map((i) => el('a', { class: 'side-link', href: i.href, 'aria-current': i.href === file ? 'page' : false }, i.label)),
       ]))),
+    el('p', { class: 'side-credits' }, 'Lautaro Frank ; Santino Hurvitz'),
     el('div', { class: 'side-foot' }, [
       el('div', { class: 'side-clock' }, [el('span', {}, 'Buenos Aires'), ba]),
       el('div', { class: 'side-clock' }, [el('span', {}, 'Nueva York'), ny]),
