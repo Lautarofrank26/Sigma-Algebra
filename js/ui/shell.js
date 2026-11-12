@@ -46,7 +46,7 @@ function buildSidebar(file) {
   }, 20_000);
 
   return el('aside', { class: 'side', id: 'side', 'aria-label': 'Navegación principal' }, [
-    el('a', { class: 'side-brand', href: 'index.html' }, [el('strong', {}, 'Sigma Algebra'), el('span', {}, 'Argentina · Estados Unidos')]),
+    el('a', { class: 'side-brand', href: 'index.html' }, [el('strong', {}, 'Sigma Algebra'), el('span', {}, 'Lautaro Frank ; Santino Hurvitz')]),
     el('nav', { class: 'side-nav' }, GROUPS.map((g) =>
       el('div', { class: 'side-group', 'data-g': g.key }, [
         g.label ? el('span', { class: 'side-label' }, g.label) : null,
