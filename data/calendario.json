@@ -31,11 +31,11 @@
       "detail": "Septiembre de 2026",
       "href": "actividad.html",
       "previo": {
-        "id": "ipi",
         "decimals": 1,
-        "signed": true,
         "label": "Anterior (m/m)",
         "t": "pct1",
+        "signed": true,
+        "id": "ipi",
         "file": "ar",
         "suffix": "%"
       },
@@ -87,10 +87,10 @@
       "detail": "Octubre de 2026 · también canastas básicas",
       "href": "precios.html",
       "previo": {
-        "id": "ipc",
         "decimals": 1,
         "label": "Anterior (m/m)",
         "t": "pct1",
+        "id": "ipc",
         "file": "ar",
         "suffix": "%"
       },
@@ -129,10 +129,10 @@
       "detail": "Septiembre de 2026",
       "href": "empleo.html",
       "previo": {
-        "id": "wages",
         "decimals": 1,
         "label": "Anterior (m/m)",
         "t": "pct1",
+        "id": "wages",
         "file": "ar",
         "suffix": "%"
       },
@@ -198,11 +198,11 @@
       "detail": "Octubre de 2026",
       "href": "externo.html",
       "previo": {
-        "id": "trade_balance",
         "decimals": 0,
         "label": "Saldo anterior",
-        "t": "level",
         "prefix": "USD ",
+        "t": "level",
+        "id": "trade_balance",
         "file": "ar",
         "suffix": " M"
       },
@@ -219,11 +219,11 @@
       "detail": "Septiembre de 2026",
       "href": "actividad.html",
       "previo": {
-        "id": "emae",
         "decimals": 1,
-        "signed": true,
         "label": "Anterior (m/m)",
         "t": "pct1",
+        "signed": true,
+        "id": "emae",
         "file": "ar",
         "suffix": "%"
       },
@@ -317,10 +317,10 @@
       "detail": "Reunión del FOMC del 8 y 9 de diciembre",
       "href": "eeuu-tasas.html",
       "previo": {
-        "id": "fedfunds",
         "decimals": 2,
         "label": "Tasa actual",
         "t": "level",
+        "id": "fedfunds",
         "file": "us",
         "suffix": "%"
       },
@@ -350,11 +350,11 @@
       "detail": "Octubre de 2026",
       "href": "actividad.html",
       "previo": {
-        "id": "ipi",
         "decimals": 1,
-        "signed": true,
         "label": "Anterior (m/m)",
         "t": "pct1",
+        "signed": true,
+        "id": "ipi",
         "file": "ar",
         "suffix": "%"
       },
@@ -415,10 +415,10 @@
       "detail": "Noviembre de 2026 · también canastas básicas",
       "href": "precios.html",
       "previo": {
-        "id": "ipc",
         "decimals": 1,
         "label": "Anterior (m/m)",
         "t": "pct1",
+        "id": "ipc",
         "file": "ar",
         "suffix": "%"
       },
@@ -447,10 +447,10 @@
       "detail": "Octubre de 2026",
       "href": "empleo.html",
       "previo": {
-        "id": "wages",
         "decimals": 1,
         "label": "Anterior (m/m)",
         "t": "pct1",
+        "id": "wages",
         "file": "ar",
         "suffix": "%"
       },
@@ -467,11 +467,11 @@
       "detail": "Informe de avance del tercer trimestre de 2026",
       "href": "actividad.html",
       "previo": {
-        "id": "gdp_level",
         "decimals": 1,
-        "signed": true,
         "label": "Anterior (i.a.)",
         "t": "yoy",
+        "signed": true,
+        "id": "gdp_level",
         "file": "ar",
         "suffix": "%"
       },
@@ -539,10 +539,10 @@
       "detail": "Desempleo del tercer trimestre de 2026",
       "href": "empleo.html",
       "previo": {
-        "id": "unemp",
         "decimals": 1,
         "label": "Anterior",
         "t": "level",
+        "id": "unemp",
         "file": "ar",
         "suffix": "%"
       },
@@ -559,11 +559,11 @@
       "detail": "Noviembre de 2026",
       "href": "externo.html",
       "previo": {
-        "id": "trade_balance",
         "decimals": 0,
         "label": "Saldo anterior",
-        "t": "level",
         "prefix": "USD ",
+        "t": "level",
+        "id": "trade_balance",
         "file": "ar",
         "suffix": " M"
       },
@@ -580,11 +580,11 @@
       "detail": "Octubre de 2026",
       "href": "actividad.html",
       "previo": {
-        "id": "emae",
         "decimals": 1,
-        "signed": true,
         "label": "Anterior (m/m)",
         "t": "pct1",
+        "signed": true,
+        "id": "emae",
         "file": "ar",
         "suffix": "%"
       },
@@ -670,11 +670,11 @@
       "detail": "Noviembre de 2026",
       "href": "actividad.html",
       "previo": {
-        "id": "ipi",
         "decimals": 1,
-        "signed": true,
         "label": "Anterior (m/m)",
         "t": "pct1",
+        "signed": true,
+        "id": "ipi",
         "file": "ar",
         "suffix": "%"
       },
@@ -704,10 +704,10 @@
       "detail": "Diciembre de 2026 · también canastas básicas",
       "href": "precios.html",
       "previo": {
-        "id": "ipc",
         "decimals": 1,
         "label": "Anterior (m/m)",
         "t": "pct1",
+        "id": "ipc",
         "file": "ar",
         "suffix": "%"
       },
@@ -749,11 +749,11 @@
       "detail": "Diciembre de 2026",
       "href": "externo.html",
       "previo": {
-        "id": "trade_balance",
         "decimals": 0,
         "label": "Saldo anterior",
-        "t": "level",
         "prefix": "USD ",
+        "t": "level",
+        "id": "trade_balance",
         "file": "ar",
         "suffix": " M"
       },
@@ -770,10 +770,10 @@
       "detail": "Noviembre de 2026",
       "href": "empleo.html",
       "previo": {
-        "id": "wages",
         "decimals": 1,
         "label": "Anterior (m/m)",
         "t": "pct1",
+        "id": "wages",
         "file": "ar",
         "suffix": "%"
       },
@@ -790,11 +790,11 @@
       "detail": "Noviembre de 2026",
       "href": "actividad.html",
       "previo": {
-        "id": "emae",
         "decimals": 1,
-        "signed": true,
         "label": "Anterior (m/m)",
         "t": "pct1",
+        "signed": true,
+        "id": "emae",
         "file": "ar",
         "suffix": "%"
       },
@@ -824,10 +824,10 @@
       "detail": "Reunión del FOMC del 26 y 27 de enero",
       "href": "eeuu-tasas.html",
       "previo": {
-        "id": "fedfunds",
         "decimals": 2,
         "label": "Tasa actual",
         "t": "level",
+        "id": "fedfunds",
         "file": "us",
         "suffix": "%"
       },
@@ -856,11 +856,11 @@
       "detail": "Diciembre de 2026",
       "href": "actividad.html",
       "previo": {
-        "id": "ipi",
         "decimals": 1,
-        "signed": true,
         "label": "Anterior (m/m)",
         "t": "pct1",
+        "signed": true,
+        "id": "ipi",
         "file": "ar",
         "suffix": "%"
       },
@@ -890,10 +890,10 @@
       "detail": "Enero de 2027 · también canastas básicas",
       "href": "precios.html",
       "previo": {
-        "id": "ipc",
         "decimals": 1,
         "label": "Anterior (m/m)",
         "t": "pct1",
+        "id": "ipc",
         "file": "ar",
         "suffix": "%"
       },
@@ -935,10 +935,10 @@
       "detail": "Diciembre de 2026",
       "href": "empleo.html",
       "previo": {
-        "id": "wages",
         "decimals": 1,
         "label": "Anterior (m/m)",
         "t": "pct1",
+        "id": "wages",
         "file": "ar",
         "suffix": "%"
       },
@@ -955,11 +955,11 @@
       "detail": "Enero de 2027",
       "href": "externo.html",
       "previo": {
-        "id": "trade_balance",
         "decimals": 0,
         "label": "Saldo anterior",
-        "t": "level",
         "prefix": "USD ",
+        "t": "level",
+        "id": "trade_balance",
         "file": "ar",
         "suffix": " M"
       },
@@ -976,11 +976,11 @@
       "detail": "Diciembre de 2026",
       "href": "actividad.html",
       "previo": {
-        "id": "emae",
         "decimals": 1,
-        "signed": true,
         "label": "Anterior (m/m)",
         "t": "pct1",
+        "signed": true,
+        "id": "emae",
         "file": "ar",
         "suffix": "%"
       },
@@ -1010,11 +1010,11 @@
       "detail": "Enero de 2027",
       "href": "actividad.html",
       "previo": {
-        "id": "ipi",
         "decimals": 1,
-        "signed": true,
         "label": "Anterior (m/m)",
         "t": "pct1",
+        "signed": true,
+        "id": "ipi",
         "file": "ar",
         "suffix": "%"
       },
@@ -1031,10 +1031,10 @@
       "detail": "Febrero de 2027 · también canastas básicas",
       "href": "precios.html",
       "previo": {
-        "id": "ipc",
         "decimals": 1,
         "label": "Anterior (m/m)",
         "t": "pct1",
+        "id": "ipc",
         "file": "ar",
         "suffix": "%"
       },
@@ -1063,10 +1063,10 @@
       "detail": "Enero de 2027",
       "href": "empleo.html",
       "previo": {
-        "id": "wages",
         "decimals": 1,
         "label": "Anterior (m/m)",
         "t": "pct1",
+        "id": "wages",
         "file": "ar",
         "suffix": "%"
       },
@@ -1096,10 +1096,10 @@
       "detail": "Reunión del FOMC del 16 y 17 de marzo",
       "href": "eeuu-tasas.html",
       "previo": {
-        "id": "fedfunds",
         "decimals": 2,
         "label": "Tasa actual",
         "t": "level",
+        "id": "fedfunds",
         "file": "us",
         "suffix": "%"
       },
@@ -1141,10 +1141,10 @@
       "detail": "Desempleo del cuarto trimestre de 2026",
       "href": "empleo.html",
       "previo": {
-        "id": "unemp",
         "decimals": 1,
         "label": "Anterior",
         "t": "level",
+        "id": "unemp",
         "file": "ar",
         "suffix": "%"
       },
@@ -1161,11 +1161,11 @@
       "detail": "Informe de avance del cuarto trimestre de 2026",
       "href": "actividad.html",
       "previo": {
-        "id": "gdp_level",
         "decimals": 1,
-        "signed": true,
         "label": "Anterior (i.a.)",
         "t": "yoy",
+        "signed": true,
+        "id": "gdp_level",
         "file": "ar",
         "suffix": "%"
       },
@@ -1182,11 +1182,11 @@
       "detail": "Febrero de 2027",
       "href": "externo.html",
       "previo": {
-        "id": "trade_balance",
         "decimals": 0,
         "label": "Saldo anterior",
-        "t": "level",
         "prefix": "USD ",
+        "t": "level",
+        "id": "trade_balance",
         "file": "ar",
         "suffix": " M"
       },
@@ -1203,11 +1203,11 @@
       "detail": "Enero de 2027",
       "href": "actividad.html",
       "previo": {
-        "id": "emae",
         "decimals": 1,
-        "signed": true,
         "label": "Anterior (m/m)",
         "t": "pct1",
+        "signed": true,
+        "id": "emae",
         "file": "ar",
         "suffix": "%"
       },
@@ -1237,11 +1237,11 @@
       "detail": "Febrero de 2027",
       "href": "actividad.html",
       "previo": {
-        "id": "ipi",
         "decimals": 1,
-        "signed": true,
         "label": "Anterior (m/m)",
         "t": "pct1",
+        "signed": true,
+        "id": "ipi",
         "file": "ar",
         "suffix": "%"
       },
@@ -1271,10 +1271,10 @@
       "detail": "Marzo de 2027 · también canastas básicas",
       "href": "precios.html",
       "previo": {
-        "id": "ipc",
         "decimals": 1,
         "label": "Anterior (m/m)",
         "t": "pct1",
+        "id": "ipc",
         "file": "ar",
         "suffix": "%"
       },
@@ -1316,10 +1316,10 @@
       "detail": "Febrero de 2027",
       "href": "empleo.html",
       "previo": {
-        "id": "wages",
         "decimals": 1,
         "label": "Anterior (m/m)",
         "t": "pct1",
+        "id": "wages",
         "file": "ar",
         "suffix": "%"
       },
@@ -1336,11 +1336,11 @@
       "detail": "Marzo de 2027",
       "href": "externo.html",
       "previo": {
-        "id": "trade_balance",
         "decimals": 0,
         "label": "Saldo anterior",
-        "t": "level",
         "prefix": "USD ",
+        "t": "level",
+        "id": "trade_balance",
         "file": "ar",
         "suffix": " M"
       },
@@ -1357,11 +1357,11 @@
       "detail": "Febrero de 2027",
       "href": "actividad.html",
       "previo": {
-        "id": "emae",
         "decimals": 1,
-        "signed": true,
         "label": "Anterior (m/m)",
         "t": "pct1",
+        "signed": true,
+        "id": "emae",
         "file": "ar",
         "suffix": "%"
       },
@@ -1391,10 +1391,10 @@
       "detail": "Reunión del FOMC del 27 y 28 de abril",
       "href": "eeuu-tasas.html",
       "previo": {
-        "id": "fedfunds",
         "decimals": 2,
         "label": "Tasa actual",
         "t": "level",
+        "id": "fedfunds",
         "file": "us",
         "suffix": "%"
       },
@@ -1449,11 +1449,11 @@
       "detail": "Marzo de 2027",
       "href": "actividad.html",
       "previo": {
-        "id": "ipi",
         "decimals": 1,
-        "signed": true,
         "label": "Anterior (m/m)",
         "t": "pct1",
+        "signed": true,
+        "id": "ipi",
         "file": "ar",
         "suffix": "%"
       },
@@ -1470,10 +1470,10 @@
       "detail": "Abril de 2027 · también canastas básicas",
       "href": "precios.html",
       "previo": {
-        "id": "ipc",
         "decimals": 1,
         "label": "Anterior (m/m)",
         "t": "pct1",
+        "id": "ipc",
         "file": "ar",
         "suffix": "%"
       },
@@ -1515,10 +1515,10 @@
       "detail": "Marzo de 2027",
       "href": "empleo.html",
       "previo": {
-        "id": "wages",
         "decimals": 1,
         "label": "Anterior (m/m)",
         "t": "pct1",
+        "id": "wages",
         "file": "ar",
         "suffix": "%"
       },
@@ -1535,11 +1535,11 @@
       "detail": "Abril de 2027",
       "href": "externo.html",
       "previo": {
-        "id": "trade_balance",
         "decimals": 0,
         "label": "Saldo anterior",
-        "t": "level",
         "prefix": "USD ",
+        "t": "level",
+        "id": "trade_balance",
         "file": "ar",
         "suffix": " M"
       },
@@ -1556,11 +1556,11 @@
       "detail": "Marzo de 2027",
       "href": "actividad.html",
       "previo": {
-        "id": "emae",
         "decimals": 1,
-        "signed": true,
         "label": "Anterior (m/m)",
         "t": "pct1",
+        "signed": true,
+        "id": "emae",
         "file": "ar",
         "suffix": "%"
       },
@@ -1577,10 +1577,10 @@
       "detail": "Reunión del FOMC del 8 y 9 de junio",
       "href": "eeuu-tasas.html",
       "previo": {
-        "id": "fedfunds",
         "decimals": 2,
         "label": "Tasa actual",
         "t": "level",
+        "id": "fedfunds",
         "file": "us",
         "suffix": "%"
       },
@@ -1610,11 +1610,11 @@
       "detail": "Abril de 2027",
       "href": "actividad.html",
       "previo": {
-        "id": "ipi",
         "decimals": 1,
-        "signed": true,
         "label": "Anterior (m/m)",
         "t": "pct1",
+        "signed": true,
+        "id": "ipi",
         "file": "ar",
         "suffix": "%"
       },
@@ -1643,10 +1643,10 @@
       "detail": "Mayo de 2027 · también canastas básicas",
       "href": "precios.html",
       "previo": {
-        "id": "ipc",
         "decimals": 1,
         "label": "Anterior (m/m)",
         "t": "pct1",
+        "id": "ipc",
         "file": "ar",
         "suffix": "%"
       },
@@ -1688,10 +1688,10 @@
       "detail": "Abril de 2027",
       "href": "empleo.html",
       "previo": {
-        "id": "wages",
         "decimals": 1,
         "label": "Anterior (m/m)",
         "t": "pct1",
+        "id": "wages",
         "file": "ar",
         "suffix": "%"
       },
@@ -1708,11 +1708,11 @@
       "detail": "Mayo de 2027",
       "href": "externo.html",
       "previo": {
-        "id": "trade_balance",
         "decimals": 0,
         "label": "Saldo anterior",
-        "t": "level",
         "prefix": "USD ",
+        "t": "level",
+        "id": "trade_balance",
         "file": "ar",
         "suffix": " M"
       },
@@ -1729,11 +1729,11 @@
       "detail": "Informe de avance del primer trimestre de 2027",
       "href": "actividad.html",
       "previo": {
-        "id": "gdp_level",
         "decimals": 1,
-        "signed": true,
         "label": "Anterior (i.a.)",
         "t": "yoy",
+        "signed": true,
+        "id": "gdp_level",
         "file": "ar",
         "suffix": "%"
       },
@@ -1750,10 +1750,10 @@
       "detail": "Desempleo del primer trimestre de 2027",
       "href": "empleo.html",
       "previo": {
-        "id": "unemp",
         "decimals": 1,
         "label": "Anterior",
         "t": "level",
+        "id": "unemp",
         "file": "ar",
         "suffix": "%"
       },
@@ -1783,11 +1783,11 @@
       "detail": "Abril de 2027",
       "href": "actividad.html",
       "previo": {
-        "id": "emae",
         "decimals": 1,
-        "signed": true,
         "label": "Anterior (m/m)",
         "t": "pct1",
+        "signed": true,
+        "id": "emae",
         "file": "ar",
         "suffix": "%"
       },
@@ -1828,10 +1828,10 @@
       "detail": "Reunión del FOMC del 27 y 28 de julio",
       "href": "eeuu-tasas.html",
       "previo": {
-        "id": "fedfunds",
         "decimals": 2,
         "label": "Tasa actual",
         "t": "level",
+        "id": "fedfunds",
         "file": "us",
         "suffix": "%"
       },
@@ -1872,10 +1872,10 @@
       "detail": "Reunión del FOMC del 14 y 15 de septiembre",
       "href": "eeuu-tasas.html",
       "previo": {
-        "id": "fedfunds",
         "decimals": 2,
         "label": "Tasa actual",
         "t": "level",
+        "id": "fedfunds",
         "file": "us",
         "suffix": "%"
       },
@@ -1929,10 +1929,10 @@
       "detail": "Reunión del FOMC del 26 y 27 de octubre",
       "href": "eeuu-tasas.html",
       "previo": {
-        "id": "fedfunds",
         "decimals": 2,
         "label": "Tasa actual",
         "t": "level",
+        "id": "fedfunds",
         "file": "us",
         "suffix": "%"
       },
@@ -1986,10 +1986,10 @@
       "detail": "Reunión del FOMC del 16 y 17 de noviembre",
       "href": "eeuu-tasas.html",
       "previo": {
-        "id": "fedfunds",
         "decimals": 2,
         "label": "Tasa actual",
         "t": "level",
+        "id": "fedfunds",
         "file": "us",
         "suffix": "%"
       },
