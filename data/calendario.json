@@ -6,7 +6,7 @@
     "https://www.bea.gov/news/schedule",
     "https://www.ecb.europa.eu/press/calendars/mgcgc/html/index.en.html"
   ],
-  "actualizado": "2026-11-17",
+  "actualizado": "2026-11-18",
   "eventos": [
     {
       "date": "2026-11-04",
@@ -32,12 +32,12 @@
       "href": "actividad.html",
       "previo": {
         "t": "pct1",
-        "suffix": "%",
-        "label": "Anterior (m/m)",
         "decimals": 1,
+        "label": "Anterior (m/m)",
+        "signed": true,
         "id": "ipi",
-        "file": "ar",
-        "signed": true
+        "suffix": "%",
+        "file": "ar"
       },
       "impact": "medio",
       "region": "ar"
@@ -88,11 +88,11 @@
       "href": "precios.html",
       "previo": {
         "t": "pct1",
-        "suffix": "%",
         "decimals": 1,
+        "label": "Anterior (m/m)",
         "id": "ipc",
-        "file": "ar",
-        "label": "Anterior (m/m)"
+        "suffix": "%",
+        "file": "ar"
       },
       "impact": "alto",
       "region": "ar"
@@ -130,11 +130,11 @@
       "href": "empleo.html",
       "previo": {
         "t": "pct1",
-        "suffix": "%",
         "decimals": 1,
+        "label": "Anterior (m/m)",
         "id": "wages",
-        "file": "ar",
-        "label": "Anterior (m/m)"
+        "suffix": "%",
+        "file": "ar"
       },
       "impact": "medio",
       "region": "ar"
@@ -151,18 +151,6 @@
       "previo": null,
       "impact": "medio",
       "region": "ar"
-    },
-    {
-      "date": "2026-11-17",
-      "time": "08:30",
-      "tz": "-05:00",
-      "country": "us",
-      "source": "Census",
-      "title": "Ventas minoristas de EE.UU.",
-      "detail": "Octubre de 2026",
-      "href": "eeuu.html",
-      "impact": "alto",
-      "region": "us"
     },
     {
       "date": "2026-11-18",
@@ -199,12 +187,12 @@
       "href": "externo.html",
       "previo": {
         "t": "level",
-        "suffix": " M",
-        "prefix": "USD ",
         "decimals": 0,
+        "label": "Saldo anterior",
         "id": "trade_balance",
-        "file": "ar",
-        "label": "Saldo anterior"
+        "prefix": "USD ",
+        "suffix": " M",
+        "file": "ar"
       },
       "impact": "alto",
       "region": "ar"
@@ -220,12 +208,12 @@
       "href": "actividad.html",
       "previo": {
         "t": "pct1",
-        "suffix": "%",
-        "label": "Anterior (m/m)",
         "decimals": 1,
+        "label": "Anterior (m/m)",
+        "signed": true,
         "id": "emae",
-        "file": "ar",
-        "signed": true
+        "suffix": "%",
+        "file": "ar"
       },
       "impact": "alto",
       "region": "ar"
@@ -318,27 +306,14 @@
       "href": "eeuu-tasas.html",
       "previo": {
         "t": "level",
-        "suffix": "%",
         "decimals": 2,
+        "label": "Tasa actual",
         "id": "fedfunds",
-        "file": "us",
-        "label": "Tasa actual"
+        "suffix": "%",
+        "file": "us"
       },
       "impact": "alto",
       "region": "us"
-    },
-    {
-      "date": "2026-12-09",
-      "time": "16:00",
-      "tz": "-03:00",
-      "country": "ar",
-      "source": "INDEC",
-      "title": "Construcción (ISAC)",
-      "detail": "Octubre de 2026",
-      "href": "actividad.html",
-      "previo": null,
-      "impact": "medio",
-      "region": "ar"
     },
     {
       "date": "2026-12-09",
@@ -351,13 +326,26 @@
       "href": "actividad.html",
       "previo": {
         "t": "pct1",
-        "suffix": "%",
-        "label": "Anterior (m/m)",
         "decimals": 1,
+        "label": "Anterior (m/m)",
+        "signed": true,
         "id": "ipi",
-        "file": "ar",
-        "signed": true
+        "suffix": "%",
+        "file": "ar"
       },
+      "impact": "medio",
+      "region": "ar"
+    },
+    {
+      "date": "2026-12-09",
+      "time": "16:00",
+      "tz": "-03:00",
+      "country": "ar",
+      "source": "INDEC",
+      "title": "Construcción (ISAC)",
+      "detail": "Octubre de 2026",
+      "href": "actividad.html",
+      "previo": null,
       "impact": "medio",
       "region": "ar"
     },
@@ -416,11 +404,11 @@
       "href": "precios.html",
       "previo": {
         "t": "pct1",
-        "suffix": "%",
         "decimals": 1,
+        "label": "Anterior (m/m)",
         "id": "ipc",
-        "file": "ar",
-        "label": "Anterior (m/m)"
+        "suffix": "%",
+        "file": "ar"
       },
       "impact": "alto",
       "region": "ar"
@@ -448,11 +436,11 @@
       "href": "empleo.html",
       "previo": {
         "t": "pct1",
-        "suffix": "%",
         "decimals": 1,
+        "label": "Anterior (m/m)",
         "id": "wages",
-        "file": "ar",
-        "label": "Anterior (m/m)"
+        "suffix": "%",
+        "file": "ar"
       },
       "impact": "medio",
       "region": "ar"
@@ -468,12 +456,12 @@
       "href": "actividad.html",
       "previo": {
         "t": "yoy",
-        "suffix": "%",
-        "label": "Anterior (i.a.)",
         "decimals": 1,
+        "label": "Anterior (i.a.)",
+        "signed": true,
         "id": "gdp_level",
-        "file": "ar",
-        "signed": true
+        "suffix": "%",
+        "file": "ar"
       },
       "impact": "alto",
       "region": "ar"
@@ -540,11 +528,11 @@
       "href": "empleo.html",
       "previo": {
         "t": "level",
-        "suffix": "%",
         "decimals": 1,
+        "label": "Anterior",
         "id": "unemp",
-        "file": "ar",
-        "label": "Anterior"
+        "suffix": "%",
+        "file": "ar"
       },
       "impact": "alto",
       "region": "ar"
@@ -560,12 +548,12 @@
       "href": "externo.html",
       "previo": {
         "t": "level",
-        "suffix": " M",
-        "prefix": "USD ",
         "decimals": 0,
+        "label": "Saldo anterior",
         "id": "trade_balance",
-        "file": "ar",
-        "label": "Saldo anterior"
+        "prefix": "USD ",
+        "suffix": " M",
+        "file": "ar"
       },
       "impact": "alto",
       "region": "ar"
@@ -581,12 +569,12 @@
       "href": "actividad.html",
       "previo": {
         "t": "pct1",
-        "suffix": "%",
-        "label": "Anterior (m/m)",
         "decimals": 1,
+        "label": "Anterior (m/m)",
+        "signed": true,
         "id": "emae",
-        "file": "ar",
-        "signed": true
+        "suffix": "%",
+        "file": "ar"
       },
       "impact": "alto",
       "region": "ar"
@@ -659,12 +647,12 @@
       "href": "actividad.html",
       "previo": {
         "t": "pct1",
-        "suffix": "%",
-        "label": "Anterior (m/m)",
         "decimals": 1,
+        "label": "Anterior (m/m)",
+        "signed": true,
         "id": "ipi",
-        "file": "ar",
-        "signed": true
+        "suffix": "%",
+        "file": "ar"
       },
       "impact": "medio",
       "region": "ar"
@@ -693,11 +681,11 @@
       "href": "precios.html",
       "previo": {
         "t": "pct1",
-        "suffix": "%",
         "decimals": 1,
+        "label": "Anterior (m/m)",
         "id": "ipc",
-        "file": "ar",
-        "label": "Anterior (m/m)"
+        "suffix": "%",
+        "file": "ar"
       },
       "impact": "alto",
       "region": "ar"
@@ -733,19 +721,18 @@
       "tz": "-03:00",
       "country": "ar",
       "source": "INDEC",
-      "title": "Comercio exterior (ICA)",
-      "detail": "Diciembre de 2026",
-      "href": "externo.html",
+      "title": "Índice de salarios",
+      "detail": "Noviembre de 2026",
+      "href": "empleo.html",
       "previo": {
-        "t": "level",
-        "suffix": " M",
-        "prefix": "USD ",
-        "decimals": 0,
-        "id": "trade_balance",
-        "file": "ar",
-        "label": "Saldo anterior"
+        "t": "pct1",
+        "decimals": 1,
+        "label": "Anterior (m/m)",
+        "id": "wages",
+        "suffix": "%",
+        "file": "ar"
       },
-      "impact": "alto",
+      "impact": "medio",
       "region": "ar"
     },
     {
@@ -754,18 +741,19 @@
       "tz": "-03:00",
       "country": "ar",
       "source": "INDEC",
-      "title": "Índice de salarios",
-      "detail": "Noviembre de 2026",
-      "href": "empleo.html",
+      "title": "Comercio exterior (ICA)",
+      "detail": "Diciembre de 2026",
+      "href": "externo.html",
       "previo": {
-        "t": "pct1",
-        "suffix": "%",
-        "decimals": 1,
-        "id": "wages",
-        "file": "ar",
-        "label": "Anterior (m/m)"
+        "t": "level",
+        "decimals": 0,
+        "label": "Saldo anterior",
+        "id": "trade_balance",
+        "prefix": "USD ",
+        "suffix": " M",
+        "file": "ar"
       },
-      "impact": "medio",
+      "impact": "alto",
       "region": "ar"
     },
     {
@@ -779,12 +767,12 @@
       "href": "actividad.html",
       "previo": {
         "t": "pct1",
-        "suffix": "%",
-        "label": "Anterior (m/m)",
         "decimals": 1,
+        "label": "Anterior (m/m)",
+        "signed": true,
         "id": "emae",
-        "file": "ar",
-        "signed": true
+        "suffix": "%",
+        "file": "ar"
       },
       "impact": "alto",
       "region": "ar"
@@ -813,11 +801,11 @@
       "href": "eeuu-tasas.html",
       "previo": {
         "t": "level",
-        "suffix": "%",
         "decimals": 2,
+        "label": "Tasa actual",
         "id": "fedfunds",
-        "file": "us",
-        "label": "Tasa actual"
+        "suffix": "%",
+        "file": "us"
       },
       "impact": "alto",
       "region": "us"
@@ -840,10 +828,18 @@
       "tz": "-03:00",
       "country": "ar",
       "source": "INDEC",
-      "title": "Construcción (ISAC)",
+      "title": "Industria (IPI manufacturero)",
       "detail": "Diciembre de 2026",
       "href": "actividad.html",
-      "previo": null,
+      "previo": {
+        "t": "pct1",
+        "decimals": 1,
+        "label": "Anterior (m/m)",
+        "signed": true,
+        "id": "ipi",
+        "suffix": "%",
+        "file": "ar"
+      },
       "impact": "medio",
       "region": "ar"
     },
@@ -853,18 +849,10 @@
       "tz": "-03:00",
       "country": "ar",
       "source": "INDEC",
-      "title": "Industria (IPI manufacturero)",
+      "title": "Construcción (ISAC)",
       "detail": "Diciembre de 2026",
       "href": "actividad.html",
-      "previo": {
-        "t": "pct1",
-        "suffix": "%",
-        "label": "Anterior (m/m)",
-        "decimals": 1,
-        "id": "ipi",
-        "file": "ar",
-        "signed": true
-      },
+      "previo": null,
       "impact": "medio",
       "region": "ar"
     },
@@ -879,11 +867,11 @@
       "href": "precios.html",
       "previo": {
         "t": "pct1",
-        "suffix": "%",
         "decimals": 1,
+        "label": "Anterior (m/m)",
         "id": "ipc",
-        "file": "ar",
-        "label": "Anterior (m/m)"
+        "suffix": "%",
+        "file": "ar"
       },
       "impact": "alto",
       "region": "ar"
@@ -924,11 +912,11 @@
       "href": "empleo.html",
       "previo": {
         "t": "pct1",
-        "suffix": "%",
         "decimals": 1,
+        "label": "Anterior (m/m)",
         "id": "wages",
-        "file": "ar",
-        "label": "Anterior (m/m)"
+        "suffix": "%",
+        "file": "ar"
       },
       "impact": "medio",
       "region": "ar"
@@ -944,12 +932,12 @@
       "href": "externo.html",
       "previo": {
         "t": "level",
-        "suffix": " M",
-        "prefix": "USD ",
         "decimals": 0,
+        "label": "Saldo anterior",
         "id": "trade_balance",
-        "file": "ar",
-        "label": "Saldo anterior"
+        "prefix": "USD ",
+        "suffix": " M",
+        "file": "ar"
       },
       "impact": "alto",
       "region": "ar"
@@ -965,12 +953,12 @@
       "href": "actividad.html",
       "previo": {
         "t": "pct1",
-        "suffix": "%",
-        "label": "Anterior (m/m)",
         "decimals": 1,
+        "label": "Anterior (m/m)",
+        "signed": true,
         "id": "emae",
-        "file": "ar",
-        "signed": true
+        "suffix": "%",
+        "file": "ar"
       },
       "impact": "alto",
       "region": "ar"
@@ -986,12 +974,12 @@
       "href": "actividad.html",
       "previo": {
         "t": "pct1",
-        "suffix": "%",
-        "label": "Anterior (m/m)",
         "decimals": 1,
+        "label": "Anterior (m/m)",
+        "signed": true,
         "id": "ipi",
-        "file": "ar",
-        "signed": true
+        "suffix": "%",
+        "file": "ar"
       },
       "impact": "medio",
       "region": "ar"
@@ -1020,11 +1008,11 @@
       "href": "precios.html",
       "previo": {
         "t": "pct1",
-        "suffix": "%",
         "decimals": 1,
+        "label": "Anterior (m/m)",
         "id": "ipc",
-        "file": "ar",
-        "label": "Anterior (m/m)"
+        "suffix": "%",
+        "file": "ar"
       },
       "impact": "alto",
       "region": "ar"
@@ -1047,10 +1035,17 @@
       "tz": "-03:00",
       "country": "ar",
       "source": "INDEC",
-      "title": "Capacidad instalada (UCII)",
+      "title": "Índice de salarios",
       "detail": "Enero de 2027",
-      "href": "actividad.html",
-      "previo": null,
+      "href": "empleo.html",
+      "previo": {
+        "t": "pct1",
+        "decimals": 1,
+        "label": "Anterior (m/m)",
+        "id": "wages",
+        "suffix": "%",
+        "file": "ar"
+      },
       "impact": "medio",
       "region": "ar"
     },
@@ -1060,17 +1055,10 @@
       "tz": "-03:00",
       "country": "ar",
       "source": "INDEC",
-      "title": "Índice de salarios",
+      "title": "Capacidad instalada (UCII)",
       "detail": "Enero de 2027",
-      "href": "empleo.html",
-      "previo": {
-        "t": "pct1",
-        "suffix": "%",
-        "decimals": 1,
-        "id": "wages",
-        "file": "ar",
-        "label": "Anterior (m/m)"
-      },
+      "href": "actividad.html",
+      "previo": null,
       "impact": "medio",
       "region": "ar"
     },
@@ -1085,11 +1073,11 @@
       "href": "eeuu-tasas.html",
       "previo": {
         "t": "level",
-        "suffix": "%",
         "decimals": 2,
+        "label": "Tasa actual",
         "id": "fedfunds",
-        "file": "us",
-        "label": "Tasa actual"
+        "suffix": "%",
+        "file": "us"
       },
       "impact": "alto",
       "region": "us"
@@ -1125,17 +1113,16 @@
       "tz": "-03:00",
       "country": "ar",
       "source": "INDEC",
-      "title": "Nivel de actividad (PBI)",
-      "detail": "Informe de avance del cuarto trimestre de 2026",
-      "href": "actividad.html",
+      "title": "Mercado de trabajo",
+      "detail": "Desempleo del cuarto trimestre de 2026",
+      "href": "empleo.html",
       "previo": {
-        "t": "yoy",
-        "suffix": "%",
-        "label": "Anterior (i.a.)",
+        "t": "level",
         "decimals": 1,
-        "id": "gdp_level",
-        "file": "ar",
-        "signed": true
+        "label": "Anterior",
+        "id": "unemp",
+        "suffix": "%",
+        "file": "ar"
       },
       "impact": "alto",
       "region": "ar"
@@ -1146,16 +1133,17 @@
       "tz": "-03:00",
       "country": "ar",
       "source": "INDEC",
-      "title": "Mercado de trabajo",
-      "detail": "Desempleo del cuarto trimestre de 2026",
-      "href": "empleo.html",
+      "title": "Nivel de actividad (PBI)",
+      "detail": "Informe de avance del cuarto trimestre de 2026",
+      "href": "actividad.html",
       "previo": {
-        "t": "level",
-        "suffix": "%",
+        "t": "yoy",
         "decimals": 1,
-        "id": "unemp",
-        "file": "ar",
-        "label": "Anterior"
+        "label": "Anterior (i.a.)",
+        "signed": true,
+        "id": "gdp_level",
+        "suffix": "%",
+        "file": "ar"
       },
       "impact": "alto",
       "region": "ar"
@@ -1171,12 +1159,12 @@
       "href": "externo.html",
       "previo": {
         "t": "level",
-        "suffix": " M",
-        "prefix": "USD ",
         "decimals": 0,
+        "label": "Saldo anterior",
         "id": "trade_balance",
-        "file": "ar",
-        "label": "Saldo anterior"
+        "prefix": "USD ",
+        "suffix": " M",
+        "file": "ar"
       },
       "impact": "alto",
       "region": "ar"
@@ -1205,35 +1193,14 @@
       "href": "actividad.html",
       "previo": {
         "t": "pct1",
-        "suffix": "%",
-        "label": "Anterior (m/m)",
         "decimals": 1,
+        "label": "Anterior (m/m)",
+        "signed": true,
         "id": "emae",
-        "file": "ar",
-        "signed": true
+        "suffix": "%",
+        "file": "ar"
       },
       "impact": "alto",
-      "region": "ar"
-    },
-    {
-      "date": "2027-04-09",
-      "time": "16:00",
-      "tz": "-03:00",
-      "country": "ar",
-      "source": "INDEC",
-      "title": "Industria (IPI manufacturero)",
-      "detail": "Febrero de 2027",
-      "href": "actividad.html",
-      "previo": {
-        "t": "pct1",
-        "suffix": "%",
-        "label": "Anterior (m/m)",
-        "decimals": 1,
-        "id": "ipi",
-        "file": "ar",
-        "signed": true
-      },
-      "impact": "medio",
       "region": "ar"
     },
     {
@@ -1250,6 +1217,27 @@
       "region": "ar"
     },
     {
+      "date": "2027-04-09",
+      "time": "16:00",
+      "tz": "-03:00",
+      "country": "ar",
+      "source": "INDEC",
+      "title": "Industria (IPI manufacturero)",
+      "detail": "Febrero de 2027",
+      "href": "actividad.html",
+      "previo": {
+        "t": "pct1",
+        "decimals": 1,
+        "label": "Anterior (m/m)",
+        "signed": true,
+        "id": "ipi",
+        "suffix": "%",
+        "file": "ar"
+      },
+      "impact": "medio",
+      "region": "ar"
+    },
+    {
       "date": "2027-04-15",
       "time": "16:00",
       "tz": "-03:00",
@@ -1260,11 +1248,11 @@
       "href": "precios.html",
       "previo": {
         "t": "pct1",
-        "suffix": "%",
         "decimals": 1,
+        "label": "Anterior (m/m)",
         "id": "ipc",
-        "file": "ar",
-        "label": "Anterior (m/m)"
+        "suffix": "%",
+        "file": "ar"
       },
       "impact": "alto",
       "region": "ar"
@@ -1287,10 +1275,17 @@
       "tz": "-03:00",
       "country": "ar",
       "source": "INDEC",
-      "title": "Capacidad instalada (UCII)",
+      "title": "Índice de salarios",
       "detail": "Febrero de 2027",
-      "href": "actividad.html",
-      "previo": null,
+      "href": "empleo.html",
+      "previo": {
+        "t": "pct1",
+        "decimals": 1,
+        "label": "Anterior (m/m)",
+        "id": "wages",
+        "suffix": "%",
+        "file": "ar"
+      },
       "impact": "medio",
       "region": "ar"
     },
@@ -1300,17 +1295,10 @@
       "tz": "-03:00",
       "country": "ar",
       "source": "INDEC",
-      "title": "Índice de salarios",
+      "title": "Capacidad instalada (UCII)",
       "detail": "Febrero de 2027",
-      "href": "empleo.html",
-      "previo": {
-        "t": "pct1",
-        "suffix": "%",
-        "decimals": 1,
-        "id": "wages",
-        "file": "ar",
-        "label": "Anterior (m/m)"
-      },
+      "href": "actividad.html",
+      "previo": null,
       "impact": "medio",
       "region": "ar"
     },
@@ -1325,12 +1313,12 @@
       "href": "externo.html",
       "previo": {
         "t": "level",
-        "suffix": " M",
-        "prefix": "USD ",
         "decimals": 0,
+        "label": "Saldo anterior",
         "id": "trade_balance",
-        "file": "ar",
-        "label": "Saldo anterior"
+        "prefix": "USD ",
+        "suffix": " M",
+        "file": "ar"
       },
       "impact": "alto",
       "region": "ar"
@@ -1346,12 +1334,12 @@
       "href": "actividad.html",
       "previo": {
         "t": "pct1",
-        "suffix": "%",
-        "label": "Anterior (m/m)",
         "decimals": 1,
+        "label": "Anterior (m/m)",
+        "signed": true,
         "id": "emae",
-        "file": "ar",
-        "signed": true
+        "suffix": "%",
+        "file": "ar"
       },
       "impact": "alto",
       "region": "ar"
@@ -1380,11 +1368,11 @@
       "href": "eeuu-tasas.html",
       "previo": {
         "t": "level",
-        "suffix": "%",
         "decimals": 2,
+        "label": "Tasa actual",
         "id": "fedfunds",
-        "file": "us",
-        "label": "Tasa actual"
+        "suffix": "%",
+        "file": "us"
       },
       "impact": "alto",
       "region": "us"
@@ -1420,10 +1408,18 @@
       "tz": "-03:00",
       "country": "ar",
       "source": "INDEC",
-      "title": "Construcción (ISAC)",
+      "title": "Industria (IPI manufacturero)",
       "detail": "Marzo de 2027",
       "href": "actividad.html",
-      "previo": null,
+      "previo": {
+        "t": "pct1",
+        "decimals": 1,
+        "label": "Anterior (m/m)",
+        "signed": true,
+        "id": "ipi",
+        "suffix": "%",
+        "file": "ar"
+      },
       "impact": "medio",
       "region": "ar"
     },
@@ -1433,18 +1429,10 @@
       "tz": "-03:00",
       "country": "ar",
       "source": "INDEC",
-      "title": "Industria (IPI manufacturero)",
+      "title": "Construcción (ISAC)",
       "detail": "Marzo de 2027",
       "href": "actividad.html",
-      "previo": {
-        "t": "pct1",
-        "suffix": "%",
-        "label": "Anterior (m/m)",
-        "decimals": 1,
-        "id": "ipi",
-        "file": "ar",
-        "signed": true
-      },
+      "previo": null,
       "impact": "medio",
       "region": "ar"
     },
@@ -1459,11 +1447,11 @@
       "href": "precios.html",
       "previo": {
         "t": "pct1",
-        "suffix": "%",
         "decimals": 1,
+        "label": "Anterior (m/m)",
         "id": "ipc",
-        "file": "ar",
-        "label": "Anterior (m/m)"
+        "suffix": "%",
+        "file": "ar"
       },
       "impact": "alto",
       "region": "ar"
@@ -1504,11 +1492,11 @@
       "href": "empleo.html",
       "previo": {
         "t": "pct1",
-        "suffix": "%",
         "decimals": 1,
+        "label": "Anterior (m/m)",
         "id": "wages",
-        "file": "ar",
-        "label": "Anterior (m/m)"
+        "suffix": "%",
+        "file": "ar"
       },
       "impact": "medio",
       "region": "ar"
@@ -1524,12 +1512,12 @@
       "href": "externo.html",
       "previo": {
         "t": "level",
-        "suffix": " M",
-        "prefix": "USD ",
         "decimals": 0,
+        "label": "Saldo anterior",
         "id": "trade_balance",
-        "file": "ar",
-        "label": "Saldo anterior"
+        "prefix": "USD ",
+        "suffix": " M",
+        "file": "ar"
       },
       "impact": "alto",
       "region": "ar"
@@ -1545,12 +1533,12 @@
       "href": "actividad.html",
       "previo": {
         "t": "pct1",
-        "suffix": "%",
-        "label": "Anterior (m/m)",
         "decimals": 1,
+        "label": "Anterior (m/m)",
+        "signed": true,
         "id": "emae",
-        "file": "ar",
-        "signed": true
+        "suffix": "%",
+        "file": "ar"
       },
       "impact": "alto",
       "region": "ar"
@@ -1566,14 +1554,27 @@
       "href": "eeuu-tasas.html",
       "previo": {
         "t": "level",
-        "suffix": "%",
         "decimals": 2,
+        "label": "Tasa actual",
         "id": "fedfunds",
-        "file": "us",
-        "label": "Tasa actual"
+        "suffix": "%",
+        "file": "us"
       },
       "impact": "alto",
       "region": "us"
+    },
+    {
+      "date": "2027-06-09",
+      "time": "16:00",
+      "tz": "-03:00",
+      "country": "ar",
+      "source": "INDEC",
+      "title": "Construcción (ISAC)",
+      "detail": "Abril de 2027",
+      "href": "actividad.html",
+      "previo": null,
+      "impact": "medio",
+      "region": "ar"
     },
     {
       "date": "2027-06-09",
@@ -1586,26 +1587,13 @@
       "href": "actividad.html",
       "previo": {
         "t": "pct1",
-        "suffix": "%",
-        "label": "Anterior (m/m)",
         "decimals": 1,
+        "label": "Anterior (m/m)",
+        "signed": true,
         "id": "ipi",
-        "file": "ar",
-        "signed": true
+        "suffix": "%",
+        "file": "ar"
       },
-      "impact": "medio",
-      "region": "ar"
-    },
-    {
-      "date": "2027-06-09",
-      "time": "16:00",
-      "tz": "-03:00",
-      "country": "ar",
-      "source": "INDEC",
-      "title": "Construcción (ISAC)",
-      "detail": "Abril de 2027",
-      "href": "actividad.html",
-      "previo": null,
       "impact": "medio",
       "region": "ar"
     },
@@ -1632,11 +1620,11 @@
       "href": "precios.html",
       "previo": {
         "t": "pct1",
-        "suffix": "%",
         "decimals": 1,
+        "label": "Anterior (m/m)",
         "id": "ipc",
-        "file": "ar",
-        "label": "Anterior (m/m)"
+        "suffix": "%",
+        "file": "ar"
       },
       "impact": "alto",
       "region": "ar"
@@ -1677,34 +1665,13 @@
       "href": "empleo.html",
       "previo": {
         "t": "pct1",
-        "suffix": "%",
         "decimals": 1,
+        "label": "Anterior (m/m)",
         "id": "wages",
-        "file": "ar",
-        "label": "Anterior (m/m)"
+        "suffix": "%",
+        "file": "ar"
       },
       "impact": "medio",
-      "region": "ar"
-    },
-    {
-      "date": "2027-06-22",
-      "time": "16:00",
-      "tz": "-03:00",
-      "country": "ar",
-      "source": "INDEC",
-      "title": "Comercio exterior (ICA)",
-      "detail": "Mayo de 2027",
-      "href": "externo.html",
-      "previo": {
-        "t": "level",
-        "suffix": " M",
-        "prefix": "USD ",
-        "decimals": 0,
-        "id": "trade_balance",
-        "file": "ar",
-        "label": "Saldo anterior"
-      },
-      "impact": "alto",
       "region": "ar"
     },
     {
@@ -1718,12 +1685,33 @@
       "href": "actividad.html",
       "previo": {
         "t": "yoy",
-        "suffix": "%",
-        "label": "Anterior (i.a.)",
         "decimals": 1,
+        "label": "Anterior (i.a.)",
+        "signed": true,
         "id": "gdp_level",
-        "file": "ar",
-        "signed": true
+        "suffix": "%",
+        "file": "ar"
+      },
+      "impact": "alto",
+      "region": "ar"
+    },
+    {
+      "date": "2027-06-22",
+      "time": "16:00",
+      "tz": "-03:00",
+      "country": "ar",
+      "source": "INDEC",
+      "title": "Comercio exterior (ICA)",
+      "detail": "Mayo de 2027",
+      "href": "externo.html",
+      "previo": {
+        "t": "level",
+        "decimals": 0,
+        "label": "Saldo anterior",
+        "id": "trade_balance",
+        "prefix": "USD ",
+        "suffix": " M",
+        "file": "ar"
       },
       "impact": "alto",
       "region": "ar"
@@ -1739,11 +1727,11 @@
       "href": "empleo.html",
       "previo": {
         "t": "level",
-        "suffix": "%",
         "decimals": 1,
+        "label": "Anterior",
         "id": "unemp",
-        "file": "ar",
-        "label": "Anterior"
+        "suffix": "%",
+        "file": "ar"
       },
       "impact": "alto",
       "region": "ar"
@@ -1772,12 +1760,12 @@
       "href": "actividad.html",
       "previo": {
         "t": "pct1",
-        "suffix": "%",
-        "label": "Anterior (m/m)",
         "decimals": 1,
+        "label": "Anterior (m/m)",
+        "signed": true,
         "id": "emae",
-        "file": "ar",
-        "signed": true
+        "suffix": "%",
+        "file": "ar"
       },
       "impact": "alto",
       "region": "ar"
@@ -1817,11 +1805,11 @@
       "href": "eeuu-tasas.html",
       "previo": {
         "t": "level",
-        "suffix": "%",
         "decimals": 2,
+        "label": "Tasa actual",
         "id": "fedfunds",
-        "file": "us",
-        "label": "Tasa actual"
+        "suffix": "%",
+        "file": "us"
       },
       "impact": "alto",
       "region": "us"
@@ -1861,11 +1849,11 @@
       "href": "eeuu-tasas.html",
       "previo": {
         "t": "level",
-        "suffix": "%",
         "decimals": 2,
+        "label": "Tasa actual",
         "id": "fedfunds",
-        "file": "us",
-        "label": "Tasa actual"
+        "suffix": "%",
+        "file": "us"
       },
       "impact": "alto",
       "region": "us"
@@ -1918,11 +1906,11 @@
       "href": "eeuu-tasas.html",
       "previo": {
         "t": "level",
-        "suffix": "%",
         "decimals": 2,
+        "label": "Tasa actual",
         "id": "fedfunds",
-        "file": "us",
-        "label": "Tasa actual"
+        "suffix": "%",
+        "file": "us"
       },
       "impact": "alto",
       "region": "us"
@@ -1975,11 +1963,11 @@
       "href": "eeuu-tasas.html",
       "previo": {
         "t": "level",
-        "suffix": "%",
         "decimals": 2,
+        "label": "Tasa actual",
         "id": "fedfunds",
-        "file": "us",
-        "label": "Tasa actual"
+        "suffix": "%",
+        "file": "us"
       },
       "impact": "alto",
       "region": "us"
