@@ -41,10 +41,10 @@
       "href": "precios.html",
       "previo": {
         "label": "Anterior (m/m)",
-        "t": "pct1",
-        "id": "ipc",
-        "file": "ar",
         "suffix": "%",
+        "id": "ipc",
+        "t": "pct1",
+        "file": "ar",
         "decimals": 1
       },
       "impact": "alto",
@@ -83,10 +83,10 @@
       "href": "empleo.html",
       "previo": {
         "label": "Anterior (m/m)",
-        "t": "pct1",
-        "id": "wages",
-        "file": "ar",
         "suffix": "%",
+        "id": "wages",
+        "t": "pct1",
+        "file": "ar",
         "decimals": 1
       },
       "impact": "medio",
@@ -116,12 +116,12 @@
       "href": "externo.html",
       "previo": {
         "label": "Saldo anterior",
-        "t": "level",
-        "id": "trade_balance",
-        "prefix": "USD ",
-        "file": "ar",
         "suffix": " M",
-        "decimals": 0
+        "id": "trade_balance",
+        "t": "level",
+        "file": "ar",
+        "decimals": 0,
+        "prefix": "USD "
       },
       "impact": "alto",
       "region": "ar"
@@ -137,12 +137,12 @@
       "href": "actividad.html",
       "previo": {
         "label": "Anterior (m/m)",
-        "t": "pct1",
-        "id": "emae",
-        "signed": true,
-        "file": "ar",
         "suffix": "%",
-        "decimals": 1
+        "id": "emae",
+        "t": "pct1",
+        "file": "ar",
+        "decimals": 1,
+        "signed": true
       },
       "impact": "alto",
       "region": "ar"
@@ -235,10 +235,10 @@
       "href": "eeuu-tasas.html",
       "previo": {
         "label": "Tasa actual",
-        "t": "level",
-        "id": "fedfunds",
-        "file": "us",
         "suffix": "%",
+        "id": "fedfunds",
+        "t": "level",
+        "file": "us",
         "decimals": 2
       },
       "impact": "alto",
@@ -255,12 +255,12 @@
       "href": "actividad.html",
       "previo": {
         "label": "Anterior (m/m)",
-        "t": "pct1",
-        "id": "ipi",
-        "signed": true,
-        "file": "ar",
         "suffix": "%",
-        "decimals": 1
+        "id": "ipi",
+        "t": "pct1",
+        "file": "ar",
+        "decimals": 1,
+        "signed": true
       },
       "impact": "medio",
       "region": "ar"
@@ -333,10 +333,10 @@
       "href": "precios.html",
       "previo": {
         "label": "Anterior (m/m)",
-        "t": "pct1",
-        "id": "ipc",
-        "file": "ar",
         "suffix": "%",
+        "id": "ipc",
+        "t": "pct1",
+        "file": "ar",
         "decimals": 1
       },
       "impact": "alto",
@@ -365,10 +365,10 @@
       "href": "empleo.html",
       "previo": {
         "label": "Anterior (m/m)",
-        "t": "pct1",
-        "id": "wages",
-        "file": "ar",
         "suffix": "%",
+        "id": "wages",
+        "t": "pct1",
+        "file": "ar",
         "decimals": 1
       },
       "impact": "medio",
@@ -385,12 +385,12 @@
       "href": "actividad.html",
       "previo": {
         "label": "Anterior (i.a.)",
-        "t": "yoy",
-        "id": "gdp_level",
-        "signed": true,
-        "file": "ar",
         "suffix": "%",
-        "decimals": 1
+        "id": "gdp_level",
+        "t": "yoy",
+        "file": "ar",
+        "decimals": 1,
+        "signed": true
       },
       "impact": "alto",
       "region": "ar"
@@ -457,10 +457,10 @@
       "href": "empleo.html",
       "previo": {
         "label": "Anterior",
-        "t": "level",
-        "id": "unemp",
-        "file": "ar",
         "suffix": "%",
+        "id": "unemp",
+        "t": "level",
+        "file": "ar",
         "decimals": 1
       },
       "impact": "alto",
@@ -477,12 +477,12 @@
       "href": "externo.html",
       "previo": {
         "label": "Saldo anterior",
-        "t": "level",
-        "id": "trade_balance",
-        "prefix": "USD ",
-        "file": "ar",
         "suffix": " M",
-        "decimals": 0
+        "id": "trade_balance",
+        "t": "level",
+        "file": "ar",
+        "decimals": 0,
+        "prefix": "USD "
       },
       "impact": "alto",
       "region": "ar"
@@ -498,12 +498,12 @@
       "href": "actividad.html",
       "previo": {
         "label": "Anterior (m/m)",
-        "t": "pct1",
-        "id": "emae",
-        "signed": true,
-        "file": "ar",
         "suffix": "%",
-        "decimals": 1
+        "id": "emae",
+        "t": "pct1",
+        "file": "ar",
+        "decimals": 1,
+        "signed": true
       },
       "impact": "alto",
       "region": "ar"
@@ -589,12 +589,12 @@
       "href": "actividad.html",
       "previo": {
         "label": "Anterior (m/m)",
-        "t": "pct1",
-        "id": "ipi",
-        "signed": true,
-        "file": "ar",
         "suffix": "%",
-        "decimals": 1
+        "id": "ipi",
+        "t": "pct1",
+        "file": "ar",
+        "decimals": 1,
+        "signed": true
       },
       "impact": "medio",
       "region": "ar"
@@ -610,10 +610,10 @@
       "href": "precios.html",
       "previo": {
         "label": "Anterior (m/m)",
-        "t": "pct1",
-        "id": "ipc",
-        "file": "ar",
         "suffix": "%",
+        "id": "ipc",
+        "t": "pct1",
+        "file": "ar",
         "decimals": 1
       },
       "impact": "alto",
@@ -655,12 +655,12 @@
       "href": "externo.html",
       "previo": {
         "label": "Saldo anterior",
-        "t": "level",
-        "id": "trade_balance",
-        "prefix": "USD ",
-        "file": "ar",
         "suffix": " M",
-        "decimals": 0
+        "id": "trade_balance",
+        "t": "level",
+        "file": "ar",
+        "decimals": 0,
+        "prefix": "USD "
       },
       "impact": "alto",
       "region": "ar"
@@ -676,10 +676,10 @@
       "href": "empleo.html",
       "previo": {
         "label": "Anterior (m/m)",
-        "t": "pct1",
-        "id": "wages",
-        "file": "ar",
         "suffix": "%",
+        "id": "wages",
+        "t": "pct1",
+        "file": "ar",
         "decimals": 1
       },
       "impact": "medio",
@@ -696,12 +696,12 @@
       "href": "actividad.html",
       "previo": {
         "label": "Anterior (m/m)",
-        "t": "pct1",
-        "id": "emae",
-        "signed": true,
-        "file": "ar",
         "suffix": "%",
-        "decimals": 1
+        "id": "emae",
+        "t": "pct1",
+        "file": "ar",
+        "decimals": 1,
+        "signed": true
       },
       "impact": "alto",
       "region": "ar"
@@ -730,10 +730,10 @@
       "href": "eeuu-tasas.html",
       "previo": {
         "label": "Tasa actual",
-        "t": "level",
-        "id": "fedfunds",
-        "file": "us",
         "suffix": "%",
+        "id": "fedfunds",
+        "t": "level",
+        "file": "us",
         "decimals": 2
       },
       "impact": "alto",
@@ -762,12 +762,12 @@
       "href": "actividad.html",
       "previo": {
         "label": "Anterior (m/m)",
-        "t": "pct1",
-        "id": "ipi",
-        "signed": true,
-        "file": "ar",
         "suffix": "%",
-        "decimals": 1
+        "id": "ipi",
+        "t": "pct1",
+        "file": "ar",
+        "decimals": 1,
+        "signed": true
       },
       "impact": "medio",
       "region": "ar"
@@ -796,10 +796,10 @@
       "href": "precios.html",
       "previo": {
         "label": "Anterior (m/m)",
-        "t": "pct1",
-        "id": "ipc",
-        "file": "ar",
         "suffix": "%",
+        "id": "ipc",
+        "t": "pct1",
+        "file": "ar",
         "decimals": 1
       },
       "impact": "alto",
@@ -841,10 +841,10 @@
       "href": "empleo.html",
       "previo": {
         "label": "Anterior (m/m)",
-        "t": "pct1",
-        "id": "wages",
-        "file": "ar",
         "suffix": "%",
+        "id": "wages",
+        "t": "pct1",
+        "file": "ar",
         "decimals": 1
       },
       "impact": "medio",
@@ -861,12 +861,12 @@
       "href": "externo.html",
       "previo": {
         "label": "Saldo anterior",
-        "t": "level",
-        "id": "trade_balance",
-        "prefix": "USD ",
-        "file": "ar",
         "suffix": " M",
-        "decimals": 0
+        "id": "trade_balance",
+        "t": "level",
+        "file": "ar",
+        "decimals": 0,
+        "prefix": "USD "
       },
       "impact": "alto",
       "region": "ar"
@@ -882,12 +882,12 @@
       "href": "actividad.html",
       "previo": {
         "label": "Anterior (m/m)",
-        "t": "pct1",
-        "id": "emae",
-        "signed": true,
-        "file": "ar",
         "suffix": "%",
-        "decimals": 1
+        "id": "emae",
+        "t": "pct1",
+        "file": "ar",
+        "decimals": 1,
+        "signed": true
       },
       "impact": "alto",
       "region": "ar"
@@ -916,12 +916,12 @@
       "href": "actividad.html",
       "previo": {
         "label": "Anterior (m/m)",
-        "t": "pct1",
-        "id": "ipi",
-        "signed": true,
-        "file": "ar",
         "suffix": "%",
-        "decimals": 1
+        "id": "ipi",
+        "t": "pct1",
+        "file": "ar",
+        "decimals": 1,
+        "signed": true
       },
       "impact": "medio",
       "region": "ar"
@@ -937,10 +937,10 @@
       "href": "precios.html",
       "previo": {
         "label": "Anterior (m/m)",
-        "t": "pct1",
-        "id": "ipc",
-        "file": "ar",
         "suffix": "%",
+        "id": "ipc",
+        "t": "pct1",
+        "file": "ar",
         "decimals": 1
       },
       "impact": "alto",
@@ -982,10 +982,10 @@
       "href": "empleo.html",
       "previo": {
         "label": "Anterior (m/m)",
-        "t": "pct1",
-        "id": "wages",
-        "file": "ar",
         "suffix": "%",
+        "id": "wages",
+        "t": "pct1",
+        "file": "ar",
         "decimals": 1
       },
       "impact": "medio",
@@ -1002,10 +1002,10 @@
       "href": "eeuu-tasas.html",
       "previo": {
         "label": "Tasa actual",
-        "t": "level",
-        "id": "fedfunds",
-        "file": "us",
         "suffix": "%",
+        "id": "fedfunds",
+        "t": "level",
+        "file": "us",
         "decimals": 2
       },
       "impact": "alto",
@@ -1047,10 +1047,10 @@
       "href": "empleo.html",
       "previo": {
         "label": "Anterior",
-        "t": "level",
-        "id": "unemp",
-        "file": "ar",
         "suffix": "%",
+        "id": "unemp",
+        "t": "level",
+        "file": "ar",
         "decimals": 1
       },
       "impact": "alto",
@@ -1067,12 +1067,12 @@
       "href": "actividad.html",
       "previo": {
         "label": "Anterior (i.a.)",
-        "t": "yoy",
-        "id": "gdp_level",
-        "signed": true,
-        "file": "ar",
         "suffix": "%",
-        "decimals": 1
+        "id": "gdp_level",
+        "t": "yoy",
+        "file": "ar",
+        "decimals": 1,
+        "signed": true
       },
       "impact": "alto",
       "region": "ar"
@@ -1088,12 +1088,12 @@
       "href": "externo.html",
       "previo": {
         "label": "Saldo anterior",
-        "t": "level",
-        "id": "trade_balance",
-        "prefix": "USD ",
-        "file": "ar",
         "suffix": " M",
-        "decimals": 0
+        "id": "trade_balance",
+        "t": "level",
+        "file": "ar",
+        "decimals": 0,
+        "prefix": "USD "
       },
       "impact": "alto",
       "region": "ar"
@@ -1122,12 +1122,12 @@
       "href": "actividad.html",
       "previo": {
         "label": "Anterior (m/m)",
-        "t": "pct1",
-        "id": "emae",
-        "signed": true,
-        "file": "ar",
         "suffix": "%",
-        "decimals": 1
+        "id": "emae",
+        "t": "pct1",
+        "file": "ar",
+        "decimals": 1,
+        "signed": true
       },
       "impact": "alto",
       "region": "ar"
@@ -1143,12 +1143,12 @@
       "href": "actividad.html",
       "previo": {
         "label": "Anterior (m/m)",
-        "t": "pct1",
-        "id": "ipi",
-        "signed": true,
-        "file": "ar",
         "suffix": "%",
-        "decimals": 1
+        "id": "ipi",
+        "t": "pct1",
+        "file": "ar",
+        "decimals": 1,
+        "signed": true
       },
       "impact": "medio",
       "region": "ar"
@@ -1177,10 +1177,10 @@
       "href": "precios.html",
       "previo": {
         "label": "Anterior (m/m)",
-        "t": "pct1",
-        "id": "ipc",
-        "file": "ar",
         "suffix": "%",
+        "id": "ipc",
+        "t": "pct1",
+        "file": "ar",
         "decimals": 1
       },
       "impact": "alto",
@@ -1209,10 +1209,10 @@
       "href": "empleo.html",
       "previo": {
         "label": "Anterior (m/m)",
-        "t": "pct1",
-        "id": "wages",
-        "file": "ar",
         "suffix": "%",
+        "id": "wages",
+        "t": "pct1",
+        "file": "ar",
         "decimals": 1
       },
       "impact": "medio",
@@ -1242,12 +1242,12 @@
       "href": "externo.html",
       "previo": {
         "label": "Saldo anterior",
-        "t": "level",
-        "id": "trade_balance",
-        "prefix": "USD ",
-        "file": "ar",
         "suffix": " M",
-        "decimals": 0
+        "id": "trade_balance",
+        "t": "level",
+        "file": "ar",
+        "decimals": 0,
+        "prefix": "USD "
       },
       "impact": "alto",
       "region": "ar"
@@ -1263,12 +1263,12 @@
       "href": "actividad.html",
       "previo": {
         "label": "Anterior (m/m)",
-        "t": "pct1",
-        "id": "emae",
-        "signed": true,
-        "file": "ar",
         "suffix": "%",
-        "decimals": 1
+        "id": "emae",
+        "t": "pct1",
+        "file": "ar",
+        "decimals": 1,
+        "signed": true
       },
       "impact": "alto",
       "region": "ar"
@@ -1297,10 +1297,10 @@
       "href": "eeuu-tasas.html",
       "previo": {
         "label": "Tasa actual",
-        "t": "level",
-        "id": "fedfunds",
-        "file": "us",
         "suffix": "%",
+        "id": "fedfunds",
+        "t": "level",
+        "file": "us",
         "decimals": 2
       },
       "impact": "alto",
@@ -1355,12 +1355,12 @@
       "href": "actividad.html",
       "previo": {
         "label": "Anterior (m/m)",
-        "t": "pct1",
-        "id": "ipi",
-        "signed": true,
-        "file": "ar",
         "suffix": "%",
-        "decimals": 1
+        "id": "ipi",
+        "t": "pct1",
+        "file": "ar",
+        "decimals": 1,
+        "signed": true
       },
       "impact": "medio",
       "region": "ar"
@@ -1376,10 +1376,10 @@
       "href": "precios.html",
       "previo": {
         "label": "Anterior (m/m)",
-        "t": "pct1",
-        "id": "ipc",
-        "file": "ar",
         "suffix": "%",
+        "id": "ipc",
+        "t": "pct1",
+        "file": "ar",
         "decimals": 1
       },
       "impact": "alto",
@@ -1421,10 +1421,10 @@
       "href": "empleo.html",
       "previo": {
         "label": "Anterior (m/m)",
-        "t": "pct1",
-        "id": "wages",
-        "file": "ar",
         "suffix": "%",
+        "id": "wages",
+        "t": "pct1",
+        "file": "ar",
         "decimals": 1
       },
       "impact": "medio",
@@ -1441,12 +1441,12 @@
       "href": "externo.html",
       "previo": {
         "label": "Saldo anterior",
-        "t": "level",
-        "id": "trade_balance",
-        "prefix": "USD ",
-        "file": "ar",
         "suffix": " M",
-        "decimals": 0
+        "id": "trade_balance",
+        "t": "level",
+        "file": "ar",
+        "decimals": 0,
+        "prefix": "USD "
       },
       "impact": "alto",
       "region": "ar"
@@ -1462,12 +1462,12 @@
       "href": "actividad.html",
       "previo": {
         "label": "Anterior (m/m)",
-        "t": "pct1",
-        "id": "emae",
-        "signed": true,
-        "file": "ar",
         "suffix": "%",
-        "decimals": 1
+        "id": "emae",
+        "t": "pct1",
+        "file": "ar",
+        "decimals": 1,
+        "signed": true
       },
       "impact": "alto",
       "region": "ar"
@@ -1483,10 +1483,10 @@
       "href": "eeuu-tasas.html",
       "previo": {
         "label": "Tasa actual",
-        "t": "level",
-        "id": "fedfunds",
-        "file": "us",
         "suffix": "%",
+        "id": "fedfunds",
+        "t": "level",
+        "file": "us",
         "decimals": 2
       },
       "impact": "alto",
@@ -1516,12 +1516,12 @@
       "href": "actividad.html",
       "previo": {
         "label": "Anterior (m/m)",
-        "t": "pct1",
-        "id": "ipi",
-        "signed": true,
-        "file": "ar",
         "suffix": "%",
-        "decimals": 1
+        "id": "ipi",
+        "t": "pct1",
+        "file": "ar",
+        "decimals": 1,
+        "signed": true
       },
       "impact": "medio",
       "region": "ar"
@@ -1549,10 +1549,10 @@
       "href": "precios.html",
       "previo": {
         "label": "Anterior (m/m)",
-        "t": "pct1",
-        "id": "ipc",
-        "file": "ar",
         "suffix": "%",
+        "id": "ipc",
+        "t": "pct1",
+        "file": "ar",
         "decimals": 1
       },
       "impact": "alto",
@@ -1594,10 +1594,10 @@
       "href": "empleo.html",
       "previo": {
         "label": "Anterior (m/m)",
-        "t": "pct1",
-        "id": "wages",
-        "file": "ar",
         "suffix": "%",
+        "id": "wages",
+        "t": "pct1",
+        "file": "ar",
         "decimals": 1
       },
       "impact": "medio",
@@ -1614,12 +1614,12 @@
       "href": "actividad.html",
       "previo": {
         "label": "Anterior (i.a.)",
-        "t": "yoy",
-        "id": "gdp_level",
-        "signed": true,
-        "file": "ar",
         "suffix": "%",
-        "decimals": 1
+        "id": "gdp_level",
+        "t": "yoy",
+        "file": "ar",
+        "decimals": 1,
+        "signed": true
       },
       "impact": "alto",
       "region": "ar"
@@ -1635,12 +1635,12 @@
       "href": "externo.html",
       "previo": {
         "label": "Saldo anterior",
-        "t": "level",
-        "id": "trade_balance",
-        "prefix": "USD ",
-        "file": "ar",
         "suffix": " M",
-        "decimals": 0
+        "id": "trade_balance",
+        "t": "level",
+        "file": "ar",
+        "decimals": 0,
+        "prefix": "USD "
       },
       "impact": "alto",
       "region": "ar"
@@ -1656,10 +1656,10 @@
       "href": "empleo.html",
       "previo": {
         "label": "Anterior",
-        "t": "level",
-        "id": "unemp",
-        "file": "ar",
         "suffix": "%",
+        "id": "unemp",
+        "t": "level",
+        "file": "ar",
         "decimals": 1
       },
       "impact": "alto",
@@ -1689,12 +1689,12 @@
       "href": "actividad.html",
       "previo": {
         "label": "Anterior (m/m)",
-        "t": "pct1",
-        "id": "emae",
-        "signed": true,
-        "file": "ar",
         "suffix": "%",
-        "decimals": 1
+        "id": "emae",
+        "t": "pct1",
+        "file": "ar",
+        "decimals": 1,
+        "signed": true
       },
       "impact": "alto",
       "region": "ar"
@@ -1734,10 +1734,10 @@
       "href": "eeuu-tasas.html",
       "previo": {
         "label": "Tasa actual",
-        "t": "level",
-        "id": "fedfunds",
-        "file": "us",
         "suffix": "%",
+        "id": "fedfunds",
+        "t": "level",
+        "file": "us",
         "decimals": 2
       },
       "impact": "alto",
@@ -1778,10 +1778,10 @@
       "href": "eeuu-tasas.html",
       "previo": {
         "label": "Tasa actual",
-        "t": "level",
-        "id": "fedfunds",
-        "file": "us",
         "suffix": "%",
+        "id": "fedfunds",
+        "t": "level",
+        "file": "us",
         "decimals": 2
       },
       "impact": "alto",
@@ -1835,10 +1835,10 @@
       "href": "eeuu-tasas.html",
       "previo": {
         "label": "Tasa actual",
-        "t": "level",
-        "id": "fedfunds",
-        "file": "us",
         "suffix": "%",
+        "id": "fedfunds",
+        "t": "level",
+        "file": "us",
         "decimals": 2
       },
       "impact": "alto",
@@ -1892,10 +1892,10 @@
       "href": "eeuu-tasas.html",
       "previo": {
         "label": "Tasa actual",
-        "t": "level",
-        "id": "fedfunds",
-        "file": "us",
         "suffix": "%",
+        "id": "fedfunds",
+        "t": "level",
+        "file": "us",
         "decimals": 2
       },
       "impact": "alto",
